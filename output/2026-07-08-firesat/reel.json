@@ -5,55 +5,55 @@
   "scenes": [
     {
       "type": "HookCard",
-      "duration": 4.99,
+      "duration": 4.04,
       "text": "Satellites can't see a wildfire smaller than *a soccer field*",
       "voiceSegment": "Most satellites can't see a wildfire until it's bigger than a soccer field.",
       "audioStart": 0.0
     },
     {
       "type": "ImageScene",
-      "duration": 7.49,
+      "duration": 7.12,
       "kenBurns": "zoom-in",
       "image": "assets/firesat_three_sats_muonspace.jpeg",
       "text": "This week: 3 FireSat satellites reached orbit",
       "voiceSegment": "This week, three FireSat satellites reached orbit. Built by Muon Space, guided by Google AI, made to catch fires early.",
-      "audioStart": 4.99
+      "audioStart": 4.04
     },
     {
       "type": "StatCallout",
-      "duration": 7.49,
+      "duration": 5.52,
       "stat": "5x5m",
       "label": "a classroom-sized fire, from 600 km up",
       "voiceSegment": "FireSat spots a fire just five by five meters. A classroom, from six hundred kilometers up, through smoke and clouds.",
-      "audioStart": 12.48
+      "audioStart": 11.16
     },
     {
       "type": "ImageScene",
-      "duration": 9.99,
+      "duration": 7.48,
       "kenBurns": "zoom-in",
       "imagePrompt": "aerial night view of a vast dark pine forest, one single tiny glowing orange ember of fire beginning in the trees far below, thin wisp of smoke, moonlit, dramatic scale contrast between the immense dark forest and the small bright ignition point",
       "text": "The prototype caught a fire other satellites missed",
       "voiceSegment": "The prototype already caught a small Oregon fire other satellites flew right past. Google's AI checks each fire against a thousand past images of the same spot.",
-      "audioStart": 19.97,
+      "audioStart": 16.68,
       "image": "images/scene_03.png"
     },
     {
       "type": "ImageScene",
-      "duration": 10.71,
+      "duration": 9.36,
       "kenBurns": "pan-right",
       "image": "assets/deployment_transporter17_spacex.jpeg",
       "text": "Whole planet \u00b7 every 20 min \u00b7 50+ satellites",
       "voiceSegment": "The goal: fifty plus satellites, checking all of Earth every twenty minutes. Even hourly checks could save a billion dollars in damage a year, in the U S alone.",
-      "audioStart": 29.96
+      "audioStart": 24.16
     },
     {
       "type": "OutroCard",
-      "duration": 5.71,
+      "duration": 5.08,
       "text": "Catch it while it's small",
       "voiceSegment": "The next big fire could be caught while it's small. Follow for daily AI news.",
-      "audioStart": 40.67
+      "audioStart": 33.52
     }
   ],
   "voiceFile": "voice.mp3",
-  "totalDuration": 46.38
+  "totalDuration": 38.6
 }
