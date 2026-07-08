@@ -113,7 +113,15 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
 
 - Python deps: `pip install -r requirements.txt`
 - Remotion deps: `cd remotion && npm install`
+- Fonts (once, after npm install): `bash scripts/install_fonts.sh` — installs
+  Archivo Black / Inter / JetBrains Mono as system fonts for the renderer.
 - FFmpeg must be on PATH.
+- Voice engines (`pipeline/tts.py --engine`): `edge` (word-exact timings;
+  needs WebSocket) · `gemini` (plain HTTPS, uses NANO_BANANA_API_KEY; timings
+  estimated, then refined by `pipeline/align.py` if faster-whisper is
+  available) · `mock` (silent, testing). Set `TTS_ENGINE` for make_reel.sh.
+- Music: real tracks per `music/README.md`; `python3 pipeline/make_ambient.py`
+  generates a subtle synthesized bed as a stopgap so reels never ship dry.
 - `.env` (copy from `.env.example`): `NANO_BANANA_API_KEY`. Without a key,
   generate_images.py produces styled placeholder gradients so the pipeline
   still runs end-to-end for testing.

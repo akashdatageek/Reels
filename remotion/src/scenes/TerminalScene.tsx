@@ -1,10 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
-import {FONT_BODY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
+import {FONT_BODY, FONT_MONO, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {Scene, TerminalLine} from '../types';
 
-const FONT_MONO = '"JetBrains Mono", "Fira Code", "Courier New", monospace';
 const TYPE_CPS = 22; // typed characters per second for command lines
 
 /**
