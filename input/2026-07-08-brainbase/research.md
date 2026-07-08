@@ -52,3 +52,8 @@ Chosen: **#1** with #3's framing in the context scene.
 ## Source credit for caption.txt
 
 Source: Brainbase Labs (brainbaselabs.com, @BrainbaseHQ)
+
+- ⚠️ TerminalScene CLI text: "push to the cloud with a single CLI command" and
+  the YAML fields (model, harness, tools, instructions) are the site's own
+  words; the literal binary name `brainbase` in the demo terminal is
+  illustrative — exact CLI syntax is not published.

@@ -7,8 +7,32 @@
     {
       "type": "HookCard",
       "duration": 2.5,
-      "text": "Claude just got a massive upgrade",
+      "text": "Claude just got a *massive upgrade*",
       "voiceSegment": "Claude just got a massive upgrade."
+    },
+    {
+      "type": "TerminalScene",
+      "duration": 6,
+      "text": "try it",
+      "terminal": [
+        {"kind": "command", "text": "pip install anthropic"},
+        {"kind": "output", "text": "Successfully installed anthropic"},
+        {"kind": "command", "text": "python chat.py --model claude-fable-5"},
+        {"kind": "success", "text": "✓ connected"}
+      ],
+      "voiceSegment": "And you can try it with two commands."
+    },
+    {
+      "type": "ChartScene",
+      "duration": 5,
+      "text": "SWE-bench verified",
+      "label": "Source: model card",
+      "chart": [
+        {"label": "Fable 5", "value": 82.1, "suffix": "%", "highlight": true},
+        {"label": "Opus 4.5", "value": 74.5, "suffix": "%"},
+        {"label": "GPT-5.2", "value": 71.3, "suffix": "%"}
+      ],
+      "voiceSegment": "It tops the coding benchmark by a wide margin."
     },
     {
       "type": "ImageScene",

@@ -6,6 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
+import {AmbientBackground} from '../components/AmbientBackground';
 import {BG, FONT_BODY, FONT_DISPLAY, TEXT, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
@@ -22,22 +23,14 @@ export const OutroCard: React.FC<{scene: Scene; accent: string}> = ({
   const pulse = 1 + 0.05 * Math.sin((frame / fps) * Math.PI * 2.2);
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BG,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <div
+    <AbsoluteFill>
+      <AmbientBackground accent={accent} seed={4} />
+      <AbsoluteFill
         style={{
-          position: 'absolute',
-          width: 1000,
-          height: 1000,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${accent}18 0%, transparent 60%)`,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
-      />
+      >
       <div
         style={{
           textAlign: 'center',
@@ -88,6 +81,7 @@ export const OutroCard: React.FC<{scene: Scene; accent: string}> = ({
           FOLLOW
         </div>
       </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

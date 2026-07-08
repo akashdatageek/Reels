@@ -6,10 +6,12 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
-import {BG, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
+import {AmbientBackground} from '../components/AmbientBackground';
+import {FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
 import type {Scene} from '../types';
 
-/** Big bold opening statement — huge type, spring-in, high contrast bg. */
+/** Big bold opening statement — huge type, spring-in, living background.
+ *  Words wrapped in *asterisks* render in the accent color. */
 export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
   scene,
   accent,
@@ -25,31 +27,31 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
     [0, 220],
   );
 
-  const words = (scene.text ?? '').split(' ');
+  // "now *one command*" -> emphasized run of words in accent.
+  // Asterisks toggle emphasis on/off, so multi-word spans work.
+  let emphasis = false;
+  const words = (scene.text ?? '').split(/\s+/).map((w) => {
+    const opens = w.startsWith('*');
+    const closes = /\*[.,!?]?$/.test(w) && w.length > (opens ? 2 : 1);
+    if (opens) emphasis = true;
+    const emphasized = emphasis;
+    if (closes) emphasis = false;
+    return {text: w.replace(/\*/g, ''), emphasized};
+  });
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BG,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: SAFE_TOP,
-        paddingBottom: SAFE_BOTTOM,
-        paddingLeft: 70,
-        paddingRight: 70,
-      }}
-    >
-      {/* subtle accent glow */}
-      <div
+    <AbsoluteFill>
+      <AmbientBackground accent={accent} seed={1} />
+      <AbsoluteFill
         style={{
-          position: 'absolute',
-          width: 900,
-          height: 900,
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${accent}22 0%, transparent 65%)`,
-          top: '18%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: SAFE_TOP,
+          paddingBottom: SAFE_BOTTOM,
+          paddingLeft: 70,
+          paddingRight: 70,
         }}
-      />
+      >
       <div
         style={{
           transform: `scale(${scale})`,
@@ -81,9 +83,11 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
                   marginRight: 22,
                   opacity: wordIn,
                   transform: `translateY(${(1 - wordIn) * 40}px)`,
+                  color: w.emphasized ? accent : undefined,
+                  textShadow: w.emphasized ? `0 0 50px ${accent}66` : undefined,
                 }}
               >
-                {w}
+                {w.text}
               </span>
             );
           })}
@@ -98,6 +102,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
           }}
         />
       </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

@@ -6,7 +6,7 @@
     {
       "type": "HookCard",
       "duration": 4.64,
-      "text": "Deploying an AI agent is now one command",
+      "text": "Deploying an AI agent is now *one command*",
       "voiceSegment": "Deploying an AI agent is now as easy as deploying a website.",
       "audioStart": 0.0
     },
@@ -21,13 +21,17 @@
       "image": "images/scene_01.png"
     },
     {
-      "type": "SplitCompare",
+      "type": "TerminalScene",
       "duration": 10.71,
-      "text": "Shipping an agent",
-      "leftTitle": "Before",
-      "leftText": "Wire up hosting, scaling and evals yourself",
-      "rightTitle": "Now",
-      "rightText": "A few lines of YAML, then push",
+      "text": "agent.yaml",
+      "terminal": [
+        {"kind": "comment", "text": "# agent.yaml — model, harness, tools, instructions"},
+        {"kind": "output", "text": "model: claude-sonnet"},
+        {"kind": "output", "text": "tools: [slack, github, linear]"},
+        {"kind": "command", "text": "brainbase push"},
+        {"kind": "output", "text": "hosting, scaling, evals... handled"},
+        {"kind": "success", "text": "✓ agent deployed"}
+      ],
       "voiceSegment": "The old way: you wire up hosting, scaling, and evaluations yourself. The new way: describe your agent in a few lines of YAML, and push it to the cloud.",
       "audioStart": 13.2
     },
