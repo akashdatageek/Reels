@@ -3,7 +3,24 @@ export type SceneType =
   | 'ImageScene'
   | 'StatCallout'
   | 'SplitCompare'
+  | 'TerminalScene'
+  | 'ChartScene'
   | 'OutroCard';
+
+export interface TerminalLine {
+  /** command = typed with $ prompt · output = printed · comment = dim · success = accent bold */
+  kind: 'command' | 'output' | 'comment' | 'success';
+  text: string;
+}
+
+export interface ChartItem {
+  label: string;
+  value: number;
+  /** e.g. "%", "x", "s" — appended to the counted-up value */
+  suffix?: string;
+  /** the bar rendered in the accent color (the story's subject) */
+  highlight?: boolean;
+}
 
 export interface Scene {
   type: SceneType;
@@ -11,8 +28,13 @@ export interface Scene {
   duration: number;
   /** Seconds into voice.mp3 where this scene's audio starts (set by tts.py). */
   audioStart?: number;
+  /** In HookCard, wrap words in *asterisks* to render them in the accent color. */
   text?: string;
   voiceSegment?: string;
+  /** TerminalScene: the lines to type/print (title bar text comes from `text`). */
+  terminal?: TerminalLine[];
+  /** ChartScene: bars, top-to-bottom (title from `text`, footnote from `label`). */
+  chart?: ChartItem[];
   /** Path relative to the story output folder (or assets/...). */
   image?: string;
   /** If set and no image exists, generate_images.py creates one. */

@@ -8,6 +8,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
+import {AmbientBackground} from '../components/AmbientBackground';
 import {BG, BG_LIGHT, FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
@@ -84,14 +85,15 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string}> = ({
   const vsIn = spring({frame: frame - 8, fps, config: {damping: 10}});
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: BG,
-        paddingTop: SAFE_TOP,
-        paddingBottom: SAFE_BOTTOM,
-        justifyContent: 'center',
-      }}
-    >
+    <AbsoluteFill>
+      <AmbientBackground accent={accent} seed={6} />
+      <AbsoluteFill
+        style={{
+          paddingTop: SAFE_TOP,
+          paddingBottom: SAFE_BOTTOM,
+          justifyContent: 'center',
+        }}
+      >
       {scene.text ? (
         <div
           style={{
@@ -146,6 +148,7 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string}> = ({
           VS
         </div>
       </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

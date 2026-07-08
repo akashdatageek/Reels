@@ -27,7 +27,21 @@ import sys
 
 import edge_tts
 
+try:  # optional: load .env from repo root (for the gemini engine key)
+    from dotenv import load_dotenv
+
+    load_dotenv(pathlib.Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
+
 DEFAULT_VOICE = os.environ.get("EDGE_TTS_VOICE", "en-US-AndrewNeural")
+GEMINI_TTS_MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
+GEMINI_TTS_VOICE = os.environ.get("GEMINI_TTS_VOICE", "Charon")
+# Natural-language delivery direction (interpreted, not spoken, by Gemini TTS)
+GEMINI_TTS_STYLE = os.environ.get(
+    "GEMINI_TTS_STYLE",
+    "Narrate briskly and energetically, like a fast-paced news reel: ",
+)
 SCENE_PAD_S = 0.35  # breathing room after the voice ends, per scene
 
 
@@ -85,6 +99,74 @@ async def synth_segment(text: str, voice: str, out_path: pathlib.Path):
     return mp3_duration_seconds(out_path), words
 
 
+def estimate_word_timings(text: str, dur: float):
+    """Distribute words across a known audio duration, weighted by length.
+    Used for engines that don't emit word boundaries (Gemini TTS)."""
+    tokens = text.split()
+    weights = [len(t) + 2 for t in tokens]  # +2 ~ inter-word pause share
+    total = sum(weights)
+    words, cursor = [], 0.05  # small lead-in
+    usable = max(dur - 0.15, 0.1)
+    for tok, wgt in zip(tokens, weights):
+        span = usable * wgt / total
+        words.append(
+            {"word": tok, "start": round(cursor, 3), "end": round(cursor + span * 0.85, 3)}
+        )
+        cursor += span
+    return words
+
+
+async def synth_segment_gemini(text: str, voice: str, out_path: pathlib.Path):
+    """Gemini TTS over plain HTTPS (works where WebSockets are blocked).
+    Returns (duration_s, estimated word timings)."""
+    import base64
+    import subprocess
+    import time
+
+    import requests
+
+    api_key = os.environ.get("NANO_BANANA_API_KEY") or os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError("gemini engine needs NANO_BANANA_API_KEY / GEMINI_API_KEY")
+    url = (
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        f"{GEMINI_TTS_MODEL}:generateContent"
+    )
+    body = {
+        "contents": [{"parts": [{"text": GEMINI_TTS_STYLE + text}]}],
+        "generationConfig": {
+            "responseModalities": ["AUDIO"],
+            "speechConfig": {
+                "voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}
+            },
+        },
+    }
+    last_err = None
+    for attempt in range(3):
+        resp = requests.post(url, params={"key": api_key}, json=body, timeout=120)
+        if resp.status_code in (429, 500, 503):
+            last_err = f"HTTP {resp.status_code}: {resp.text[:300]}"
+            time.sleep(2 ** (attempt + 1))
+            continue
+        resp.raise_for_status()
+        data = resp.json()
+        try:
+            inline = data["candidates"][0]["content"]["parts"][0]["inlineData"]
+        except (KeyError, IndexError) as exc:
+            raise RuntimeError(f"no audio in response: {json.dumps(data)[:400]}") from exc
+        pcm = base64.b64decode(inline["data"])  # s16le mono 24kHz
+        dur = len(pcm) / 2 / 24000
+        proc = subprocess.run(
+            ["ffmpeg", "-y", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-",
+             "-c:a", "libmp3lame", "-q:a", "2", str(out_path)],
+            input=pcm, capture_output=True,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"ffmpeg pcm->mp3 failed: {proc.stderr[-500:].decode()}")
+        return dur, estimate_word_timings(text, dur)
+    raise RuntimeError(f"gemini tts failed after retries: {last_err}")
+
+
 async def synth_segment_mock(text: str, out_path: pathlib.Path):
     """Offline stand-in: silence at ~2.8 words/sec with evenly spaced timings."""
     import subprocess
@@ -104,7 +186,7 @@ async def synth_segment_mock(text: str, out_path: pathlib.Path):
     return dur, words
 
 
-async def run(reel_path: pathlib.Path, voice: str, mock: bool = False) -> None:
+async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None:
     reel = json.loads(reel_path.read_text(encoding="utf-8"))
     out_dir = reel_path.parent
     seg_dir = out_dir / "segments"
@@ -122,8 +204,11 @@ async def run(reel_path: pathlib.Path, voice: str, mock: bool = False) -> None:
             cursor += float(scene.get("duration", 2.0))
             continue
         seg_path = seg_dir / f"scene_{idx:02d}.mp3"
-        if mock:
+        if engine == "mock":
             dur, words = await synth_segment_mock(text, seg_path)
+        elif engine == "gemini":
+            gemini_voice = voice if voice != DEFAULT_VOICE else GEMINI_TTS_VOICE
+            dur, words = await synth_segment_gemini(text, gemini_voice, seg_path)
         else:
             dur, words = await synth_segment(text, voice, seg_path)
         if dur <= 0:
@@ -199,14 +284,19 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("reel_json", help="Path to reel.json")
     parser.add_argument("--voice", default=DEFAULT_VOICE)
+    parser.add_argument("--engine", choices=["edge", "gemini", "mock"], default="edge",
+                        help="edge = Edge-TTS (word-exact timings, needs WebSocket); "
+                             "gemini = Gemini TTS over HTTPS (estimated timings); "
+                             "mock = silence (offline testing)")
     parser.add_argument("--mock", action="store_true",
-                        help="Silence + estimated timings (offline testing)")
+                        help="Shorthand for --engine mock")
     args = parser.parse_args()
+    engine = "mock" if args.mock else args.engine
     reel_path = pathlib.Path(args.reel_json)
     if not reel_path.exists():
         print(f"not found: {reel_path}", file=sys.stderr)
         return 1
-    asyncio.run(run(reel_path, args.voice, mock=args.mock))
+    asyncio.run(run(reel_path, args.voice, engine=engine))
     return 0
 
 

@@ -1,0 +1,7 @@
+Deploying an AI agent is now one command 🤖☁️
+
+YC-backed Brainbase just took its "AI agent cloud" GA: describe an agent in a few lines of YAML — model, harness, tools, instructions — and push it to the cloud. Hosting, scaling and evals handled. Triggers from webhooks, schedules, or 1,000+ apps like Slack, GitHub and Linear. SOC 2 + HIPAA out of the box.
+
+Source: Brainbase Labs (brainbaselabs.com · @BrainbaseHQ)
+
+#ai #aiagents #agentcloud #brainbase #ycombinator #startup #ainews #devtools #llm #automation #technews #artificialintelligence

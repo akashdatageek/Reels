@@ -6,7 +6,8 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
-import {BG, BG_LIGHT, FONT_BODY, FONT_DISPLAY, TEXT_DIM} from '../theme';
+import {AmbientBackground} from '../components/AmbientBackground';
+import {FONT_BODY, FONT_DISPLAY, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
 /** Parse a stat like "2x", "87%", "$20", "1.5M" into prefix/number/suffix. */
@@ -35,13 +36,14 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
   const ringScale = interpolate(progress, [0, 1], [0.8, 1]);
 
   return (
-    <AbsoluteFill
-      style={{
-        background: `radial-gradient(circle at 50% 40%, ${BG_LIGHT} 0%, ${BG} 70%)`,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <AbsoluteFill>
+      <AmbientBackground accent={accent} seed={2} />
+      <AbsoluteFill
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
       <div
         style={{
           width: 780,
@@ -80,6 +82,7 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
           {scene.label}
         </div>
       </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

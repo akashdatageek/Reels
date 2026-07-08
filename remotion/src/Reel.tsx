@@ -1,12 +1,19 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, useVideoConfig} from 'remotion';
+import {
+  AbsoluteFill,
+  Sequence,
+  useCurrentFrame,
+  useVideoConfig,
+} from 'remotion';
 import {Captions} from './components/Captions';
+import {ChartScene} from './scenes/ChartScene';
 import {HookCard} from './scenes/HookCard';
 import {ImageScene} from './scenes/ImageScene';
 import {OutroCard} from './scenes/OutroCard';
 import {SplitCompare} from './scenes/SplitCompare';
 import {StatCallout} from './scenes/StatCallout';
-import {BG, DEFAULT_ACCENT} from './theme';
+import {TerminalScene} from './scenes/TerminalScene';
+import {BG, DEFAULT_ACCENT, SAFE_TOP} from './theme';
 import type {ReelProps, Scene} from './types';
 
 const SCENE_COMPONENTS: Record<
@@ -17,7 +24,41 @@ const SCENE_COMPONENTS: Record<
   ImageScene,
   StatCallout,
   SplitCompare,
+  TerminalScene,
+  ChartScene,
   OutroCard,
+};
+
+/** Thin accent progress bar just below the IG top safe zone — a retention
+ *  device: viewers can see the reel is short. */
+const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
+  const frame = useCurrentFrame();
+  const {durationInFrames} = useVideoConfig();
+  const pct = Math.min(1, frame / Math.max(durationInFrames - 1, 1));
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: SAFE_TOP - 30,
+        left: 60,
+        right: 60,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'rgba(255,255,255,0.14)',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          width: `${pct * 100}%`,
+          height: '100%',
+          borderRadius: 4,
+          backgroundColor: accent,
+          boxShadow: `0 0 18px ${accent}aa`,
+        }}
+      />
+    </div>
+  );
 };
 
 /** Reads the reel spec (passed as input props) and sequences the scenes. */
@@ -45,6 +86,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
         );
       })}
       <Captions captions={captions ?? []} accent={accent} />
+      <ProgressBar accent={accent} />
     </AbsoluteFill>
   );
 };

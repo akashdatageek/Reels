@@ -1,0 +1,66 @@
+{
+  "title": "Brainbase takes its AI agent cloud GA",
+  "accentColor": "#00E58C",
+  "music": "music/upbeat_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 4.64,
+      "text": "Deploying an AI agent is now *one command*",
+      "voiceSegment": "Deploying an AI agent is now as easy as deploying a website.",
+      "audioStart": 0.0
+    },
+    {
+      "type": "ImageScene",
+      "duration": 8.56,
+      "kenBurns": "zoom-in",
+      "text": "Brainbase: the AI agent cloud, now GA",
+      "imagePrompt": "isometric floating cloud platform with small glowing robot figures standing on it, streams of glowing code blocks flowing up into the cloud from a stylized terminal window below",
+      "voiceSegment": "A Y C startup called Brainbase just took its AI agent cloud into general availability. Think of it like Vercel, but for agents.",
+      "audioStart": 4.64,
+      "image": "images/scene_01.png"
+    },
+    {
+      "type": "TerminalScene",
+      "duration": 10.71,
+      "text": "agent.yaml",
+      "terminal": [
+        {"kind": "comment", "text": "# agent.yaml — model, harness, tools, instructions"},
+        {"kind": "output", "text": "model: claude-sonnet"},
+        {"kind": "output", "text": "tools: [slack, github, linear]"},
+        {"kind": "command", "text": "brainbase push"},
+        {"kind": "output", "text": "hosting, scaling, evals... handled"},
+        {"kind": "success", "text": "✓ agent deployed"}
+      ],
+      "voiceSegment": "The old way: you wire up hosting, scaling, and evaluations yourself. The new way: describe your agent in a few lines of YAML, and push it to the cloud.",
+      "audioStart": 13.2
+    },
+    {
+      "type": "StatCallout",
+      "duration": 6.42,
+      "stat": "1000+",
+      "label": "app triggers",
+      "voiceSegment": "Agents kick off from webhooks, schedules, or over one thousand app triggers, like Slack, GitHub, and Linear.",
+      "audioStart": 23.91
+    },
+    {
+      "type": "ImageScene",
+      "duration": 7.14,
+      "kenBurns": "pan-right",
+      "text": "SOC 2 \u00b7 HIPAA \u00b7 any model, any harness",
+      "imagePrompt": "isometric secure data center fortress with a large glowing holographic shield hovering above server racks, orbiting padlock icons and clean network connection lines",
+      "voiceSegment": "And it is enterprise ready out of the box. SOC 2, HIPAA, even hybrid deployment. Any model, any harness.",
+      "audioStart": 30.33,
+      "image": "images/scene_04.png"
+    },
+    {
+      "type": "OutroCard",
+      "duration": 2.14,
+      "text": "Follow for daily AI news",
+      "voiceSegment": "Follow for daily AI news.",
+      "audioStart": 37.47
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 39.61
+}

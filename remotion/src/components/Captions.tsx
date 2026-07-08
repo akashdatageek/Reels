@@ -50,9 +50,10 @@ export const Captions: React.FC<{
                 key={i}
                 style={{
                   color: active ? (isCurrent ? accent : TEXT) : 'rgba(245,247,255,0.35)',
-                  marginRight: 14,
+                  marginRight: 22,
                   display: 'inline-block',
-                  transform: isCurrent ? 'scale(1.08)' : 'scale(1)',
+                  transform: isCurrent ? 'scale(1.06)' : 'scale(1)',
+                  transformOrigin: 'center bottom',
                 }}
               >
                 {w.word}
