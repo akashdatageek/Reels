@@ -1,0 +1,44 @@
+{
+  "title": "Example — Claude Fable 5 launch",
+  "accentColor": "#00E5FF",
+  "handle": "@your.handle",
+  "music": "music/upbeat_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 2.5,
+      "text": "Claude just got a massive upgrade",
+      "voiceSegment": "Claude just got a massive upgrade."
+    },
+    {
+      "type": "ImageScene",
+      "duration": 4,
+      "kenBurns": "zoom-in",
+      "text": "Fable 5 tops every benchmark",
+      "imagePrompt": "futuristic AI model visualization, glowing neural core",
+      "voiceSegment": "The new Fable 5 model tops every major benchmark the industry uses."
+    },
+    {
+      "type": "StatCallout",
+      "duration": 3,
+      "stat": "2x",
+      "label": "faster reasoning",
+      "voiceSegment": "It reasons twice as fast as the previous generation."
+    },
+    {
+      "type": "SplitCompare",
+      "duration": 4,
+      "text": "Old vs new",
+      "leftTitle": "Opus 4.5",
+      "leftText": "Previous flagship",
+      "rightTitle": "Fable 5",
+      "rightText": "New state of the art",
+      "voiceSegment": "Compared to the old flagship, it is simply a different class of model."
+    },
+    {
+      "type": "OutroCard",
+      "duration": 2.5,
+      "text": "Follow for daily AI news"
+    }
+  ]
+}

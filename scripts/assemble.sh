@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Render + audio assembly for one story.
+#
+# Usage: scripts/assemble.sh output/<story-folder>
+#
+# Expects in the story folder (created by earlier pipeline steps):
+#   reel.json        scene spec (durations already set by tts.py)
+#   captions.json    word-level caption groups (captions.py)
+#   voice.mp3        narration (tts.py)
+#   images/          generated images (generate_images.py)
+#   assets/          optional provided assets (copied from input/)
+#
+# Steps:
+#   1. Build props.json ({reel, captions}) for Remotion
+#   2. remotion render (silent video; story folder is the public dir,
+#      so scene image paths resolve via staticFile)
+#   3. Mux: voice + music (music ducked -12dB under voice via sidechain),
+#      loudness-normalized to -14 LUFS (IG/YT target)
+set -euo pipefail
+
+STORY_DIR="$(cd "$1" && pwd)"
+REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+REEL_JSON="$STORY_DIR/reel.json"
+CAPTIONS_JSON="$STORY_DIR/captions.json"
+VOICE="$STORY_DIR/voice.mp3"
+
+[ -f "$REEL_JSON" ] || { echo "missing $REEL_JSON" >&2; exit 1; }
+[ -f "$VOICE" ] || { echo "missing $VOICE (run pipeline/tts.py first)" >&2; exit 1; }
+
+# 1. props.json = {reel, captions}
+python3 - "$REEL_JSON" "$CAPTIONS_JSON" "$STORY_DIR/props.json" <<'PY'
+import json, pathlib, sys
+reel = json.loads(pathlib.Path(sys.argv[1]).read_text())
+captions = []
+cap_path = pathlib.Path(sys.argv[2])
+if cap_path.exists():
+    captions = json.loads(cap_path.read_text())
+pathlib.Path(sys.argv[3]).write_text(json.dumps({"reel": reel, "captions": captions}))
+PY
+
+# 2. Render video (no audio) — story dir is the public dir for staticFile()
+cd "$REPO_DIR/remotion"
+npx remotion render Reel "$STORY_DIR/video_silent.mp4" \
+  --props="$STORY_DIR/props.json" \
+  --public-dir="$STORY_DIR" \
+  --muted
+
+# 3. Mux audio
+MUSIC_REL="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('music') or '')" "$REEL_JSON")"
+MUSIC="$REPO_DIR/$MUSIC_REL"
+OUT="$STORY_DIR/reel.mp4"
+
+if [ -n "$MUSIC_REL" ] && [ -f "$MUSIC" ]; then
+  # music looped to full length, ducked -12dB under voice, then loudnorm
+  ffmpeg -y \
+    -i "$STORY_DIR/video_silent.mp4" \
+    -i "$VOICE" \
+    -stream_loop -1 -i "$MUSIC" \
+    -filter_complex "\
+[2:a]volume=0.5[music];\
+[music][1:a]sidechaincompress=threshold=0.03:ratio=8:attack=50:release=400:makeup=1[ducked];\
+[1:a][ducked]amix=inputs=2:duration=first:dropout_transition=0[mix];\
+[mix]loudnorm=I=-14:TP=-1.5:LRA=11[aout]" \
+    -map 0:v -map "[aout]" \
+    -c:v copy -c:a aac -b:a 192k -shortest \
+    "$OUT"
+else
+  echo "no music track found ($MUSIC_REL) — muxing voice only" >&2
+  ffmpeg -y \
+    -i "$STORY_DIR/video_silent.mp4" \
+    -i "$VOICE" \
+    -filter_complex "[1:a]loudnorm=I=-14:TP=-1.5:LRA=11[aout]" \
+    -map 0:v -map "[aout]" \
+    -c:v copy -c:a aac -b:a 192k -shortest \
+    "$OUT"
+fi
+
+rm -f "$STORY_DIR/video_silent.mp4" "$STORY_DIR/props.json"
+echo ""
+echo "DONE -> $OUT"
