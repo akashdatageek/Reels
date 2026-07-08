@@ -1,0 +1,57 @@
+{
+  "title": "FireSat: first 3 operational wildfire satellites in orbit",
+  "accentColor": "#FF7A1A",
+  "music": "music/upbeat_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 3.21,
+      "text": "Google just put a *smoke detector* in orbit",
+      "voiceSegment": "Google just put a smoke detector in orbit.",
+      "audioStart": 0.0
+    },
+    {
+      "type": "ImageScene",
+      "duration": 8.92,
+      "kenBurns": "zoom-in",
+      "image": "assets/firesat_three_sats_muonspace.jpeg",
+      "text": "3 FireSat satellites reached orbit this week",
+      "voiceSegment": "Three FireSat satellites reached orbit this week on a SpaceX rideshare. It is the start of an operational constellation built to watch for wildfires.",
+      "audioStart": 3.21
+    },
+    {
+      "type": "StatCallout",
+      "duration": 7.14,
+      "stat": "5x5m",
+      "label": "smallest fire it can spot",
+      "voiceSegment": "Their infrared sensors can spot a fire as small as five by five meters, even through smoke and clouds.",
+      "audioStart": 12.13
+    },
+    {
+      "type": "ImageScene",
+      "duration": 8.56,
+      "kenBurns": "pan-right",
+      "image": "assets/deployment_transporter17_spacex.jpeg",
+      "text": "Google AI checks each pixel against 1,000 past images",
+      "voiceSegment": "Google's AI compares every new image with the last thousand views of the same spot, plus local weather, to confirm a real ignition.",
+      "audioStart": 19.27
+    },
+    {
+      "type": "StatCallout",
+      "duration": 7.14,
+      "stat": "20min",
+      "label": "global updates, 50+ sats by early 2030s",
+      "voiceSegment": "The plan: more than fifty satellites by the early twenty thirties, updating every point on Earth every twenty minutes.",
+      "audioStart": 27.83
+    },
+    {
+      "type": "OutroCard",
+      "duration": 2.14,
+      "text": "Follow for daily AI news",
+      "voiceSegment": "Follow for daily AI news.",
+      "audioStart": 34.97
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 37.11
+}
