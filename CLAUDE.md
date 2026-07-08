@@ -31,9 +31,23 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
 
 3. **Extract the story:** what launched, who, why it matters, 2–3 concrete numbers.
 
-4. **Write a 30–45s script.** HOOK (0–3s, must stop the scroll) → CONTEXT →
-   2–3 KEY POINTS → OUTRO. Conversational, no jargon, short sentences.
-   Choose the theme/angle yourself based on research.md.
+4. **Write a 30–45s script — as a scriptwriter, not a summarizer.**
+   Write `input/<story>/script.md` with three parts:
+   - **V1 draft**: HOOK (0–3s, must stop the scroll) → CONTEXT → 2–3 KEY
+     POINTS → OUTRO. Conversational, no jargon, short sentences.
+   - **Critique**: attack V1 like an editor — Is there a *problem/villain*
+     before the announcement? Is there a *proof moment* (a receipt, not a
+     promise)? Are stats *felt* via contrast ("soccer field vs classroom"),
+     not listed? Does the outro *call back* to the hook?
+   - **V2**: rewrite fixing the critique; cross-check every line against
+     research.md sources before it goes in reel.json.
+   Prefer problem-first hooks over announcement hooks.
+
+4b. **Choose each scene's visual deliberately** (and write the choice into
+   script.md): which beat gets a provided asset, which gets a generated
+   image, and *why that image tells that beat*. After generating images,
+   LOOK at them (Read the file); regenerate if one is weak or off-story.
+   Screenshots of webpages must be cropped to the photo region first.
 
 5. **Build `output/<story>/reel.json`** — 5–8 scenes (schema:
    `remotion/src/types.ts`, example: `remotion/src/example/reel.json`).
