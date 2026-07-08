@@ -1,0 +1,25 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node / Remotion
+node_modules/
+remotion/out/
+.remotion/
+
+# Generated media (large binaries stay out of git)
+output/*/reel.mp4
+output/*/video_silent.mp4
+output/*/voice*.mp3
+output/*/segments/
+output/*/images/
+output/*/props.json
+music/*.mp3
+music/*.wav
+
+# OS
+.DS_Store

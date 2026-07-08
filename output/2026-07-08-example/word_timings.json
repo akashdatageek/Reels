@@ -1,0 +1,242 @@
+[
+  {
+    "word": "Claude",
+    "start": 0.0,
+    "end": 0.307,
+    "scene": 0
+  },
+  {
+    "word": "just",
+    "start": 0.357,
+    "end": 0.664,
+    "scene": 0
+  },
+  {
+    "word": "got",
+    "start": 0.714,
+    "end": 1.021,
+    "scene": 0
+  },
+  {
+    "word": "a",
+    "start": 1.071,
+    "end": 1.379,
+    "scene": 0
+  },
+  {
+    "word": "massive",
+    "start": 1.429,
+    "end": 1.736,
+    "scene": 0
+  },
+  {
+    "word": "upgrade.",
+    "start": 1.786,
+    "end": 2.093,
+    "scene": 0
+  },
+  {
+    "word": "The",
+    "start": 2.49,
+    "end": 2.797,
+    "scene": 1
+  },
+  {
+    "word": "new",
+    "start": 2.847,
+    "end": 3.154,
+    "scene": 1
+  },
+  {
+    "word": "Fable",
+    "start": 3.204,
+    "end": 3.511,
+    "scene": 1
+  },
+  {
+    "word": "5",
+    "start": 3.561,
+    "end": 3.869,
+    "scene": 1
+  },
+  {
+    "word": "model",
+    "start": 3.919,
+    "end": 4.226,
+    "scene": 1
+  },
+  {
+    "word": "tops",
+    "start": 4.276,
+    "end": 4.583,
+    "scene": 1
+  },
+  {
+    "word": "every",
+    "start": 4.633,
+    "end": 4.94,
+    "scene": 1
+  },
+  {
+    "word": "major",
+    "start": 4.99,
+    "end": 5.297,
+    "scene": 1
+  },
+  {
+    "word": "benchmark",
+    "start": 5.347,
+    "end": 5.654,
+    "scene": 1
+  },
+  {
+    "word": "the",
+    "start": 5.704,
+    "end": 6.011,
+    "scene": 1
+  },
+  {
+    "word": "industry",
+    "start": 6.061,
+    "end": 6.369,
+    "scene": 1
+  },
+  {
+    "word": "uses.",
+    "start": 6.419,
+    "end": 6.726,
+    "scene": 1
+  },
+  {
+    "word": "It",
+    "start": 7.13,
+    "end": 7.437,
+    "scene": 2
+  },
+  {
+    "word": "reasons",
+    "start": 7.487,
+    "end": 7.794,
+    "scene": 2
+  },
+  {
+    "word": "twice",
+    "start": 7.844,
+    "end": 8.151,
+    "scene": 2
+  },
+  {
+    "word": "as",
+    "start": 8.201,
+    "end": 8.509,
+    "scene": 2
+  },
+  {
+    "word": "fast",
+    "start": 8.559,
+    "end": 8.866,
+    "scene": 2
+  },
+  {
+    "word": "as",
+    "start": 8.916,
+    "end": 9.223,
+    "scene": 2
+  },
+  {
+    "word": "the",
+    "start": 9.273,
+    "end": 9.58,
+    "scene": 2
+  },
+  {
+    "word": "previous",
+    "start": 9.63,
+    "end": 9.937,
+    "scene": 2
+  },
+  {
+    "word": "generation.",
+    "start": 9.987,
+    "end": 10.294,
+    "scene": 2
+  },
+  {
+    "word": "Compared",
+    "start": 10.69,
+    "end": 10.997,
+    "scene": 3
+  },
+  {
+    "word": "to",
+    "start": 11.047,
+    "end": 11.354,
+    "scene": 3
+  },
+  {
+    "word": "the",
+    "start": 11.404,
+    "end": 11.711,
+    "scene": 3
+  },
+  {
+    "word": "old",
+    "start": 11.761,
+    "end": 12.069,
+    "scene": 3
+  },
+  {
+    "word": "flagship,",
+    "start": 12.119,
+    "end": 12.426,
+    "scene": 3
+  },
+  {
+    "word": "it",
+    "start": 12.476,
+    "end": 12.783,
+    "scene": 3
+  },
+  {
+    "word": "is",
+    "start": 12.833,
+    "end": 13.14,
+    "scene": 3
+  },
+  {
+    "word": "simply",
+    "start": 13.19,
+    "end": 13.497,
+    "scene": 3
+  },
+  {
+    "word": "a",
+    "start": 13.547,
+    "end": 13.854,
+    "scene": 3
+  },
+  {
+    "word": "different",
+    "start": 13.904,
+    "end": 14.211,
+    "scene": 3
+  },
+  {
+    "word": "class",
+    "start": 14.261,
+    "end": 14.569,
+    "scene": 3
+  },
+  {
+    "word": "of",
+    "start": 14.619,
+    "end": 14.926,
+    "scene": 3
+  },
+  {
+    "word": "model.",
+    "start": 14.976,
+    "end": 15.283,
+    "scene": 3
+  }
+]
