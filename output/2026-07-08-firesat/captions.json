@@ -5,22 +5,22 @@
     "scene": 0,
     "words": [
       {
-        "word": "Google",
+        "word": "Most",
         "start": 0.0,
         "end": 0.307
       },
       {
-        "word": "just",
+        "word": "satellites",
         "start": 0.357,
         "end": 0.664
       },
       {
-        "word": "put",
+        "word": "can't",
         "start": 0.714,
         "end": 1.021
       },
       {
-        "word": "a",
+        "word": "see",
         "start": 1.071,
         "end": 1.379
       }
@@ -32,642 +32,821 @@
     "scene": 0,
     "words": [
       {
-        "word": "smoke",
+        "word": "a",
         "start": 1.429,
         "end": 1.736
       },
       {
-        "word": "detector",
+        "word": "wildfire",
         "start": 1.786,
         "end": 2.093
       },
       {
-        "word": "in",
+        "word": "until",
         "start": 2.143,
         "end": 2.45
       },
       {
-        "word": "orbit.",
+        "word": "it's",
         "start": 2.5,
         "end": 2.807
       }
     ]
   },
   {
-    "start": 3.21,
-    "end": 4.589,
+    "start": 2.857,
+    "end": 4.236,
+    "scene": 0,
+    "words": [
+      {
+        "word": "bigger",
+        "start": 2.857,
+        "end": 3.164
+      },
+      {
+        "word": "than",
+        "start": 3.214,
+        "end": 3.521
+      },
+      {
+        "word": "a",
+        "start": 3.571,
+        "end": 3.879
+      },
+      {
+        "word": "soccer",
+        "start": 3.929,
+        "end": 4.236
+      }
+    ]
+  },
+  {
+    "start": 4.286,
+    "end": 4.593,
+    "scene": 0,
+    "words": [
+      {
+        "word": "field.",
+        "start": 4.286,
+        "end": 4.593
+      }
+    ]
+  },
+  {
+    "start": 4.99,
+    "end": 6.369,
     "scene": 1,
     "words": [
       {
-        "word": "Three",
-        "start": 3.21,
-        "end": 3.517
+        "word": "This",
+        "start": 4.99,
+        "end": 5.297
+      },
+      {
+        "word": "week,",
+        "start": 5.347,
+        "end": 5.654
+      },
+      {
+        "word": "three",
+        "start": 5.704,
+        "end": 6.011
       },
       {
         "word": "FireSat",
-        "start": 3.567,
-        "end": 3.874
-      },
+        "start": 6.061,
+        "end": 6.369
+      }
+    ]
+  },
+  {
+    "start": 6.419,
+    "end": 7.797,
+    "scene": 1,
+    "words": [
       {
         "word": "satellites",
-        "start": 3.924,
-        "end": 4.231
+        "start": 6.419,
+        "end": 6.726
       },
       {
         "word": "reached",
-        "start": 4.281,
-        "end": 4.589
+        "start": 6.776,
+        "end": 7.083
+      },
+      {
+        "word": "orbit.",
+        "start": 7.133,
+        "end": 7.44
+      },
+      {
+        "word": "Built",
+        "start": 7.49,
+        "end": 7.797
       }
     ]
   },
   {
-    "start": 4.639,
-    "end": 6.017,
+    "start": 7.847,
+    "end": 9.226,
     "scene": 1,
     "words": [
       {
-        "word": "orbit",
-        "start": 4.639,
-        "end": 4.946
+        "word": "by",
+        "start": 7.847,
+        "end": 8.154
       },
       {
-        "word": "this",
-        "start": 4.996,
-        "end": 5.303
+        "word": "Muon",
+        "start": 8.204,
+        "end": 8.511
       },
       {
-        "word": "week",
-        "start": 5.353,
-        "end": 5.66
+        "word": "Space,",
+        "start": 8.561,
+        "end": 8.869
       },
       {
-        "word": "on",
-        "start": 5.71,
-        "end": 6.017
+        "word": "guided",
+        "start": 8.919,
+        "end": 9.226
       }
     ]
   },
   {
-    "start": 6.067,
-    "end": 7.446,
+    "start": 9.276,
+    "end": 10.654,
     "scene": 1,
     "words": [
       {
-        "word": "a",
-        "start": 6.067,
-        "end": 6.374
+        "word": "by",
+        "start": 9.276,
+        "end": 9.583
       },
       {
-        "word": "SpaceX",
-        "start": 6.424,
-        "end": 6.731
+        "word": "Google",
+        "start": 9.633,
+        "end": 9.94
       },
       {
-        "word": "rideshare.",
-        "start": 6.781,
-        "end": 7.089
+        "word": "AI,",
+        "start": 9.99,
+        "end": 10.297
       },
       {
-        "word": "It",
-        "start": 7.139,
-        "end": 7.446
+        "word": "made",
+        "start": 10.347,
+        "end": 10.654
       }
     ]
   },
   {
-    "start": 7.496,
-    "end": 8.874,
-    "scene": 1,
-    "words": [
-      {
-        "word": "is",
-        "start": 7.496,
-        "end": 7.803
-      },
-      {
-        "word": "the",
-        "start": 7.853,
-        "end": 8.16
-      },
-      {
-        "word": "start",
-        "start": 8.21,
-        "end": 8.517
-      },
-      {
-        "word": "of",
-        "start": 8.567,
-        "end": 8.874
-      }
-    ]
-  },
-  {
-    "start": 8.924,
-    "end": 10.303,
-    "scene": 1,
-    "words": [
-      {
-        "word": "an",
-        "start": 8.924,
-        "end": 9.231
-      },
-      {
-        "word": "operational",
-        "start": 9.281,
-        "end": 9.589
-      },
-      {
-        "word": "constellation",
-        "start": 9.639,
-        "end": 9.946
-      },
-      {
-        "word": "built",
-        "start": 9.996,
-        "end": 10.303
-      }
-    ]
-  },
-  {
-    "start": 10.353,
-    "end": 11.731,
+    "start": 10.704,
+    "end": 12.083,
     "scene": 1,
     "words": [
       {
         "word": "to",
-        "start": 10.353,
-        "end": 10.66
+        "start": 10.704,
+        "end": 11.011
       },
       {
-        "word": "watch",
-        "start": 10.71,
-        "end": 11.017
+        "word": "catch",
+        "start": 11.061,
+        "end": 11.369
       },
       {
-        "word": "for",
-        "start": 11.067,
-        "end": 11.374
+        "word": "fires",
+        "start": 11.419,
+        "end": 11.726
       },
       {
-        "word": "wildfires.",
-        "start": 11.424,
-        "end": 11.731
+        "word": "early.",
+        "start": 11.776,
+        "end": 12.083
       }
     ]
   },
   {
-    "start": 12.13,
-    "end": 13.509,
+    "start": 12.48,
+    "end": 13.859,
     "scene": 2,
     "words": [
       {
-        "word": "Their",
-        "start": 12.13,
-        "end": 12.437
+        "word": "FireSat",
+        "start": 12.48,
+        "end": 12.787
       },
       {
-        "word": "infrared",
-        "start": 12.487,
-        "end": 12.794
-      },
-      {
-        "word": "sensors",
-        "start": 12.844,
-        "end": 13.151
-      },
-      {
-        "word": "can",
-        "start": 13.201,
-        "end": 13.509
-      }
-    ]
-  },
-  {
-    "start": 13.559,
-    "end": 14.937,
-    "scene": 2,
-    "words": [
-      {
-        "word": "spot",
-        "start": 13.559,
-        "end": 13.866
+        "word": "spots",
+        "start": 12.837,
+        "end": 13.144
       },
       {
         "word": "a",
-        "start": 13.916,
-        "end": 14.223
+        "start": 13.194,
+        "end": 13.501
       },
       {
         "word": "fire",
-        "start": 14.273,
-        "end": 14.58
-      },
-      {
-        "word": "as",
-        "start": 14.63,
-        "end": 14.937
+        "start": 13.551,
+        "end": 13.859
       }
     ]
   },
   {
-    "start": 14.987,
-    "end": 16.366,
+    "start": 13.909,
+    "end": 15.287,
     "scene": 2,
     "words": [
       {
-        "word": "small",
-        "start": 14.987,
-        "end": 15.294
-      },
-      {
-        "word": "as",
-        "start": 15.344,
-        "end": 15.651
+        "word": "just",
+        "start": 13.909,
+        "end": 14.216
       },
       {
         "word": "five",
-        "start": 15.701,
-        "end": 16.009
+        "start": 14.266,
+        "end": 14.573
       },
       {
         "word": "by",
-        "start": 16.059,
-        "end": 16.366
-      }
-    ]
-  },
-  {
-    "start": 16.416,
-    "end": 17.794,
-    "scene": 2,
-    "words": [
+        "start": 14.623,
+        "end": 14.93
+      },
       {
         "word": "five",
-        "start": 16.416,
-        "end": 16.723
-      },
-      {
-        "word": "meters,",
-        "start": 16.773,
-        "end": 17.08
-      },
-      {
-        "word": "even",
-        "start": 17.13,
-        "end": 17.437
-      },
-      {
-        "word": "through",
-        "start": 17.487,
-        "end": 17.794
+        "start": 14.98,
+        "end": 15.287
       }
     ]
   },
   {
-    "start": 17.844,
-    "end": 18.866,
+    "start": 15.337,
+    "end": 16.716,
     "scene": 2,
     "words": [
       {
+        "word": "meters.",
+        "start": 15.337,
+        "end": 15.644
+      },
+      {
+        "word": "A",
+        "start": 15.694,
+        "end": 16.001
+      },
+      {
+        "word": "classroom,",
+        "start": 16.051,
+        "end": 16.359
+      },
+      {
+        "word": "from",
+        "start": 16.409,
+        "end": 16.716
+      }
+    ]
+  },
+  {
+    "start": 16.766,
+    "end": 18.144,
+    "scene": 2,
+    "words": [
+      {
+        "word": "six",
+        "start": 16.766,
+        "end": 17.073
+      },
+      {
+        "word": "hundred",
+        "start": 17.123,
+        "end": 17.43
+      },
+      {
+        "word": "kilometers",
+        "start": 17.48,
+        "end": 17.787
+      },
+      {
+        "word": "up,",
+        "start": 17.837,
+        "end": 18.144
+      }
+    ]
+  },
+  {
+    "start": 18.194,
+    "end": 19.573,
+    "scene": 2,
+    "words": [
+      {
+        "word": "through",
+        "start": 18.194,
+        "end": 18.501
+      },
+      {
         "word": "smoke",
-        "start": 17.844,
-        "end": 18.151
+        "start": 18.551,
+        "end": 18.859
       },
       {
         "word": "and",
-        "start": 18.201,
-        "end": 18.509
+        "start": 18.909,
+        "end": 19.216
       },
       {
         "word": "clouds.",
-        "start": 18.559,
-        "end": 18.866
+        "start": 19.266,
+        "end": 19.573
       }
     ]
   },
   {
-    "start": 19.27,
-    "end": 20.649,
+    "start": 19.97,
+    "end": 21.349,
     "scene": 3,
     "words": [
       {
-        "word": "Google's",
-        "start": 19.27,
-        "end": 19.577
+        "word": "The",
+        "start": 19.97,
+        "end": 20.277
       },
       {
-        "word": "AI",
-        "start": 19.627,
-        "end": 19.934
+        "word": "prototype",
+        "start": 20.327,
+        "end": 20.634
       },
       {
-        "word": "compares",
-        "start": 19.984,
-        "end": 20.291
+        "word": "already",
+        "start": 20.684,
+        "end": 20.991
       },
       {
-        "word": "every",
-        "start": 20.341,
-        "end": 20.649
+        "word": "caught",
+        "start": 21.041,
+        "end": 21.349
       }
     ]
   },
   {
-    "start": 20.699,
-    "end": 22.077,
-    "scene": 3,
-    "words": [
-      {
-        "word": "new",
-        "start": 20.699,
-        "end": 21.006
-      },
-      {
-        "word": "image",
-        "start": 21.056,
-        "end": 21.363
-      },
-      {
-        "word": "with",
-        "start": 21.413,
-        "end": 21.72
-      },
-      {
-        "word": "the",
-        "start": 21.77,
-        "end": 22.077
-      }
-    ]
-  },
-  {
-    "start": 22.127,
-    "end": 23.506,
-    "scene": 3,
-    "words": [
-      {
-        "word": "last",
-        "start": 22.127,
-        "end": 22.434
-      },
-      {
-        "word": "thousand",
-        "start": 22.484,
-        "end": 22.791
-      },
-      {
-        "word": "views",
-        "start": 22.841,
-        "end": 23.149
-      },
-      {
-        "word": "of",
-        "start": 23.199,
-        "end": 23.506
-      }
-    ]
-  },
-  {
-    "start": 23.556,
-    "end": 24.934,
-    "scene": 3,
-    "words": [
-      {
-        "word": "the",
-        "start": 23.556,
-        "end": 23.863
-      },
-      {
-        "word": "same",
-        "start": 23.913,
-        "end": 24.22
-      },
-      {
-        "word": "spot,",
-        "start": 24.27,
-        "end": 24.577
-      },
-      {
-        "word": "plus",
-        "start": 24.627,
-        "end": 24.934
-      }
-    ]
-  },
-  {
-    "start": 24.984,
-    "end": 26.363,
-    "scene": 3,
-    "words": [
-      {
-        "word": "local",
-        "start": 24.984,
-        "end": 25.291
-      },
-      {
-        "word": "weather,",
-        "start": 25.341,
-        "end": 25.649
-      },
-      {
-        "word": "to",
-        "start": 25.699,
-        "end": 26.006
-      },
-      {
-        "word": "confirm",
-        "start": 26.056,
-        "end": 26.363
-      }
-    ]
-  },
-  {
-    "start": 26.413,
-    "end": 27.434,
+    "start": 21.399,
+    "end": 22.777,
     "scene": 3,
     "words": [
       {
         "word": "a",
-        "start": 26.413,
-        "end": 26.72
+        "start": 21.399,
+        "end": 21.706
       },
       {
-        "word": "real",
-        "start": 26.77,
-        "end": 27.077
+        "word": "small",
+        "start": 21.756,
+        "end": 22.063
       },
       {
-        "word": "ignition.",
-        "start": 27.127,
-        "end": 27.434
+        "word": "Oregon",
+        "start": 22.113,
+        "end": 22.42
+      },
+      {
+        "word": "fire",
+        "start": 22.47,
+        "end": 22.777
       }
     ]
   },
   {
-    "start": 27.83,
-    "end": 29.209,
+    "start": 22.827,
+    "end": 24.206,
+    "scene": 3,
+    "words": [
+      {
+        "word": "other",
+        "start": 22.827,
+        "end": 23.134
+      },
+      {
+        "word": "satellites",
+        "start": 23.184,
+        "end": 23.491
+      },
+      {
+        "word": "flew",
+        "start": 23.541,
+        "end": 23.849
+      },
+      {
+        "word": "right",
+        "start": 23.899,
+        "end": 24.206
+      }
+    ]
+  },
+  {
+    "start": 24.256,
+    "end": 25.634,
+    "scene": 3,
+    "words": [
+      {
+        "word": "past.",
+        "start": 24.256,
+        "end": 24.563
+      },
+      {
+        "word": "Google's",
+        "start": 24.613,
+        "end": 24.92
+      },
+      {
+        "word": "AI",
+        "start": 24.97,
+        "end": 25.277
+      },
+      {
+        "word": "checks",
+        "start": 25.327,
+        "end": 25.634
+      }
+    ]
+  },
+  {
+    "start": 25.684,
+    "end": 27.063,
+    "scene": 3,
+    "words": [
+      {
+        "word": "each",
+        "start": 25.684,
+        "end": 25.991
+      },
+      {
+        "word": "fire",
+        "start": 26.041,
+        "end": 26.349
+      },
+      {
+        "word": "against",
+        "start": 26.399,
+        "end": 26.706
+      },
+      {
+        "word": "a",
+        "start": 26.756,
+        "end": 27.063
+      }
+    ]
+  },
+  {
+    "start": 27.113,
+    "end": 28.491,
+    "scene": 3,
+    "words": [
+      {
+        "word": "thousand",
+        "start": 27.113,
+        "end": 27.42
+      },
+      {
+        "word": "past",
+        "start": 27.47,
+        "end": 27.777
+      },
+      {
+        "word": "images",
+        "start": 27.827,
+        "end": 28.134
+      },
+      {
+        "word": "of",
+        "start": 28.184,
+        "end": 28.491
+      }
+    ]
+  },
+  {
+    "start": 28.541,
+    "end": 29.563,
+    "scene": 3,
+    "words": [
+      {
+        "word": "the",
+        "start": 28.541,
+        "end": 28.849
+      },
+      {
+        "word": "same",
+        "start": 28.899,
+        "end": 29.206
+      },
+      {
+        "word": "spot.",
+        "start": 29.256,
+        "end": 29.563
+      }
+    ]
+  },
+  {
+    "start": 29.96,
+    "end": 31.339,
     "scene": 4,
     "words": [
       {
         "word": "The",
-        "start": 27.83,
-        "end": 28.137
+        "start": 29.96,
+        "end": 30.267
       },
       {
-        "word": "plan:",
-        "start": 28.187,
-        "end": 28.494
+        "word": "goal:",
+        "start": 30.317,
+        "end": 30.624
       },
-      {
-        "word": "more",
-        "start": 28.544,
-        "end": 28.851
-      },
-      {
-        "word": "than",
-        "start": 28.901,
-        "end": 29.209
-      }
-    ]
-  },
-  {
-    "start": 29.259,
-    "end": 30.637,
-    "scene": 4,
-    "words": [
       {
         "word": "fifty",
-        "start": 29.259,
-        "end": 29.566
+        "start": 30.674,
+        "end": 30.981
       },
       {
-        "word": "satellites",
-        "start": 29.616,
-        "end": 29.923
-      },
-      {
-        "word": "by",
-        "start": 29.973,
-        "end": 30.28
-      },
-      {
-        "word": "the",
-        "start": 30.33,
-        "end": 30.637
+        "word": "plus",
+        "start": 31.031,
+        "end": 31.339
       }
     ]
   },
   {
-    "start": 30.687,
-    "end": 32.066,
+    "start": 31.389,
+    "end": 32.767,
     "scene": 4,
     "words": [
       {
-        "word": "early",
-        "start": 30.687,
-        "end": 30.994
+        "word": "satellites,",
+        "start": 31.389,
+        "end": 31.696
       },
       {
-        "word": "twenty",
-        "start": 31.044,
-        "end": 31.351
+        "word": "checking",
+        "start": 31.746,
+        "end": 32.053
       },
       {
-        "word": "thirties,",
-        "start": 31.401,
-        "end": 31.709
+        "word": "all",
+        "start": 32.103,
+        "end": 32.41
       },
       {
-        "word": "updating",
-        "start": 31.759,
-        "end": 32.066
+        "word": "of",
+        "start": 32.46,
+        "end": 32.767
       }
     ]
   },
   {
-    "start": 32.116,
-    "end": 33.494,
+    "start": 32.817,
+    "end": 34.196,
     "scene": 4,
     "words": [
-      {
-        "word": "every",
-        "start": 32.116,
-        "end": 32.423
-      },
-      {
-        "word": "point",
-        "start": 32.473,
-        "end": 32.78
-      },
-      {
-        "word": "on",
-        "start": 32.83,
-        "end": 33.137
-      },
       {
         "word": "Earth",
-        "start": 33.187,
-        "end": 33.494
-      }
-    ]
-  },
-  {
-    "start": 33.544,
-    "end": 34.566,
-    "scene": 4,
-    "words": [
+        "start": 32.817,
+        "end": 33.124
+      },
       {
         "word": "every",
-        "start": 33.544,
-        "end": 33.851
+        "start": 33.174,
+        "end": 33.481
       },
       {
         "word": "twenty",
-        "start": 33.901,
-        "end": 34.209
+        "start": 33.531,
+        "end": 33.839
       },
       {
         "word": "minutes.",
-        "start": 34.259,
-        "end": 34.566
+        "start": 33.889,
+        "end": 34.196
       }
     ]
   },
   {
-    "start": 34.97,
-    "end": 36.349,
+    "start": 34.246,
+    "end": 35.624,
+    "scene": 4,
+    "words": [
+      {
+        "word": "Even",
+        "start": 34.246,
+        "end": 34.553
+      },
+      {
+        "word": "hourly",
+        "start": 34.603,
+        "end": 34.91
+      },
+      {
+        "word": "checks",
+        "start": 34.96,
+        "end": 35.267
+      },
+      {
+        "word": "could",
+        "start": 35.317,
+        "end": 35.624
+      }
+    ]
+  },
+  {
+    "start": 35.674,
+    "end": 37.053,
+    "scene": 4,
+    "words": [
+      {
+        "word": "save",
+        "start": 35.674,
+        "end": 35.981
+      },
+      {
+        "word": "a",
+        "start": 36.031,
+        "end": 36.339
+      },
+      {
+        "word": "billion",
+        "start": 36.389,
+        "end": 36.696
+      },
+      {
+        "word": "dollars",
+        "start": 36.746,
+        "end": 37.053
+      }
+    ]
+  },
+  {
+    "start": 37.103,
+    "end": 38.481,
+    "scene": 4,
+    "words": [
+      {
+        "word": "in",
+        "start": 37.103,
+        "end": 37.41
+      },
+      {
+        "word": "damage",
+        "start": 37.46,
+        "end": 37.767
+      },
+      {
+        "word": "a",
+        "start": 37.817,
+        "end": 38.124
+      },
+      {
+        "word": "year,",
+        "start": 38.174,
+        "end": 38.481
+      }
+    ]
+  },
+  {
+    "start": 38.531,
+    "end": 39.91,
+    "scene": 4,
+    "words": [
+      {
+        "word": "in",
+        "start": 38.531,
+        "end": 38.839
+      },
+      {
+        "word": "the",
+        "start": 38.889,
+        "end": 39.196
+      },
+      {
+        "word": "U",
+        "start": 39.246,
+        "end": 39.553
+      },
+      {
+        "word": "S",
+        "start": 39.603,
+        "end": 39.91
+      }
+    ]
+  },
+  {
+    "start": 39.96,
+    "end": 40.267,
+    "scene": 4,
+    "words": [
+      {
+        "word": "alone.",
+        "start": 39.96,
+        "end": 40.267
+      }
+    ]
+  },
+  {
+    "start": 40.67,
+    "end": 42.049,
     "scene": 5,
     "words": [
       {
+        "word": "The",
+        "start": 40.67,
+        "end": 40.977
+      },
+      {
+        "word": "next",
+        "start": 41.027,
+        "end": 41.334
+      },
+      {
+        "word": "big",
+        "start": 41.384,
+        "end": 41.691
+      },
+      {
+        "word": "fire",
+        "start": 41.741,
+        "end": 42.049
+      }
+    ]
+  },
+  {
+    "start": 42.099,
+    "end": 43.477,
+    "scene": 5,
+    "words": [
+      {
+        "word": "could",
+        "start": 42.099,
+        "end": 42.406
+      },
+      {
+        "word": "be",
+        "start": 42.456,
+        "end": 42.763
+      },
+      {
+        "word": "caught",
+        "start": 42.813,
+        "end": 43.12
+      },
+      {
+        "word": "while",
+        "start": 43.17,
+        "end": 43.477
+      }
+    ]
+  },
+  {
+    "start": 43.527,
+    "end": 44.906,
+    "scene": 5,
+    "words": [
+      {
+        "word": "it's",
+        "start": 43.527,
+        "end": 43.834
+      },
+      {
+        "word": "small.",
+        "start": 43.884,
+        "end": 44.191
+      },
+      {
         "word": "Follow",
-        "start": 34.97,
-        "end": 35.277
+        "start": 44.241,
+        "end": 44.549
       },
       {
         "word": "for",
-        "start": 35.327,
-        "end": 35.634
-      },
-      {
-        "word": "daily",
-        "start": 35.684,
-        "end": 35.991
-      },
-      {
-        "word": "AI",
-        "start": 36.041,
-        "end": 36.349
+        "start": 44.599,
+        "end": 44.906
       }
     ]
   },
   {
-    "start": 36.399,
-    "end": 36.706,
+    "start": 44.956,
+    "end": 45.977,
     "scene": 5,
     "words": [
       {
+        "word": "daily",
+        "start": 44.956,
+        "end": 45.263
+      },
+      {
+        "word": "AI",
+        "start": 45.313,
+        "end": 45.62
+      },
+      {
         "word": "news.",
-        "start": 36.399,
-        "end": 36.706
+        "start": 45.67,
+        "end": 45.977
       }
     ]
   }

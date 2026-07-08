@@ -51,3 +51,14 @@ Chosen: #1, with #2 as the first StatCallout.
 ## Source credit for caption.txt
 
 Source: Google Research / Earth Fire Alliance / Muon Space; images: Muon Space, SpaceX
+
+## Round-2 research (script V2 additions)
+
+| # | Fact | Source |
+|---|------|--------|
+| 9 | Current firefighting satellite imagery is low-resolution / updated only a few times a day; fires smaller than a soccer field are hard to detect | https://sites.research.google/gr/wildfires/firesat/ + https://blog.google/company-news/outreach-and-initiatives/sustainability/google-ai-wildfire-detection/ |
+| 10 | Protoflight detected fires on five continents incl. a small, cool fire in the Western U.S. (Oregon) that existing satellite systems were not sensitive enough to identify | https://blog.google/innovation-and-ai/technology/research/first-firesat-images/ + https://www.earthfirealliance.org/press-release/firesat-first-wildfire-images |
+| 11 | EFA-commissioned research: even a 1-hour FireSat revisit rate could annually save $1B+ in fire damage, protect 3,500 homes, reduce burned land by 1.3M acres, prevent 21.9M tons CO2 (US) | https://internationalfireandsafetyjournal.com/exclusive-why-firesat-could-transform-the-global-response-to-wildfire-threats/ |
+| 12 | US wildfire costs: >$11B direct, ~$415B indirect annually (EFA-commissioned) | same as 11 |
+| 13 | California angle: Gov. Newsom promoted the launch; Cal Fire partnership | https://www.gov.ca.gov/2026/07/07/californias-wildfire-defense-blasts-off-governor-newsom-launches-firesat-wildfire-detection-satellites-to-spot-blazes-from-space/ |
+| 14 | ~600 km orbit: deployment altitude 598 km shown in SpaceX Transporter-17 stream telemetry | user-provided asset (stream frame, credit SpaceX) |

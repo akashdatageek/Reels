@@ -1,6 +1,6 @@
-Google just put a smoke detector in orbit 🛰️🔥
+Satellites can't see a wildfire smaller than a soccer field. That just changed. 🛰️🔥
 
-The first 3 operational FireSat satellites reached orbit this week on SpaceX Transporter-17. Their infrared sensors spot fires as small as 5×5 m — through smoke and clouds — and Google AI confirms ignitions by checking each image against ~1,000 past views of the same spot. The goal: 50+ satellites by the early 2030s, updating the whole planet every 20 minutes.
+The first 3 operational FireSat satellites reached orbit this week on SpaceX Transporter-17. They spot fires as small as 5×5 m — a classroom, from ~600 km up, through smoke and clouds — and Google AI confirms each ignition against ~1,000 past images of the same spot. The prototype already caught an Oregon fire other satellites missed. Goal: 50+ satellites scanning the whole planet every 20 minutes by the early 2030s.
 
 Source: Google Research · Earth Fire Alliance · Muon Space | Images: Muon Space, SpaceX
 
