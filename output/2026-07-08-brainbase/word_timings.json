@@ -1,0 +1,632 @@
+[
+  {
+    "word": "Deploying",
+    "start": 0.0,
+    "end": 0.307,
+    "scene": 0
+  },
+  {
+    "word": "an",
+    "start": 0.357,
+    "end": 0.664,
+    "scene": 0
+  },
+  {
+    "word": "AI",
+    "start": 0.714,
+    "end": 1.021,
+    "scene": 0
+  },
+  {
+    "word": "agent",
+    "start": 1.071,
+    "end": 1.379,
+    "scene": 0
+  },
+  {
+    "word": "is",
+    "start": 1.429,
+    "end": 1.736,
+    "scene": 0
+  },
+  {
+    "word": "now",
+    "start": 1.786,
+    "end": 2.093,
+    "scene": 0
+  },
+  {
+    "word": "as",
+    "start": 2.143,
+    "end": 2.45,
+    "scene": 0
+  },
+  {
+    "word": "easy",
+    "start": 2.5,
+    "end": 2.807,
+    "scene": 0
+  },
+  {
+    "word": "as",
+    "start": 2.857,
+    "end": 3.164,
+    "scene": 0
+  },
+  {
+    "word": "deploying",
+    "start": 3.214,
+    "end": 3.521,
+    "scene": 0
+  },
+  {
+    "word": "a",
+    "start": 3.571,
+    "end": 3.879,
+    "scene": 0
+  },
+  {
+    "word": "website.",
+    "start": 3.929,
+    "end": 4.236,
+    "scene": 0
+  },
+  {
+    "word": "A",
+    "start": 4.64,
+    "end": 4.947,
+    "scene": 1
+  },
+  {
+    "word": "Y",
+    "start": 4.997,
+    "end": 5.304,
+    "scene": 1
+  },
+  {
+    "word": "C",
+    "start": 5.354,
+    "end": 5.661,
+    "scene": 1
+  },
+  {
+    "word": "startup",
+    "start": 5.711,
+    "end": 6.019,
+    "scene": 1
+  },
+  {
+    "word": "called",
+    "start": 6.069,
+    "end": 6.376,
+    "scene": 1
+  },
+  {
+    "word": "Brainbase",
+    "start": 6.426,
+    "end": 6.733,
+    "scene": 1
+  },
+  {
+    "word": "just",
+    "start": 6.783,
+    "end": 7.09,
+    "scene": 1
+  },
+  {
+    "word": "took",
+    "start": 7.14,
+    "end": 7.447,
+    "scene": 1
+  },
+  {
+    "word": "its",
+    "start": 7.497,
+    "end": 7.804,
+    "scene": 1
+  },
+  {
+    "word": "AI",
+    "start": 7.854,
+    "end": 8.161,
+    "scene": 1
+  },
+  {
+    "word": "agent",
+    "start": 8.211,
+    "end": 8.519,
+    "scene": 1
+  },
+  {
+    "word": "cloud",
+    "start": 8.569,
+    "end": 8.876,
+    "scene": 1
+  },
+  {
+    "word": "into",
+    "start": 8.926,
+    "end": 9.233,
+    "scene": 1
+  },
+  {
+    "word": "general",
+    "start": 9.283,
+    "end": 9.59,
+    "scene": 1
+  },
+  {
+    "word": "availability.",
+    "start": 9.64,
+    "end": 9.947,
+    "scene": 1
+  },
+  {
+    "word": "Think",
+    "start": 9.997,
+    "end": 10.304,
+    "scene": 1
+  },
+  {
+    "word": "of",
+    "start": 10.354,
+    "end": 10.661,
+    "scene": 1
+  },
+  {
+    "word": "it",
+    "start": 10.711,
+    "end": 11.019,
+    "scene": 1
+  },
+  {
+    "word": "like",
+    "start": 11.069,
+    "end": 11.376,
+    "scene": 1
+  },
+  {
+    "word": "Vercel,",
+    "start": 11.426,
+    "end": 11.733,
+    "scene": 1
+  },
+  {
+    "word": "but",
+    "start": 11.783,
+    "end": 12.09,
+    "scene": 1
+  },
+  {
+    "word": "for",
+    "start": 12.14,
+    "end": 12.447,
+    "scene": 1
+  },
+  {
+    "word": "agents.",
+    "start": 12.497,
+    "end": 12.804,
+    "scene": 1
+  },
+  {
+    "word": "The",
+    "start": 13.2,
+    "end": 13.507,
+    "scene": 2
+  },
+  {
+    "word": "old",
+    "start": 13.557,
+    "end": 13.864,
+    "scene": 2
+  },
+  {
+    "word": "way:",
+    "start": 13.914,
+    "end": 14.221,
+    "scene": 2
+  },
+  {
+    "word": "you",
+    "start": 14.271,
+    "end": 14.579,
+    "scene": 2
+  },
+  {
+    "word": "wire",
+    "start": 14.629,
+    "end": 14.936,
+    "scene": 2
+  },
+  {
+    "word": "up",
+    "start": 14.986,
+    "end": 15.293,
+    "scene": 2
+  },
+  {
+    "word": "hosting,",
+    "start": 15.343,
+    "end": 15.65,
+    "scene": 2
+  },
+  {
+    "word": "scaling,",
+    "start": 15.7,
+    "end": 16.007,
+    "scene": 2
+  },
+  {
+    "word": "and",
+    "start": 16.057,
+    "end": 16.364,
+    "scene": 2
+  },
+  {
+    "word": "evaluations",
+    "start": 16.414,
+    "end": 16.721,
+    "scene": 2
+  },
+  {
+    "word": "yourself.",
+    "start": 16.771,
+    "end": 17.079,
+    "scene": 2
+  },
+  {
+    "word": "The",
+    "start": 17.129,
+    "end": 17.436,
+    "scene": 2
+  },
+  {
+    "word": "new",
+    "start": 17.486,
+    "end": 17.793,
+    "scene": 2
+  },
+  {
+    "word": "way:",
+    "start": 17.843,
+    "end": 18.15,
+    "scene": 2
+  },
+  {
+    "word": "describe",
+    "start": 18.2,
+    "end": 18.507,
+    "scene": 2
+  },
+  {
+    "word": "your",
+    "start": 18.557,
+    "end": 18.864,
+    "scene": 2
+  },
+  {
+    "word": "agent",
+    "start": 18.914,
+    "end": 19.221,
+    "scene": 2
+  },
+  {
+    "word": "in",
+    "start": 19.271,
+    "end": 19.579,
+    "scene": 2
+  },
+  {
+    "word": "a",
+    "start": 19.629,
+    "end": 19.936,
+    "scene": 2
+  },
+  {
+    "word": "few",
+    "start": 19.986,
+    "end": 20.293,
+    "scene": 2
+  },
+  {
+    "word": "lines",
+    "start": 20.343,
+    "end": 20.65,
+    "scene": 2
+  },
+  {
+    "word": "of",
+    "start": 20.7,
+    "end": 21.007,
+    "scene": 2
+  },
+  {
+    "word": "YAML,",
+    "start": 21.057,
+    "end": 21.364,
+    "scene": 2
+  },
+  {
+    "word": "and",
+    "start": 21.414,
+    "end": 21.721,
+    "scene": 2
+  },
+  {
+    "word": "push",
+    "start": 21.771,
+    "end": 22.079,
+    "scene": 2
+  },
+  {
+    "word": "it",
+    "start": 22.129,
+    "end": 22.436,
+    "scene": 2
+  },
+  {
+    "word": "to",
+    "start": 22.486,
+    "end": 22.793,
+    "scene": 2
+  },
+  {
+    "word": "the",
+    "start": 22.843,
+    "end": 23.15,
+    "scene": 2
+  },
+  {
+    "word": "cloud.",
+    "start": 23.2,
+    "end": 23.507,
+    "scene": 2
+  },
+  {
+    "word": "Agents",
+    "start": 23.91,
+    "end": 24.217,
+    "scene": 3
+  },
+  {
+    "word": "kick",
+    "start": 24.267,
+    "end": 24.574,
+    "scene": 3
+  },
+  {
+    "word": "off",
+    "start": 24.624,
+    "end": 24.931,
+    "scene": 3
+  },
+  {
+    "word": "from",
+    "start": 24.981,
+    "end": 25.289,
+    "scene": 3
+  },
+  {
+    "word": "webhooks,",
+    "start": 25.339,
+    "end": 25.646,
+    "scene": 3
+  },
+  {
+    "word": "schedules,",
+    "start": 25.696,
+    "end": 26.003,
+    "scene": 3
+  },
+  {
+    "word": "or",
+    "start": 26.053,
+    "end": 26.36,
+    "scene": 3
+  },
+  {
+    "word": "over",
+    "start": 26.41,
+    "end": 26.717,
+    "scene": 3
+  },
+  {
+    "word": "one",
+    "start": 26.767,
+    "end": 27.074,
+    "scene": 3
+  },
+  {
+    "word": "thousand",
+    "start": 27.124,
+    "end": 27.431,
+    "scene": 3
+  },
+  {
+    "word": "app",
+    "start": 27.481,
+    "end": 27.789,
+    "scene": 3
+  },
+  {
+    "word": "triggers,",
+    "start": 27.839,
+    "end": 28.146,
+    "scene": 3
+  },
+  {
+    "word": "like",
+    "start": 28.196,
+    "end": 28.503,
+    "scene": 3
+  },
+  {
+    "word": "Slack,",
+    "start": 28.553,
+    "end": 28.86,
+    "scene": 3
+  },
+  {
+    "word": "GitHub,",
+    "start": 28.91,
+    "end": 29.217,
+    "scene": 3
+  },
+  {
+    "word": "and",
+    "start": 29.267,
+    "end": 29.574,
+    "scene": 3
+  },
+  {
+    "word": "Linear.",
+    "start": 29.624,
+    "end": 29.931,
+    "scene": 3
+  },
+  {
+    "word": "And",
+    "start": 30.33,
+    "end": 30.637,
+    "scene": 4
+  },
+  {
+    "word": "it",
+    "start": 30.687,
+    "end": 30.994,
+    "scene": 4
+  },
+  {
+    "word": "is",
+    "start": 31.044,
+    "end": 31.351,
+    "scene": 4
+  },
+  {
+    "word": "enterprise",
+    "start": 31.401,
+    "end": 31.709,
+    "scene": 4
+  },
+  {
+    "word": "ready",
+    "start": 31.759,
+    "end": 32.066,
+    "scene": 4
+  },
+  {
+    "word": "out",
+    "start": 32.116,
+    "end": 32.423,
+    "scene": 4
+  },
+  {
+    "word": "of",
+    "start": 32.473,
+    "end": 32.78,
+    "scene": 4
+  },
+  {
+    "word": "the",
+    "start": 32.83,
+    "end": 33.137,
+    "scene": 4
+  },
+  {
+    "word": "box.",
+    "start": 33.187,
+    "end": 33.494,
+    "scene": 4
+  },
+  {
+    "word": "SOC",
+    "start": 33.544,
+    "end": 33.851,
+    "scene": 4
+  },
+  {
+    "word": "2,",
+    "start": 33.901,
+    "end": 34.209,
+    "scene": 4
+  },
+  {
+    "word": "HIPAA,",
+    "start": 34.259,
+    "end": 34.566,
+    "scene": 4
+  },
+  {
+    "word": "even",
+    "start": 34.616,
+    "end": 34.923,
+    "scene": 4
+  },
+  {
+    "word": "hybrid",
+    "start": 34.973,
+    "end": 35.28,
+    "scene": 4
+  },
+  {
+    "word": "deployment.",
+    "start": 35.33,
+    "end": 35.637,
+    "scene": 4
+  },
+  {
+    "word": "Any",
+    "start": 35.687,
+    "end": 35.994,
+    "scene": 4
+  },
+  {
+    "word": "model,",
+    "start": 36.044,
+    "end": 36.351,
+    "scene": 4
+  },
+  {
+    "word": "any",
+    "start": 36.401,
+    "end": 36.709,
+    "scene": 4
+  },
+  {
+    "word": "harness.",
+    "start": 36.759,
+    "end": 37.066,
+    "scene": 4
+  },
+  {
+    "word": "Follow",
+    "start": 37.47,
+    "end": 37.777,
+    "scene": 5
+  },
+  {
+    "word": "for",
+    "start": 37.827,
+    "end": 38.134,
+    "scene": 5
+  },
+  {
+    "word": "daily",
+    "start": 38.184,
+    "end": 38.491,
+    "scene": 5
+  },
+  {
+    "word": "AI",
+    "start": 38.541,
+    "end": 38.849,
+    "scene": 5
+  },
+  {
+    "word": "news.",
+    "start": 38.899,
+    "end": 39.206,
+    "scene": 5
+  }
+]
