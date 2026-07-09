@@ -72,6 +72,10 @@ export interface ReelSpec {
   voiceover?: string;
   music?: string;
   accentColor?: string;
+  /** Second acid-palette color; gradients run accent -> secondary. */
+  secondaryColor?: string;
+  /** Extra style words appended to every image prompt for this reel's vibe. */
+  imageStyle?: string;
   handle?: string;
   scenes: Scene[];
   totalDuration?: number;

@@ -1,6 +1,8 @@
 {
   "title": "FireSat V2: problem-first cut",
   "accentColor": "#FF7A1A",
+  "secondaryColor": "#FFD23F",
+  "imageStyle": "warm ember glow against cool darkness, natural monumental scale",
   "music": "music/ambient_01.mp3",
   "scenes": [
     {

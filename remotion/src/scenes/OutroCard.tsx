@@ -11,10 +11,12 @@ import {BG, FONT_BODY, FONT_DISPLAY, TEXT, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
 /** CTA + handle, with a "follow" pulse. */
-export const OutroCard: React.FC<{scene: Scene; accent: string}> = ({
+export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
@@ -24,7 +26,7 @@ export const OutroCard: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={4} />
+      <AmbientBackground accent={accent} secondary={second} seed={4} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

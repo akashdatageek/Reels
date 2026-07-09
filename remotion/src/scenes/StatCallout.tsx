@@ -21,10 +21,12 @@ const parseStat = (stat: string) => {
 };
 
 /** Animated number/metric — counts up, label fades in. */
-export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
+export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
@@ -39,7 +41,7 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={2} />
+      <AmbientBackground accent={accent} secondary={second} seed={2} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',
@@ -62,8 +64,11 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
             fontFamily: FONT_DISPLAY,
             fontSize: 260,
             lineHeight: 1,
-            color: accent,
-            textShadow: `0 0 ${80 + bass * 90}px ${accent}${bass > 0.4 ? '88' : '55'}`,
+            background: `linear-gradient(160deg, ${accent} 25%, ${second} 85%)`,
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            filter: `drop-shadow(0 0 ${34 + bass * 44}px ${accent}${bass > 0.4 ? '88' : '55'})`,
             transform: `scale(${1 + bass * 0.025})`,
           }}
         >

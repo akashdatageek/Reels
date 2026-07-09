@@ -8,10 +8,12 @@ import {usePulse} from './MusicPulse';
  * faint perspective grid, so no scene ever sits on dead pixels.
  * Deterministic per `seed` so different scenes get different drift patterns.
  */
-export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
-  accent,
-  seed = 0,
-}) => {
+export const AmbientBackground: React.FC<{
+  accent: string;
+  secondary?: string;
+  seed?: number;
+}> = ({accent, secondary, seed = 0}) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const {bass} = usePulse();
@@ -54,7 +56,8 @@ export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
             width: o.r * 2,
             height: o.r * 2,
             borderRadius: '50%',
-            background: `radial-gradient(circle, ${accent} 0%, transparent 62%)`,
+            // alternate the acid pair so the background reads duotone
+            background: `radial-gradient(circle, ${i % 2 === 0 ? accent : second} 0%, transparent 62%)`,
             opacity: o.opacity,
             filter: 'blur(2px)',
           }}

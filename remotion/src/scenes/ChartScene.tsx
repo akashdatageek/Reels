@@ -14,10 +14,12 @@ import type {ChartItem, Scene} from '../types';
  * Animated horizontal bar chart — bars grow in staggered, values count up,
  * the `highlight` item glows in the accent color. For benchmark stories.
  */
-export const ChartScene: React.FC<{scene: Scene; accent: string}> = ({
+export const ChartScene: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const items: ChartItem[] = scene.chart ?? [];
@@ -27,7 +29,7 @@ export const ChartScene: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={5} />
+      <AmbientBackground accent={accent} secondary={second} seed={5} />
       <AbsoluteFill
         style={{
           paddingTop: SAFE_TOP + 60,
@@ -107,7 +109,7 @@ export const ChartScene: React.FC<{scene: Scene; accent: string}> = ({
                     width: `${widthPct}%`,
                     borderRadius: 17,
                     background: isHi
-                      ? `linear-gradient(90deg, ${accent}88, ${accent})`
+                      ? `linear-gradient(90deg, ${accent}, ${second})`
                       : 'linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.45))',
                     boxShadow: isHi ? `0 0 40px ${accent}66` : 'none',
                   }}

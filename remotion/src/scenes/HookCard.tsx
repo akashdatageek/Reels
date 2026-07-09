@@ -13,10 +13,12 @@ import type {Scene} from '../types';
 
 /** Big bold opening statement — huge type, spring-in, living background.
  *  Words wrapped in *asterisks* render in the accent color. */
-export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
+export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
@@ -43,7 +45,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={1} />
+      <AmbientBackground accent={accent} secondary={second} seed={1} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',
@@ -85,8 +87,16 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
                   marginRight: 22,
                   opacity: wordIn,
                   transform: `translateY(${(1 - wordIn) * 40}px)`,
-                  color: w.emphasized ? accent : undefined,
-                  textShadow: w.emphasized ? `0 0 50px ${accent}66` : undefined,
+                  // emphasized words run the acid gradient, chrome-type style
+                  ...(w.emphasized
+                    ? {
+                        background: `linear-gradient(115deg, ${accent} 20%, ${second} 80%)`,
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: `drop-shadow(0 0 26px ${accent}66)`,
+                      }
+                    : null),
                 }}
               >
                 {w.text}
@@ -98,7 +108,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
           style={{
             height: 12,
             width: barW * (1 + bass * 0.25),
-            backgroundColor: accent,
+            background: `linear-gradient(90deg, ${accent}, ${second})`,
             margin: '48px auto 0',
             borderRadius: 6,
             boxShadow: `0 0 ${10 + bass * 50}px ${accent}`,

@@ -75,6 +75,29 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
 
 8. **Show the output path (`output/<story>/reel.mp4`). Never post automatically.**
 
+## Theme analysis (before any visuals — the editor's first decision)
+
+Analyze the story's *theme* and pick a matching Gen-Z-friendly identity,
+writing the choice + reasoning into script.md. Set in reel.json:
+`accentColor` + `secondaryColor` (acid duotone pair; gradients, orbs and
+wipes run accent → secondary) and `imageStyle` (vibe words prepended to
+every image prompt).
+
+| Story theme | Duotone pair | imageStyle flavor |
+|---|---|---|
+| dev tools / infra | mint `#00E58C` + electric blue `#00A3FF` | "clean holographic terminal glow" |
+| models / research | violet `#8B5CF6` + hot pink `#FF4D9D` | "iridescent neural chrome" |
+| money / business | amber `#FFB020` + acid green `#B6FF3B` | "gold chrome, ticker energy" |
+| drama / security | red `#FF4D4D` + neon orange `#FF7A1A` | "alarm glow, high tension" |
+| climate / science | orange `#FF7A1A` + golden `#FFD23F` | "warm ember glow, natural scale" |
+| consumer / social | hot pink `#FF4D9D` + cyan `#00E5FF` | "playful glossy plastic, Y2K" |
+
+Pairs are starting points — tune per story. **Gen-Z authenticity rules:**
+conversational hooks, never corporate phrasing ("game-changing solution" is
+banned); no forced slang — the aesthetic can be loud, the words stay real;
+receipts over promises (show the terminal, the chart, the photo); emoji in
+caption.txt are fine, on-screen text stays clean.
+
 ## Creative direction (choose deliberately, per story)
 
 - **Scene mix:** never use the same scene sequence two days in a row. Pick the

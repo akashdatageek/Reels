@@ -37,11 +37,16 @@ MODEL = os.environ.get("NANO_BANANA_MODEL", "gemini-2.5-flash-image")
 ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
 
 # Keep visuals consistent day to day — this prefix is applied to every prompt.
-# The per-reel creative direction comes from the scene's imagePrompt itself.
+# Gen-Z visual language: acid duotone glow, holographic/chrome surface energy,
+# subtle analog grain — bold but still dark-bg so on-screen type stays readable.
+# Per-reel flavor comes from reel.json "imageStyle"; the subject from each
+# scene's imagePrompt.
 STYLE_PREFIX = (
     "Vertical 9:16 social media background image. Dark navy/black background, "
-    "single neon accent color, clean isometric 3D or abstract tech aesthetic, "
-    "cinematic lighting, high detail. Absolutely no text, no words, no letters, "
+    "vivid two-color neon acid-gradient lighting, holographic chrome and "
+    "iridescent surface accents, bold isometric 3D or abstract tech aesthetic, "
+    "cinematic lighting, subtle analog film grain, high detail, Y2K "
+    "retro-futuristic energy. Absolutely no text, no words, no letters, "
     "no logos, no watermarks in the image. "
 )
 
@@ -109,11 +114,17 @@ def main() -> int:
     if not API_KEY:
         print("WARN: NANO_BANANA_API_KEY not set -> generating placeholder gradients", file=sys.stderr)
 
+    # optional per-reel vibe words (from theme analysis), e.g.
+    # "fiery orange and golden glow, ember particles in the air"
+    image_style = (reel.get("imageStyle") or "").strip()
+
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
         prompt = scene.get("imagePrompt")
         if not prompt:
             continue
+        if image_style:
+            prompt = f"{image_style}. {prompt}"
         existing = scene.get("image")
         if existing and (out_dir / existing).exists() and not args.force:
             print(f"scene {idx:02d}: keeping existing asset {existing}")

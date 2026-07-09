@@ -17,8 +17,11 @@ export const Captions: React.FC<{
   const {bass} = usePulse();
   const t = frame / fps;
 
-  const group = captions.find((g) => t >= g.start && t <= g.end + 0.25);
-  if (!group) return null;
+  const groupIndex = captions.findIndex((g) => t >= g.start && t <= g.end + 0.25);
+  if (groupIndex === -1) return null;
+  const group = captions[groupIndex];
+  // sticker feel: each caption group lands at a slightly different angle
+  const jitter = ((groupIndex * 37) % 5) - 2; // deterministic, -2..2 degrees
 
   return (
     <AbsoluteFill style={{pointerEvents: 'none'}}>
@@ -34,14 +37,15 @@ export const Captions: React.FC<{
         <div
           style={{
             display: 'inline-block',
-            backgroundColor: 'rgba(5,6,16,0.78)',
-            borderRadius: 20,
-            padding: '18px 30px',
+            backgroundColor: 'rgba(5,6,16,0.82)',
+            borderRadius: 22,
+            padding: '18px 32px',
             fontFamily: FONT_BODY,
             fontWeight: 800,
-            fontSize: 48,
+            fontSize: 50,
             lineHeight: 1.25,
             textTransform: 'uppercase',
+            transform: `rotate(${jitter * 0.6}deg)`,
           }}
         >
           {group.words.map((w, i) => {

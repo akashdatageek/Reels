@@ -11,10 +11,12 @@ const TYPE_CPS = 22; // typed characters per second for command lines
  * the scene for dev-tool launches ("push an agent", "npm install x").
  * Commands type character-by-character; outputs pop in line-by-line.
  */
-export const TerminalScene: React.FC<{scene: Scene; accent: string}> = ({
+export const TerminalScene: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps, durationInFrames} = useVideoConfig();
   const lines: TerminalLine[] = scene.terminal ?? [];
@@ -40,7 +42,7 @@ export const TerminalScene: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={3} />
+      <AmbientBackground accent={accent} secondary={second} seed={3} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

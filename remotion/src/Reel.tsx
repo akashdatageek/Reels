@@ -21,7 +21,7 @@ import type {ReelProps, Scene} from './types';
 
 const SCENE_COMPONENTS: Record<
   Scene['type'],
-  React.FC<{scene: Scene; accent: string}>
+  React.FC<{scene: Scene; accent: string; secondary?: string}>
 > = {
   HookCard,
   ImageScene,
@@ -69,6 +69,7 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
 export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   const {fps} = useVideoConfig();
   const accent = reel.accentColor ?? DEFAULT_ACCENT;
+  const secondary = reel.secondaryColor ?? accent;
 
   let cursor = 0;
   const sequenced = reel.scenes.map((scene, i) => {
@@ -86,14 +87,14 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
           if (!Comp) return null;
           return (
             <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
-              <Comp scene={{...scene, handle: scene.handle ?? reel.handle}} accent={accent} />
+              <Comp scene={{...scene, handle: scene.handle ?? reel.handle}} accent={accent} secondary={secondary} />
             </Sequence>
           );
         })}
         {/* accent wipe at every cut (skip the reel's very first frame) */}
         {sequenced.slice(1).map(({from, key}) => (
           <Sequence key={`cut-${key}`} from={from - 3} durationInFrames={CUT_FLASH_FRAMES} name={`cut-${key}`}>
-            <CutFlash accent={accent} />
+            <CutFlash accent={accent} secondary={secondary} />
           </Sequence>
         ))}
         <Captions captions={captions ?? []} accent={accent} />
