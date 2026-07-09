@@ -13,7 +13,9 @@ export const AmbientBackground: React.FC<{
   accent: string;
   secondary?: string;
   seed?: number;
-}> = ({accent, secondary, seed = 0}) => {
+  /** true when a Backdrop image sits underneath — orbs/glow only, no fill */
+  transparent?: boolean;
+}> = ({accent, secondary, seed = 0, transparent = false}) => {
   const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -36,7 +38,7 @@ export const AmbientBackground: React.FC<{
   });
 
   return (
-    <AbsoluteFill style={{backgroundColor: BG, overflow: 'hidden'}}>
+    <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : BG, overflow: 'hidden'}}>
       {/* faint grid, slow vertical drift (hidden in moody vibe) */}
       <AbsoluteFill
         style={{

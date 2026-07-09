@@ -31,6 +31,11 @@ export interface Scene {
   /** In HookCard, wrap words in *asterisks* to render them in the accent color. */
   text?: string;
   voiceSegment?: string;
+  /** Aesthetic background image behind text/data scenes (Hook/Stat/Split);
+   *  rendered darkened with a scrim so type stays readable. */
+  backdrop?: string;
+  /** If set and no backdrop exists, generate_images.py creates one. */
+  backdropPrompt?: string;
   /** TerminalScene: the lines to type/print (title bar text comes from `text`). */
   terminal?: TerminalLine[];
   /** ChartScene: bars, top-to-bottom (title from `text`, footnote from `label`). */

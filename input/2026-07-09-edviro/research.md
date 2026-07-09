@@ -52,3 +52,9 @@ used before) + x-ray building cutaway.
 ## Source credit for caption.txt
 
 Source: Edviro (edviroenergy.com); sector stats: ENERGY STAR / US DOE
+
+## Extended-cut additions
+
+| # | Fact | Source |
+|---|------|--------|
+| 7 | Facilities managers are overwhelmed with dashboards, alarms and analytics for hundreds of boilers, HVAC units and heat pumps across buildings | https://edviroenergy.com/ (site copy via search index) |

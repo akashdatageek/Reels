@@ -2,541 +2,1003 @@
   {
     "word": "Your",
     "start": 0.05,
-    "end": 0.251,
+    "end": 0.253,
     "scene": 0
   },
   {
     "word": "school",
-    "start": 0.286,
-    "end": 0.554,
+    "start": 0.289,
+    "end": 0.56,
     "scene": 0
   },
   {
     "word": "probably",
-    "start": 0.602,
-    "end": 0.936,
+    "start": 0.607,
+    "end": 0.946,
     "scene": 0
   },
   {
     "word": "spends",
-    "start": 0.996,
-    "end": 1.263,
+    "start": 1.005,
+    "end": 1.276,
     "scene": 0
   },
   {
     "word": "more",
-    "start": 1.311,
-    "end": 1.512,
+    "start": 1.324,
+    "end": 1.527,
     "scene": 0
   },
   {
     "word": "on",
-    "start": 1.547,
-    "end": 1.681,
+    "start": 1.563,
+    "end": 1.698,
     "scene": 0
   },
   {
     "word": "energy",
-    "start": 1.705,
-    "end": 1.973,
+    "start": 1.722,
+    "end": 1.993,
     "scene": 0
   },
   {
     "word": "than",
-    "start": 2.02,
-    "end": 2.221,
+    "start": 2.04,
+    "end": 2.243,
     "scene": 0
   },
   {
     "word": "on",
-    "start": 2.256,
-    "end": 2.39,
+    "start": 2.279,
+    "end": 2.414,
     "scene": 0
   },
   {
     "word": "textbooks",
-    "start": 2.414,
-    "end": 2.782,
+    "start": 2.438,
+    "end": 2.811,
     "scene": 0
   },
   {
     "word": "and",
-    "start": 2.847,
-    "end": 3.015,
+    "start": 2.876,
+    "end": 3.045,
     "scene": 0
   },
   {
     "word": "computers",
-    "start": 3.044,
-    "end": 3.413,
+    "start": 3.075,
+    "end": 3.447,
     "scene": 0
   },
   {
     "word": "combined.",
-    "start": 3.478,
-    "end": 3.846,
+    "start": 3.513,
+    "end": 3.885,
     "scene": 0
   },
   {
     "word": "U",
-    "start": 4.41,
-    "end": 4.509,
+    "start": 4.45,
+    "end": 4.54,
     "scene": 1
   },
   {
     "word": "S",
-    "start": 4.526,
-    "end": 4.625,
+    "start": 4.556,
+    "end": 4.646,
     "scene": 1
   },
   {
     "word": "districts",
-    "start": 4.642,
-    "end": 5.003,
+    "start": 4.662,
+    "end": 4.993,
     "scene": 1
   },
   {
     "word": "burn",
-    "start": 5.067,
-    "end": 5.264,
+    "start": 5.051,
+    "end": 5.232,
     "scene": 1
   },
   {
     "word": "nearly",
-    "start": 5.299,
-    "end": 5.562,
+    "start": 5.264,
+    "end": 5.504,
     "scene": 1
   },
   {
     "word": "eight",
-    "start": 5.609,
-    "end": 5.839,
+    "start": 5.547,
+    "end": 5.757,
     "scene": 1
   },
   {
     "word": "billion",
-    "start": 5.879,
-    "end": 6.175,
+    "start": 5.794,
+    "end": 6.065,
     "scene": 1
   },
   {
     "word": "dollars",
-    "start": 6.227,
-    "end": 6.523,
+    "start": 6.113,
+    "end": 6.384,
     "scene": 1
   },
   {
     "word": "a",
-    "start": 6.575,
-    "end": 6.674,
+    "start": 6.431,
+    "end": 6.522,
     "scene": 1
   },
   {
     "word": "year",
-    "start": 6.691,
-    "end": 6.888,
+    "start": 6.537,
+    "end": 6.718,
     "scene": 1
   },
   {
     "word": "on",
-    "start": 6.923,
-    "end": 7.055,
+    "start": 6.75,
+    "end": 6.87,
     "scene": 1
   },
   {
     "word": "energy,",
-    "start": 7.078,
-    "end": 7.374,
+    "start": 6.891,
+    "end": 7.162,
     "scene": 1
   },
   {
     "word": "and",
-    "start": 7.426,
-    "end": 7.59,
+    "start": 7.21,
+    "end": 7.36,
     "scene": 1
   },
   {
     "word": "about",
-    "start": 7.619,
-    "end": 7.849,
+    "start": 7.387,
+    "end": 7.597,
     "scene": 1
   },
   {
     "word": "thirty",
-    "start": 7.89,
-    "end": 8.153,
+    "start": 7.634,
+    "end": 7.875,
     "scene": 1
   },
   {
     "word": "percent",
-    "start": 8.199,
-    "end": 8.495,
+    "start": 7.917,
+    "end": 8.188,
     "scene": 1
   },
   {
     "word": "of",
-    "start": 8.547,
-    "end": 8.678,
+    "start": 8.236,
+    "end": 8.356,
     "scene": 1
   },
   {
     "word": "it",
-    "start": 8.702,
-    "end": 8.833,
+    "start": 8.377,
+    "end": 8.498,
     "scene": 1
   },
   {
     "word": "is",
-    "start": 8.856,
-    "end": 8.988,
+    "start": 8.519,
+    "end": 8.639,
     "scene": 1
   },
   {
     "word": "just",
-    "start": 9.011,
-    "end": 9.208,
+    "start": 8.66,
+    "end": 8.841,
     "scene": 1
   },
   {
     "word": "wasted.",
-    "start": 9.243,
-    "end": 9.539,
+    "start": 8.873,
+    "end": 9.143,
     "scene": 1
   },
   {
-    "word": "A",
-    "start": 10.09,
-    "end": 10.184,
+    "word": "Here's",
+    "start": 9.69,
+    "end": 10.009,
     "scene": 2
   },
   {
-    "word": "Y",
-    "start": 10.201,
-    "end": 10.295,
+    "word": "why",
+    "start": 10.066,
+    "end": 10.265,
     "scene": 2
   },
   {
-    "word": "C",
-    "start": 10.312,
-    "end": 10.406,
+    "word": "it",
+    "start": 10.301,
+    "end": 10.46,
     "scene": 2
   },
   {
-    "word": "startup",
-    "start": 10.423,
-    "end": 10.706,
+    "word": "stays",
+    "start": 10.489,
+    "end": 10.768,
     "scene": 2
   },
   {
-    "word": "called",
-    "start": 10.756,
-    "end": 11.007,
+    "word": "broken:",
+    "start": 10.817,
+    "end": 11.177,
     "scene": 2
   },
   {
-    "word": "Edviro",
-    "start": 11.052,
-    "end": 11.303,
+    "word": "one",
+    "start": 11.24,
+    "end": 11.44,
     "scene": 2
   },
   {
-    "word": "puts",
-    "start": 11.348,
-    "end": 11.536,
+    "word": "facilities",
+    "start": 11.475,
+    "end": 11.954,
     "scene": 2
   },
   {
-    "word": "AI",
-    "start": 11.57,
-    "end": 11.696,
+    "word": "manager,",
+    "start": 12.039,
+    "end": 12.438,
     "scene": 2
   },
   {
-    "word": "agents",
-    "start": 11.718,
-    "end": 11.969,
+    "word": "hundreds",
+    "start": 12.508,
+    "end": 12.908,
     "scene": 2
   },
   {
-    "word": "on",
-    "start": 12.014,
-    "end": 12.139,
+    "word": "of",
+    "start": 12.978,
+    "end": 13.138,
     "scene": 2
   },
   {
-    "word": "that",
-    "start": 12.162,
-    "end": 12.35,
+    "word": "boilers,",
+    "start": 13.166,
+    "end": 13.565,
     "scene": 2
   },
   {
-    "word": "problem.",
-    "start": 12.384,
-    "end": 12.698,
+    "word": "HVAC",
+    "start": 13.636,
+    "end": 13.875,
     "scene": 2
   },
   {
-    "word": "They",
-    "start": 12.754,
-    "end": 12.942,
-    "scene": 2
-  },
-  {
-    "word": "connect",
-    "start": 12.976,
-    "end": 13.259,
-    "scene": 2
-  },
-  {
-    "word": "the",
-    "start": 13.308,
-    "end": 13.466,
-    "scene": 2
-  },
-  {
-    "word": "meters",
-    "start": 13.493,
-    "end": 13.745,
+    "word": "units,",
+    "start": 13.918,
+    "end": 14.237,
     "scene": 2
   },
   {
     "word": "and",
-    "start": 13.789,
-    "end": 13.947,
+    "start": 14.293,
+    "end": 14.493,
     "scene": 2
   },
   {
-    "word": "controls,",
-    "start": 13.974,
-    "end": 14.32,
+    "word": "alarm",
+    "start": 14.528,
+    "end": 14.808,
     "scene": 2
   },
   {
-    "word": "and",
-    "start": 14.381,
-    "end": 14.538,
+    "word": "dashboards.",
+    "start": 14.857,
+    "end": 15.376,
+    "scene": 2
+  },
+  {
+    "word": "Nobody",
+    "start": 15.468,
+    "end": 15.787,
+    "scene": 2
+  },
+  {
+    "word": "can",
+    "start": 15.843,
+    "end": 16.043,
     "scene": 2
   },
   {
     "word": "watch",
-    "start": 14.566,
-    "end": 14.786,
+    "start": 16.078,
+    "end": 16.358,
     "scene": 2
   },
   {
-    "word": "every",
-    "start": 14.825,
-    "end": 15.045,
+    "word": "it",
+    "start": 16.407,
+    "end": 16.567,
     "scene": 2
   },
   {
-    "word": "building",
-    "start": 15.084,
-    "end": 15.399,
+    "word": "all.",
+    "start": 16.595,
+    "end": 16.835,
     "scene": 2
   },
   {
-    "word": "around",
-    "start": 15.454,
-    "end": 15.706,
+    "word": "So",
+    "start": 16.877,
+    "end": 17.037,
     "scene": 2
+  },
+  {
+    "word": "a",
+    "start": 17.065,
+    "end": 17.184,
+    "scene": 2
+  },
+  {
+    "word": "Y",
+    "start": 17.206,
+    "end": 17.325,
+    "scene": 2
+  },
+  {
+    "word": "C",
+    "start": 17.347,
+    "end": 17.466,
+    "scene": 2
+  },
+  {
+    "word": "startup",
+    "start": 17.487,
+    "end": 17.847,
+    "scene": 2
+  },
+  {
+    "word": "called",
+    "start": 17.91,
+    "end": 18.23,
+    "scene": 2
+  },
+  {
+    "word": "Edviro",
+    "start": 18.286,
+    "end": 18.605,
+    "scene": 2
+  },
+  {
+    "word": "made",
+    "start": 18.662,
+    "end": 18.901,
+    "scene": 2
+  },
+  {
+    "word": "AI",
+    "start": 18.944,
+    "end": 19.103,
+    "scene": 2
+  },
+  {
+    "word": "agents",
+    "start": 19.132,
+    "end": 19.451,
+    "scene": 2
+  },
+  {
+    "word": "that",
+    "start": 19.507,
+    "end": 19.747,
+    "scene": 2
+  },
+  {
+    "word": "can.",
+    "start": 19.789,
+    "end": 20.029,
+    "scene": 2
+  },
+  {
+    "word": "The",
+    "start": 20.57,
+    "end": 20.716,
+    "scene": 3
+  },
+  {
+    "word": "agents",
+    "start": 20.742,
+    "end": 20.976,
+    "scene": 3
+  },
+  {
+    "word": "plug",
+    "start": 21.018,
+    "end": 21.193,
+    "scene": 3
+  },
+  {
+    "word": "into",
+    "start": 21.224,
+    "end": 21.4,
+    "scene": 3
   },
   {
     "word": "the",
-    "start": 15.75,
-    "end": 15.907,
-    "scene": 2
-  },
-  {
-    "word": "clock.",
-    "start": 15.935,
-    "end": 16.187,
-    "scene": 2
-  },
-  {
-    "word": "When",
-    "start": 16.73,
-    "end": 16.922,
+    "start": 21.431,
+    "end": 21.577,
     "scene": 3
   },
   {
-    "word": "something",
-    "start": 16.956,
-    "end": 17.309,
+    "word": "district's",
+    "start": 21.603,
+    "end": 21.955,
     "scene": 3
   },
   {
-    "word": "starts",
-    "start": 17.371,
-    "end": 17.627,
+    "word": "meters,",
+    "start": 22.017,
+    "end": 22.28,
     "scene": 3
   },
   {
-    "word": "wasting",
-    "start": 17.672,
-    "end": 17.961,
-    "scene": 3
-  },
-  {
-    "word": "power,",
-    "start": 18.012,
-    "end": 18.268,
-    "scene": 3
-  },
-  {
-    "word": "the",
-    "start": 18.313,
-    "end": 18.473,
-    "scene": 3
-  },
-  {
-    "word": "agent",
-    "start": 18.502,
-    "end": 18.726,
-    "scene": 3
-  },
-  {
-    "word": "catches",
-    "start": 18.765,
-    "end": 19.054,
-    "scene": 3
-  },
-  {
-    "word": "it,",
-    "start": 19.105,
-    "end": 19.265,
-    "scene": 3
-  },
-  {
-    "word": "simulates",
-    "start": 19.293,
-    "end": 19.646,
-    "scene": 3
-  },
-  {
-    "word": "the",
-    "start": 19.708,
-    "end": 19.868,
-    "scene": 3
-  },
-  {
-    "word": "fix,",
-    "start": 19.896,
-    "end": 20.088,
+    "word": "controls,",
+    "start": 22.327,
+    "end": 22.649,
     "scene": 3
   },
   {
     "word": "and",
-    "start": 20.122,
-    "end": 20.283,
+    "start": 22.705,
+    "end": 22.852,
     "scene": 3
+  },
+  {
+    "word": "utility",
+    "start": 22.878,
+    "end": 23.141,
+    "scene": 3
+  },
+  {
+    "word": "data,",
+    "start": 23.188,
+    "end": 23.393,
+    "scene": 3
+  },
+  {
+    "word": "and",
+    "start": 23.429,
+    "end": 23.575,
+    "scene": 3
+  },
+  {
+    "word": "watch",
+    "start": 23.601,
+    "end": 23.806,
+    "scene": 3
+  },
+  {
+    "word": "every",
+    "start": 23.842,
+    "end": 24.047,
+    "scene": 3
+  },
+  {
+    "word": "building",
+    "start": 24.083,
+    "end": 24.376,
+    "scene": 3
+  },
+  {
+    "word": "around",
+    "start": 24.428,
+    "end": 24.662,
+    "scene": 3
+  },
+  {
+    "word": "the",
+    "start": 24.703,
+    "end": 24.85,
+    "scene": 3
+  },
+  {
+    "word": "clock.",
+    "start": 24.875,
+    "end": 25.11,
+    "scene": 3
+  },
+  {
+    "word": "When",
+    "start": 25.65,
+    "end": 25.84,
+    "scene": 4
+  },
+  {
+    "word": "something",
+    "start": 25.874,
+    "end": 26.223,
+    "scene": 4
+  },
+  {
+    "word": "starts",
+    "start": 26.285,
+    "end": 26.539,
+    "scene": 4
+  },
+  {
+    "word": "wasting",
+    "start": 26.584,
+    "end": 26.869,
+    "scene": 4
+  },
+  {
+    "word": "power,",
+    "start": 26.92,
+    "end": 27.174,
+    "scene": 4
+  },
+  {
+    "word": "the",
+    "start": 27.219,
+    "end": 27.377,
+    "scene": 4
+  },
+  {
+    "word": "agent",
+    "start": 27.405,
+    "end": 27.627,
+    "scene": 4
+  },
+  {
+    "word": "catches",
+    "start": 27.667,
+    "end": 27.952,
+    "scene": 4
+  },
+  {
+    "word": "it,",
+    "start": 28.003,
+    "end": 28.161,
+    "scene": 4
+  },
+  {
+    "word": "simulates",
+    "start": 28.189,
+    "end": 28.539,
+    "scene": 4
+  },
+  {
+    "word": "the",
+    "start": 28.6,
+    "end": 28.759,
+    "scene": 4
+  },
+  {
+    "word": "fix",
+    "start": 28.787,
+    "end": 28.946,
+    "scene": 4
+  },
+  {
+    "word": "with",
+    "start": 28.974,
+    "end": 29.164,
+    "scene": 4
+  },
+  {
+    "word": "an",
+    "start": 29.198,
+    "end": 29.325,
+    "scene": 4
+  },
+  {
+    "word": "energy",
+    "start": 29.347,
+    "end": 29.601,
+    "scene": 4
+  },
+  {
+    "word": "world",
+    "start": 29.646,
+    "end": 29.868,
+    "scene": 4
+  },
+  {
+    "word": "model,",
+    "start": 29.907,
+    "end": 30.161,
+    "scene": 4
+  },
+  {
+    "word": "and",
+    "start": 30.206,
+    "end": 30.365,
+    "scene": 4
   },
   {
     "word": "then",
-    "start": 20.311,
-    "end": 20.503,
-    "scene": 3
+    "start": 30.393,
+    "end": 30.583,
+    "scene": 4
   },
   {
     "word": "proves",
-    "start": 20.537,
-    "end": 20.793,
-    "scene": 3
+    "start": 30.617,
+    "end": 30.871,
+    "scene": 4
   },
   {
     "word": "the",
-    "start": 20.839,
-    "end": 20.999,
-    "scene": 3
+    "start": 30.916,
+    "end": 31.074,
+    "scene": 4
   },
   {
     "word": "savings",
-    "start": 21.027,
-    "end": 21.315,
-    "scene": 3
+    "start": 31.102,
+    "end": 31.388,
+    "scene": 4
   },
   {
     "word": "on",
-    "start": 21.366,
-    "end": 21.494,
-    "scene": 3
+    "start": 31.439,
+    "end": 31.566,
+    "scene": 4
   },
   {
     "word": "the",
-    "start": 21.517,
-    "end": 21.677,
-    "scene": 3
+    "start": 31.588,
+    "end": 31.747,
+    "scene": 4
   },
   {
     "word": "actual",
-    "start": 21.706,
-    "end": 21.962,
-    "scene": 3
+    "start": 31.775,
+    "end": 32.029,
+    "scene": 4
+  },
+  {
+    "word": "utility",
+    "start": 32.073,
+    "end": 32.359,
+    "scene": 4
   },
   {
     "word": "bill.",
-    "start": 22.007,
-    "end": 22.231,
-    "scene": 3
+    "start": 32.41,
+    "end": 32.632,
+    "scene": 4
+  },
+  {
+    "word": "And",
+    "start": 33.17,
+    "end": 33.349,
+    "scene": 5
+  },
+  {
+    "word": "the",
+    "start": 33.38,
+    "end": 33.559,
+    "scene": 5
+  },
+  {
+    "word": "wild",
+    "start": 33.59,
+    "end": 33.804,
+    "scene": 5
+  },
+  {
+    "word": "part:",
+    "start": 33.842,
+    "end": 34.092,
+    "scene": 5
+  },
+  {
+    "word": "about",
+    "start": 34.136,
+    "end": 34.386,
+    "scene": 5
+  },
+  {
+    "word": "ten",
+    "start": 34.43,
+    "end": 34.609,
+    "scene": 5
+  },
+  {
+    "word": "percent",
+    "start": 34.64,
+    "end": 34.962,
+    "scene": 5
+  },
+  {
+    "word": "of",
+    "start": 35.018,
+    "end": 35.161,
+    "scene": 5
+  },
+  {
+    "word": "school",
+    "start": 35.186,
+    "end": 35.472,
+    "scene": 5
+  },
+  {
+    "word": "energy",
+    "start": 35.522,
+    "end": 35.808,
+    "scene": 5
+  },
+  {
+    "word": "can",
+    "start": 35.858,
+    "end": 36.037,
+    "scene": 5
+  },
+  {
+    "word": "be",
+    "start": 36.068,
+    "end": 36.211,
+    "scene": 5
+  },
+  {
+    "word": "saved",
+    "start": 36.236,
+    "end": 36.486,
+    "scene": 5
+  },
+  {
+    "word": "with",
+    "start": 36.531,
+    "end": 36.745,
+    "scene": 5
+  },
+  {
+    "word": "low-cost",
+    "start": 36.783,
+    "end": 37.14,
+    "scene": 5
+  },
+  {
+    "word": "fixes",
+    "start": 37.203,
+    "end": 37.453,
+    "scene": 5
+  },
+  {
+    "word": "alone.",
+    "start": 37.497,
+    "end": 37.782,
+    "scene": 5
+  },
+  {
+    "word": "The",
+    "start": 37.833,
+    "end": 38.011,
+    "scene": 5
+  },
+  {
+    "word": "money",
+    "start": 38.043,
+    "end": 38.293,
+    "scene": 5
+  },
+  {
+    "word": "is",
+    "start": 38.337,
+    "end": 38.48,
+    "scene": 5
+  },
+  {
+    "word": "just",
+    "start": 38.505,
+    "end": 38.719,
+    "scene": 5
+  },
+  {
+    "word": "sitting",
+    "start": 38.757,
+    "end": 39.078,
+    "scene": 5
+  },
+  {
+    "word": "there.",
+    "start": 39.135,
+    "end": 39.421,
+    "scene": 5
+  },
+  {
+    "word": "Edviro",
+    "start": 39.97,
+    "end": 40.266,
+    "scene": 6
+  },
+  {
+    "word": "even",
+    "start": 40.318,
+    "end": 40.54,
+    "scene": 6
+  },
+  {
+    "word": "puts",
+    "start": 40.579,
+    "end": 40.801,
+    "scene": 6
+  },
+  {
+    "word": "public",
+    "start": 40.84,
+    "end": 41.136,
+    "scene": 6
+  },
+  {
+    "word": "dashboards",
+    "start": 41.188,
+    "end": 41.631,
+    "scene": 6
+  },
+  {
+    "word": "in",
+    "start": 41.71,
+    "end": 41.857,
+    "scene": 6
+  },
+  {
+    "word": "front",
+    "start": 41.884,
+    "end": 42.142,
+    "scene": 6
+  },
+  {
+    "word": "of",
+    "start": 42.188,
+    "end": 42.336,
+    "scene": 6
+  },
+  {
+    "word": "the",
+    "start": 42.362,
+    "end": 42.547,
+    "scene": 6
+  },
+  {
+    "word": "community,",
+    "start": 42.579,
+    "end": 43.023,
+    "scene": 6
+  },
+  {
+    "word": "so",
+    "start": 43.101,
+    "end": 43.249,
+    "scene": 6
+  },
+  {
+    "word": "students",
+    "start": 43.275,
+    "end": 43.645,
+    "scene": 6
+  },
+  {
+    "word": "and",
+    "start": 43.71,
+    "end": 43.895,
+    "scene": 6
+  },
+  {
+    "word": "taxpayers",
+    "start": 43.928,
+    "end": 44.334,
+    "scene": 6
+  },
+  {
+    "word": "can",
+    "start": 44.406,
+    "end": 44.591,
+    "scene": 6
+  },
+  {
+    "word": "see",
+    "start": 44.623,
+    "end": 44.808,
+    "scene": 6
+  },
+  {
+    "word": "exactly",
+    "start": 44.841,
+    "end": 45.174,
+    "scene": 6
+  },
+  {
+    "word": "where",
+    "start": 45.232,
+    "end": 45.491,
+    "scene": 6
+  },
+  {
+    "word": "the",
+    "start": 45.537,
+    "end": 45.722,
+    "scene": 6
+  },
+  {
+    "word": "energy",
+    "start": 45.754,
+    "end": 46.05,
+    "scene": 6
+  },
+  {
+    "word": "money",
+    "start": 46.102,
+    "end": 46.361,
+    "scene": 6
+  },
+  {
+    "word": "goes.",
+    "start": 46.407,
+    "end": 46.665,
+    "scene": 6
   },
   {
     "word": "Less",
-    "start": 22.77,
-    "end": 23.02,
-    "scene": 4
+    "start": 47.21,
+    "end": 47.537,
+    "scene": 7
   },
   {
     "word": "waste,",
-    "start": 23.064,
-    "end": 23.397,
-    "scene": 4
+    "start": 47.594,
+    "end": 48.03,
+    "scene": 7
   },
   {
     "word": "more",
-    "start": 23.456,
-    "end": 23.706,
-    "scene": 4
+    "start": 48.107,
+    "end": 48.434,
+    "scene": 7
   },
   {
     "word": "textbook",
-    "start": 23.75,
-    "end": 24.166,
-    "scene": 4
+    "start": 48.491,
+    "end": 49.036,
+    "scene": 7
   },
   {
     "word": "money.",
-    "start": 24.24,
-    "end": 24.573,
-    "scene": 4
+    "start": 49.132,
+    "end": 49.568,
+    "scene": 7
   },
   {
     "word": "Follow",
-    "start": 24.632,
-    "end": 24.965,
-    "scene": 4
+    "start": 49.645,
+    "end": 50.08,
+    "scene": 7
   },
   {
     "word": "for",
-    "start": 25.024,
-    "end": 25.232,
-    "scene": 4
+    "start": 50.157,
+    "end": 50.43,
+    "scene": 7
   },
   {
     "word": "daily",
-    "start": 25.269,
-    "end": 25.561,
-    "scene": 4
+    "start": 50.478,
+    "end": 50.859,
+    "scene": 7
   },
   {
     "word": "AI",
-    "start": 25.612,
-    "end": 25.779,
-    "scene": 4
+    "start": 50.926,
+    "end": 51.144,
+    "scene": 7
   },
   {
     "word": "news.",
-    "start": 25.808,
-    "end": 26.1,
-    "scene": 4
+    "start": 51.182,
+    "end": 51.564,
+    "scene": 7
   }
 ]

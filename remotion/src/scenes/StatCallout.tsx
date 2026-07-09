@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {Backdrop} from '../components/Backdrop';
 import {usePulse} from '../components/MusicPulse';
 import {FONT_BODY, FONT_DISPLAY, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
@@ -41,7 +42,8 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={2} />
+      {scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.backdrop)} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',
