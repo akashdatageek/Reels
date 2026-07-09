@@ -35,9 +35,15 @@ if [ -n "$MUSIC_REL_PRE" ] && [ -f "$REPO_DIR/$MUSIC_REL_PRE" ]; then
   cp "$REPO_DIR/$MUSIC_REL_PRE" "$STORY_DIR/music.mp3"
 fi
 
-# 1b. props.json = {reel, captions}; music cleared if track wasn't staged so
-#     the renderer never analyzes a missing file
-python3 - "$REEL_JSON" "$CAPTIONS_JSON" "$STORY_DIR/props.json" "$STORY_DIR/music.mp3" <<'PY'
+# 1a2. Stage the brand logo into the story dir for the OutroCard.
+rm -f "$STORY_DIR/logo.png"
+if [ -f "$REPO_DIR/brand/startups-logo.png" ]; then
+  cp "$REPO_DIR/brand/startups-logo.png" "$STORY_DIR/logo.png"
+fi
+
+# 1b. props.json = {reel, captions}; music/logo cleared if not staged so the
+#     renderer never references a missing file
+python3 - "$REEL_JSON" "$CAPTIONS_JSON" "$STORY_DIR/props.json" "$STORY_DIR/music.mp3" "$STORY_DIR/logo.png" <<'PY'
 import json, pathlib, sys
 reel = json.loads(pathlib.Path(sys.argv[1]).read_text())
 captions = []
@@ -46,6 +52,7 @@ if cap_path.exists():
     captions = json.loads(cap_path.read_text())
 if not pathlib.Path(sys.argv[4]).exists():
     reel["music"] = None
+reel["logo"] = "logo.png" if pathlib.Path(sys.argv[5]).exists() else None
 pathlib.Path(sys.argv[3]).write_text(json.dumps({"reel": reel, "captions": captions}))
 PY
 
