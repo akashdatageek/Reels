@@ -1,9 +1,10 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
-import {FONT_BODY, FONT_SERIF, SAFE_BOTTOM, TEXT} from '../theme';
+import {FONT_BODY, FONT_SERIF, SAFE_BOTTOM} from '../theme';
 import type {CaptionGroup} from '../types';
 import {usePulse} from './MusicPulse';
 import {useVibe} from './VibeContext';
+import {usePalette} from './ThemeContext';
 
 /**
  * Word-by-word animated captions overlaid on all scenes.
@@ -18,6 +19,14 @@ export const Captions: React.FC<{
   const {bass} = usePulse();
   const vibe = useVibe();
   const moody = vibe === 'moody';
+  const pal = usePalette();
+  const light = pal.bg === '#f5f4f0';
+  // moody serif captions sit bare on the page, so they follow the theme text
+  // color; bold captions live in a dark pill, so their text stays light.
+  const pillText = moody ? pal.text : '#f5f7ff';
+  const inactive = moody
+    ? (light ? 'rgba(22,23,29,0.35)' : 'rgba(245,247,255,0.35)')
+    : 'rgba(245,247,255,0.35)';
   const t = frame / fps;
 
   const groupIndex = captions.findIndex((g) => t >= g.start && t <= g.end + 0.25);
@@ -59,7 +68,7 @@ export const Captions: React.FC<{
               <span
                 key={i}
                 style={{
-                  color: active ? (isCurrent ? accent : TEXT) : 'rgba(245,247,255,0.35)',
+                  color: active ? (isCurrent ? accent : pillText) : inactive,
                   marginRight: 22,
                   display: 'inline-block',
                   transform: isCurrent ? `scale(${1.06 + bass * 0.05})` : 'scale(1)',

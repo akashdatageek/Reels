@@ -55,7 +55,27 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
 5. **Build `output/<story>/reel.json`** — 6–12 scenes (schema:
    `remotion/src/types.ts`, example: `remotion/src/example/reel.json`).
    - Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
-     `TerminalScene` (typed CLI demo), `ChartScene` (animated bars), `OutroCard`.
+     `TerminalScene` (typed CLI demo), `ChartScene` (animated bars),
+     `FigureScene` (show a REAL source figure + explain it), `OutroCard`.
+   - **Show the real thing.** If the source has a chart, diagram, screenshot,
+     or photo that carries the point, put it on screen with `FigureScene`
+     (`figure` = cropped asset, `figureCredit`, `annotations` = the callouts
+     that walk through it) — do NOT paraphrase a chart into decoration or
+     replace it with a generated image. Crop screenshots to the figure region
+     (`pipeline/*` or a quick PIL bbox). Generated images are for *mood/metaphor*
+     beats only, never as a stand-in for evidence the source actually provided.
+   - **Explain graphs out loud.** When a figure is shown, the voiceover names
+     the axes/colors and reads the takeaway ("blue = kept; red = removed,
+     lower is better; GRAM's red bar is 0.60 vs 0.85").
+   - **Theme (`theme` in reel.json): choose by content.**
+     `light` (editorial warm-white, dark text, clean shadows) for data,
+     research papers, charts, explainers, business/credibility stories.
+     `dark` (default) for launches, drama, atmosphere, cinematic/moody.
+     Don't default to dark neon for everything — it makes data look like a
+     sci-fi trailer instead of credible reporting.
+   - **Break the structure.** Don't reuse the same scene order two days
+     running. An explainer is mostly FigureScenes; a launch is image-led; a
+     data story is chart-led. Pick the sequence the *story* needs.
    - Each spoken scene gets a `voiceSegment` (1–2 short sentences).
    - **Prefer provided assets over generated images**: copy usable files from
      `input/<story>/assets/` into `output/<story>/assets/` and reference them

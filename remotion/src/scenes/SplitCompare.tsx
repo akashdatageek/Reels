@@ -10,7 +10,8 @@ import {
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
-import {BG, BG_LIGHT, FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
+import {usePalette} from '../components/ThemeContext';
+import {FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP} from '../theme';
 import type {Scene} from '../types';
 
 const Panel: React.FC<{
@@ -23,6 +24,7 @@ const Panel: React.FC<{
 }> = ({title, text, image, accent, from, highlight}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const pal = usePalette();
   const slide = spring({frame, fps, config: {damping: 16, stiffness: 90}});
   const x = interpolate(slide, [0, 1], [from === 'left' ? -560 : 560, 0]);
 
@@ -33,8 +35,8 @@ const Panel: React.FC<{
         margin: 18,
         borderRadius: 32,
         overflow: 'hidden',
-        backgroundColor: BG_LIGHT,
-        border: highlight ? `4px solid ${accent}` : '4px solid transparent',
+        backgroundColor: pal.panel,
+        border: highlight ? `4px solid ${accent}` : `4px solid ${pal.panelBorder}`,
         transform: `translateX(${x}px)`,
         display: 'flex',
         flexDirection: 'column',
@@ -51,7 +53,7 @@ const Panel: React.FC<{
           style={{
             fontFamily: FONT_DISPLAY,
             fontSize: 56,
-            color: highlight ? accent : TEXT,
+            color: highlight ? accent : pal.text,
             textTransform: 'uppercase',
           }}
         >
@@ -65,7 +67,7 @@ const Panel: React.FC<{
               fontWeight: 600,
               fontSize: 40,
               lineHeight: 1.3,
-              color: TEXT_DIM,
+              color: pal.textDim,
             }}
           >
             {text}
@@ -85,6 +87,7 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
   const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const pal = usePalette();
   const vsIn = spring({frame: frame - 8, fps, config: {damping: 10}});
 
   return (
@@ -104,7 +107,7 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
             textAlign: 'center',
             fontFamily: FONT_DISPLAY,
             fontSize: 64,
-            color: TEXT,
+            color: pal.text,
             textTransform: 'uppercase',
             marginBottom: 30,
             paddingLeft: 60,
@@ -140,7 +143,7 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
             height: 130,
             borderRadius: '50%',
             backgroundColor: accent,
-            color: BG,
+            color: pal.bgLight,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

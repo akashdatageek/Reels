@@ -7,7 +7,8 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
-import {BG, FONT_BODY, FONT_DISPLAY, TEXT, TEXT_DIM} from '../theme';
+import {usePalette} from '../components/ThemeContext';
+import {FONT_BODY, FONT_DISPLAY} from '../theme';
 import type {Scene} from '../types';
 
 /** CTA + handle, with a "follow" pulse. */
@@ -19,6 +20,10 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
   const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const pal = usePalette();
+  const TEXT = pal.text;
+  const TEXT_DIM = pal.textDim;
+  const BG = pal.bg;
 
   const cardIn = spring({frame, fps, config: {damping: 14}});
   // gentle infinite pulse on the follow button

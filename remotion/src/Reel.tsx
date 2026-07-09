@@ -10,7 +10,10 @@ import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
 import {MusicPulseProvider, usePulse} from './components/MusicPulse';
 import {VibeContext} from './components/VibeContext';
+import {ThemeContext, usePalette} from './components/ThemeContext';
+import {getPalette} from './palette';
 import {ChartScene} from './scenes/ChartScene';
+import {FigureScene} from './scenes/FigureScene';
 import {HookCard} from './scenes/HookCard';
 import {ImageScene} from './scenes/ImageScene';
 import {OutroCard} from './scenes/OutroCard';
@@ -30,6 +33,7 @@ const SCENE_COMPONENTS: Record<
   SplitCompare,
   TerminalScene,
   ChartScene,
+  FigureScene,
   OutroCard,
 };
 
@@ -39,6 +43,7 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const {bass} = usePulse();
+  const p = usePalette();
   const pct = Math.min(1, frame / Math.max(durationInFrames - 1, 1));
   return (
     <div
@@ -49,7 +54,7 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
         right: 60,
         height: 8,
         borderRadius: 4,
-        backgroundColor: 'rgba(255,255,255,0.14)',
+        backgroundColor: p.bg === '#f5f4f0' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.14)',
         overflow: 'hidden',
       }}
     >
@@ -71,6 +76,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   const {fps} = useVideoConfig();
   const accent = reel.accentColor ?? DEFAULT_ACCENT;
   const secondary = reel.secondaryColor ?? accent;
+  const palette = getPalette(reel.theme);
 
   let cursor = 0;
   const sequenced = reel.scenes.map((scene, i) => {
@@ -81,9 +87,10 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   });
 
   return (
+    <ThemeContext.Provider value={palette}>
     <VibeContext.Provider value={reel.vibe ?? 'bold'}>
     <MusicPulseProvider hasMusic={Boolean(reel.music)}>
-      <AbsoluteFill style={{backgroundColor: BG}}>
+      <AbsoluteFill style={{backgroundColor: palette.bg}}>
         {sequenced.map(({scene, from, frames, key}) => {
           const Comp = SCENE_COMPONENTS[scene.type];
           if (!Comp) return null;
@@ -105,5 +112,6 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
       </AbsoluteFill>
     </MusicPulseProvider>
     </VibeContext.Provider>
+    </ThemeContext.Provider>
   );
 };

@@ -5,7 +5,15 @@ export type SceneType =
   | 'SplitCompare'
   | 'TerminalScene'
   | 'ChartScene'
+  | 'FigureScene'
   | 'OutroCard';
+
+export interface FigureAnnotation {
+  /** short callout line that fades in on a timeline to explain the figure */
+  text: string;
+  /** optional: highlight color word/marker */
+  emphasis?: boolean;
+}
 
 export interface TerminalLine {
   /** command = typed with $ prompt · output = printed · comment = dim · success = accent bold */
@@ -40,6 +48,12 @@ export interface Scene {
   terminal?: TerminalLine[];
   /** ChartScene: bars, top-to-bottom (title from `text`, footnote from `label`). */
   chart?: ChartItem[];
+  /** FigureScene: a real source image (chart/diagram/screenshot) to show. */
+  figure?: string;
+  /** FigureScene: source credit line under the figure. */
+  figureCredit?: string;
+  /** FigureScene: explanation callouts that fade in over the scene. */
+  annotations?: FigureAnnotation[];
   /** Path relative to the story output folder (or assets/...). */
   image?: string;
   /** If set and no image exists, generate_images.py creates one. */
@@ -83,6 +97,8 @@ export interface ReelSpec {
   imageStyle?: string;
   /** 'bold' (default, loud acid look) or 'moody' (cinematic restraint). */
   vibe?: 'bold' | 'moody';
+  /** 'dark' (default, atmospheric) or 'light' (editorial white — data/research). */
+  theme?: 'dark' | 'light';
   handle?: string;
   scenes: Scene[];
   totalDuration?: number;
