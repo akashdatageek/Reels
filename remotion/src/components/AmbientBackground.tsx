@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BG} from '../theme';
 import {usePulse} from './MusicPulse';
+import {useVibe} from './VibeContext';
 
 /**
  * Living background for text scenes: slow-drifting accent glow orbs over a
@@ -16,7 +17,10 @@ export const AmbientBackground: React.FC<{
   const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const {bass} = usePulse();
+  const pulse = usePulse();
+  const moody = useVibe() === 'moody';
+  // moody: calmer glow, half the audio reactivity
+  const bass = moody ? pulse.bass * 0.5 : pulse.bass;
   const t = frame / fps;
 
   const orbs = [0, 1, 2].map((i) => {
@@ -33,9 +37,10 @@ export const AmbientBackground: React.FC<{
 
   return (
     <AbsoluteFill style={{backgroundColor: BG, overflow: 'hidden'}}>
-      {/* faint grid, slow vertical drift */}
+      {/* faint grid, slow vertical drift (hidden in moody vibe) */}
       <AbsoluteFill
         style={{
+          display: moody ? 'none' : undefined,
           backgroundImage: `linear-gradient(${accent}14 1px, transparent 1px),
             linear-gradient(90deg, ${accent}14 1px, transparent 1px)`,
           backgroundSize: '108px 108px',

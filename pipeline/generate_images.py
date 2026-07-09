@@ -41,19 +41,22 @@ ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:gen
 # subtle analog grain — bold but still dark-bg so on-screen type stays readable.
 # Per-reel flavor comes from reel.json "imageStyle"; the subject from each
 # scene's imagePrompt.
-STYLE_PREFIX = (
-    "Vertical 9:16 social media background image. Dark navy/black background, "
-    "vivid two-color neon acid-gradient lighting, holographic chrome and "
-    "iridescent surface accents, bold isometric 3D or abstract tech aesthetic, "
-    "cinematic lighting, subtle analog film grain, high detail, Y2K "
-    "retro-futuristic energy. Absolutely no text, no words, no letters, "
+BASE_RULES = (
+    "Vertical 9:16 social media background image. Cinematic lighting, subtle "
+    "analog film grain, high detail. Absolutely no text, no words, no letters, "
     "no logos, no watermarks in the image. "
+)
+# Default vibe words (bold Gen-Z look); a reel's "imageStyle" REPLACES these.
+DEFAULT_VIBE = (
+    "Dark navy/black background, vivid two-color neon acid-gradient lighting, "
+    "holographic chrome and iridescent surface accents, bold isometric 3D or "
+    "abstract tech aesthetic, Y2K retro-futuristic energy. "
 )
 
 
 def generate_nano_banana(prompt: str, out_path: pathlib.Path) -> None:
     body = {
-        "contents": [{"parts": [{"text": STYLE_PREFIX + prompt}]}],
+        "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "responseModalities": ["IMAGE"],
             "imageConfig": {"aspectRatio": "9:16"},
@@ -114,17 +117,17 @@ def main() -> int:
     if not API_KEY:
         print("WARN: NANO_BANANA_API_KEY not set -> generating placeholder gradients", file=sys.stderr)
 
-    # optional per-reel vibe words (from theme analysis), e.g.
-    # "fiery orange and golden glow, ember particles in the air"
+    # per-reel vibe words (from theme analysis) replace the default look, e.g.
+    # "moody dusk film photography, muted teal and warm amber, atmospheric haze"
     image_style = (reel.get("imageStyle") or "").strip()
+    vibe_words = f"{image_style.rstrip('.')}. " if image_style else DEFAULT_VIBE
 
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
         prompt = scene.get("imagePrompt")
         if not prompt:
             continue
-        if image_style:
-            prompt = f"{image_style}. {prompt}"
+        prompt = BASE_RULES + vibe_words + prompt
         existing = scene.get("image")
         if existing and (out_dir / existing).exists() and not args.force:
             print(f"scene {idx:02d}: keeping existing asset {existing}")

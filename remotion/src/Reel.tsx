@@ -9,6 +9,7 @@ import {Captions} from './components/Captions';
 import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
 import {MusicPulseProvider, usePulse} from './components/MusicPulse';
+import {VibeContext} from './components/VibeContext';
 import {ChartScene} from './scenes/ChartScene';
 import {HookCard} from './scenes/HookCard';
 import {ImageScene} from './scenes/ImageScene';
@@ -80,6 +81,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   });
 
   return (
+    <VibeContext.Provider value={reel.vibe ?? 'bold'}>
     <MusicPulseProvider hasMusic={Boolean(reel.music)}>
       <AbsoluteFill style={{backgroundColor: BG}}>
         {sequenced.map(({scene, from, frames, key}) => {
@@ -102,5 +104,6 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
         <Grain />
       </AbsoluteFill>
     </MusicPulseProvider>
+    </VibeContext.Provider>
   );
 };

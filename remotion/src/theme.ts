@@ -23,3 +23,5 @@ export const DEFAULT_ACCENT = '#00E5FF';
 export const FONT_DISPLAY = '"Archivo Black", "Arial Black", Impact, sans-serif';
 export const FONT_BODY = 'Inter, "Helvetica Neue", Arial, sans-serif';
 export const FONT_MONO = '"JetBrains Mono", "Fira Code", "Courier New", monospace';
+/** Moody vibe display face (quiet cinematic serif). */
+export const FONT_SERIF = 'Fraunces, Georgia, "Times New Roman", serif';

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fontsource/archivo-black": "^5.2.8",
+    "@fontsource/fraunces": "^5.2.9",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@remotion/cli": "^4.0.0",

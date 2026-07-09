@@ -1,8 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
-import {FONT_BODY, SAFE_BOTTOM, TEXT} from '../theme';
+import {FONT_BODY, FONT_SERIF, SAFE_BOTTOM, TEXT} from '../theme';
 import type {CaptionGroup} from '../types';
 import {usePulse} from './MusicPulse';
+import {useVibe} from './VibeContext';
 
 /**
  * Word-by-word animated captions overlaid on all scenes.
@@ -15,6 +16,8 @@ export const Captions: React.FC<{
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const {bass} = usePulse();
+  const vibe = useVibe();
+  const moody = vibe === 'moody';
   const t = frame / fps;
 
   const groupIndex = captions.findIndex((g) => t >= g.start && t <= g.end + 0.25);
@@ -37,15 +40,16 @@ export const Captions: React.FC<{
         <div
           style={{
             display: 'inline-block',
-            backgroundColor: 'rgba(5,6,16,0.82)',
+            backgroundColor: moody ? 'transparent' : 'rgba(5,6,16,0.82)',
             borderRadius: 22,
-            padding: '18px 32px',
-            fontFamily: FONT_BODY,
-            fontWeight: 800,
-            fontSize: 50,
-            lineHeight: 1.25,
-            textTransform: 'uppercase',
-            transform: `rotate(${jitter * 0.6}deg)`,
+            padding: moody ? '10px 24px' : '18px 32px',
+            fontFamily: moody ? FONT_SERIF : FONT_BODY,
+            fontWeight: moody ? 400 : 800,
+            fontSize: moody ? 44 : 50,
+            lineHeight: 1.3,
+            textTransform: moody ? 'lowercase' : 'uppercase',
+            transform: moody ? undefined : `rotate(${jitter * 0.6}deg)`,
+            textShadow: moody ? '0 2px 24px rgba(0,0,0,0.9)' : undefined,
           }}
         >
           {group.words.map((w, i) => {

@@ -92,6 +92,16 @@ every image prompt).
 | climate / science | orange `#FF7A1A` + golden `#FFD23F` | "warm ember glow, natural scale" |
 | consumer / social | hot pink `#FF4D9D` + cyan `#00E5FF` | "playful glossy plastic, Y2K" |
 
+Also choose the reel's **vibe** (`vibe` in reel.json):
+- `bold` (default) — loud acid duotone, chunky uppercase type, sticker
+  captions, light-blade cuts. For news, launches, benchmarks.
+- `moody` — cinematic restraint: quiet serif (Fraunces), sentence case,
+  luma-dip cuts, heavier grain, calmer audio-reactivity, no grid, captions
+  as bare serif text. For human/emotional/reflective stories. Pair with a
+  dusk palette (e.g. warm amber `#E8A25C` + soft teal `#7FBFB5`) and an
+  imageStyle like "moody dusk film photography, muted teal and warm amber,
+  atmospheric haze, silhouettes" (imageStyle *replaces* the default look).
+
 Pairs are starting points — tune per story. **Gen-Z authenticity rules:**
 conversational hooks, never corporate phrasing ("game-changing solution" is
 banned); no forced slang — the aesthetic can be loud, the words stay real;
