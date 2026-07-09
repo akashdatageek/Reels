@@ -1,0 +1,90 @@
+{
+  "title": "GRAM: an off-switch for an AI's most dangerous knowledge",
+  "vibe": "bold",
+  "accentColor": "#8B5CF6",
+  "secondaryColor": "#FF4D9D",
+  "imageStyle": "iridescent neural chrome, violet and magenta holographic glow, dark research-lab atmosphere, high detail",
+  "music": "music/ambient_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 5.64,
+      "text": "The same AI that helps *cure* a disease can help *make* one",
+      "voiceSegment": "The same AI knowledge that helps cure a disease can help make one. That's the dual-use problem.",
+      "backdropPrompt": "dark high-tech virology laboratory, rows of glass vials glowing faintly violet, biosafety hood, moody light",
+      "audioStart": 0.0,
+      "backdrop": "images/scene_00_bg.png"
+    },
+    {
+      "type": "SplitCompare",
+      "duration": 6.84,
+      "text": "Today it's all or nothing",
+      "leftTitle": "Ship it",
+      "leftText": "The powerful model \u2014 and the misuse risk",
+      "rightTitle": "Withhold it",
+      "rightText": "Play it safe \u2014 and lose the good it can do",
+      "voiceSegment": "Until now it was all or nothing: ship the powerful model and risk misuse, or hold it back and lose the good it can do.",
+      "audioStart": 5.64
+    },
+    {
+      "type": "ImageScene",
+      "duration": 9.84,
+      "kenBurns": "zoom-in",
+      "imagePrompt": "glowing central AI brain core made of chrome, with several small detachable glowing modules docked around it labeled by color, one clearly separable, iridescent violet and magenta, isometric",
+      "text": "GRAM: each dangerous skill goes in its own removable module",
+      "voiceSegment": "Researchers at A E Studio and Anthropic built a fix, called GRAM. During training, each dangerous skill, like virology or cyber, gets packed into its own small, removable module.",
+      "audioStart": 12.48,
+      "image": "images/scene_02.png"
+    },
+    {
+      "type": "ImageScene",
+      "duration": 4.16,
+      "kenBurns": "pan-right",
+      "imagePrompt": "a single glowing chrome module being pulled out of an AI core, the empty socket going dark and cold while the rest stays lit, dramatic violet rim light, isometric",
+      "text": "Delete it \u2192 the model acts like it never learned it",
+      "voiceSegment": "Delete that module, and the model acts like it never learned the subject at all.",
+      "audioStart": 22.32,
+      "image": "images/scene_03.png"
+    },
+    {
+      "type": "SplitCompare",
+      "duration": 7.52,
+      "text": "Keeps the good, drops the danger",
+      "leftTitle": "Core skills",
+      "leftText": "0.96 \u2014 kept, near baseline",
+      "rightTitle": "Removed skill",
+      "rightText": "0.60 \u2014 lower means more gone",
+      "voiceSegment": "And it keeps its normal abilities almost perfectly, while the removed capability drops away, cleaner than just filtering the data or trying to make it forget later.",
+      "audioStart": 26.48
+    },
+    {
+      "type": "StatCallout",
+      "duration": 8.36,
+      "stat": "5B",
+      "label": "and it only gets cleaner with scale",
+      "voiceSegment": "They tested it up to five billion parameters, and it only gets better with scale. Bigger models are harder to trick back into the deleted knowledge.",
+      "backdropPrompt": "vast dark data center training hall, endless rows of servers with violet and magenta indicator lights receding into the distance",
+      "audioStart": 34.0,
+      "backdrop": "images/scene_05_bg.png"
+    },
+    {
+      "type": "ImageScene",
+      "duration": 8.52,
+      "kenBurns": "zoom-out",
+      "imagePrompt": "a large glowing physical switch or dial on a control panel, one setting labeled with a lock, chrome and iridescent violet, a hand reaching toward it, cinematic",
+      "text": "An off-switch: trusted labs get the full model, everyone else the safe one",
+      "voiceSegment": "It's basically an off-switch: trusted labs get the full model, everyone else gets the safe one. From a single training run, five times cheaper than training separate models.",
+      "audioStart": 42.36,
+      "image": "images/scene_06.png"
+    },
+    {
+      "type": "OutroCard",
+      "duration": 4.56,
+      "text": "A switch for what AI is allowed to *know*",
+      "voiceSegment": "A switch for what an A I is allowed to know. Follow for daily AI news.",
+      "audioStart": 50.88
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 55.44
+}
