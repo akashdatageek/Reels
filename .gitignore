@@ -18,6 +18,7 @@ output/*/voice*.mp3
 output/*/segments/
 output/*/images/
 output/*/props.json
+output/*/music.mp3
 music/*.mp3
 music/*.wav
 

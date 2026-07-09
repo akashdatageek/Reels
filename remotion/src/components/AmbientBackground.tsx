@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BG} from '../theme';
+import {usePulse} from './MusicPulse';
 
 /**
  * Living background for text scenes: slow-drifting accent glow orbs over a
@@ -13,6 +14,7 @@ export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {bass} = usePulse();
   const t = frame / fps;
 
   const orbs = [0, 1, 2].map((i) => {
@@ -21,8 +23,9 @@ export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
     return {
       x: 540 + Math.sin(t * speed + phase) * (260 + i * 130),
       y: 640 + Math.cos(t * speed * 0.8 + phase * 1.3) * (330 + i * 160) + i * 220,
-      r: 340 - i * 70,
-      opacity: 0.16 - i * 0.04,
+      // orbs breathe with the low end of the music
+      r: (340 - i * 70) * (1 + bass * 0.18),
+      opacity: (0.16 - i * 0.04) * (1 + bass * 0.9),
     };
   });
 

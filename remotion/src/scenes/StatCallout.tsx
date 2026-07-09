@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {usePulse} from '../components/MusicPulse';
 import {FONT_BODY, FONT_DISPLAY, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
@@ -33,7 +34,8 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
     value === null ? '' : (value * progress).toFixed(decimals);
 
   const labelIn = spring({frame: frame - 10, fps, config: {damping: 200}});
-  const ringScale = interpolate(progress, [0, 1], [0.8, 1]);
+  const {bass} = usePulse();
+  const ringScale = interpolate(progress, [0, 1], [0.8, 1]) * (1 + bass * 0.04);
 
   return (
     <AbsoluteFill>
@@ -61,7 +63,8 @@ export const StatCallout: React.FC<{scene: Scene; accent: string}> = ({
             fontSize: 260,
             lineHeight: 1,
             color: accent,
-            textShadow: `0 0 80px ${accent}55`,
+            textShadow: `0 0 ${80 + bass * 90}px ${accent}${bass > 0.4 ? '88' : '55'}`,
+            transform: `scale(${1 + bass * 0.025})`,
           }}
         >
           {value === null ? scene.stat : `${prefix}${shown}${suffix}`}

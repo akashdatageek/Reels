@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {usePulse} from '../components/MusicPulse';
 import {FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
 import type {Scene} from '../types';
 
@@ -20,7 +21,8 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
   const {fps} = useVideoConfig();
 
   const pop = spring({frame, fps, config: {damping: 12, stiffness: 120}});
-  const scale = interpolate(pop, [0, 1], [0.6, 1]);
+  const {bass} = usePulse();
+  const scale = interpolate(pop, [0, 1], [0.6, 1]) * (1 + bass * 0.015);
   const barW = interpolate(
     spring({frame: frame - 6, fps, config: {damping: 200}}),
     [0, 1],
@@ -95,10 +97,11 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
         <div
           style={{
             height: 12,
-            width: barW,
+            width: barW * (1 + bass * 0.25),
             backgroundColor: accent,
             margin: '48px auto 0',
             borderRadius: 6,
+            boxShadow: `0 0 ${10 + bass * 50}px ${accent}`,
           }}
         />
       </div>

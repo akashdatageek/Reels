@@ -6,6 +6,9 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {Captions} from './components/Captions';
+import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
+import {Grain} from './components/Grain';
+import {MusicPulseProvider, usePulse} from './components/MusicPulse';
 import {ChartScene} from './scenes/ChartScene';
 import {HookCard} from './scenes/HookCard';
 import {ImageScene} from './scenes/ImageScene';
@@ -34,6 +37,7 @@ const SCENE_COMPONENTS: Record<
 const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
+  const {bass} = usePulse();
   const pct = Math.min(1, frame / Math.max(durationInFrames - 1, 1));
   return (
     <div
@@ -54,7 +58,7 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
           height: '100%',
           borderRadius: 4,
           backgroundColor: accent,
-          boxShadow: `0 0 18px ${accent}aa`,
+          boxShadow: `0 0 ${18 + bass * 26}px ${accent}aa`,
         }}
       />
     </div>
@@ -75,18 +79,27 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   });
 
   return (
-    <AbsoluteFill style={{backgroundColor: BG}}>
-      {sequenced.map(({scene, from, frames, key}) => {
-        const Comp = SCENE_COMPONENTS[scene.type];
-        if (!Comp) return null;
-        return (
-          <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
-            <Comp scene={{...scene, handle: scene.handle ?? reel.handle}} accent={accent} />
+    <MusicPulseProvider hasMusic={Boolean(reel.music)}>
+      <AbsoluteFill style={{backgroundColor: BG}}>
+        {sequenced.map(({scene, from, frames, key}) => {
+          const Comp = SCENE_COMPONENTS[scene.type];
+          if (!Comp) return null;
+          return (
+            <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
+              <Comp scene={{...scene, handle: scene.handle ?? reel.handle}} accent={accent} />
+            </Sequence>
+          );
+        })}
+        {/* accent wipe at every cut (skip the reel's very first frame) */}
+        {sequenced.slice(1).map(({from, key}) => (
+          <Sequence key={`cut-${key}`} from={from - 3} durationInFrames={CUT_FLASH_FRAMES} name={`cut-${key}`}>
+            <CutFlash accent={accent} />
           </Sequence>
-        );
-      })}
-      <Captions captions={captions ?? []} accent={accent} />
-      <ProgressBar accent={accent} />
-    </AbsoluteFill>
+        ))}
+        <Captions captions={captions ?? []} accent={accent} />
+        <ProgressBar accent={accent} />
+        <Grain />
+      </AbsoluteFill>
+    </MusicPulseProvider>
   );
 };

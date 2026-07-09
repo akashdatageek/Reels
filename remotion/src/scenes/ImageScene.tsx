@@ -8,6 +8,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
+import {usePulse} from '../components/MusicPulse';
 import {BG, FONT_BODY, SAFE_BOTTOM, TEXT} from '../theme';
 import type {Scene} from '../types';
 
@@ -42,6 +43,13 @@ export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
   }
 
   const barIn = spring({frame: frame - 4, fps, config: {damping: 200}});
+  const {bass} = usePulse();
+  // 2.5D feel: a slow perspective tilt + a light band sweeping across once
+  const tilt = Math.sin(t * Math.PI) * 1.2;
+  const sweepX = interpolate(t, [0.1, 0.75], [-60, 160], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
   return (
     <AbsoluteFill style={{backgroundColor: BG}}>
@@ -52,10 +60,26 @@ export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            transform: `scale(${scale}) translate(${tx}px, ${ty}px)`,
+            transform: `perspective(1400px) rotateY(${tilt}deg) scale(${scale * (1 + bass * 0.01)}) translate(${tx}px, ${ty}px)`,
           }}
         />
       ) : null}
+      {/* light sweep across the image */}
+      <AbsoluteFill style={{overflow: 'hidden', pointerEvents: 'none'}}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '-20%',
+            height: '140%',
+            width: '45%',
+            left: 0,
+            transform: `translateX(${sweepX}%) skewX(-14deg)`,
+            background:
+              'linear-gradient(90deg, transparent, rgba(255,255,255,0.10) 50%, transparent)',
+            mixBlendMode: 'screen',
+          }}
+        />
+      </AbsoluteFill>
       {/* vignette */}
       <AbsoluteFill
         style={{

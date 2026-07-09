@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {FONT_BODY, SAFE_BOTTOM, TEXT} from '../theme';
 import type {CaptionGroup} from '../types';
+import {usePulse} from './MusicPulse';
 
 /**
  * Word-by-word animated captions overlaid on all scenes.
@@ -13,6 +14,7 @@ export const Captions: React.FC<{
 }> = ({captions, accent}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {bass} = usePulse();
   const t = frame / fps;
 
   const group = captions.find((g) => t >= g.start && t <= g.end + 0.25);
@@ -52,8 +54,9 @@ export const Captions: React.FC<{
                   color: active ? (isCurrent ? accent : TEXT) : 'rgba(245,247,255,0.35)',
                   marginRight: 22,
                   display: 'inline-block',
-                  transform: isCurrent ? 'scale(1.06)' : 'scale(1)',
+                  transform: isCurrent ? `scale(${1.06 + bass * 0.05})` : 'scale(1)',
                   transformOrigin: 'center bottom',
+                  textShadow: isCurrent ? `0 0 ${bass * 30}px ${accent}` : undefined,
                 }}
               >
                 {w.word}
