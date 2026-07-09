@@ -76,17 +76,19 @@ const Panel: React.FC<{
 };
 
 /** Before/after, X vs Y — two panels slide in from opposite sides. */
-export const SplitCompare: React.FC<{scene: Scene; accent: string}> = ({
+export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const vsIn = spring({frame: frame - 8, fps, config: {damping: 10}});
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={6} />
+      <AmbientBackground accent={accent} secondary={second} seed={6} />
       <AbsoluteFill
         style={{
           paddingTop: SAFE_TOP,

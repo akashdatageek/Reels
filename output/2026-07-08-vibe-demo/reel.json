@@ -1,0 +1,40 @@
+{
+  "title": "Moody vibe acceptance test \u2014 quote reel",
+  "vibe": "moody",
+  "accentColor": "#E8A25C",
+  "secondaryColor": "#7FBFB5",
+  "imageStyle": "moody dusk film photography, muted teal sky and warm amber horizon light, atmospheric haze, heavy natural film grain, silhouettes, cinematic anamorphic feel",
+  "music": "music/ambient_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 3.5,
+      "text": "risk is always *better than regret.*",
+      "audioStart": 0.0
+    },
+    {
+      "type": "ImageScene",
+      "duration": 4.5,
+      "kenBurns": "zoom-in",
+      "imagePrompt": "lone rider on horseback galloping along a dark wet beach at dusk, waves rolling in, vast brooding sky, tiny figure against immense nature",
+      "audioStart": 3.5,
+      "image": "images/scene_01.png"
+    },
+    {
+      "type": "ImageScene",
+      "duration": 4.5,
+      "kenBurns": "zoom-out",
+      "imagePrompt": "silhouette of a person mid-backflip above a beach at sunset, frozen against the fading orange and teal sky, spray of sand, distant lighthouse",
+      "audioStart": 8.0,
+      "image": "images/scene_02.png"
+    },
+    {
+      "type": "OutroCard",
+      "duration": 2.5,
+      "text": "take the risk",
+      "audioStart": 12.5
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 15.0
+}

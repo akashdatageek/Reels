@@ -50,7 +50,7 @@ def group_words(words, max_words=4, max_gap=0.6):
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("timings_json", help="Path to word_timings.json")
-    parser.add_argument("--max-words", type=int, default=4)
+    parser.add_argument("--max-words", type=int, default=3)
     parser.add_argument("--max-gap", type=float, default=0.6)
     args = parser.parse_args()
 

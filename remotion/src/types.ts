@@ -72,6 +72,12 @@ export interface ReelSpec {
   voiceover?: string;
   music?: string;
   accentColor?: string;
+  /** Second acid-palette color; gradients run accent -> secondary. */
+  secondaryColor?: string;
+  /** Extra style words for every image prompt (replaces the default vibe words). */
+  imageStyle?: string;
+  /** 'bold' (default, loud acid look) or 'moody' (cinematic restraint). */
+  vibe?: 'bold' | 'moody';
   handle?: string;
   scenes: Scene[];
   totalDuration?: number;

@@ -8,21 +8,31 @@ import {
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
 import {usePulse} from '../components/MusicPulse';
-import {FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
+import {useVibe} from '../components/VibeContext';
+import {FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
 import type {Scene} from '../types';
 
 /** Big bold opening statement — huge type, spring-in, living background.
  *  Words wrapped in *asterisks* render in the accent color. */
-export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
+export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
   accent,
+  secondary,
 }) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const pop = spring({frame, fps, config: {damping: 12, stiffness: 120}});
+  const vibe = useVibe();
+  const moody = vibe === 'moody';
+  // moody: slow fade-drift in; bold: springy pop
+  const pop = spring({
+    frame,
+    fps,
+    config: moody ? {damping: 60, stiffness: 22} : {damping: 12, stiffness: 120},
+  });
   const {bass} = usePulse();
-  const scale = interpolate(pop, [0, 1], [0.6, 1]) * (1 + bass * 0.015);
+  const scale = interpolate(pop, [0, 1], [moody ? 0.96 : 0.6, 1]) * (1 + bass * (moody ? 0.004 : 0.015));
   const barW = interpolate(
     spring({frame: frame - 6, fps, config: {damping: 200}}),
     [0, 1],
@@ -43,7 +53,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} seed={1} />
+      <AmbientBackground accent={accent} secondary={second} seed={1} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',
@@ -63,12 +73,15 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
       >
         <div
           style={{
-            fontFamily: FONT_DISPLAY,
-            fontSize: 96,
-            lineHeight: 1.08,
+            fontFamily: moody ? FONT_SERIF : FONT_DISPLAY,
+            fontSize: moody ? 66 : 96,
+            fontWeight: moody ? 400 : undefined,
+            lineHeight: moody ? 1.45 : 1.08,
             color: TEXT,
-            textTransform: 'uppercase',
-            letterSpacing: -1,
+            textTransform: moody ? 'none' : 'uppercase',
+            letterSpacing: moody ? 0.5 : -1,
+            maxWidth: moody ? 760 : undefined,
+            margin: moody ? '0 auto' : undefined,
           }}
         >
           {words.map((w, i) => {
@@ -85,8 +98,18 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
                   marginRight: 22,
                   opacity: wordIn,
                   transform: `translateY(${(1 - wordIn) * 40}px)`,
-                  color: w.emphasized ? accent : undefined,
-                  textShadow: w.emphasized ? `0 0 50px ${accent}66` : undefined,
+                  // bold: acid gradient chrome-type; moody: quiet warm italic
+                  ...(w.emphasized
+                    ? moody
+                      ? {fontStyle: 'italic', color: accent}
+                      : {
+                          background: `linear-gradient(115deg, ${accent} 20%, ${second} 80%)`,
+                          WebkitBackgroundClip: 'text',
+                          backgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          filter: `drop-shadow(0 0 26px ${accent}66)`,
+                        }
+                    : null),
                 }}
               >
                 {w.text}
@@ -96,12 +119,12 @@ export const HookCard: React.FC<{scene: Scene; accent: string}> = ({
         </div>
         <div
           style={{
-            height: 12,
-            width: barW * (1 + bass * 0.25),
-            backgroundColor: accent,
+            height: moody ? 2 : 12,
+            width: moody ? 120 : barW * (1 + bass * 0.25),
+            background: moody ? `${accent}88` : `linear-gradient(90deg, ${accent}, ${second})`,
             margin: '48px auto 0',
             borderRadius: 6,
-            boxShadow: `0 0 ${10 + bass * 50}px ${accent}`,
+            boxShadow: moody ? 'none' : `0 0 ${10 + bass * 50}px ${accent}`,
           }}
         />
       </div>

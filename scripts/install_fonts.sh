@@ -20,6 +20,9 @@ FILES=(
   "inter/files/inter-latin-800-normal.woff2"
   "jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2"
   "jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2"
+  "fraunces/files/fraunces-latin-400-normal.woff2"
+  "fraunces/files/fraunces-latin-400-italic.woff2"
+  "fraunces/files/fraunces-latin-600-normal.woff2"
 )
 
 for f in "${FILES[@]}"; do

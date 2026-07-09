@@ -2,19 +2,25 @@ import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
 import {BG} from '../theme';
 import {usePulse} from './MusicPulse';
+import {useVibe} from './VibeContext';
 
 /**
  * Living background for text scenes: slow-drifting accent glow orbs over a
  * faint perspective grid, so no scene ever sits on dead pixels.
  * Deterministic per `seed` so different scenes get different drift patterns.
  */
-export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
-  accent,
-  seed = 0,
-}) => {
+export const AmbientBackground: React.FC<{
+  accent: string;
+  secondary?: string;
+  seed?: number;
+}> = ({accent, secondary, seed = 0}) => {
+  const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const {bass} = usePulse();
+  const pulse = usePulse();
+  const moody = useVibe() === 'moody';
+  // moody: calmer glow, half the audio reactivity
+  const bass = moody ? pulse.bass * 0.5 : pulse.bass;
   const t = frame / fps;
 
   const orbs = [0, 1, 2].map((i) => {
@@ -31,9 +37,10 @@ export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
 
   return (
     <AbsoluteFill style={{backgroundColor: BG, overflow: 'hidden'}}>
-      {/* faint grid, slow vertical drift */}
+      {/* faint grid, slow vertical drift (hidden in moody vibe) */}
       <AbsoluteFill
         style={{
+          display: moody ? 'none' : undefined,
           backgroundImage: `linear-gradient(${accent}14 1px, transparent 1px),
             linear-gradient(90deg, ${accent}14 1px, transparent 1px)`,
           backgroundSize: '108px 108px',
@@ -54,7 +61,8 @@ export const AmbientBackground: React.FC<{accent: string; seed?: number}> = ({
             width: o.r * 2,
             height: o.r * 2,
             borderRadius: '50%',
-            background: `radial-gradient(circle, ${accent} 0%, transparent 62%)`,
+            // alternate the acid pair so the background reads duotone
+            background: `radial-gradient(circle, ${i % 2 === 0 ? accent : second} 0%, transparent 62%)`,
             opacity: o.opacity,
             filter: 'blur(2px)',
           }}
