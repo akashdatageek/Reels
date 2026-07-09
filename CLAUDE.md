@@ -83,6 +83,9 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
      to scenes with no asset.
    - Pick one `accentColor` for the whole reel; set `music` to one of the
      tracks in `music/`.
+   - **Handle:** set `"handle": "@startups.ai"` on every reel (the project's
+     social handle) — it renders on the OutroCard under the CTA. Also end
+     caption.txt with it.
    - Scene `duration` values are placeholders — tts.py overwrites them with
      real audio durations.
 
@@ -94,7 +97,7 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
    also be run individually if something needs a retry.)
 
 7. **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary,
-   source credit (from research.md), 8–12 hashtags.
+   source credit (from research.md), the handle **@startups.ai**, 8–12 hashtags.
 
 8. **Show the output path (`output/<story>/reel.mp4`). Never post automatically.**
 

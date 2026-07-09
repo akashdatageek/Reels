@@ -123,11 +123,12 @@
     {
       "type": "OutroCard",
       "duration": 4.44,
-      "text": "A switch for what AI is allowed to *know*",
+      "text": "A switch for what AI is allowed to know",
       "voiceSegment": "Basically, a switch for what an AI is allowed to know. Follow for daily AI news.",
       "audioStart": 81.52
     }
   ],
   "voiceFile": "voice.mp3",
-  "totalDuration": 85.96
+  "totalDuration": 85.96,
+  "handle": "@startups.ai"
 }

@@ -4,4 +4,6 @@ An explainer of new research from AE Studio & Anthropic — "Modular Pretraining
 
 All charts shown are the authors' own figures. Source: AE Studio & Anthropic (@AEStudioLA) · Paper: ae.studio/research/modular-pretraining-access-control
 
+
+Follow @startups.ai for daily AI news.
 #ai #aisafety #anthropic #aestudio #machinelearning #llm #alignment #dualuse #airesearch #ainews #technews #explainer
