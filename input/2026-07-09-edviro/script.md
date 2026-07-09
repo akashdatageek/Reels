@@ -34,3 +34,23 @@
 - meters/controls, 24/7 watch → fact 1 ✓
 - catch → simulate → prove on bill → facts 1,3 ✓
 - callback outro ✓
+
+## V3 (extended cut, ~60s — new 45–75s format)
+
+Added beats vs V2, all from research.md:
+- SplitCompare: one overwhelmed manager vs agents (fact 7)
+- StatCallout #2: 10% saveable with low-cost fixes alone (fact 6)
+- Beacon beat: public dashboards for taxpayer transparency + student fellows (fact 4)
+
+| # | Beat | Scene |
+|---|------|-------|
+| 1 | PROBLEM | HookCard — energy > textbooks |
+| 2 | SCALE | StatCallout 30% (+$8B in voice) |
+| 3 | WHY IT PERSISTS | SplitCompare — one manager, hundreds of machines vs agents 24/7 |
+| 4 | TURN | ImageScene — watched campus (Edviro, YC, meters+controls) |
+| 5 | HOW/RECEIPT | ImageScene — anomaly cutaway (catch → simulate → prove on bill) |
+| 6 | EASY WINS | StatCallout 10% — low-cost fixes alone |
+| 7 | SO-WHAT | ImageScene — Beacon public dashboards, taxpayers + students see the savings |
+| 8 | OUTRO | callback — less waste, more textbooks |
+
+Cross-check: facts 1,3,4,5,6,7 all used; nothing new invented. ✓

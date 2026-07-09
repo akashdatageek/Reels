@@ -1,6 +1,6 @@
 Your school spends more on energy than on textbooks 📚⚡
 
-US districts burn ~$8B a year on energy — and about 30% of it is wasted (ENERGY STAR/DOE). YC-backed Edviro puts AI agents on the problem: they connect meters, controls and utility data, watch every building 24/7, catch waste as it starts, simulate the fix, and prove the savings on the actual bill.
+US districts burn ~$8B a year on energy — about 30% wasted, and ~10% saveable with low-cost fixes alone (ENERGY STAR/DOE). YC-backed Edviro puts AI agents on it: they connect meters, controls and utility data, watch every building 24/7, catch waste as it starts, simulate the fix, and prove savings on the actual bill. Their Beacon program even puts public dashboards in front of students and taxpayers.
 
 Source: Edviro (edviroenergy.com) · Sector stats: ENERGY STAR / US DOE
 

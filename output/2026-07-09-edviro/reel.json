@@ -1,5 +1,5 @@
 {
-  "title": "Edviro: AI agents vs school energy waste",
+  "title": "Edviro: AI agents vs school energy waste (extended cut)",
   "vibe": "bold",
   "accentColor": "#FFB020",
   "secondaryColor": "#B6FF3B",
@@ -8,47 +8,74 @@
   "scenes": [
     {
       "type": "HookCard",
-      "duration": 4.36,
+      "duration": 4.4,
       "text": "Your school spends more on *energy than textbooks*",
       "voiceSegment": "Your school probably spends more on energy than on textbooks and computers combined.",
       "audioStart": 0.0
     },
     {
       "type": "StatCallout",
-      "duration": 5.68,
+      "duration": 5.24,
       "stat": "30%",
       "label": "of school energy is wasted",
       "voiceSegment": "U S districts burn nearly eight billion dollars a year on energy, and about thirty percent of it is just wasted.",
-      "audioStart": 4.36
+      "audioStart": 4.4
+    },
+    {
+      "type": "SplitCompare",
+      "duration": 10.88,
+      "text": "Why it stays broken",
+      "leftTitle": "Today",
+      "leftText": "One manager, hundreds of boilers, HVAC units and alarms",
+      "rightTitle": "Agentic",
+      "rightText": "AI agents watch every building 24/7",
+      "voiceSegment": "Here's why it stays broken: one facilities manager, hundreds of boilers, HVAC units, and alarm dashboards. Nobody can watch it all. So a Y C startup called Edviro made AI agents that can.",
+      "audioStart": 9.64
     },
     {
       "type": "ImageScene",
-      "duration": 6.64,
+      "duration": 5.08,
       "kenBurns": "zoom-in",
-      "imagePrompt": "aerial view of a school campus at night, several buildings with glowing windows, luminous energy streams rising from each rooftop into a watching constellation of small sensor points above",
-      "text": "Edviro: AI agents watching every building 24/7",
-      "voiceSegment": "A Y C startup called Edviro puts AI agents on that problem. They connect the meters and controls, and watch every building around the clock.",
-      "audioStart": 10.04,
-      "image": "images/scene_02.png"
+      "image": "images/scene_02.png",
+      "text": "Connected: meters \u00b7 controls \u00b7 utility data",
+      "voiceSegment": "The agents plug into the district's meters, controls, and utility data, and watch every building around the clock.",
+      "audioStart": 20.52
     },
     {
       "type": "ImageScene",
-      "duration": 6.04,
+      "duration": 7.52,
       "kenBurns": "pan-left",
-      "imagePrompt": "x-ray cutaway view of a school building interior showing ducts pipes and HVAC systems as glowing schematic lines, one single section flaring bright hot as an anomaly among the calm systems",
+      "image": "images/scene_03.png",
       "text": "Catch the waste \u00b7 simulate the fix \u00b7 prove it on the bill",
-      "voiceSegment": "When something starts wasting power, the agent catches it, simulates the fix, and then proves the savings on the actual bill.",
-      "audioStart": 16.68,
-      "image": "images/scene_03.png"
+      "voiceSegment": "When something starts wasting power, the agent catches it, simulates the fix with an energy world model, and then proves the savings on the actual utility bill.",
+      "audioStart": 25.6
+    },
+    {
+      "type": "StatCallout",
+      "duration": 6.8,
+      "stat": "10%",
+      "label": "saveable with low-cost fixes alone",
+      "voiceSegment": "And the wild part: about ten percent of school energy can be saved with low-cost fixes alone. The money is just sitting there.",
+      "audioStart": 33.12
+    },
+    {
+      "type": "ImageScene",
+      "duration": 7.24,
+      "kenBurns": "zoom-out",
+      "imagePrompt": "large glowing abstract data visualization wall display in a modern school hallway at dusk, columns of light showing energy flows, a few silhouetted students looking at it",
+      "text": "Beacon: public dashboards, so taxpayers see it too",
+      "voiceSegment": "Edviro even puts public dashboards in front of the community, so students and taxpayers can see exactly where the energy money goes.",
+      "audioStart": 39.92,
+      "image": "images/scene_06.png"
     },
     {
       "type": "OutroCard",
-      "duration": 3.88,
+      "duration": 4.92,
       "text": "Less waste, more textbooks",
       "voiceSegment": "Less waste, more textbook money. Follow for daily AI news.",
-      "audioStart": 22.72
+      "audioStart": 47.16
     }
   ],
   "voiceFile": "voice.mp3",
-  "totalDuration": 26.6
+  "totalDuration": 52.08
 }
