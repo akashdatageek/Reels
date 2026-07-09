@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {Backdrop} from '../components/Backdrop';
 import {usePulse} from '../components/MusicPulse';
 import {useVibe} from '../components/VibeContext';
 import {FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
@@ -53,7 +54,8 @@ export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: strin
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={1} />
+      {scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={1} transparent={Boolean(scene.backdrop)} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

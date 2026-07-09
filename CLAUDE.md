@@ -129,6 +129,12 @@ caption.txt are fine, on-screen text stays clean.
 - **Image prompts:** vary the composition day to day (isometric platform,
   close-up macro, top-down grid, low-angle monument scale) so consecutive
   reels don't look cloned; the style prefix keeps them on-brand.
+- **Backdrops:** every text/data scene (HookCard, StatCallout, SplitCompare)
+  should carry a `backdropPrompt` when the story affords imagery — a real
+  *place* related to the beat (the classroom, the boiler room, the control
+  room), dark and uncluttered; it renders dimmed under a scrim so type stays
+  readable. Photos (assets or `pipeline/fetch_stock.py` locally, with
+  credits) can go in `backdrop` directly.
 - **Terminal content:** real commands/output only — from docs or the launch
   post; treat CLI text like a stat (it's on screen; it must be traceable).
 - **Audio-reactive motion (automatic):** the renderer FFT-analyzes the music

@@ -124,25 +124,28 @@ def main() -> int:
 
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
-        prompt = scene.get("imagePrompt")
-        if not prompt:
-            continue
-        prompt = BASE_RULES + vibe_words + prompt
-        existing = scene.get("image")
-        if existing and (out_dir / existing).exists() and not args.force:
-            print(f"scene {idx:02d}: keeping existing asset {existing}")
-            continue
-        out_path = img_dir / f"scene_{idx:02d}.png"
-        if out_path.exists() and not args.force:
-            print(f"scene {idx:02d}: already generated, skipping (--force to redo)")
-        else:
-            print(f"scene {idx:02d}: generating -> {out_path.name}")
-            if API_KEY:
-                generate_nano_banana(prompt, out_path)
+        # (field with the prompt, field to write the path to, filename suffix)
+        jobs = [("imagePrompt", "image", ""), ("backdropPrompt", "backdrop", "_bg")]
+        for prompt_field, target_field, suffix in jobs:
+            prompt = scene.get(prompt_field)
+            if not prompt:
+                continue
+            prompt = BASE_RULES + vibe_words + prompt
+            existing = scene.get(target_field)
+            if existing and (out_dir / existing).exists() and not args.force:
+                print(f"scene {idx:02d}: keeping existing {target_field} {existing}")
+                continue
+            out_path = img_dir / f"scene_{idx:02d}{suffix}.png"
+            if out_path.exists() and not args.force:
+                print(f"scene {idx:02d}: {target_field} already generated, skipping (--force to redo)")
             else:
-                generate_placeholder(prompt, out_path, reel.get("accentColor", "#00E5FF"))
-            made += 1
-        scene["image"] = str(out_path.relative_to(out_dir))
+                print(f"scene {idx:02d}: generating {target_field} -> {out_path.name}")
+                if API_KEY:
+                    generate_nano_banana(prompt, out_path)
+                else:
+                    generate_placeholder(prompt, out_path, reel.get("accentColor", "#00E5FF"))
+                made += 1
+            scene[target_field] = str(out_path.relative_to(out_dir))
 
     reel_path.write_text(json.dumps(reel, indent=2), encoding="utf-8")
     print(f"\n{made} image(s) generated; reel.json updated")

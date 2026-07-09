@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {Backdrop} from '../components/Backdrop';
 import {BG, BG_LIGHT, FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {Scene} from '../types';
 
@@ -88,7 +89,8 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={6} />
+      {scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={6} transparent={Boolean(scene.backdrop)} />
       <AbsoluteFill
         style={{
           paddingTop: SAFE_TOP,

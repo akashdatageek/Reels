@@ -11,7 +11,9 @@
       "duration": 4.4,
       "text": "Your school spends more on *energy than textbooks*",
       "voiceSegment": "Your school probably spends more on energy than on textbooks and computers combined.",
-      "audioStart": 0.0
+      "audioStart": 0.0,
+      "backdropPrompt": "empty American classroom at dusk, rows of desks, warm light through the windows, one flickering fluorescent tube",
+      "backdrop": "images/scene_00_bg.png"
     },
     {
       "type": "StatCallout",
@@ -19,7 +21,9 @@
       "stat": "30%",
       "label": "of school energy is wasted",
       "voiceSegment": "U S districts burn nearly eight billion dollars a year on energy, and about thirty percent of it is just wasted.",
-      "audioStart": 4.4
+      "audioStart": 4.4,
+      "backdropPrompt": "old school boiler room, big steel boilers and tangled pipes radiating heat haze, warm glow leaking from a furnace door",
+      "backdrop": "images/scene_01_bg.png"
     },
     {
       "type": "SplitCompare",
@@ -30,7 +34,9 @@
       "rightTitle": "Agentic",
       "rightText": "AI agents watch every building 24/7",
       "voiceSegment": "Here's why it stays broken: one facilities manager, hundreds of boilers, HVAC units, and alarm dashboards. Nobody can watch it all. So a Y C startup called Edviro made AI agents that can.",
-      "audioStart": 9.64
+      "audioStart": 9.64,
+      "backdropPrompt": "dim facilities control room with a wall of aging monitors and blinking alarm lights, one empty office chair",
+      "backdrop": "images/scene_02_bg.png"
     },
     {
       "type": "ImageScene",
@@ -56,7 +62,9 @@
       "stat": "10%",
       "label": "saveable with low-cost fixes alone",
       "voiceSegment": "And the wild part: about ten percent of school energy can be saved with low-cost fixes alone. The money is just sitting there.",
-      "audioStart": 33.12
+      "audioStart": 33.12,
+      "backdropPrompt": "extreme close-up macro of an old wall thermostat dial in warm light, dust particles floating",
+      "backdrop": "images/scene_05_bg.png"
     },
     {
       "type": "ImageScene",
