@@ -95,6 +95,12 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
   reels don't look cloned; the style prefix keeps them on-brand.
 - **Terminal content:** real commands/output only — from docs or the launch
   post; treat CLI text like a stat (it's on screen; it must be traceable).
+- **Audio-reactive motion (automatic):** the renderer FFT-analyzes the music
+  track per frame — background orbs, stat glow, hook bar, captions and the
+  progress bar all pulse with the low end; scene cuts get an accent light
+  wipe; ImageScenes get a light sweep + perspective drift; film grain overlays
+  everything. No per-reel work needed — just set `music` in reel.json.
+  Punchier track = punchier reel.
 
 ## Rules
 

@@ -1,7 +1,7 @@
 {
   "title": "FireSat V2: problem-first cut",
   "accentColor": "#FF7A1A",
-  "music": "music/upbeat_01.mp3",
+  "music": "music/ambient_01.mp3",
   "scenes": [
     {
       "type": "HookCard",

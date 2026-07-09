@@ -27,14 +27,25 @@ VOICE="$STORY_DIR/voice.mp3"
 [ -f "$REEL_JSON" ] || { echo "missing $REEL_JSON" >&2; exit 1; }
 [ -f "$VOICE" ] || { echo "missing $VOICE (run pipeline/tts.py first)" >&2; exit 1; }
 
-# 1. props.json = {reel, captions}
-python3 - "$REEL_JSON" "$CAPTIONS_JSON" "$STORY_DIR/props.json" <<'PY'
+# 1. Stage the music track in the story dir so the renderer can analyze it
+#    (audio-reactive visuals read music.mp3 via staticFile)
+MUSIC_REL_PRE="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('music') or '')" "$REEL_JSON")"
+rm -f "$STORY_DIR/music.mp3"
+if [ -n "$MUSIC_REL_PRE" ] && [ -f "$REPO_DIR/$MUSIC_REL_PRE" ]; then
+  cp "$REPO_DIR/$MUSIC_REL_PRE" "$STORY_DIR/music.mp3"
+fi
+
+# 1b. props.json = {reel, captions}; music cleared if track wasn't staged so
+#     the renderer never analyzes a missing file
+python3 - "$REEL_JSON" "$CAPTIONS_JSON" "$STORY_DIR/props.json" "$STORY_DIR/music.mp3" <<'PY'
 import json, pathlib, sys
 reel = json.loads(pathlib.Path(sys.argv[1]).read_text())
 captions = []
 cap_path = pathlib.Path(sys.argv[2])
 if cap_path.exists():
     captions = json.loads(cap_path.read_text())
+if not pathlib.Path(sys.argv[4]).exists():
+    reel["music"] = None
 pathlib.Path(sys.argv[3]).write_text(json.dumps({"reel": reel, "captions": captions}))
 PY
 
