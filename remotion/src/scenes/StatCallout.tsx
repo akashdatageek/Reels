@@ -9,7 +9,8 @@ import {
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
 import {usePulse} from '../components/MusicPulse';
-import {FONT_BODY, FONT_DISPLAY, TEXT_DIM} from '../theme';
+import {usePalette} from '../components/ThemeContext';
+import {FONT_BODY, FONT_DISPLAY} from '../theme';
 import type {Scene} from '../types';
 
 /** Parse a stat like "2x", "87%", "$20", "1.5M" into prefix/number/suffix. */
@@ -37,6 +38,7 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
     value === null ? '' : (value * progress).toFixed(decimals);
 
   const labelIn = spring({frame: frame - 10, fps, config: {damping: 200}});
+  const TEXT_DIM = usePalette().textDim;
   const {bass} = usePulse();
   const ringScale = interpolate(progress, [0, 1], [0.8, 1]) * (1 + bass * 0.04);
 

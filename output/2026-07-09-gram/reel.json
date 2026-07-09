@@ -1,0 +1,134 @@
+{
+  "title": "GRAM: an off-switch for an AI's dangerous knowledge (explainer)",
+  "vibe": "bold",
+  "theme": "light",
+  "accentColor": "#5B4BE5",
+  "secondaryColor": "#E5484D",
+  "music": "music/ambient_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 6.4,
+      "text": "You can now *delete* what an AI knows",
+      "voiceSegment": "The same AI knowledge that helps cure a disease can help make one. New research shows you can delete just the dangerous part.",
+      "audioStart": 0.0
+    },
+    {
+      "type": "FigureScene",
+      "duration": 16.64,
+      "figure": "assets/fig_arch.png",
+      "figureCredit": "Fig. 1 \u2014 AE Studio & Anthropic",
+      "text": "How GRAM works",
+      "annotations": [
+        {
+          "text": "One shared \"Core\" holds general knowledge."
+        },
+        {
+          "text": "Each dangerous skill \u2014 Bio, Cyber, Nuclear \u2014 gets its own module.",
+          "emphasis": true
+        },
+        {
+          "text": "Training routes Bio data only into the Bio module."
+        },
+        {
+          "text": "So each capability is boxed off, not blended in."
+        }
+      ],
+      "voiceSegment": "Here's the method, called GRAM. One shared core holds the general knowledge. Then each dangerous skill, like biology or cyber, gets packed into its own module. When the model trains on biology text, that learning is routed only into the biology module. So the capability is boxed off, not blended into the whole network.",
+      "audioStart": 6.4
+    },
+    {
+      "type": "FigureScene",
+      "duration": 7.56,
+      "text": "Remove a module, remove the skill",
+      "annotations": [
+        {
+          "text": "At use time, delete a module \u2014",
+          "emphasis": false
+        },
+        {
+          "text": "the model acts like it never learned that subject.",
+          "emphasis": true
+        },
+        {
+          "text": "The rest of its abilities stay intact."
+        }
+      ],
+      "figure": "assets/fig_arch.png",
+      "figureCredit": "Fig. 1 \u2014 AE Studio & Anthropic",
+      "voiceSegment": "To remove a capability, you just delete its module. The model then behaves like it never learned that subject at all, while everything else stays intact.",
+      "audioStart": 23.04
+    },
+    {
+      "type": "FigureScene",
+      "duration": 23.36,
+      "figure": "assets/fig_bars.png",
+      "figureCredit": "AE Studio (@AEStudioLA)",
+      "text": "Does it actually work?",
+      "annotations": [
+        {
+          "text": "Blue = core skills kept. GRAM scores 0.96 \u2014 near the top.",
+          "emphasis": false
+        },
+        {
+          "text": "Red = the removed skill. Lower is better.",
+          "emphasis": false
+        },
+        {
+          "text": "GRAM's red bar is 0.60 vs 0.85 for the alternatives \u2014",
+          "emphasis": true
+        },
+        {
+          "text": "it removes the danger far more thoroughly."
+        }
+      ],
+      "voiceSegment": "And does it work? This is the paper's own chart. The blue bars are how much normal skill each method keeps. GRAM scores zero point nine six, right near the top. The red bars are how much of the dangerous skill is left, and lower is better. GRAM sits at zero point six zero, versus zero point eight five for data filtering and LoRA. In plain terms: it keeps the good abilities, and strips the dangerous one far more completely.",
+      "audioStart": 30.6
+    },
+    {
+      "type": "FigureScene",
+      "duration": 15.4,
+      "figure": "assets/fig_scaling.png",
+      "figureCredit": "AE Studio (@AEStudioLA)",
+      "text": "And it gets better with scale",
+      "annotations": [
+        {
+          "text": "They tested 50 million up to 5 billion parameters."
+        },
+        {
+          "text": "Left panel: core skill stays flat and high."
+        },
+        {
+          "text": "Middle & right: the forget lines fall as models grow.",
+          "emphasis": true
+        },
+        {
+          "text": "Bigger models forget more thoroughly \u2014 and resist retraining."
+        }
+      ],
+      "voiceSegment": "They also tested it across model sizes, from fifty million to five billion parameters. On the left, core skill stays high the whole way. In the middle and right, the forgetting curves drop as the models get bigger. So the separation actually improves with scale, and the deleted knowledge gets harder to bring back.",
+      "audioStart": 53.96
+    },
+    {
+      "type": "SplitCompare",
+      "duration": 12.16,
+      "text": "Why this matters",
+      "leftTitle": "Before",
+      "leftText": "Ship the powerful model, or hold it back \u2014 all or nothing",
+      "rightTitle": "With GRAM",
+      "rightText": "Trusted labs get the full model, everyone else the safe one",
+      "voiceSegment": "Why does this matter? Before, it was all or nothing: ship the powerful model, or lock it away. Now trusted labs can get the full model, and everyone else gets a safer variant, from a single training run about five times cheaper than training separate models.",
+      "audioStart": 69.36
+    },
+    {
+      "type": "OutroCard",
+      "duration": 4.44,
+      "text": "A switch for what AI is allowed to know",
+      "voiceSegment": "Basically, a switch for what an AI is allowed to know. Follow for daily AI news.",
+      "audioStart": 81.52
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 85.96,
+  "handle": "@startups.ai"
+}

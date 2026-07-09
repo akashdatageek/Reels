@@ -1,8 +1,8 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig} from 'remotion';
-import {BG} from '../theme';
 import {usePulse} from './MusicPulse';
 import {useVibe} from './VibeContext';
+import {usePalette} from './ThemeContext';
 
 /**
  * Living background for text scenes: slow-drifting accent glow orbs over a
@@ -21,6 +21,8 @@ export const AmbientBackground: React.FC<{
   const {fps} = useVideoConfig();
   const pulse = usePulse();
   const moody = useVibe() === 'moody';
+  const pal = usePalette();
+  const light = pal.bg === '#f5f4f0';
   // moody: calmer glow, half the audio reactivity
   const bass = moody ? pulse.bass * 0.5 : pulse.bass;
   const t = frame / fps;
@@ -37,8 +39,44 @@ export const AmbientBackground: React.FC<{
     };
   });
 
+  // On light theme, keep it clean editorial: near-white bg, faint accent
+  // corner wash, no orbs/grid.
+  if (light) {
+    return (
+      <AbsoluteFill
+        style={{
+          backgroundColor: transparent ? 'transparent' : pal.bg,
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: -220,
+            right: -180,
+            width: 640,
+            height: 640,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${accent}1f 0%, transparent 68%)`,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -240,
+            left: -200,
+            width: 600,
+            height: 600,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${second}18 0%, transparent 68%)`,
+          }}
+        />
+      </AbsoluteFill>
+    );
+  }
+
   return (
-    <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : BG, overflow: 'hidden'}}>
+    <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : pal.bg, overflow: 'hidden'}}>
       {/* faint grid, slow vertical drift (hidden in moody vibe) */}
       <AbsoluteFill
         style={{

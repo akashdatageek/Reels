@@ -1,0 +1,9 @@
+You can now delete just the dangerous part of what an AI knows 🧠🔧
+
+An explainer of new research from AE Studio & Anthropic — "Modular Pretraining Enables Access Control" (GRAM). During training, each dual-use skill (bio, cyber, nuclear) is routed into its own module. Delete a module and the model acts like it never learned that subject, while keeping its normal abilities. On the authors' own benchmark it keeps core skill at 0.96 while cutting the removed capability to 0.60 (lower = more thoroughly gone) vs 0.85 for data filtering — and the separation improves from 50M up to 5B parameters. One training run, ~5× cheaper than training separate models.
+
+All charts shown are the authors' own figures. Source: AE Studio & Anthropic (@AEStudioLA) · Paper: ae.studio/research/modular-pretraining-access-control
+
+
+Follow @startups.ai for daily AI news.
+#ai #aisafety #anthropic #aestudio #machinelearning #llm #alignment #dualuse #airesearch #ainews #technews #explainer

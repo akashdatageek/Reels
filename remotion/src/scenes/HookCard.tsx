@@ -10,7 +10,8 @@ import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
 import {usePulse} from '../components/MusicPulse';
 import {useVibe} from '../components/VibeContext';
-import {FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP, TEXT} from '../theme';
+import {usePalette} from '../components/ThemeContext';
+import {FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP} from '../theme';
 import type {Scene} from '../types';
 
 /** Big bold opening statement — huge type, spring-in, living background.
@@ -26,6 +27,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: strin
 
   const vibe = useVibe();
   const moody = vibe === 'moody';
+  const TEXT = usePalette().text;
   // moody: slow fade-drift in; bold: springy pop
   const pop = spring({
     frame,
