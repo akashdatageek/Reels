@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {usePalette} from '../components/ThemeContext';
+import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
 import type {FigureAnnotation, Scene} from '../types';
 
@@ -27,7 +28,6 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
   const p = usePalette();
   const anns: FigureAnnotation[] = scene.annotations ?? [];
 
-  const titleIn = spring({frame, fps, config: {damping: 200}});
   const figIn = spring({frame: frame - 6, fps, config: {damping: 22, stiffness: 90}});
 
   // annotations fade in staggered over the middle 70% of the scene
@@ -58,7 +58,8 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
         }}
       >
         {scene.text ? (
-          <div
+          <RevealText
+            text={scene.text}
             style={{
               fontFamily: FONT_DISPLAY,
               fontSize: 60,
@@ -67,12 +68,8 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
               textTransform: 'uppercase',
               textAlign: 'center',
               marginBottom: 34,
-              opacity: titleIn,
-              transform: `translateY(${(1 - titleIn) * 24}px)`,
             }}
-          >
-            {scene.text}
-          </div>
+          />
         ) : null}
 
         {scene.figure ? (

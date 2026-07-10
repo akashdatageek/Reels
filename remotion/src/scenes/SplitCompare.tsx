@@ -10,6 +10,7 @@ import {
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
+import {RevealText} from '../components/RevealText';
 import {usePalette} from '../components/ThemeContext';
 import {FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP} from '../theme';
 import type {Scene} from '../types';
@@ -102,7 +103,8 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
         }}
       >
       {scene.text ? (
-        <div
+        <RevealText
+          text={scene.text}
           style={{
             textAlign: 'center',
             fontFamily: FONT_DISPLAY,
@@ -113,9 +115,7 @@ export const SplitCompare: React.FC<{scene: Scene; accent: string; secondary?: s
             paddingLeft: 60,
             paddingRight: 60,
           }}
-        >
-          {scene.text}
-        </div>
+        />
       ) : null}
       <div style={{display: 'flex', flexDirection: 'column', height: 1000, position: 'relative'}}>
         <Panel

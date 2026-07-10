@@ -46,6 +46,29 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
      research.md sources before it goes in reel.json.
    Prefer problem-first hooks over announcement hooks.
 
+   **Hook archetypes** — pick one deliberately and rotate day to day; never
+   open two reels the same way:
+   - *Problem-first*: name the pain before the product ("Your agent forgets
+     everything the second the chat ends.").
+   - *Number-shock*: lead with the stat that sounds impossible ("It fixed 82%
+     of real GitHub issues.").
+   - *Contrarian*: reverse the consensus ("Everyone says bigger wins. This
+     tiny model just beat them.").
+   - *Overlooked*: the buried detail nobody's covering ("Everyone's posting
+     the demo. The footnote is the real story.").
+   - *Before/after*: the world-before and world-after in one breath.
+   - *Stakes*: who it helps or hurts, made concrete ("If you ship code, this
+     changes your Monday.").
+   The first 3 seconds must contain a concrete noun or number, not a category
+   ("a 30-second render", not "an exciting advance").
+
+   **Line craft (apply in V2):** one idea per sentence, one sentence per
+   caption group. Vary sentence length — a long setup then a 3-word punch.
+   Concrete over abstract. Cut hedges and corporate voice ("basically",
+   "seamless", "game-changing", "revolutionary"). Make stats *felt* by
+   contrast ("0.60 vs 0.85 — a third fewer errors"), not listed. The outro
+   calls back to the hook's exact word or image so the reel closes a loop.
+
 4b. **Choose each scene's visual deliberately** (and write the choice into
    script.md): which beat gets a provided asset, which gets a generated
    image, and *why that image tells that beat*. After generating images,
@@ -77,6 +100,11 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
      running. An explainer is mostly FigureScenes; a launch is image-led; a
      data story is chart-led. Pick the sequence the *story* needs.
    - Each spoken scene gets a `voiceSegment` (1–2 short sentences).
+   - **Voice delivery follows the vibe automatically:** `bold` reels are
+     narrated with brisk news energy, `moody` reels slow and intimate (tts.py
+     picks the delivery from `vibe`). Override per reel with `voiceStyle`
+     (a natural-language direction, e.g. `"Deadpan and dry, like you're
+     unimpressed:"`) when the story wants a specific tone.
    - **Prefer provided assets over generated images**: copy usable files from
      `input/<story>/assets/` into `output/<story>/assets/` and reference them
      in the scene's `image` field. Only add an `imagePrompt` (for Nano Banana)
@@ -151,9 +179,16 @@ caption.txt are fine, on-screen text stays clean.
   mood — e.g. cyan `#00E5FF` (infra/cloud), mint `#00E58C` (dev tools), violet
   `#8B5CF6` (research/models), amber `#FFB020` (money/business), red `#FF4D4D`
   (drama/security). One accent per reel, never more.
-- **Image prompts:** vary the composition day to day (isometric platform,
-  close-up macro, top-down grid, low-angle monument scale) so consecutive
-  reels don't look cloned; the style prefix keeps them on-brand.
+- **Image prompts:** describe the *subject* only — `generate_images.py` now
+  prepends a **photographic, anti-slop** base (captured/crafted look, real
+  materials, "no glossy CGI blobs, no floating spheres, no hologram-grid
+  cliche") and **auto-rotates the composition** per scene index (wide
+  establishing, low-angle hero, macro, top-down, POV, off-center diagonal) so
+  consecutive images are never framed the same. Push for *real photography or
+  a specific art-directed still*, not generic "abstract tech." A reel's
+  `imageStyle` still sets the palette/mood on top (and can be loud). Best of
+  all: prefer a real provided asset or a `FigureScene` over any generated
+  image — that's the surest cure for the AI-slop look.
 - **Backdrops:** every text/data scene (HookCard, StatCallout, SplitCompare)
   should carry a `backdropPrompt` when the story affords imagery — a real
   *place* related to the beat (the classroom, the boiler room, the control
@@ -163,11 +198,18 @@ caption.txt are fine, on-screen text stays clean.
 - **Terminal content:** real commands/output only — from docs or the launch
   post; treat CLI text like a stat (it's on screen; it must be traceable).
 - **Audio-reactive motion (automatic):** the renderer FFT-analyzes the music
-  track per frame — background orbs, stat glow, hook bar, captions and the
-  progress bar all pulse with the low end; scene cuts get an accent light
+  track per frame — the aurora background, stat glow, hook bar, captions and
+  the progress bar all pulse with the low end; scene cuts get an accent light
   wipe; ImageScenes get a light sweep + perspective drift; film grain overlays
   everything. No per-reel work needed — just set `music` in reel.json.
   Punchier track = punchier reel.
+- **Cinematic finish (automatic):** every reel gets a layered **aurora
+  background** (drifting duotone washes + rotating sheen + fine dot texture —
+  not the old three-orb look), a global **CinemaGrade** pass (vertical
+  falloff + accent halation that ties the frame to the one accent + a whisper
+  of chromatic fringe), and **kinetic titles** (Chart/Figure/Split titles wipe
+  up behind a mask instead of a flat fade). Light theme keeps all of this
+  restrained and editorial. Nothing to set per reel.
 
 ## Rules
 

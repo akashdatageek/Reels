@@ -5,15 +5,18 @@ import {useVibe} from './VibeContext';
 import {usePalette} from './ThemeContext';
 
 /**
- * Living background for text scenes: slow-drifting accent glow orbs over a
- * faint perspective grid, so no scene ever sits on dead pixels.
- * Deterministic per `seed` so different scenes get different drift patterns.
+ * Living background for text scenes. Two modes:
+ *  - dark: a layered aurora field — soft duotone washes that drift and rotate
+ *    over a fine dot texture, breathing with the low end. Deliberately NOT the
+ *    three-blurred-circles look (that reads as generic AI video).
+ *  - light: clean editorial — near-white with two faint accent corner washes.
+ * Deterministic per `seed` so scenes drift differently.
  */
 export const AmbientBackground: React.FC<{
   accent: string;
   secondary?: string;
   seed?: number;
-  /** true when a Backdrop image sits underneath — orbs/glow only, no fill */
+  /** true when a Backdrop image sits underneath — washes only, no fill */
   transparent?: boolean;
 }> = ({accent, secondary, seed = 0, transparent = false}) => {
   const second = secondary ?? accent;
@@ -27,20 +30,7 @@ export const AmbientBackground: React.FC<{
   const bass = moody ? pulse.bass * 0.5 : pulse.bass;
   const t = frame / fps;
 
-  const orbs = [0, 1, 2].map((i) => {
-    const phase = seed * 1.7 + i * 2.1;
-    const speed = 0.12 + i * 0.05;
-    return {
-      x: 540 + Math.sin(t * speed + phase) * (260 + i * 130),
-      y: 640 + Math.cos(t * speed * 0.8 + phase * 1.3) * (330 + i * 160) + i * 220,
-      // orbs breathe with the low end of the music
-      r: (340 - i * 70) * (1 + bass * 0.18),
-      opacity: (0.16 - i * 0.04) * (1 + bass * 0.9),
-    };
-  });
-
-  // On light theme, keep it clean editorial: near-white bg, faint accent
-  // corner wash, no orbs/grid.
+  // ---- light theme: clean editorial (no aurora, no dots) ----
   if (light) {
     return (
       <AbsoluteFill
@@ -75,44 +65,62 @@ export const AmbientBackground: React.FC<{
     );
   }
 
+  // ---- dark theme: layered aurora field ----
+  // Three broad, soft washes anchored to mesh points, each drifting on its own
+  // slow orbit. Large + very soft so they read as light, not blobs.
+  const washes = [
+    {hue: accent, ax: 28, ay: 30, sp: 0.05, ph: seed * 1.3, size: 115},
+    {hue: second, ax: 74, ay: 62, sp: 0.045, ph: seed * 2.1 + 2, size: 125},
+    {hue: accent, ax: 52, ay: 88, sp: 0.06, ph: seed * 0.7 + 4, size: 105},
+  ].map((w) => ({
+    x: w.ax + Math.sin(t * w.sp + w.ph) * 12,
+    y: w.ay + Math.cos(t * w.sp * 0.8 + w.ph * 1.2) * 10,
+    hue: w.hue,
+    size: w.size * (1 + bass * 0.12),
+    op: (moody ? 0.2 : 0.32) * (1 + bass * 0.5),
+  }));
+
+  const meshBg = washes
+    .map(
+      (w) =>
+        `radial-gradient(${w.size}vh ${w.size}vh at ${w.x}% ${w.y}%, ` +
+        `${w.hue}${Math.round(w.op * 255).toString(16).padStart(2, '0')} 0%, transparent 55%)`,
+    )
+    .join(', ');
+
+  // slow-rotating conic sheen adds directionality the flat orbs lacked
+  const sheenRot = (t * 6 + seed * 40) % 360;
+
   return (
     <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : pal.bg, overflow: 'hidden'}}>
-      {/* faint grid, slow vertical drift (hidden in moody vibe) */}
+      {/* aurora washes */}
+      <AbsoluteFill style={{backgroundImage: meshBg, filter: 'blur(8px)'}} />
+      {/* rotating conic sheen, barely there */}
       <AbsoluteFill
         style={{
           display: moody ? 'none' : undefined,
-          backgroundImage: `linear-gradient(${accent}14 1px, transparent 1px),
-            linear-gradient(90deg, ${accent}14 1px, transparent 1px)`,
-          backgroundSize: '108px 108px',
-          backgroundPosition: `0px ${(t * 9) % 108}px`,
-          maskImage:
-            'radial-gradient(ellipse at 50% 45%, black 30%, transparent 78%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse at 50% 45%, black 30%, transparent 78%)',
+          background: `conic-gradient(from ${sheenRot}deg at 50% 42%, transparent 0deg, ${accent}0f 90deg, transparent 180deg, ${second}0f 270deg, transparent 360deg)`,
+          mixBlendMode: 'screen',
+          opacity: 0.6 + bass * 0.3,
         }}
       />
-      {orbs.map((o, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            left: o.x - o.r,
-            top: o.y - o.r,
-            width: o.r * 2,
-            height: o.r * 2,
-            borderRadius: '50%',
-            // alternate the acid pair so the background reads duotone
-            background: `radial-gradient(circle, ${i % 2 === 0 ? accent : second} 0%, transparent 62%)`,
-            opacity: o.opacity,
-            filter: 'blur(2px)',
-          }}
-        />
-      ))}
+      {/* fine dot texture (replaces the old grid — subtler, less sci-fi) */}
+      <AbsoluteFill
+        style={{
+          display: moody ? 'none' : undefined,
+          backgroundImage: `radial-gradient(${accent}22 1.2px, transparent 1.2px)`,
+          backgroundSize: '46px 46px',
+          backgroundPosition: `0px ${(t * 7) % 46}px`,
+          maskImage: 'radial-gradient(ellipse at 50% 45%, black 25%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at 50% 45%, black 25%, transparent 75%)',
+          opacity: 0.6,
+        }}
+      />
       {/* vignette to keep edges calm */}
       <AbsoluteFill
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,0.5) 100%)',
+            'radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%)',
         }}
       />
     </AbsoluteFill>

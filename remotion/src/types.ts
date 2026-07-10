@@ -101,6 +101,9 @@ export interface ReelSpec {
   logo?: string;
   /** 'bold' (default, loud acid look) or 'moody' (cinematic restraint). */
   vibe?: 'bold' | 'moody';
+  /** Optional TTS delivery direction override (read by tts.py). Falls back to a
+   *  per-vibe preset: bold = brisk news energy, moody = slow and intimate. */
+  voiceStyle?: string;
   /** 'dark' (default, atmospheric) or 'light' (editorial white — data/research). */
   theme?: 'dark' | 'light';
   handle?: string;

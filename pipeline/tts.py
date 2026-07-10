@@ -37,11 +37,33 @@ except ImportError:
 DEFAULT_VOICE = os.environ.get("EDGE_TTS_VOICE", "en-US-AndrewNeural")
 GEMINI_TTS_MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
 GEMINI_TTS_VOICE = os.environ.get("GEMINI_TTS_VOICE", "Charon")
-# Natural-language delivery direction (interpreted, not spoken, by Gemini TTS)
+# Natural-language delivery direction (interpreted, not spoken, by Gemini TTS).
+# The default matches the 'bold' vibe; per-vibe presets below let the DELIVERY
+# match the look, and a reel can override with a "voiceStyle" field.
 GEMINI_TTS_STYLE = os.environ.get(
     "GEMINI_TTS_STYLE",
     "Narrate briskly and energetically, like a fast-paced news reel: ",
 )
+VOICE_STYLES = {
+    # loud, punchy, breaking-news energy — matches the acid Gen-Z look
+    "bold": GEMINI_TTS_STYLE,
+    # slow, intimate, reflective — matches the cinematic/dusk moody look
+    "moody": (
+        "Narrate slowly and intimately, calm and reflective, warm and unhurried, "
+        "leaving a little space between phrases: "
+    ),
+}
+
+
+def resolve_voice_style(reel: dict) -> str:
+    """Pick the TTS delivery direction: explicit reel `voiceStyle` wins, else a
+    per-vibe preset, else the bold default."""
+    explicit = (reel.get("voiceStyle") or "").strip()
+    if explicit:
+        return explicit if explicit.endswith((":", " ")) else explicit + ": "
+    return VOICE_STYLES.get(reel.get("vibe") or "bold", GEMINI_TTS_STYLE)
+
+
 SCENE_PAD_S = 0.35  # breathing room after the voice ends, per scene
 
 
@@ -116,7 +138,9 @@ def estimate_word_timings(text: str, dur: float):
     return words
 
 
-async def synth_segment_gemini(text: str, voice: str, out_path: pathlib.Path):
+async def synth_segment_gemini(
+    text: str, voice: str, out_path: pathlib.Path, style: str = GEMINI_TTS_STYLE
+):
     """Gemini TTS over plain HTTPS (works where WebSockets are blocked).
     Returns (duration_s, estimated word timings)."""
     import base64
@@ -133,7 +157,7 @@ async def synth_segment_gemini(text: str, voice: str, out_path: pathlib.Path):
         f"{GEMINI_TTS_MODEL}:generateContent"
     )
     body = {
-        "contents": [{"parts": [{"text": GEMINI_TTS_STYLE + text}]}],
+        "contents": [{"parts": [{"text": style + text}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {
@@ -192,6 +216,7 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
     seg_dir = out_dir / "segments"
     seg_dir.mkdir(parents=True, exist_ok=True)
 
+    voice_style = resolve_voice_style(reel)
     all_words = []
     cursor = 0.0  # seconds into the concatenated voice track
     seg_files = []
@@ -208,7 +233,7 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
             dur, words = await synth_segment_mock(text, seg_path)
         elif engine == "gemini":
             gemini_voice = voice if voice != DEFAULT_VOICE else GEMINI_TTS_VOICE
-            dur, words = await synth_segment_gemini(text, gemini_voice, seg_path)
+            dur, words = await synth_segment_gemini(text, gemini_voice, seg_path, voice_style)
         else:
             dur, words = await synth_segment(text, voice, seg_path)
         if dur <= 0:
