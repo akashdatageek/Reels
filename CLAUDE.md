@@ -83,9 +83,11 @@ Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-
      to scenes with no asset.
    - Pick one `accentColor` for the whole reel; set `music` to one of the
      tracks in `music/`.
-   - **Handle:** set `"handle": "@startups.ai"` on every reel (the project's
-     social handle) — it renders on the OutroCard under the CTA. Also end
-     caption.txt with it.
+   - **Handle + logo:** set `"handle": "@startups.ai"` on every reel — it
+     renders on the OutroCard under the CTA. The brand logo
+     (`brand/startups-logo.png`) is staged automatically by assemble.sh and
+     shown above the outro CTA; no per-reel field needed. Also end caption.txt
+     with the handle.
    - Scene `duration` values are placeholders — tts.py overwrites them with
      real audio durations.
 

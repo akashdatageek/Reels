@@ -96,7 +96,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
           if (!Comp) return null;
           return (
             <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
-              <Comp scene={{...scene, handle: scene.handle ?? reel.handle}} accent={accent} secondary={secondary} />
+              <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
             </Sequence>
           );
         })}

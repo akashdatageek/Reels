@@ -71,6 +71,8 @@ export interface Scene {
   rightText?: string;
   /** OutroCard */
   handle?: string;
+  /** OutroCard brand logo (path relative to the story public dir). */
+  logo?: string;
 }
 
 export interface CaptionWord {
@@ -95,6 +97,8 @@ export interface ReelSpec {
   secondaryColor?: string;
   /** Extra style words for every image prompt (replaces the default vibe words). */
   imageStyle?: string;
+  /** Brand logo (staged as logo.png by assemble.sh); shown on the OutroCard. */
+  logo?: string;
   /** 'bold' (default, loud acid look) or 'moody' (cinematic restraint). */
   vibe?: 'bold' | 'moody';
   /** 'dark' (default, atmospheric) or 'light' (editorial white — data/research). */

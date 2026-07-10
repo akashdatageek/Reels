@@ -1,8 +1,10 @@
 import React from 'react';
 import {
   AbsoluteFill,
+  Img,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
@@ -45,6 +47,18 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
           transform: `translateY(${interpolate(cardIn, [0, 1], [60, 0])}px)`,
         }}
       >
+        {scene.logo ? (
+          <Img
+            src={staticFile(scene.logo)}
+            style={{
+              width: 150,
+              height: 'auto',
+              margin: '0 auto 44px',
+              display: 'block',
+              filter: `drop-shadow(0 6px 30px ${accent}55)`,
+            }}
+          />
+        ) : null}
         <div
           style={{
             fontFamily: FONT_DISPLAY,
