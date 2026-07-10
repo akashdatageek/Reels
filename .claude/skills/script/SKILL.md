@@ -51,6 +51,17 @@ The first 3 seconds must contain a **concrete noun or number**, not a category
 - The outro calls back to the hook's exact word or image so the reel closes a
   loop.
 
+## Worked example (V1 → critique → V2)
+
+- **V1 hook:** "Today a company announced a new AI model that improves coding
+  performance." → category noun, no stakes, no number, corporate voice.
+- **Critique:** no problem before the announcement; "improves performance" is a
+  promise, not a receipt; nothing concrete in the first 3 seconds.
+- **V2 hook (number-shock + problem-first):** "AI still fumbles real bugs — this
+  one just fixed **82% of them.**" → concrete number, a problem framed first, a
+  receipt implied. The outro then calls back: "82%. On the bugs that used to
+  win."
+
 ## Decide the visual intent per beat (write it into script.md)
 
 For each beat, note *what shows it and why*: which beat gets a provided asset,

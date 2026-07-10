@@ -37,6 +37,26 @@ to a source URL in research.md.** If the story can't be verified from at least
 Also extract the spine of the story: what launched, who, why it matters, and
 the 2–3 concrete numbers that prove it.
 
+## Worked example (research.md shape)
+
+```markdown
+# GRAM — verified facts
+- Beats the prior best on the benchmark: 0.60 vs 0.85, lower is better.
+  [source: https://example.com/gram-paper §4.2]
+- ~10× smaller than the model it beats. [source: https://example.com/blog]
+- ⚠️ "runs on a laptop" — claimed in one tweet, not in the paper. EXCLUDE.
+
+## Killer numbers
+- 0.60 vs 0.85 (headline contrast)  ·  10× smaller
+
+## Hook angles (ranked)
+1. Contrarian — tiny model beats the giants
+2. Number-shock — a third fewer errors
+```
+
+Every kept line carries a source URL; anything that can't be sourced twice is
+marked ⚠️ and left out.
+
 ## Rule
 
 Never carry an unverified stat forward. If ≥2 sources don't agree, stop and ask.

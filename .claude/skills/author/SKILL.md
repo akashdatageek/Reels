@@ -94,7 +94,47 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
 - **Handle + logo:** set `"handle": "@startups.ai"` on every reel (renders on
   the OutroCard). The brand logo is staged automatically by assemble.sh — no
   per-reel field needed.
-- Pick `music` from `music/`. Scene `duration` values are placeholders — the
-  build step overwrites them.
+- Set `music` to a track that actually exists in `music/` (the folder is
+  gitignored, so a fresh clone is empty — the `build` skill covers adding one or
+  synthesizing a bed). Scene `duration` values are placeholders — the build step
+  overwrites them from the real audio.
+
+## Worked example (shape, not a template to copy)
+
+A two-scene slice — a hook and a real figure. Note: subject-only image prompt,
+`*asterisks*` for accent emphasis, a figure with credit + annotations, and a
+`voiceSegment` that reads the chart out loud.
+
+```json
+{
+  "title": "GRAM benchmark",
+  "theme": "light",
+  "vibe": "bold",
+  "accentColor": "#8B5CF6",
+  "secondaryColor": "#FF4D9D",
+  "handle": "@startups.ai",
+  "music": "music/upbeat_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 3,
+      "text": "This tiny model just *beat* the giants",
+      "voiceSegment": "A model a fraction of the size just topped the leaderboard."
+    },
+    {
+      "type": "FigureScene",
+      "duration": 6,
+      "figure": "assets/gram_bar.png",
+      "figureCredit": "Source: GRAM paper, fig. 3",
+      "text": "Lower is better",
+      "voiceSegment": "Blue is the old model, purple is GRAM. Lower is better — GRAM's bar is 0.60 versus 0.85.",
+      "annotations": [
+        { "text": "Blue = previous best", "emphasis": false },
+        { "text": "Purple = GRAM, 0.60", "emphasis": true }
+      ]
+    }
+  ]
+}
+```
 
 **Next:** invoke the `build` skill.

@@ -10,35 +10,53 @@ A render is a draft, not a delivery. Look at it critically before it ships.
 ## 1. Actually look
 
 - **Read the generated images** (`output/<story>/images/*.png`) — don't trust
-  the prompt, view the file. Regenerate any image that's weak, off-story, or
-  reads as generic AI slop: fix the scene's `imagePrompt`, then
-  `python3 pipeline/generate_images.py output/<story>/reel.json --force`.
-- **Spot-check the render** without a full re-encode by rendering a still of a
-  specific frame:
+  the prompt, view the file.
+- **Spot-check the render** by opening `reel.mp4`, or render a single frame for
+  a specific beat:
   ```bash
-  cd remotion && npx remotion still Reel /tmp/frame.png \
-    --frame=<n> --props=<story>/props.json --public-dir=<story>
+  bash scripts/still.sh output/<story> <frame>   # -> /tmp/still_<story>_<frame>.png
   ```
-  (or just open `reel.mp4`). Confirm safe zones, legibility, and that figures
-  are readable.
+  (`still.sh` rebuilds the props `assemble.sh` deletes and wires the story dir
+  as the public dir, so images + audio resolve.) Confirm safe zones,
+  legibility, and that figures are readable.
 
-## 2. Apply the editor's lens to the finished thing
+## 2. Regenerate a weak image (one scene, not all)
 
-- Is there a **problem/villain before the announcement**?
-- Is there a **proof moment** — a receipt (real chart/terminal/photo), not a
-  promise?
-- Are stats **felt** via contrast, not just listed?
-- Does the **outro call back** to the hook?
-- **Structure check:** does this reel's scene order differ from the last one?
-  If it's the same sequence again, break it.
+`generate_images.py --force` regenerates **every** image — costly, and it
+changes ones you liked. To redo just one scene, delete its file, clear its
+`image` field, and run **without** `--force` (existing files are skipped):
+
+```bash
+rm output/<story>/images/scene_03.png
+python3 - <<'PY'
+import json; p="output/<story>/reel.json"; d=json.load(open(p))
+d["scenes"][3].pop("image", None); json.dump(d, open(p,"w"), indent=2)
+PY
+python3 pipeline/generate_images.py output/<story>/reel.json   # only the missing one
+```
+
+First improve the scene's `imagePrompt` (or switch the beat to a real asset /
+`FigureScene`) — a better prompt beats a re-roll of the same one.
+
+## 3. Apply the editor's lens to the finished thing
+
+Re-run the `script` skill's critique lens (problem before announcement · proof
+moment · stats felt by contrast · outro calls back) — this time against what's
+actually on screen, not the words on paper. Plus the render-only checks:
+
+- **Structure check:** does this reel's scene order differ from the last one? If
+  it's the same sequence again, break it.
 - **Figures explained:** every shown graph has a `voiceSegment` that names the
-  axes/colors and reads the takeaway.
+  axes/colors and reads the takeaway (per the `author` skill's "show the real
+  thing" rule).
+- **Legibility:** type clears the IG safe zones (top 250px / bottom 320px) and
+  nothing important sits under the caption band.
 
-Anything that fails → fix in reel.json and re-run the relevant build step (only
-`generate_images.py` for image swaps; full `make_reel.sh` if text/timing
+Anything that fails → fix in reel.json and re-run the relevant build step (just
+the image regen above for a picture swap; full `make_reel.sh` if text or timing
 changed).
 
-## 3. Package and hand off
+## 4. Package and hand off
 
 - **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary, source
   credit (from research.md), the handle **@startups.ai**, 8–12 hashtags. Emoji
