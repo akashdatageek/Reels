@@ -6,6 +6,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {Captions} from './components/Captions';
+import {CinemaGrade} from './components/CinemaGrade';
 import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
 import {MusicPulseProvider, usePulse} from './components/MusicPulse';
@@ -106,6 +107,8 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
             <CutFlash accent={accent} secondary={secondary} />
           </Sequence>
         ))}
+        {/* global grade pass — sits over scenes, under the caption/UI layer */}
+        <CinemaGrade accent={accent} />
         <Captions captions={captions ?? []} accent={accent} />
         <ProgressBar accent={accent} />
         <Grain />

@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {ChartItem, Scene} from '../types';
 
@@ -25,8 +26,6 @@ export const ChartScene: React.FC<{scene: Scene; accent: string; secondary?: str
   const items: ChartItem[] = scene.chart ?? [];
   const max = Math.max(...items.map((i) => i.value), 1);
 
-  const titleIn = spring({frame, fps, config: {damping: 200}});
-
   return (
     <AbsoluteFill>
       <AmbientBackground accent={accent} secondary={second} seed={5} />
@@ -40,19 +39,16 @@ export const ChartScene: React.FC<{scene: Scene; accent: string; secondary?: str
         }}
       >
         {scene.text ? (
-          <div
+          <RevealText
+            text={scene.text}
             style={{
               fontFamily: FONT_DISPLAY,
               fontSize: 62,
               color: TEXT,
               textTransform: 'uppercase',
               marginBottom: 70,
-              opacity: titleIn,
-              transform: `translateY(${(1 - titleIn) * 30}px)`,
             }}
-          >
-            {scene.text}
-          </div>
+          />
         ) : null}
         {items.map((item, i) => {
           const grow = spring({

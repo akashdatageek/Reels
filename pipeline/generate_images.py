@@ -37,21 +37,39 @@ MODEL = os.environ.get("NANO_BANANA_MODEL", "gemini-2.5-flash-image")
 ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
 
 # Keep visuals consistent day to day — this prefix is applied to every prompt.
-# Gen-Z visual language: acid duotone glow, holographic/chrome surface energy,
-# subtle analog grain — bold but still dark-bg so on-screen type stays readable.
-# Per-reel flavor comes from reel.json "imageStyle"; the subject from each
-# scene's imagePrompt.
+# Push for a CAPTURED, crafted look (photo/still) over the generic stock-AI
+# render, and explicitly steer away from the tells that read as slop. Per-reel
+# flavor comes from reel.json "imageStyle"; the subject from each scene's prompt.
 BASE_RULES = (
-    "Vertical 9:16 social media background image. Cinematic lighting, subtle "
-    "analog film grain, high detail. Absolutely no text, no words, no letters, "
-    "no logos, no watermarks in the image. "
+    "Vertical 9:16 image, full-bleed. Photographic, physically-based lighting, "
+    "real materials and textures, natural depth of field, subtle analog film "
+    "grain — looks captured or hand-crafted, intentional and art-directed. "
+    "Absolutely no text, no words, no letters, no logos, no watermarks, no UI. "
+    "Avoid the generic AI-stock look: no glossy plastic CGI blobs, no floating "
+    "3D spheres, no default hologram-grid cliche, no over-rendered chrome soup, "
+    "no muddy centered symmetry. "
 )
-# Default vibe words (bold Gen-Z look); a reel's "imageStyle" REPLACES these.
+# Default vibe words — a restrained cinematic grade (used only when a reel does
+# NOT set "imageStyle"). A reel's "imageStyle" REPLACES these entirely, so a
+# bold Gen-Z reel can still ask for a loud acid-duotone palette on top of the
+# crafted BASE_RULES above.
 DEFAULT_VIBE = (
-    "Dark navy/black background, vivid two-color neon acid-gradient lighting, "
-    "holographic chrome and iridescent surface accents, bold isometric 3D or "
-    "abstract tech aesthetic, Y2K retro-futuristic energy. "
+    "Moody cinematic still, restrained color grade built around one dominant "
+    "accent hue, deep controlled shadows, atmospheric haze, a single confident "
+    "light source. "
 )
+
+# Deterministic composition rotation so consecutive foreground images are never
+# framed the same way (attacks the 'every AI image looks alike' tell). Indexed
+# by scene position; backdrops get their own uncluttered-environment framing.
+COMPOSITIONS = [
+    "wide establishing shot with generous negative space, subject small in frame",
+    "low-angle hero shot looking up, monumental sense of scale",
+    "extreme macro close-up, tactile surface detail, very shallow focus",
+    "clean top-down overhead flat-lay, geometric order",
+    "immersive first-person / over-the-shoulder point of view",
+    "off-center subject, strong diagonal lead-in lines, rule-of-thirds",
+]
 
 
 def generate_nano_banana(prompt: str, out_path: pathlib.Path) -> None:
@@ -124,13 +142,23 @@ def main() -> int:
 
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
-        # (field with the prompt, field to write the path to, filename suffix)
-        jobs = [("imagePrompt", "image", ""), ("backdropPrompt", "backdrop", "_bg")]
-        for prompt_field, target_field, suffix in jobs:
-            prompt = scene.get(prompt_field)
-            if not prompt:
+        # (prompt field, path field, filename suffix, is_backdrop)
+        jobs = [
+            ("imagePrompt", "image", "", False),
+            ("backdropPrompt", "backdrop", "_bg", True),
+        ]
+        for prompt_field, target_field, suffix, is_backdrop in jobs:
+            subject = scene.get(prompt_field)
+            if not subject:
                 continue
-            prompt = BASE_RULES + vibe_words + prompt
+            if is_backdrop:
+                framing = (
+                    " Real, uncluttered environment with out-of-focus depth, dark "
+                    "and atmospheric so overlaid text stays readable."
+                )
+            else:
+                framing = f" Composition: {COMPOSITIONS[idx % len(COMPOSITIONS)]}."
+            prompt = BASE_RULES + vibe_words + subject + framing
             existing = scene.get(target_field)
             if existing and (out_dir / existing).exists() and not args.force:
                 print(f"scene {idx:02d}: keeping existing {target_field} {existing}")
