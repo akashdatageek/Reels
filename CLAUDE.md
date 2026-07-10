@@ -1,253 +1,66 @@
 # AI News Reel Pipeline
 
-Claude Code is the orchestrator of this repo. When asked to "make today's reel"
-(or given a story folder / a link), follow the Daily Reel Workflow below.
+Claude Code is the orchestrator of this repo. It turns one link (or a story
+folder) into a rendered, narrated, captioned 9:16 reel. The user provides source
+data; Claude does the research, writing, visual identity, and orchestration.
 
-**Stack:** Claude Code (research + script + orchestration) · Nano Banana (images) ·
-Edge-TTS (voice + word timings) · Remotion (render) · FFmpeg (mux) · royalty-free music.
+**Stack:** Claude Code (research + script + orchestration) · Nano Banana
+(images) · Edge-TTS / Gemini TTS (voice + word timings) · Remotion (render) ·
+FFmpeg (mux) · royalty-free music.
 
-## Daily Reel Workflow
+## The workflow is five skills — run them in order
 
-1. **Read the input.** `input/<date>-<slug>/brief.md` and everything in its
-   `assets/` folder. The brief can be as thin as one link.
+When asked to "make today's reel" (or given a link / story folder), walk these
+five stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
+its `SKILL.md`) when you reach that stage.** The detailed discipline lives in the
+skills, not here, so there's a single source of truth.
 
-2. **RESEARCH PASS (mandatory, before any scripting).**
-   - WebFetch the primary source (official blog, docs, model card, launch post).
-     Primary > news aggregators. Use `python3 pipeline/extract.py <url> --out input/<story>/extracted`
-     when you need clean article text.
-   - WebSearch 2–3 independent sources to confirm key claims and numbers.
-     If sources conflict, flag it — never guess.
-   - Enrich: concrete benchmarks, pricing, availability date, comparison to
-     the previous version / competitors.
-   - Angle check: quick search of what's already being said, so the hook
-     isn't the same take everyone posted 6 hours ago.
-   - Write `input/<story>/research.md`:
-     - Verified facts, each with source URL
-     - 2–3 killer numbers/stats for StatCallout scenes
-     - Suggested hook angles, ranked
-     - Anything unverified → marked ⚠️ and excluded from the script
-   - **Rules:** every on-screen stat must trace to a source URL in research.md.
-     If the story can't be verified from at least 2 sources → stop and ask.
+| # | Skill | Stage | Writes |
+|---|-------|-------|--------|
+| 1 | **`research`** | Verify the story from primary + independent sources | `input/<story>/research.md` |
+| 2 | **`script`** | Scriptwriter's cut: V1 → critique → V2, chosen hook | `input/<story>/script.md` |
+| 3 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
+| 4 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
+| 5 | **`editor`** | Review the render, tighten, write the caption, hand off | `output/<story>/caption.txt` |
 
-3. **Extract the story:** what launched, who, why it matters, 2–3 concrete numbers.
+`reel.json` is the single contract every stage routes through: `author` writes
+it, `build` enriches it (durations, image paths) and renders it. Schema:
+`remotion/src/types.ts`; example: `remotion/src/example/reel.json`.
 
-4. **Write a 45–75s script — as a scriptwriter, not a summarizer.**
-   Aim ~60s when the story has depth; go shorter rather than padding a thin
-   story. Structure for the longer format: HOOK → CONTEXT → 3–5 KEY POINTS
-   (each with a receipt) → SO-WHAT → OUTRO.
-   Write `input/<story>/script.md` with three parts:
-   - **V1 draft**: HOOK (0–3s, must stop the scroll) → CONTEXT → 3–5 KEY
-     POINTS → SO-WHAT → OUTRO. Conversational, no jargon, short sentences.
-   - **Critique**: attack V1 like an editor — Is there a *problem/villain*
-     before the announcement? Is there a *proof moment* (a receipt, not a
-     promise)? Are stats *felt* via contrast ("soccer field vs classroom"),
-     not listed? Does the outro *call back* to the hook?
-   - **V2**: rewrite fixing the critique; cross-check every line against
-     research.md sources before it goes in reel.json.
-   Prefer problem-first hooks over announcement hooks.
+## Non-negotiable rules (apply across every stage)
 
-   **Hook archetypes** — pick one deliberately and rotate day to day; never
-   open two reels the same way:
-   - *Problem-first*: name the pain before the product ("Your agent forgets
-     everything the second the chat ends.").
-   - *Number-shock*: lead with the stat that sounds impossible ("It fixed 82%
-     of real GitHub issues.").
-   - *Contrarian*: reverse the consensus ("Everyone says bigger wins. This
-     tiny model just beat them.").
-   - *Overlooked*: the buried detail nobody's covering ("Everyone's posting
-     the demo. The footnote is the real story.").
-   - *Before/after*: the world-before and world-after in one breath.
-   - *Stakes*: who it helps or hurts, made concrete ("If you ship code, this
-     changes your Monday.").
-   The first 3 seconds must contain a concrete noun or number, not a category
-   ("a 30-second render", not "an exciting advance").
-
-   **Line craft (apply in V2):** one idea per sentence, one sentence per
-   caption group. Vary sentence length — a long setup then a 3-word punch.
-   Concrete over abstract. Cut hedges and corporate voice ("basically",
-   "seamless", "game-changing", "revolutionary"). Make stats *felt* by
-   contrast ("0.60 vs 0.85 — a third fewer errors"), not listed. The outro
-   calls back to the hook's exact word or image so the reel closes a loop.
-
-4b. **Choose each scene's visual deliberately** (and write the choice into
-   script.md): which beat gets a provided asset, which gets a generated
-   image, and *why that image tells that beat*. After generating images,
-   LOOK at them (Read the file); regenerate if one is weak or off-story.
-   Screenshots of webpages must be cropped to the photo region first.
-
-5. **Build `output/<story>/reel.json`** — 6–12 scenes (schema:
-   `remotion/src/types.ts`, example: `remotion/src/example/reel.json`).
-   - Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
-     `TerminalScene` (typed CLI demo), `ChartScene` (animated bars),
-     `FigureScene` (show a REAL source figure + explain it), `OutroCard`.
-   - **Show the real thing.** If the source has a chart, diagram, screenshot,
-     or photo that carries the point, put it on screen with `FigureScene`
-     (`figure` = cropped asset, `figureCredit`, `annotations` = the callouts
-     that walk through it) — do NOT paraphrase a chart into decoration or
-     replace it with a generated image. Crop screenshots to the figure region
-     (`pipeline/*` or a quick PIL bbox). Generated images are for *mood/metaphor*
-     beats only, never as a stand-in for evidence the source actually provided.
-   - **Explain graphs out loud.** When a figure is shown, the voiceover names
-     the axes/colors and reads the takeaway ("blue = kept; red = removed,
-     lower is better; GRAM's red bar is 0.60 vs 0.85").
-   - **Theme (`theme` in reel.json): choose by content.**
-     `light` (editorial warm-white, dark text, clean shadows) for data,
-     research papers, charts, explainers, business/credibility stories.
-     `dark` (default) for launches, drama, atmosphere, cinematic/moody.
-     Don't default to dark neon for everything — it makes data look like a
-     sci-fi trailer instead of credible reporting.
-   - **Break the structure.** Don't reuse the same scene order two days
-     running. An explainer is mostly FigureScenes; a launch is image-led; a
-     data story is chart-led. Pick the sequence the *story* needs.
-   - Each spoken scene gets a `voiceSegment` (1–2 short sentences).
-   - **Voice delivery follows the vibe automatically:** `bold` reels are
-     narrated with brisk news energy, `moody` reels slow and intimate (tts.py
-     picks the delivery from `vibe`). Override per reel with `voiceStyle`
-     (a natural-language direction, e.g. `"Deadpan and dry, like you're
-     unimpressed:"`) when the story wants a specific tone.
-   - **Prefer provided assets over generated images**: copy usable files from
-     `input/<story>/assets/` into `output/<story>/assets/` and reference them
-     in the scene's `image` field. Only add an `imagePrompt` (for Nano Banana)
-     to scenes with no asset.
-   - Pick one `accentColor` for the whole reel; set `music` to one of the
-     tracks in `music/`.
-   - **Handle + logo:** set `"handle": "@startups.ai"` on every reel — it
-     renders on the OutroCard under the CTA. The brand logo
-     (`brand/startups-logo.png`) is staged automatically by assemble.sh and
-     shown above the outro CTA; no per-reel field needed. Also end caption.txt
-     with the handle.
-   - Scene `duration` values are placeholders — tts.py overwrites them with
-     real audio durations.
-
-6. **Run the mechanical pipeline:**
-   ```bash
-   bash scripts/make_reel.sh output/<story>
-   ```
-   (= tts.py → captions.py → generate_images.py → assemble.sh; each step can
-   also be run individually if something needs a retry.)
-
-7. **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary,
-   source credit (from research.md), the handle **@startups.ai**, 8–12 hashtags.
-
-8. **Show the output path (`output/<story>/reel.mp4`). Never post automatically.**
-
-## Theme analysis (before any visuals — the editor's first decision)
-
-Analyze the story's *theme* and pick a matching Gen-Z-friendly identity,
-writing the choice + reasoning into script.md. Set in reel.json:
-`accentColor` + `secondaryColor` (acid duotone pair; gradients, orbs and
-wipes run accent → secondary) and `imageStyle` (vibe words prepended to
-every image prompt).
-
-| Story theme | Duotone pair | imageStyle flavor |
-|---|---|---|
-| dev tools / infra | mint `#00E58C` + electric blue `#00A3FF` | "clean holographic terminal glow" |
-| models / research | violet `#8B5CF6` + hot pink `#FF4D9D` | "iridescent neural chrome" |
-| money / business | amber `#FFB020` + acid green `#B6FF3B` | "gold chrome, ticker energy" |
-| drama / security | red `#FF4D4D` + neon orange `#FF7A1A` | "alarm glow, high tension" |
-| climate / science | orange `#FF7A1A` + golden `#FFD23F` | "warm ember glow, natural scale" |
-| consumer / social | hot pink `#FF4D9D` + cyan `#00E5FF` | "playful glossy plastic, Y2K" |
-
-Also choose the reel's **vibe** (`vibe` in reel.json):
-- `bold` (default) — loud acid duotone, chunky uppercase type, sticker
-  captions, light-blade cuts. For news, launches, benchmarks.
-- `moody` — cinematic restraint: quiet serif (Fraunces), sentence case,
-  luma-dip cuts, heavier grain, calmer audio-reactivity, no grid, captions
-  as bare serif text. For human/emotional/reflective stories. Pair with a
-  dusk palette (e.g. warm amber `#E8A25C` + soft teal `#7FBFB5`) and an
-  imageStyle like "moody dusk film photography, muted teal and warm amber,
-  atmospheric haze, silhouettes" (imageStyle *replaces* the default look).
-
-Pairs are starting points — tune per story. **Gen-Z authenticity rules:**
-conversational hooks, never corporate phrasing ("game-changing solution" is
-banned); no forced slang — the aesthetic can be loud, the words stay real;
-receipts over promises (show the terminal, the chart, the photo); emoji in
-caption.txt are fine, on-screen text stays clean.
-
-## Creative direction (choose deliberately, per story)
-
-- **Scene mix:** never use the same scene sequence two days in a row. Pick the
-  scene that *shows* the story: dev tool → `TerminalScene` with the actual
-  commands; benchmark/comparison story → `ChartScene` (only verified numbers,
-  subject bar `highlight: true`); product/hardware → `ImageScene`; head-to-head
-  → `SplitCompare`. StatCallout is for the single most surprising number, max
-  1–2 per reel.
-- **Hook emphasis:** in HookCard text, wrap the 1–2 payoff words in
-  *asterisks* — they render in the accent color (`"now *one command*"`).
-  Emphasize the surprise, not the subject.
-- **Accent color:** pick per story, loosely matched to the subject's brand or
-  mood — e.g. cyan `#00E5FF` (infra/cloud), mint `#00E58C` (dev tools), violet
-  `#8B5CF6` (research/models), amber `#FFB020` (money/business), red `#FF4D4D`
-  (drama/security). One accent per reel, never more.
-- **Image prompts:** describe the *subject* only — `generate_images.py` now
-  prepends a **photographic, anti-slop** base (captured/crafted look, real
-  materials, "no glossy CGI blobs, no floating spheres, no hologram-grid
-  cliche") and **auto-rotates the composition** per scene index (wide
-  establishing, low-angle hero, macro, top-down, POV, off-center diagonal) so
-  consecutive images are never framed the same. Push for *real photography or
-  a specific art-directed still*, not generic "abstract tech." A reel's
-  `imageStyle` still sets the palette/mood on top (and can be loud). Best of
-  all: prefer a real provided asset or a `FigureScene` over any generated
-  image — that's the surest cure for the AI-slop look.
-- **Backdrops:** every text/data scene (HookCard, StatCallout, SplitCompare)
-  should carry a `backdropPrompt` when the story affords imagery — a real
-  *place* related to the beat (the classroom, the boiler room, the control
-  room), dark and uncluttered; it renders dimmed under a scrim so type stays
-  readable. Photos (assets or `pipeline/fetch_stock.py` locally, with
-  credits) can go in `backdrop` directly.
-- **Terminal content:** real commands/output only — from docs or the launch
-  post; treat CLI text like a stat (it's on screen; it must be traceable).
-- **Audio-reactive motion (automatic):** the renderer FFT-analyzes the music
-  track per frame — the aurora background, stat glow, hook bar, captions and
-  the progress bar all pulse with the low end; scene cuts get an accent light
-  wipe; ImageScenes get a light sweep + perspective drift; film grain overlays
-  everything. No per-reel work needed — just set `music` in reel.json.
-  Punchier track = punchier reel.
-- **Cinematic finish (automatic):** every reel gets a layered **aurora
-  background** (drifting duotone washes + rotating sheen + fine dot texture —
-  not the old three-orb look), a global **CinemaGrade** pass (vertical
-  falloff + accent halation that ties the frame to the one accent + a whisper
-  of chromatic fringe), and **kinetic titles** (Chart/Figure/Split titles wipe
-  up behind a mask instead of a flat fade). Light theme keeps all of this
-  restrained and editorial. Nothing to set per reel.
-
-## Rules
-
-- If the input includes a launch video: extract max 2–3 short clips (<5s each)
-  as b-roll, always with our commentary overlaid. Never re-post their video wholesale.
-- Always credit the source in caption.txt.
-- Never use an unverified stat. Everything on screen traces to research.md.
-- Image prompt style (baked into `pipeline/generate_images.py` as STYLE_PREFIX):
-  dark navy bg, one neon accent, isometric-3D/abstract tech, **no text in image**.
-  Per-scene prompts describe the subject only; the style prefix keeps visuals
-  consistent day to day.
-- Design constraints (baked into Remotion components): 1080×1920 @ 30fps,
-  IG safe zones (top 250px / bottom 320px), max 2 fonts, one accent color per reel.
-
-## Environment
-
-- Python deps: `pip install -r requirements.txt`
-- Remotion deps: `cd remotion && npm install`
-- Fonts (once, after npm install): `bash scripts/install_fonts.sh` — installs
-  Archivo Black / Inter / JetBrains Mono as system fonts for the renderer.
-- FFmpeg must be on PATH.
-- Voice engines (`pipeline/tts.py --engine`): `edge` (word-exact timings;
-  needs WebSocket) · `gemini` (plain HTTPS, uses NANO_BANANA_API_KEY; timings
-  estimated, then refined by `pipeline/align.py` if faster-whisper is
-  available) · `mock` (silent, testing). Set `TTS_ENGINE` for make_reel.sh.
-- Music: real tracks per `music/README.md`; `python3 pipeline/make_ambient.py`
-  generates a subtle synthesized bed as a stopgap so reels never ship dry.
-- `.env` (copy from `.env.example`): `NANO_BANANA_API_KEY`. Without a key,
-  generate_images.py produces styled placeholder gradients so the pipeline
-  still runs end-to-end for testing.
+- **Never use an unverified stat.** Everything on screen traces to a source URL
+  in research.md. If the story can't be verified from ≥2 sources → stop and ask.
+- **Always credit the source** in caption.txt.
+- **Show the real thing.** If the source provides a chart/figure/photo that
+  carries the point, put it on screen (`FigureScene`) and explain it out loud —
+  don't paraphrase evidence into decoration or a generated image.
+- **Break the structure.** Never reuse the same scene order two days running.
+- **Never post automatically.** Show the output path and stop.
+- **Design constraints** (baked into the Remotion components): 1080×1920 @
+  30fps, IG safe zones (top 250px / bottom 320px), max 2 fonts, one accent color
+  per reel.
+- If the input includes a launch video: max 2–3 short clips (<5s each) as
+  b-roll with our commentary overlaid — never re-post their video wholesale.
 
 ## Repo map
 
 ```
-input/<story>/          brief.md (+ assets/) → research.md written here
-pipeline/               extract.py · tts.py · captions.py · generate_images.py
+.claude/skills/         research · script · author · build · editor (the workflow)
+input/<story>/          brief.md (+ assets/) → research.md, script.md written here
+pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
-scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux)
+scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · install_fonts.sh
 music/                  royalty-free tracks (see music/README.md)
+brand/                  startups-logo.png (auto-staged onto the OutroCard)
 output/<story>/         reel.json · voice.mp3 · captions.json · images/ · reel.mp4 · caption.txt
 ```
+
+## Environment quick reference
+
+- Python deps: `pip install -r requirements.txt` · Remotion: `cd remotion && npm install`
+- Fonts once: `bash scripts/install_fonts.sh` · FFmpeg must be on PATH.
+- `.env` (from `.env.example`): `NANO_BANANA_API_KEY`. Without it,
+  `generate_images.py` emits styled placeholder gradients so the pipeline still
+  runs end-to-end.
+- Full setup + engine/voice details live in the `build` skill.
