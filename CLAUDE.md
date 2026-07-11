@@ -50,7 +50,7 @@ it, `build` enriches it (durations, image paths) and renders it. Schema:
 input/<story>/          brief.md (+ assets/) → research.md, script.md written here
 pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
-scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · install_fonts.sh
+scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · still.sh (review frame) · install_fonts.sh
 music/                  royalty-free tracks (see music/README.md)
 brand/                  startups-logo.png (auto-staged onto the OutroCard)
 output/<story>/         reel.json · voice.mp3 · captions.json · images/ · reel.mp4 · caption.txt

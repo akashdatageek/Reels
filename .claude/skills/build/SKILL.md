@@ -27,9 +27,12 @@ Any step can be run individually if something needs a retry.
      `mock` (silent, for testing).
 2. **`align.py` — refine timings.** Forced alignment (faster-whisper) tightens
    word timings to the audio; degrades gracefully to the estimate if the model
-   is unavailable.
-3. **`captions.py` — caption groups.** Groups word timings into short 1–3 word
-   chunks that pop in sync with the voice → `captions.json`.
+   is unavailable. **Only runs for `gemini`/`mock`** (which start from estimated
+   timings); `make_reel.sh` skips it for `edge`, whose timings are already
+   word-exact.
+3. **`captions.py` — caption groups.** Reads `word_timings.json` (not reel.json),
+   groups words into short 1–3 word chunks that pop in sync with the voice, and
+   writes `captions.json` next to it.
 4. **`generate_images.py` — images + backdrops.** For each scene with an
    `imagePrompt`/`backdropPrompt` and no provided asset, calls Nano Banana and
    writes the path back into reel.json. The final prompt is assembled as:
@@ -68,8 +71,11 @@ Any step can be run individually if something needs a retry.
 - Fonts (once, after npm install): `bash scripts/install_fonts.sh` — installs
   Archivo Black / Inter / JetBrains Mono / Fraunces as system fonts.
 - FFmpeg on PATH. `.env` from `.env.example` holds `NANO_BANANA_API_KEY`.
-- Music: real tracks per `music/README.md`; `python3 pipeline/make_ambient.py`
-  makes a synthesized bed as a stopgap so reels never ship dry.
+- Music: `music/*.mp3` is **gitignored**, so a fresh clone has an empty
+  `music/`. Add a real track (see `music/README.md`) or run
+  `python3 pipeline/make_ambient.py` to synthesize a bed *before* building —
+  otherwise the track named in reel.json won't exist and the mux ships voice
+  only (no audio-reactive motion). Then point reel.json's `music` at it.
 - Headless render: set `REMOTION_BROWSER_EXECUTABLE` to the pre-installed
   Chromium headless shell if the default browser isn't found.
 
