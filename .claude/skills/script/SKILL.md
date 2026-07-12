@@ -1,12 +1,19 @@
 ---
 name: script
-description: Second stage — write the reel's script after research. Produces input/<story>/script.md as a scriptwriter's cut (V1 draft → self-critique → V2), with a deliberately chosen hook archetype and tight line craft. Use once research.md exists and before authoring reel.json.
+description: Third stage — write the reel's voiceover to the frames from the content stage. Produces input/<story>/script.md as a scriptwriter's cut (V1 draft → self-critique → V2), one voiceSegment per frame, with a deliberately chosen hook and tight, plain-language line craft. Use once frames.md exists and before authoring reel.json.
 ---
 
 # Write the script — as a scriptwriter, not a summarizer
 
+**Write the voice TO the frames.** The `content` stage has already locked the
+reel's content in `input/<story>/frames.md` — each frame's point, its real
+receipt, and its visual. Your job here is the *voiceover* that carries those
+frames, not to invent new content. One `voiceSegment` per frame, in frame order.
+If a frame has no real content behind it, go back to `content`/`research` — don't
+paper over it with words.
+
 Target **45–75s** (~60s when the story has depth; go shorter rather than
-padding a thin story). Structure for the longer format:
+padding a thin story). The frames already give you the structure:
 **HOOK → CONTEXT → 3–5 KEY POINTS (each with a receipt) → SO-WHAT → OUTRO.**
 
 Write `input/<story>/script.md` in three explicit parts:
@@ -95,12 +102,12 @@ what, fast.
   receipt implied. The outro then calls back: "82%. On the bugs that used to
   win."
 
-## Decide the visual intent per beat (write it into script.md)
+## Visuals are already decided (in frames.md)
 
-For each beat, note *what shows it and why*: which beat gets a provided asset,
-which gets a real source figure, which gets a generated image — and why that
-image tells that beat. Screenshots of webpages must be cropped to the photo
-region first. This intent is what the `author` skill turns into reel.json.
+Don't re-invent the visuals here — the `content` stage already assigned each
+frame its real asset / figure / scene in `frames.md`. If writing the voice
+reveals a frame's visual is wrong, note it and fix it back in `content`, so
+frames.md stays the single source of truth the `author` stage reads.
 
 ## Tone note
 

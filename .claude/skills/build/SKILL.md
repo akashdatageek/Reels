@@ -1,6 +1,6 @@
 ---
 name: build
-description: Fourth stage — turn an authored reel.json into the rendered video. Runs the mechanical pipeline (voice → forced alignment → captions → images → Remotion render → FFmpeg mux) and knows how to run/retry each step and what happens automatically. Use once reel.json is authored; also use to re-render after edits.
+description: Fifth stage — turn an authored reel.json into the rendered video. Runs the mechanical pipeline (voice → forced alignment → captions → images → Remotion render → FFmpeg mux) and knows how to run/retry each step and what happens automatically. Use once reel.json is authored; also use to re-render after edits.
 ---
 
 # Build the reel (mechanical pipeline)

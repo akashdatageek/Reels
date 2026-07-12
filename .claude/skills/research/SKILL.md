@@ -70,4 +70,4 @@ the user to provide the missing data manually** — paste the text, or drop a
 screenshot/file into the story's `assets/`. Better a paused reel than a
 confident-but-wrong one.
 
-**Next:** invoke the `script` skill.
+**Next:** invoke the `content` skill (generate the frames), then `script`.
