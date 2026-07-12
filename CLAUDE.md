@@ -31,6 +31,11 @@ it, `build` enriches it (durations, image paths) and renders it. Schema:
 
 - **Never use an unverified stat.** Everything on screen traces to a source URL
   in research.md. If the story can't be verified from ≥2 sources → stop and ask.
+- **When the picture is incomplete, ask for manual data — don't fill the gap.**
+  If a source is blocked/unreachable, a claim can't be verified, or key data is
+  missing, STOP and ask the user to provide it manually (paste the text, drop a
+  screenshot into the story's `assets/`). Never proceed on partial info, and
+  never substitute adjacent or lookalike data as if it were the real source.
 - **Always credit the source** in caption.txt.
 - **Show the real thing.** If the source provides a chart/figure/photo that
   carries the point, put it on screen (`FigureScene`) and explain it out loud —

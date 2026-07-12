@@ -61,4 +61,13 @@ marked ⚠️ and left out.
 
 Never carry an unverified stat forward. If ≥2 sources don't agree, stop and ask.
 
+**When the picture is incomplete, ask for manual data.** If a primary source is
+blocked/unreachable (e.g. an egress-policy 403), a number can't be confirmed, or
+key data is missing, do NOT proceed on partial info and do NOT substitute
+adjacent/lookalike data (a different paper, a different lab's benchmark) as if it
+were the source. Write down what you *can* verify, mark the rest ⚠️, and **ask
+the user to provide the missing data manually** — paste the text, or drop a
+screenshot/file into the story's `assets/`. Better a paused reel than a
+confident-but-wrong one.
+
 **Next:** invoke the `script` skill.
