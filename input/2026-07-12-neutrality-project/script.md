@@ -1,80 +1,59 @@
-# Script — The Neutrality Project (v2, plain-language rewrite)
+# Script — The Neutrality Project (written to frames.md)
 
-**Target:** ~60s. **Register:** brisk but credible news (bold), **not** partisan.
-**Tone rule:** a reel *about* neutrality must itself stay neutral — report the
-finding, never cheer or jeer a "side." The hero is the open, checkable method.
-Every number traces to `research.md` → `results.html`.
+**Written to the 9 frames in `frames.md` — one `voiceSegment` per frame, in
+order.** ~60s. Register: brisk but credible (bold), **non-partisan** (a reel
+about neutrality must itself stay neutral). Every line traces to `research.md` →
+results.html / homepage. Visuals are already fixed in `frames.md`.
 
 **Hook archetype:** lead with the ONE surprising, *named* result — "the most
-neutral AI is Grok" — then prove it with the 97-of-108 stat.
-
-**Covers the basics (all in the first ~15s):**
-WHO = The Neutrality Project (independent, open-source). WHAT = a test that
-measures the political lean of AI models. RESULT = Grok most neutral; almost all
-leaned left; Phi-4 the most + dodged questions. WHY = an AI's lean quietly
-becomes yours.
+neutral AI is Grok" — then prove it.
+**Basics covered:** WHO (fr2) · WHAT (fr3) · RESULT (fr1/4/5) · WHY (fr8), all in
+the first ~15s.
 
 ---
 
-## V1 (draft — see critique below)
+## V1 (draft) — see critique
 
-Kept from the earlier draft; its problems: opened on an abstract stat (97/108)
-instead of the human result, used hard words ("self-anchored", "ideological
-axes"), and never plainly said *who* did it or *what* the benchmark is.
+An earlier draft opened on the abstract "97 of 108" stat, used seminar words
+("self-anchored", "ideological axes"), and never plainly said *who* did it or
+*what* the test is. It also predated the frames, so its beats didn't map 1:1.
 
 ## Critique (what this rewrite fixes)
 
-- **Wrong thing on page one.** Old hook led with "97 of 108 left of center" — a
-  stat, not the surprise. Fix: open on "the most neutral AI is Grok" (named,
-  counter-intuitive, repeatable). The stat becomes the proof in beat 3.
-- **Too hard to follow.** "Self-anchored ideological axes", "reproducible",
-  "measured against its own far-left and far-right" — seminar language. Fix:
-  plain words a person says out loud.
-- **Didn't cover the basics.** Never plainly said *who* (The Neutrality Project)
-  or *what the benchmark is* (a political-lean test). Fix: who + what land right
-  after the hook.
-- **Kept:** the honesty caveat (it's *this test's* finding, models compared to
-  their own range) and the strict non-partisan tone.
+- **Aligns to the frames.** One voiceSegment per frame (9), same order — no
+  invented content, no orphaned frame.
+- **Leads with Grok** (frame 1), the named surprise; the 97/108 stat drops to the
+  proof beat (frame 4).
+- **Plain language.** No jargon — "tested where each AI leans", "models from
+  three countries set the scale", "one in four" not "26%". Say-out-loud checked.
+- **Covers who/what fast** (frames 2–3) so the viewer isn't lost.
+- **Honesty + tone kept:** it's *this test's* finding; models judged against
+  their own range; no cheering or jeering a side.
 
-## V2 (final — this goes to the author stage)
+## V2 (final) — the voiceover, frame by frame
 
-1. **HOOK:** "The most politically neutral AI right now? It's Grok."
-2. **WHO + WHAT:** "That's the finding from The Neutrality Project — an independent group that tested the politics inside 18 AI models."
-3. **WHAT (the test):** "They asked each AI almost 4,000 real opinion-poll questions, then mapped where it leans — left or right."
-4. **RESULT (proof):** "Out of 108 scores, 97 leaned left. Every model leaned at least a little. Grok just landed closest to the middle."
-5. **CONTRAST:** "The most one-sided? Microsoft's Phi-4 — which also dodged one in four questions."
-6. **WHY IT'S FAIR:** "To keep it honest, AIs from three different countries set the scale — not the project's own idea of the center."
-7. **WHY YOU CARE:** "It matters, because when an AI writes your summary, its lean quietly becomes yours."
-8. **OUTRO:** "The most neutral AI is Grok — and now you can check the rest yourself."
+| Frame | Role | `voiceSegment` |
+|-------|------|----------------|
+| 1 | hook | "The most politically neutral AI right now? It's Grok." |
+| 2 | who | "That's the finding from The Neutrality Project — an independent, open group that takes no money from the AI labs it grades." |
+| 3 | what | "They put 18 models through almost 4,000 real opinion-poll questions, then mapped where each one leans — left or right." |
+| 4 | result | "Out of 108 scores, 97 leaned left. Every model leaned at least a little." |
+| 5 | proof | "On the scoreboard, Grok lands closest to dead center — the only one that's basically neutral." |
+| 6 | contrast | "The most one-sided? Microsoft's Phi-4 — which also dodged one in four questions." |
+| 7 | why-fair | "To keep it honest, models from three different countries set the scale — not the project's own idea of the center." |
+| 8 | stakes | "It matters, because when an AI writes your summary, its lean quietly becomes yours." |
+| 9 | outro | "The most neutral AI is Grok. Now you can check the rest yourself." |
 
-**Word count ≈ 115 → ~48s voice → ~60s reel with scene pauses. On target.**
-
+**Word count ≈ 120 → ~50s voice → ~60s reel with scene pauses. On target.**
 **Say-it-out-loud check:** every line is one clause, common words, no term a
-normal viewer would need to look up. "One in four", not "26%".
+viewer must look up.
 
 ---
 
-## Per-beat visual intent (hand-off to the `author` stage)
-
-Figure-led explainer on the project's REAL charts. Theme **light** (editorial /
-credibility). Vibe **bold**, restrained. Accent: **teal ~#12B98A** (non-partisan;
-echoes the site — deliberately not red/blue). Handle **@startups.ai**.
-
-| # | Beat | Scene | Visual (real asset) | Why |
-|---|------|-------|--------------------|-----|
-| 1 | Hook — "most neutral is Grok" | HookCard | text, emphasize *Grok* | named surprise, clean, scroll-stopping |
-| 2 | Who + what | HookCard/text | short line, project name | grounds the hook fast |
-| 3 | The test | FigureScene | **six-axis pole table** (economic/social/…) or the −1↔+1 ruler | show what "leans left/right" means, in plain view |
-| 4 | Result — Grok closest | FigureScene | **Neutrality Map / leaderboard** with Grok 4.5 −0.02 marked "MOST NEUTRAL"; "97 of 108 left" as annotation | the result IS the chart |
-| 5 | Contrast — Phi-4 | FigureScene/Stat | Phi-4 −0.59 + "dodged 1 in 4" (from the same leaderboard) | the other end of the scale |
-| 6 | Why fair | FigureScene/text | "3 countries set the scale" simple graphic | the honesty beat, plain |
-| 7 | Why you care | StatCallout/text | one plain statement, no chart | the stakes |
-| 8 | Outro | OutroCard | "Most neutral: Grok — check the rest" + @startups.ai | callback to the hook |
-
-**Figures to crop (build stage) from `assets/results.pdf` / `assets/homepage.pdf`:**
-Neutrality Map with Grok marked MOST NEUTRAL; the ranked 18-model list (Grok
-−0.02 … Phi-4 −0.59); the six-axis pole table; the aggregate −1↔+1 scatter.
-
-**Source credit (caption.txt):** The Neutrality Project — neutralityproject.org
-(Release 01). **Keep visible:** it's *this open test's* finding; models are
-compared to their own range, not an absolute political center.
+## Notes for the `author` stage
+- Take these 9 `voiceSegment`s straight into `reel.json`, one per scene, in the
+  scene types `frames.md` assigns (Hook / Figure / Stat / Outro).
+- Keep the source credit for `caption.txt`: The Neutrality Project —
+  neutralityproject.org (Release 01).
+- Caveat to keep visible: positions are relative to each model's own range, not
+  an absolute political center.
