@@ -8,29 +8,37 @@ data; Claude does the research, writing, visual identity, and orchestration.
 (images) · Edge-TTS / Gemini TTS (voice + word timings) · Remotion (render) ·
 FFmpeg (mux) · royalty-free music.
 
-## The workflow is five skills — run them in order
+## The workflow is six skills — run them in order
 
 When asked to "make today's reel" (or given a link / story folder), walk these
-five stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
+six stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
 its `SKILL.md`) when you reach that stage.** The detailed discipline lives in the
 skills, not here, so there's a single source of truth.
 
 | # | Skill | Stage | Writes |
 |---|-------|-------|--------|
 | 1 | **`research`** | Verify the story from primary + independent sources | `input/<story>/research.md` |
-| 2 | **`script`** | Scriptwriter's cut: V1 → critique → V2, chosen hook | `input/<story>/script.md` |
-| 3 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
-| 4 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
-| 5 | **`editor`** | Review the render, tighten, write the caption, hand off | `output/<story>/caption.txt` |
+| 2 | **`content`** | Lock the content frame-by-frame (point + receipt + visual) | `input/<story>/frames.md` |
+| 3 | **`script`** | Write the voiceover to the frames: V1 → critique → V2 | `input/<story>/script.md` |
+| 4 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
+| 5 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
+| 6 | **`editor`** | Review the render, tighten, write the caption, hand off | `output/<story>/caption.txt` |
 
-`reel.json` is the single contract every stage routes through: `author` writes
-it, `build` enriches it (durations, image paths) and renders it. Schema:
-`remotion/src/types.ts`; example: `remotion/src/example/reel.json`.
+**Content before words:** `content` locks *what each frame says and shows* (its
+real receipt) before `script` writes the voice — so the script is never written
+in a vacuum. `reel.json` is then the single contract: `author` writes it from the
+frames + script, `build` enriches it (durations, image paths) and renders it.
+Schema: `remotion/src/types.ts`; example: `remotion/src/example/reel.json`.
 
 ## Non-negotiable rules (apply across every stage)
 
 - **Never use an unverified stat.** Everything on screen traces to a source URL
   in research.md. If the story can't be verified from ≥2 sources → stop and ask.
+- **When the picture is incomplete, ask for manual data — don't fill the gap.**
+  If a source is blocked/unreachable, a claim can't be verified, or key data is
+  missing, STOP and ask the user to provide it manually (paste the text, drop a
+  screenshot into the story's `assets/`). Never proceed on partial info, and
+  never substitute adjacent or lookalike data as if it were the real source.
 - **Always credit the source** in caption.txt.
 - **Show the real thing.** If the source provides a chart/figure/photo that
   carries the point, put it on screen (`FigureScene`) and explain it out loud —
@@ -46,8 +54,8 @@ it, `build` enriches it (durations, image paths) and renders it. Schema:
 ## Repo map
 
 ```
-.claude/skills/         research · script · author · build · editor (the workflow)
-input/<story>/          brief.md (+ assets/) → research.md, script.md written here
+.claude/skills/         research · content · script · author · build · editor (the workflow)
+input/<story>/          brief.md (+ assets/) → research.md, frames.md, script.md written here
 pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
 scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · still.sh (review frame) · install_fonts.sh

@@ -1,11 +1,14 @@
 ---
 name: author
-description: Third stage — turn the script into output/<story>/reel.json, the single contract the renderer reads. Choose the visual identity (theme, vibe, accent/secondary palette, imageStyle), pick scene types that SHOW the story, wire real assets and image prompts, and set handle/music. Use after script.md is written and before running the build.
+description: Fourth stage — turn the frames + script into output/<story>/reel.json, the single contract the renderer reads. Choose the visual identity (theme, vibe, accent/secondary palette, imageStyle), realize each frame as a scene, wire real assets and image prompts, and set handle/music. Use after frames.md and script.md exist, before running the build.
 ---
 
 # Author reel.json — the single contract
 
-Build `output/<story>/reel.json`, 6–12 scenes. Schema:
+Build `output/<story>/reel.json`, 6–12 scenes, by realizing the storyboard.
+**Read `frames.md` (the content per frame + its visual) and `script.md` (the
+voiceover per frame).** Each frame becomes one scene: frames.md tells you the
+scene type + real asset, script.md gives its `voiceSegment`. Schema:
 `remotion/src/types.ts`; example: `remotion/src/example/reel.json`. The build
 step overwrites placeholder durations with real audio, so focus on *content and
 identity*, not timing.
