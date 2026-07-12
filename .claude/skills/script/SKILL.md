@@ -38,6 +38,13 @@ Never open two reels the same way. Prefer problem-first over announcement.
 The first 3 seconds must contain a **concrete noun or number**, not a category
 ("a 30-second render", not "an exciting advance").
 
+**Lead with the ONE thing a viewer would text a friend.** Open on the single
+most surprising, most repeatable finding — and prefer a **named, concrete
+result over an abstract stat**. "The most neutral AI right now is Grok" beats
+"97 of 108 scores landed left of center." The abstract stat is your *proof* in
+beat 2, not your opener. If the result names a recognizable person, product, or
+brand and defies expectations, that's almost always the hook.
+
 ## Line craft (apply in V2)
 
 - One idea per sentence; one sentence per caption group.
@@ -50,6 +57,32 @@ The first 3 seconds must contain a **concrete noun or number**, not a category
   listed.
 - The outro calls back to the hook's exact word or image so the reel closes a
   loop.
+
+## Plain language (write for the scroll, not the seminar)
+
+A viewer is half-watching on a phone. If a line needs a re-read, they're gone.
+- **Short, common words.** Aim ~grade 6–8. Read every line **out loud** — if
+  it's hard to say, rewrite it.
+- **Ban jargon and insider terms.** Translate the source, don't quote it: "self-
+  anchored ideological axes" → "they tested each AI against its own most extreme
+  answers"; "reproducible" → "anyone can check the math." If a technical idea is
+  essential, say it in plain words in ≤1 sentence.
+- **One clause per breath.** No nested sub-points inside a spoken line.
+- **Numbers as a person would say them** ("one in four", not "26%").
+
+## Cover the basics (an explainer must actually explain)
+
+Punchy is not the same as complete. Before V2, confirm the reel answers the four
+questions a first-time viewer has — and that all four are findable in roughly the
+first 15 seconds:
+- **WHO** made or did this (name the team/company/project).
+- **WHAT** it is — the product / benchmark / thing, in one plain sentence.
+- **WHAT they found** — the actual result, with its receipt.
+- **WHY it matters** — the stakes for the viewer.
+
+A hook full of numbers that never says *who* did it or *what* it is leaves the
+viewer lost. Lead with the surprise (above), then immediately ground it: who +
+what, fast.
 
 ## Worked example (V1 → critique → V2)
 
