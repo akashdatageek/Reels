@@ -15,6 +15,31 @@ export interface FigureAnnotation {
   emphasis?: boolean;
 }
 
+/** A rectangle inside a figure image, normalized 0..1 (x,y = top-left). */
+export interface FigureRegion {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/**
+ * One "camera move" on a FigureScene: at `at` (fraction 0..1 of the scene) the
+ * view eases to `region` (zoom-in) and optionally draws a highlight + label on
+ * it — so the reel zooms into the exact part of a chart as the voice hits it.
+ * Omit `region` for a full-frame step (zoom back out).
+ */
+export interface FigureFocus {
+  /** when this step becomes active, as a fraction 0..1 of the scene duration */
+  at: number;
+  /** region to zoom to; omit → full frame */
+  region?: FigureRegion;
+  /** mark drawn on the region while focused */
+  highlight?: 'box' | 'circle' | 'underline' | 'spotlight';
+  /** short label pinned to the region */
+  label?: string;
+}
+
 export interface TerminalLine {
   /** command = typed with $ prompt · output = printed · comment = dim · success = accent bold */
   kind: 'command' | 'output' | 'comment' | 'success';
@@ -54,6 +79,8 @@ export interface Scene {
   figureCredit?: string;
   /** FigureScene: explanation callouts that fade in over the scene. */
   annotations?: FigureAnnotation[];
+  /** FigureScene: timed zoom/highlight moves onto parts of the figure. */
+  figureFocus?: FigureFocus[];
   /** Path relative to the story output folder (or assets/...). */
   image?: string;
   /** If set and no image exists, generate_images.py creates one. */
