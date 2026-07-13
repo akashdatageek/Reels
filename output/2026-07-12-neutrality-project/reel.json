@@ -12,6 +12,7 @@
       "type": "HookCard",
       "duration": 4.32,
       "text": "The most politically *neutral* AI right now? It's *Grok*.",
+      "textStyle": "pop",
       "voiceSegment": "The most politically neutral AI right now? It's Grok.",
       "audioStart": 0.0
     },
@@ -19,6 +20,7 @@
       "type": "HookCard",
       "duration": 9.84,
       "text": "Every AI has a *political lean* \u2014 baked in.",
+      "textStyle": "marker",
       "voiceSegment": "Here's something most people don't realize: every AI chatbot leans a certain way on hot topics \u2014 baked in, whether it tells you or not.",
       "audioStart": 4.32
     },
@@ -115,6 +117,7 @@
       "duration": 10.04,
       "stat": "26%",
       "label": "Phi-4 dodged 1 in 4",
+      "statVariant": "donut",
       "voiceSegment": "The most one-sided? Microsoft's Phi-4 \u2014 which also refused to answer one in four questions. And dodging is its own kind of bias.",
       "audioStart": 49.12
     },
@@ -122,6 +125,7 @@
       "type": "HookCard",
       "duration": 9.4,
       "text": "*3 countries* kept it fair",
+      "textStyle": "typewriter",
       "voiceSegment": "To keep it fair, AIs from three different countries decided what counts as left or right \u2014 so no single country's politics set the rules.",
       "audioStart": 59.16
     },

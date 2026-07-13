@@ -68,6 +68,13 @@ export interface Scene {
   transition?: 'punch' | 'slide' | 'pushUp' | 'whip' | 'wipe' | 'none';
   /** In HookCard, wrap words in *asterisks* to render them in the accent color. */
   text?: string;
+  /** HookCard title animation. Omit to auto-rotate so text never animates the
+   *  same way twice. rise = word-by-word lift · typewriter = typed · pop =
+   *  bouncy scale-in · marker = highlighter swipe behind emphasized words. */
+  textStyle?: 'rise' | 'typewriter' | 'pop' | 'marker';
+  /** Motion background behind text/data scenes. aurora (default) · beams
+   *  (drifting light streaks) · dots (denser field) · plain. */
+  bgStyle?: 'aurora' | 'beams' | 'dots' | 'plain';
   voiceSegment?: string;
   /** Aesthetic background image behind text/data scenes (Hook/Stat/Split);
    *  rendered darkened with a scrim so type stays readable. */
@@ -94,6 +101,9 @@ export interface Scene {
   /** StatCallout */
   stat?: string;
   label?: string;
+  /** StatCallout viz: ring (default halo) · donut (arc fills to the fraction) ·
+   *  bar (horizontal fill). donut/bar need stat to be a % or an a/b fraction. */
+  statVariant?: 'ring' | 'donut' | 'bar';
   /** SplitCompare */
   leftTitle?: string;
   rightTitle?: string;

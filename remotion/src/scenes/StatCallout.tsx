@@ -22,6 +22,18 @@ const parseStat = (stat: string) => {
   return {prefix: m[1], value: parseFloat(raw), suffix: m[3], decimals};
 };
 
+/** Derive a 0..1 fraction from a stat like "26%" or "97/108" (else null). */
+const fractionOf = (stat: string): number | null => {
+  const pct = stat.match(/([0-9.]+)\s*%/);
+  if (pct) return Math.min(1, parseFloat(pct[1]) / 100);
+  const frac = stat.match(/([0-9.]+)\s*\/\s*([0-9.]+)/);
+  if (frac) {
+    const d = parseFloat(frac[2]);
+    if (d) return Math.min(1, parseFloat(frac[1]) / d);
+  }
+  return null;
+};
+
 /** Animated number/metric — counts up, label fades in. */
 export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
   scene,
@@ -42,26 +54,52 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
   const {bass} = usePulse();
   const ringScale = interpolate(progress, [0, 1], [0.8, 1]) * (1 + bass * 0.04);
 
+  // data viz: donut/bar need a fraction (a "26%" or "97/108")
+  const fraction = fractionOf(scene.stat ?? '');
+  const variant = scene.statVariant && fraction !== null ? scene.statVariant : 'ring';
+  const fillP = (fraction ?? 0) * progress; // arc/bar fills in sync with count-up
+  const R = 46;
+  const C = 2 * Math.PI * R;
+
   return (
     <AbsoluteFill>
       {scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
-      <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.backdrop)} />
+      <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.backdrop)} variant={scene.bgStyle} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-      <div
-        style={{
-          width: 780,
-          height: 780,
-          borderRadius: '50%',
-          border: `3px solid ${accent}33`,
-          position: 'absolute',
-          transform: `scale(${ringScale})`,
-        }}
-      />
+      {variant === 'ring' ? (
+        <div
+          style={{
+            width: 780,
+            height: 780,
+            borderRadius: '50%',
+            border: `3px solid ${accent}33`,
+            position: 'absolute',
+            transform: `scale(${ringScale})`,
+          }}
+        />
+      ) : null}
+      {variant === 'donut' ? (
+        <svg width={720} height={720} viewBox="0 0 100 100" style={{position: 'absolute', transform: `rotate(-90deg) scale(${1 + bass * 0.02})`}}>
+          <circle cx="50" cy="50" r={R} fill="none" stroke={`${accent}22`} strokeWidth={7} />
+          <circle
+            cx="50"
+            cy="50"
+            r={R}
+            fill="none"
+            stroke={accent}
+            strokeWidth={7}
+            strokeLinecap="round"
+            strokeDasharray={C}
+            strokeDashoffset={C * (1 - fillP)}
+            style={{filter: `drop-shadow(0 0 6px ${accent})`}}
+          />
+        </svg>
+      ) : null}
       <div style={{textAlign: 'center'}}>
         <div
           style={{
@@ -93,6 +131,11 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
         >
           {scene.label}
         </div>
+        {variant === 'bar' ? (
+          <div style={{margin: '44px auto 0', width: 760, height: 34, borderRadius: 17, backgroundColor: `${accent}22`, overflow: 'hidden'}}>
+            <div style={{width: `${fillP * 100}%`, height: '100%', borderRadius: 17, background: `linear-gradient(90deg, ${accent}, ${second})`, boxShadow: `0 0 40px ${accent}66`}} />
+          </div>
+        ) : null}
       </div>
       </AbsoluteFill>
     </AbsoluteFill>

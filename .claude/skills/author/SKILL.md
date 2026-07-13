@@ -83,6 +83,19 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   sync-safe (plays in the first ~0.4s, then settles), so it never shifts audio.
   A subtle **beat punch** (whole-frame zoom on the kick) is automatic when
   `music` is set.
+- **Kinetic type (`textStyle` on HookCard).** `rise` (default word lift),
+  `typewriter` (typed on), `pop` (bouncy scale-in), `marker` (a highlighter
+  swipe behind the *asterisk-emphasized* words). Vary it so titles don't all
+  animate the same; moody vibe always stays on `rise`.
+- **Animated data (`statVariant` on StatCallout).** `ring` (default halo),
+  `donut` (an arc fills to the fraction), `bar` (a horizontal fill). donut/bar
+  need the `stat` to be a percentage (`"26%"`) or a fraction (`"97/108"`) — the
+  fill animates in sync with the count-up.
+- **Text-scene backgrounds (`bgStyle` on Hook/Stat, dark theme only).** `aurora`
+  (default), `beams` (drifting light streaks), `dots`, `plain`. Light theme
+  keeps its clean editorial wash regardless. (True video b-roll needs stock
+  footage the pipeline can't source in-sandbox — this is the motion-variety
+  substitute.)
 - **Explain graphs out loud.** When a figure is shown, the `voiceSegment` names
   the axes/colors and reads the takeaway ("blue = kept, red = removed, lower is
   better; GRAM's red bar is 0.60 vs 0.85").
