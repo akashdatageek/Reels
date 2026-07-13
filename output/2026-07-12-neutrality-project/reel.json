@@ -87,7 +87,7 @@
           "at": 0.0
         },
         {
-          "at": 0.5,
+          "at": 0.4,
           "region": {
             "x": 0.25,
             "y": 0.34,
@@ -95,6 +95,17 @@
             "h": 0.3
           },
           "highlight": "spotlight"
+        },
+        {
+          "at": 0.66,
+          "region": {
+            "x": 0.27,
+            "y": 0.35,
+            "w": 0.16,
+            "h": 0.26
+          },
+          "highlight": "circleDraw",
+          "label": "MOST BALANCED"
         }
       ],
       "audioStart": 38.16

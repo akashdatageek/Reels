@@ -65,6 +65,10 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
   // active highlight = last focus step whose `at` has passed
   const activeIdx = focus.reduce((acc, f, i) => (t >= f.at ? i : acc), -1);
   const active = activeIdx >= 0 ? focus[activeIdx] : undefined;
+  // draw-on progress (0..1) since this highlight became active
+  const drawP = active
+    ? spring({frame: frame - active.at * durationInFrames, fps, config: {damping: 200}})
+    : 0;
 
   return (
     <AbsoluteFill style={{backgroundColor: p.bg}}>
@@ -118,7 +122,7 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
             >
               <Img src={staticFile(scene.figure)} style={{width: '100%', height: 'auto', display: 'block'}} />
               {active && active.region ? (
-                <Highlight region={active.region} kind={active.highlight ?? 'box'} label={active.label} accent={accent} scale={s} />
+                <Highlight region={active.region} kind={active.highlight ?? 'box'} label={active.label} accent={accent} scale={s} progress={drawP} />
               ) : null}
             </div>
           </div>
@@ -166,12 +170,15 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
  *  current zoom so they stay crisp and constant on screen. */
 const Highlight: React.FC<{
   region: {x: number; y: number; w: number; h: number};
-  kind: 'box' | 'circle' | 'underline' | 'spotlight';
+  kind: 'box' | 'circle' | 'underline' | 'spotlight' | 'marker' | 'circleDraw';
   label?: string;
   accent: string;
   scale: number;
-}> = ({region, kind, label, accent, scale}) => {
+  /** 0..1 draw-on progress since the mark became active */
+  progress: number;
+}> = ({region, kind, label, accent, scale, progress}) => {
   const bw = 5 / scale; // on-screen ~5px border regardless of zoom
+  const P = Math.min(1, Math.max(0, progress));
   const box: React.CSSProperties = {
     position: 'absolute',
     left: `${region.x * 100}%`,
@@ -184,13 +191,48 @@ const Highlight: React.FC<{
   return (
     <>
       {kind === 'spotlight' ? (
-        <div style={{...box, boxShadow: `0 0 0 9999px rgba(8,10,24,0.55)`, borderRadius: 8 / scale}} />
+        <div style={{...box, boxShadow: `0 0 0 9999px rgba(8,10,24,${0.55 * P})`, borderRadius: 8 / scale}} />
       ) : null}
+      {/* box / spotlight border wipes on left→right */}
       {kind === 'box' || kind === 'spotlight' ? (
-        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: 8 / scale, boxShadow: `0 0 ${16 / scale}px ${accent}`}} />
+        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: 8 / scale, boxShadow: `0 0 ${16 / scale}px ${accent}`, clipPath: `inset(0 ${(1 - P) * 100}% 0 0)`}} />
       ) : null}
+      {/* plain circle: springs in */}
       {kind === 'circle' ? (
-        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: '50%', boxShadow: `0 0 ${16 / scale}px ${accent}`}} />
+        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: '50%', boxShadow: `0 0 ${16 / scale}px ${accent}`, transform: `scale(${0.7 + P * 0.3})`, opacity: P}} />
+      ) : null}
+      {/* hand-drawn scribble ring: SVG stroke draws on */}
+      {kind === 'circleDraw' ? (
+        <svg style={{...box, overflow: 'visible'}} viewBox="0 0 100 100" preserveAspectRatio="none">
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="48"
+            ry="46"
+            fill="none"
+            stroke={accent}
+            strokeWidth={bw}
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+            pathLength={100}
+            strokeDasharray="100"
+            strokeDashoffset={100 - P * 100}
+            style={{filter: `drop-shadow(0 0 ${10 / scale}px ${accent})`}}
+          />
+        </svg>
+      ) : null}
+      {/* highlighter marker: translucent accent bar sweeps across (works on any
+          figure background — no blend mode) */}
+      {kind === 'marker' ? (
+        <div
+          style={{
+            ...box,
+            width: `${region.w * 100 * P}%`,
+            backgroundColor: accent,
+            opacity: 0.38,
+            borderRadius: 4 / scale,
+          }}
+        />
       ) : null}
       {kind === 'underline' ? (
         <div
@@ -198,7 +240,7 @@ const Highlight: React.FC<{
             position: 'absolute',
             left: `${region.x * 100}%`,
             top: `${(region.y + region.h) * 100}%`,
-            width: `${region.w * 100}%`,
+            width: `${region.w * 100 * P}%`,
             height: bw,
             backgroundColor: accent,
             boxShadow: `0 0 ${14 / scale}px ${accent}`,
@@ -221,6 +263,7 @@ const Highlight: React.FC<{
             padding: `${6 / scale}px ${12 / scale}px`,
             borderRadius: 8 / scale,
             whiteSpace: 'nowrap',
+            opacity: Math.min(1, P * 1.6),
           }}
         >
           {label}

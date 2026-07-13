@@ -10,7 +10,8 @@ import {CinemaGrade} from './components/CinemaGrade';
 import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
 import {MusicPulseProvider, usePulse} from './components/MusicPulse';
-import {VibeContext} from './components/VibeContext';
+import {SceneTransition, transitionFor} from './components/SceneTransition';
+import {VibeContext, useVibe} from './components/VibeContext';
 import {ThemeContext, usePalette} from './components/ThemeContext';
 import {getPalette} from './palette';
 import {ChartScene} from './scenes/ChartScene';
@@ -72,6 +73,19 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
   );
 };
 
+/** Subtle whole-frame zoom that breathes with the kick — the modern "punch"
+ *  feel. Kept ≤2% so it energizes without nausea; calmer in the moody vibe. */
+const BeatPunch: React.FC<{children: React.ReactNode}> = ({children}) => {
+  const {bass} = usePulse();
+  const moody = useVibe() === 'moody';
+  const amt = moody ? 0.008 : 0.018;
+  return (
+    <AbsoluteFill style={{transform: `scale(${1 + bass * amt})`, transformOrigin: 'center center'}}>
+      {children}
+    </AbsoluteFill>
+  );
+};
+
 /** Reads the reel spec (passed as input props) and sequences the scenes. */
 export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   const {fps} = useVideoConfig();
@@ -92,15 +106,19 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
     <VibeContext.Provider value={reel.vibe ?? 'bold'}>
     <MusicPulseProvider hasMusic={Boolean(reel.music)}>
       <AbsoluteFill style={{backgroundColor: palette.bg}}>
+        <BeatPunch>
         {sequenced.map(({scene, from, frames, key}) => {
           const Comp = SCENE_COMPONENTS[scene.type];
           if (!Comp) return null;
           return (
             <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
-              <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
+              <SceneTransition kind={transitionFor(scene, key)}>
+                <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
+              </SceneTransition>
             </Sequence>
           );
         })}
+        </BeatPunch>
         {/* accent wipe at every cut (skip the reel's very first frame) */}
         {sequenced.slice(1).map(({from, key}) => (
           <Sequence key={`cut-${key}`} from={from - 3} durationInFrames={CUT_FLASH_FRAMES} name={`cut-${key}`}>

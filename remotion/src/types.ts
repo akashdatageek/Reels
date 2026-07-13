@@ -34,8 +34,10 @@ export interface FigureFocus {
   at: number;
   /** region to zoom to; omit → full frame */
   region?: FigureRegion;
-  /** mark drawn on the region while focused */
-  highlight?: 'box' | 'circle' | 'underline' | 'spotlight';
+  /** mark drawn on the region while focused. box/circle/underline draw on;
+   *  spotlight dims the rest; marker sweeps a highlighter; circleDraw is a
+   *  hand-drawn scribble ring. */
+  highlight?: 'box' | 'circle' | 'underline' | 'spotlight' | 'marker' | 'circleDraw';
   /** short label pinned to the region */
   label?: string;
 }
@@ -61,6 +63,9 @@ export interface Scene {
   duration: number;
   /** Seconds into voice.mp3 where this scene's audio starts (set by tts.py). */
   audioStart?: number;
+  /** How this scene ENTERS at its cut (sync-safe — no timing overlap). Omit to
+   *  auto-rotate per scene index so cuts never repeat. */
+  transition?: 'punch' | 'slide' | 'pushUp' | 'whip' | 'wipe' | 'none';
   /** In HookCard, wrap words in *asterisks* to render them in the accent color. */
   text?: string;
   voiceSegment?: string;

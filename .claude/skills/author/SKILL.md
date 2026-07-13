@@ -73,7 +73,16 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   "Grok" row when the voiceSegment says Grok), then a `{at, region: full}` step
   to pull back out. Border/label sizes stay crisp at any zoom. Estimate regions
   by eye from the cropped figure; verify with `scripts/still.sh` at a frame mid-
-  zoom before rendering the whole reel.
+  zoom before rendering the whole reel. Highlight styles: `spotlight` (dims the
+  rest), `box`/`underline` (wipe on), `circle` (springs in), `circleDraw` (a
+  hand-drawn scribble ring — great for "circle the winner"), `marker` (a
+  highlighter bar sweeps across).
+- **Scene transitions (`transition`).** Each scene enters with a move — `punch`
+  (scale-in), `slide`, `pushUp`, `whip` (motion-blur pan), `wipe`, or `none`.
+  Omit to auto-rotate per scene index so consecutive cuts never repeat. It's
+  sync-safe (plays in the first ~0.4s, then settles), so it never shifts audio.
+  A subtle **beat punch** (whole-frame zoom on the kick) is automatic when
+  `music` is set.
 - **Explain graphs out loud.** When a figure is shown, the `voiceSegment` names
   the axes/colors and reads the takeaway ("blue = kept, red = removed, lower is
   better; GRAM's red bar is 0.60 vs 0.85").
