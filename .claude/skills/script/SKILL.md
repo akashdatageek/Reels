@@ -12,8 +12,11 @@ frames, not to invent new content. One `voiceSegment` per frame, in frame order.
 If a frame has no real content behind it, go back to `content`/`research` — don't
 paper over it with words.
 
-Target **45–75s** (~60s when the story has depth; go shorter rather than
-padding a thin story). The frames already give you the structure:
+**Length follows the value, not a target.** Make it as long as it needs to be to
+genuinely inform the viewer — and no longer. Roughly 45–90s: go long enough that
+the idea truly lands (define the concept, read the charts, land the stakes),
+short enough that every line earns its place. **Never amputate substance to hit a
+number; never pad a thin story to fill time.** The frames give you the structure:
 **HOOK → CONTEXT → 3–5 KEY POINTS (each with a receipt) → SO-WHAT → OUTRO.**
 
 Write `input/<story>/script.md` in three explicit parts:
