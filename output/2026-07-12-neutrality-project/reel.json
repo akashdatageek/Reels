@@ -10,24 +10,49 @@
   "scenes": [
     {
       "type": "HookCard",
-      "duration": 4.0,
+      "duration": 4.32,
       "text": "The most politically *neutral* AI right now? It's *Grok*.",
       "voiceSegment": "The most politically neutral AI right now? It's Grok.",
       "audioStart": 0.0
     },
     {
+      "type": "HookCard",
+      "duration": 9.84,
+      "text": "Every AI has a *political lean* \u2014 baked in.",
+      "voiceSegment": "Here's something most people don't realize: every AI chatbot leans a certain way on hot topics \u2014 baked in, whether it tells you or not.",
+      "audioStart": 4.32
+    },
+    {
+      "type": "StatCallout",
+      "duration": 10.96,
+      "stat": "4,000",
+      "label": "questions \u2014 a political survey",
+      "voiceSegment": "An independent group, The Neutrality Project, decided to measure it. They gave 18 AIs the same kind of political survey a person would take \u2014 almost 4,000 questions.",
+      "audioStart": 14.16
+    },
+    {
       "type": "FigureScene",
-      "duration": 14.12,
-      "text": "18 AIs, measured",
+      "duration": 13.04,
+      "text": "Almost all leaned left",
       "figure": "assets/aggregate_scale.png",
       "figureCredit": "The Neutrality Project",
-      "voiceSegment": "That's the finding from The Neutrality Project \u2014 an independent group that takes no money from the labs it grades. They put 18 AI models through almost 4,000 real opinion questions, and mapped where each one leans.",
+      "voiceSegment": "Almost every one leaned left \u2014 its answers favored progressive views. Across 18 AIs and six topics, that's 108 scores. 97 of them tilted left.",
+      "annotations": [
+        {
+          "text": "Each dot is one AI",
+          "emphasis": false
+        },
+        {
+          "text": "Left = progressive \u00b7 right = conservative",
+          "emphasis": true
+        }
+      ],
       "figureFocus": [
         {
           "at": 0.0
         },
         {
-          "at": 0.5,
+          "at": 0.45,
           "region": {
             "x": 0.13,
             "y": 0.15,
@@ -35,32 +60,34 @@
             "h": 0.3
           },
           "highlight": "spotlight",
-          "label": "ALL LEFT OF CENTER"
+          "label": "97 OF 108 LEFT"
         }
       ],
-      "audioStart": 4.0
-    },
-    {
-      "type": "StatCallout",
-      "duration": 6.68,
-      "stat": "97/108",
-      "label": "scores leaned left",
-      "voiceSegment": "Out of 108 scores, 97 leaned left. Every model leaned at least a little.",
-      "audioStart": 18.12
+      "audioStart": 25.12
     },
     {
       "type": "FigureScene",
-      "duration": 6.44,
+      "duration": 10.96,
       "text": "Who's actually neutral?",
       "figure": "assets/neutrality_map.png",
       "figureCredit": "The Neutrality Project",
-      "voiceSegment": "On the scoreboard, Grok lands closest to dead center \u2014 the only one that's basically neutral.",
+      "voiceSegment": "But here's the twist. On the map, closer to the middle means more neutral \u2014 and Elon Musk's Grok landed right on the line. The most balanced of all.",
+      "annotations": [
+        {
+          "text": "Closer to the middle = more neutral",
+          "emphasis": false
+        },
+        {
+          "text": "Grok lands right on the line",
+          "emphasis": true
+        }
+      ],
       "figureFocus": [
         {
           "at": 0.0
         },
         {
-          "at": 0.42,
+          "at": 0.5,
           "region": {
             "x": 0.25,
             "y": 0.34,
@@ -70,39 +97,39 @@
           "highlight": "spotlight"
         }
       ],
-      "audioStart": 24.8
+      "audioStart": 38.16
     },
     {
       "type": "StatCallout",
-      "duration": 6.68,
+      "duration": 10.04,
       "stat": "26%",
-      "label": "Phi-4 refused \u2014 most one-sided",
-      "voiceSegment": "The most one-sided? Microsoft's Phi-4 \u2014 which also dodged one in four questions.",
-      "audioStart": 31.24
+      "label": "Phi-4 dodged 1 in 4",
+      "voiceSegment": "The most one-sided? Microsoft's Phi-4 \u2014 which also refused to answer one in four questions. And dodging is its own kind of bias.",
+      "audioStart": 49.12
     },
     {
       "type": "HookCard",
-      "duration": 7.4,
-      "text": "*3 countries* set the scale",
-      "voiceSegment": "To keep it honest, models from three different countries set the scale \u2014 not the project's own idea of the center.",
-      "audioStart": 37.92
+      "duration": 9.4,
+      "text": "*3 countries* kept it fair",
+      "voiceSegment": "To keep it fair, AIs from three different countries decided what counts as left or right \u2014 so no single country's politics set the rules.",
+      "audioStart": 59.16
     },
     {
       "type": "HookCard",
-      "duration": 6.28,
-      "text": "Its lean becomes *your* starting point",
-      "voiceSegment": "It matters, because when an AI writes your summary, its lean quietly becomes yours.",
-      "audioStart": 45.32
+      "duration": 9.64,
+      "text": "Its lean becomes *your* news, emails, homework",
+      "voiceSegment": "Why care? This is the AI writing your emails, your kid's homework, your news summary. If it leans, your information leans too \u2014 quietly.",
+      "audioStart": 68.56
     },
     {
       "type": "OutroCard",
-      "duration": 5.28,
-      "text": "Most neutral: Grok. Check the rest.",
+      "duration": 10.08,
+      "text": "It has a side. Most neutral: Grok \u2014 check the rest.",
       "handle": "@startups.ai",
-      "voiceSegment": "The most neutral AI is Grok. Now you can check the rest yourself.",
-      "audioStart": 51.6
+      "voiceSegment": "So next time an AI explains the news to you, remember: it has a side. The most balanced one is Grok \u2014 now you can check the rest yourself.",
+      "audioStart": 78.2
     }
   ],
   "voiceFile": "voice.mp3",
-  "totalDuration": 56.88
+  "totalDuration": 88.28
 }
