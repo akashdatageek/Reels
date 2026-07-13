@@ -33,8 +33,30 @@ frames; the `author` stage turns them into scenes. Content first, words second.
    frames together must answer **WHO · WHAT · RESULT · WHY**, all reachable in
    roughly the first 15s. Every on-screen number traces to research.md.
 5. **Cut ruthlessly.** A frame with no real content — only vibes — gets merged or
-   dropped. Prefer a real figure over a generated image every time. Aim 6–10
-   frames for a 45–75s reel.
+   dropped. Prefer a real figure over a generated image every time. Aim 6–11
+   frames for a 45–80s reel.
+
+## Explain it for someone who's never heard of this
+
+The viewer is smart but **non-technical, with zero background** in the topic.
+Findings alone don't land — the reel has to teach the idea. The frames together
+must, in plain words:
+- **Define the core concept** before stating a result about it. A reel on "AI
+  political neutrality" needs a frame that says *what that even means* — "AI
+  chatbots answer touchy questions with a slant, baked in from training" — not
+  just "97 of 108 leaned left."
+- **Decode every number.** "108 scores" is meaningless alone; "18 AIs across 6
+  topics — money, climate, religion and more" is not. Gloss any jargon term the
+  moment it appears ("refused = dodged the question, its own kind of bias").
+- **Explain what each chart shows.** A figure frame must plan a **plain-language
+  annotation** — "each dot is one AI", "closer to the middle = more neutral" —
+  never just drop the raw chart and move on.
+- **Say why it matters to a normal person's life** — connect it to the AI that
+  writes their emails, their kid's homework, their news summary.
+
+Test: if a smart friend outside the field would say "wait — what does that
+mean?", you're missing a frame. Add it. Better a slightly longer reel that
+everyone understands than a tight one only insiders get.
 
 ## Output: `input/<story>/frames.md`
 

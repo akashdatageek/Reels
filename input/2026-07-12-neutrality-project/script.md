@@ -1,59 +1,51 @@
-# Script — The Neutrality Project (written to frames.md)
+# Script — The Neutrality Project (v3: layperson explainer, written to frames.md)
 
-**Written to the 9 frames in `frames.md` — one `voiceSegment` per frame, in
-order.** ~60s. Register: brisk but credible (bold), **non-partisan** (a reel
-about neutrality must itself stay neutral). Every line traces to `research.md` →
-results.html / homepage. Visuals are already fixed in `frames.md`.
+**Written to the 9 frames** — one voiceSegment per frame. ~75–80s. Register:
+brisk but credible, **non-partisan**. Now teaches the idea for a non-technical
+viewer: defines the concept, decodes the numbers, reads the charts, lands the
+stakes. Every line traces to `research.md`.
 
-**Hook archetype:** lead with the ONE surprising, *named* result — "the most
-neutral AI is Grok" — then prove it.
-**Basics covered:** WHO (fr2) · WHAT (fr3) · RESULT (fr1/4/5) · WHY (fr8), all in
-the first ~15s.
+## Critique (what this rewrite fixes vs the last cut)
 
----
-
-## V1 (draft) — see critique
-
-An earlier draft opened on the abstract "97 of 108" stat, used seminar words
-("self-anchored", "ideological axes"), and never plainly said *who* did it or
-*what* the test is. It also predated the frames, so its beats didn't map 1:1.
-
-## Critique (what this rewrite fixes)
-
-- **Aligns to the frames.** One voiceSegment per frame (9), same order — no
-  invented content, no orphaned frame.
-- **Leads with Grok** (frame 1), the named surprise; the 97/108 stat drops to the
-  proof beat (frame 4).
-- **Plain language.** No jargon — "tested where each AI leans", "models from
-  three countries set the scale", "one in four" not "26%". Say-out-loud checked.
-- **Covers who/what fast** (frames 2–3) so the viewer isn't lost.
-- **Honesty + tone kept:** it's *this test's* finding; models judged against
-  their own range; no cheering or jeering a side.
+- **Was insider-only.** Stated "97 of 108 leaned left" with no idea of *what an
+  AI's political lean is*, what 108 means, or why anyone should care. Fix: a
+  concept frame (fr2), a plain "it's a survey" frame (fr3), numbers decoded out
+  loud, charts read aloud, stakes in the viewer's life (fr8).
+- **Scene 2 dragged (~14s).** Fix: split who/how (fr3) from the result figure
+  (fr4), so no single figure holds 14s.
+- **Kept:** lead with Grok, non-partisan tone, the "3 countries kept it fair"
+  safeguard, and the relative-not-absolute honesty.
 
 ## V2 (final) — the voiceover, frame by frame
 
 | Frame | Role | `voiceSegment` |
 |-------|------|----------------|
 | 1 | hook | "The most politically neutral AI right now? It's Grok." |
-| 2 | who | "That's the finding from The Neutrality Project — an independent, open group that takes no money from the AI labs it grades." |
-| 3 | what | "They put 18 models through almost 4,000 real opinion-poll questions, then mapped where each one leans — left or right." |
-| 4 | result | "Out of 108 scores, 97 leaned left. Every model leaned at least a little." |
-| 5 | proof | "On the scoreboard, Grok lands closest to dead center — the only one that's basically neutral." |
-| 6 | contrast | "The most one-sided? Microsoft's Phi-4 — which also dodged one in four questions." |
-| 7 | why-fair | "To keep it honest, models from three different countries set the scale — not the project's own idea of the center." |
-| 8 | stakes | "It matters, because when an AI writes your summary, its lean quietly becomes yours." |
-| 9 | outro | "The most neutral AI is Grok. Now you can check the rest yourself." |
+| 2 | concept | "Here's something most people don't realize: every AI chatbot leans a certain way on hot topics — baked in, whether it tells you or not." |
+| 3 | who + how | "An independent group, The Neutrality Project, decided to measure it. They gave 18 AIs the same kind of political survey a person would take — almost 4,000 questions." |
+| 4 | result | "Almost every one leaned left — its answers favored progressive views. Across 18 AIs and six topics, that's 108 scores. 97 of them tilted left." |
+| 5 | proof | "But here's the twist. On the map, closer to the middle means more neutral — and Elon Musk's Grok landed right on the line. The most balanced of all." |
+| 6 | contrast | "The most one-sided? Microsoft's Phi-4 — which also refused to answer one in four questions. And dodging is its own kind of bias." |
+| 7 | why-fair | "To keep it fair, AIs from three different countries decided what counts as left or right — so no single country's politics set the rules." |
+| 8 | why-you-care | "Why care? This is the AI writing your emails, your kid's homework, your news summary. If it leans, your information leans too — quietly." |
+| 9 | outro | "So next time an AI explains the news to you, remember: it has a side. The most balanced one is Grok — now you can check the rest yourself." |
 
-**Word count ≈ 120 → ~50s voice → ~60s reel with scene pauses. On target.**
-**Say-it-out-loud check:** every line is one clause, common words, no term a
-viewer must look up.
+**Word count ≈ 175 → ~65s voice → ~78s reel with scene pauses.** Slightly longer
+than the punchy cut on purpose — the point is that everyone understands it.
+
+**Say-it-out-loud check:** each line is plain and self-contained; no term a
+non-expert must look up (concept defined fr2, "108" decoded fr4, "refused"
+glossed fr6, charts read fr4/fr5).
 
 ---
 
 ## Notes for the `author` stage
-- Take these 9 `voiceSegment`s straight into `reel.json`, one per scene, in the
-  scene types `frames.md` assigns (Hook / Figure / Stat / Outro).
-- Keep the source credit for `caption.txt`: The Neutrality Project —
-  neutralityproject.org (Release 01).
-- Caveat to keep visible: positions are relative to each model's own range, not
-  an absolute political center.
+- 9 scenes: HookCard(1) · HookCard(2 concept) · HookCard(3 survey) ·
+  FigureScene(4 aggregate, + annotations) · FigureScene(5 map, + annotations) ·
+  StatCallout(6, 26%) · HookCard(7) · HookCard(8) · OutroCard(9).
+- **Add plain `annotations` to the two FigureScenes** (from frames.md): fr4 —
+  "Each dot = one AI", "Left = progressive, Right = conservative"; fr5 — "Closer
+  to the middle = more neutral", "Grok sits on the line". Keep the figureFocus
+  zooms.
+- Source credit for caption.txt: The Neutrality Project — neutralityproject.org
+  (Release 01). Keep the relative-not-absolute caveat in the caption.
