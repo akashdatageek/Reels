@@ -10,6 +10,7 @@ import {CinemaGrade} from './components/CinemaGrade';
 import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
 import {MusicPulseProvider, usePulse} from './components/MusicPulse';
+import {LowerThird, Stickers} from './components/Overlays';
 import {SceneTransition, transitionFor} from './components/SceneTransition';
 import {VibeContext, useVibe} from './components/VibeContext';
 import {ThemeContext, usePalette} from './components/ThemeContext';
@@ -79,8 +80,10 @@ const BeatPunch: React.FC<{children: React.ReactNode}> = ({children}) => {
   const {bass} = usePulse();
   const moody = useVibe() === 'moody';
   const amt = moody ? 0.008 : 0.018;
+  // subtle camera bounce: a few px vertical nudge on the kick (bold only)
+  const bounce = moody ? 0 : bass * 5;
   return (
-    <AbsoluteFill style={{transform: `scale(${1 + bass * amt})`, transformOrigin: 'center center'}}>
+    <AbsoluteFill style={{transform: `translateY(${-bounce}px) scale(${1 + bass * amt})`, transformOrigin: 'center center'}}>
       {children}
     </AbsoluteFill>
   );
@@ -115,6 +118,9 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
               <SceneTransition kind={transitionFor(scene, key)}>
                 <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
               </SceneTransition>
+              {/* personality overlays sit above the scene, outside its transition */}
+              {scene.lowerThird ? <LowerThird data={scene.lowerThird} accent={accent} /> : null}
+              {scene.stickers ? <Stickers stickers={scene.stickers} /> : null}
             </Sequence>
           );
         })}

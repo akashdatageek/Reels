@@ -96,6 +96,13 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   keeps its clean editorial wash regardless. (True video b-roll needs stock
   footage the pipeline can't source in-sandbox — this is the motion-variety
   substitute.)
+- **Personality flourishes (use sparingly, match the tone).** `stickers` — an
+  array of `{text, x, y, at, rotate, size}` emoji/short-label pops (`"🤯"`,
+  `"!!"`) at normalized positions; great for punchy stories, **skip them on
+  serious/credibility pieces**. `lowerThird` — a `{title, subtitle}` news strip
+  that slides in (e.g. a source credit). The OutroCard's follow button now taps
+  and rings a bell automatically. A subtle beat camera-bounce is automatic in
+  bold vibe.
 - **Explain graphs out loud.** When a figure is shown, the `voiceSegment` names
   the axes/colors and reads the takeaway ("blue = kept, red = removed, lower is
   better; GRAM's red bar is 0.60 vs 0.85").

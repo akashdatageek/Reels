@@ -30,6 +30,10 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
   const cardIn = spring({frame, fps, config: {damping: 14}});
   // gentle infinite pulse on the follow button
   const pulse = 1 + 0.05 * Math.sin((frame / fps) * Math.PI * 2.2);
+  // periodic "tap" press every ~2.3s + a bell that rings during the tap
+  const tp = (frame % 70) / 70;
+  const tap = tp < 0.14 ? 1 - 0.1 * Math.sin((tp / 0.14) * Math.PI) : 1;
+  const bellWob = Math.sin((frame / fps) * 11) * (tp < 0.22 ? 16 : 3);
 
   return (
     <AbsoluteFill>
@@ -88,7 +92,7 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
           style={{
             marginTop: 70,
             display: 'inline-block',
-            transform: `scale(${pulse})`,
+            transform: `scale(${pulse * tap})`,
             backgroundColor: accent,
             color: BG,
             fontFamily: FONT_BODY,
@@ -99,7 +103,8 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
             boxShadow: `0 0 60px ${accent}66`,
           }}
         >
-          FOLLOW
+          FOLLOW{' '}
+          <span style={{display: 'inline-block', transform: `rotate(${bellWob}deg)`, transformOrigin: 'top center'}}>🔔</span>
         </div>
       </div>
       </AbsoluteFill>

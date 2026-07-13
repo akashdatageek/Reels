@@ -8,6 +8,27 @@ export type SceneType =
   | 'FigureScene'
   | 'OutroCard';
 
+/** A sticker/emoji that pops onto a scene for personality. */
+export interface Sticker {
+  /** emoji or a very short label ("!!", "⚡", "🤯") */
+  text: string;
+  /** normalized center position, 0..1 */
+  x: number;
+  y: number;
+  /** fraction of the scene (0..1) when it pops in (default ~0.1) */
+  at?: number;
+  /** tilt in degrees */
+  rotate?: number;
+  /** font size in px (default 96) */
+  size?: number;
+}
+
+/** News-style lower-third strip (e.g. a source credit). */
+export interface LowerThird {
+  title: string;
+  subtitle?: string;
+}
+
 export interface FigureAnnotation {
   /** short callout line that fades in on a timeline to explain the figure */
   text: string;
@@ -75,6 +96,10 @@ export interface Scene {
   /** Motion background behind text/data scenes. aurora (default) · beams
    *  (drifting light streaks) · dots (denser field) · plain. */
   bgStyle?: 'aurora' | 'beams' | 'dots' | 'plain';
+  /** Emoji/text stickers that pop onto this scene for personality. */
+  stickers?: Sticker[];
+  /** News-style lower-third strip on this scene (e.g. a source credit). */
+  lowerThird?: LowerThird;
   voiceSegment?: string;
   /** Aesthetic background image behind text/data scenes (Hook/Stat/Split);
    *  rendered darkened with a scrim so type stays readable. */
