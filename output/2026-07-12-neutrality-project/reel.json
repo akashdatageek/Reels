@@ -1,0 +1,75 @@
+{
+  "title": "The Neutrality Project — who's the most neutral AI?",
+  "theme": "light",
+  "vibe": "bold",
+  "accentColor": "#12B98A",
+  "secondaryColor": "#0EA5A5",
+  "handle": "@startups.ai",
+  "voiceStyle": "Narrate clearly and evenly, like a credible explainer — engaged but calm and non-partisan: ",
+  "music": "music/neutrality_bed.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 3,
+      "text": "The most politically *neutral* AI right now? It's *Grok*.",
+      "voiceSegment": "The most politically neutral AI right now? It's Grok."
+    },
+    {
+      "type": "FigureScene",
+      "duration": 8,
+      "text": "18 AIs, measured",
+      "figure": "assets/aggregate_scale.png",
+      "figureCredit": "The Neutrality Project",
+      "voiceSegment": "That's the finding from The Neutrality Project — an independent group that takes no money from the labs it grades. They put 18 AI models through almost 4,000 real opinion questions, and mapped where each one leans.",
+      "figureFocus": [
+        { "at": 0.0 },
+        { "at": 0.5, "region": { "x": 0.13, "y": 0.15, "w": 0.44, "h": 0.30 }, "highlight": "spotlight", "label": "ALL LEFT OF CENTER" }
+      ]
+    },
+    {
+      "type": "StatCallout",
+      "duration": 3,
+      "stat": "97/108",
+      "label": "scores leaned left",
+      "voiceSegment": "Out of 108 scores, 97 leaned left. Every model leaned at least a little."
+    },
+    {
+      "type": "FigureScene",
+      "duration": 7,
+      "text": "Who's actually neutral?",
+      "figure": "assets/neutrality_map.png",
+      "figureCredit": "The Neutrality Project",
+      "voiceSegment": "On the scoreboard, Grok lands closest to dead center — the only one that's basically neutral.",
+      "figureFocus": [
+        { "at": 0.0 },
+        { "at": 0.42, "region": { "x": 0.25, "y": 0.34, "w": 0.19, "h": 0.30 }, "highlight": "spotlight" }
+      ]
+    },
+    {
+      "type": "StatCallout",
+      "duration": 3,
+      "stat": "26%",
+      "label": "Phi-4 refused — most one-sided",
+      "voiceSegment": "The most one-sided? Microsoft's Phi-4 — which also dodged one in four questions."
+    },
+    {
+      "type": "HookCard",
+      "duration": 4,
+      "text": "*3 countries* set the scale",
+      "voiceSegment": "To keep it honest, models from three different countries set the scale — not the project's own idea of the center."
+    },
+    {
+      "type": "HookCard",
+      "duration": 4,
+      "text": "Its lean becomes *your* starting point",
+      "voiceSegment": "It matters, because when an AI writes your summary, its lean quietly becomes yours."
+    },
+    {
+      "type": "OutroCard",
+      "duration": 3,
+      "text": "Most neutral: Grok. Check the rest.",
+      "handle": "@startups.ai",
+      "voiceSegment": "The most neutral AI is Grok. Now you can check the rest yourself."
+    }
+  ]
+}
