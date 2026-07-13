@@ -1,0 +1,14 @@
+Which AI is the most politically neutral? Someone measured 18 of them — and the answer is Grok. 🤖⚖️
+
+Every AI chatbot has a political lean baked in, whether it tells you or not. The Neutrality Project gave 18 AI models the same ~4,000-question political survey and mapped where each one lands. The result: 97 of 108 scores leaned left, Elon Musk's Grok landed closest to dead center, and Microsoft's Phi-4 leaned the hardest — while refusing to answer 1 in 4 questions. To keep it fair, AIs from three different countries set the scale.
+
+Why it matters: the AI writing your emails, your kid's homework and your news summary isn't neutral either — now you can see which ones lean.
+
+The best part? It's open and reproducible — you can check every number yourself.
+
+⚖️ Note: each AI is scored against its own range on this open benchmark, not an absolute political center. It's one independent test's findings — read the method and decide for yourself.
+
+Source: The Neutrality Project (Release 01) · neutralityproject.org/results.html
+@startups.ai
+
+#AI #ArtificialIntelligence #AIbias #Grok #ChatGPT #Gemini #AIethics #TechNews #MachineLearning #OpenSource #AIliteracy #Startups

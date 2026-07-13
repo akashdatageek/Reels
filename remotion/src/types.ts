@@ -8,6 +8,27 @@ export type SceneType =
   | 'FigureScene'
   | 'OutroCard';
 
+/** A sticker/emoji that pops onto a scene for personality. */
+export interface Sticker {
+  /** emoji or a very short label ("!!", "⚡", "🤯") */
+  text: string;
+  /** normalized center position, 0..1 */
+  x: number;
+  y: number;
+  /** fraction of the scene (0..1) when it pops in (default ~0.1) */
+  at?: number;
+  /** tilt in degrees */
+  rotate?: number;
+  /** font size in px (default 96) */
+  size?: number;
+}
+
+/** News-style lower-third strip (e.g. a source credit). */
+export interface LowerThird {
+  title: string;
+  subtitle?: string;
+}
+
 export interface FigureAnnotation {
   /** short callout line that fades in on a timeline to explain the figure */
   text: string;
@@ -34,8 +55,10 @@ export interface FigureFocus {
   at: number;
   /** region to zoom to; omit → full frame */
   region?: FigureRegion;
-  /** mark drawn on the region while focused */
-  highlight?: 'box' | 'circle' | 'underline' | 'spotlight';
+  /** mark drawn on the region while focused. box/circle/underline draw on;
+   *  spotlight dims the rest; marker sweeps a highlighter; circleDraw is a
+   *  hand-drawn scribble ring. */
+  highlight?: 'box' | 'circle' | 'underline' | 'spotlight' | 'marker' | 'circleDraw';
   /** short label pinned to the region */
   label?: string;
 }
@@ -61,8 +84,22 @@ export interface Scene {
   duration: number;
   /** Seconds into voice.mp3 where this scene's audio starts (set by tts.py). */
   audioStart?: number;
+  /** How this scene ENTERS at its cut (sync-safe — no timing overlap). Omit to
+   *  auto-rotate per scene index so cuts never repeat. */
+  transition?: 'punch' | 'slide' | 'pushUp' | 'whip' | 'wipe' | 'none';
   /** In HookCard, wrap words in *asterisks* to render them in the accent color. */
   text?: string;
+  /** HookCard title animation. Omit to auto-rotate so text never animates the
+   *  same way twice. rise = word-by-word lift · typewriter = typed · pop =
+   *  bouncy scale-in · marker = highlighter swipe behind emphasized words. */
+  textStyle?: 'rise' | 'typewriter' | 'pop' | 'marker';
+  /** Motion background behind text/data scenes. aurora (default) · beams
+   *  (drifting light streaks) · dots (denser field) · plain. */
+  bgStyle?: 'aurora' | 'beams' | 'dots' | 'plain';
+  /** Emoji/text stickers that pop onto this scene for personality. */
+  stickers?: Sticker[];
+  /** News-style lower-third strip on this scene (e.g. a source credit). */
+  lowerThird?: LowerThird;
   voiceSegment?: string;
   /** Aesthetic background image behind text/data scenes (Hook/Stat/Split);
    *  rendered darkened with a scrim so type stays readable. */
@@ -89,6 +126,9 @@ export interface Scene {
   /** StatCallout */
   stat?: string;
   label?: string;
+  /** StatCallout viz: ring (default halo) · donut (arc fills to the fraction) ·
+   *  bar (horizontal fill). donut/bar need stat to be a % or an a/b fraction. */
+  statVariant?: 'ring' | 'donut' | 'bar';
   /** SplitCompare */
   leftTitle?: string;
   rightTitle?: string;

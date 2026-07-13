@@ -12,8 +12,11 @@ frames, not to invent new content. One `voiceSegment` per frame, in frame order.
 If a frame has no real content behind it, go back to `content`/`research` — don't
 paper over it with words.
 
-Target **45–75s** (~60s when the story has depth; go shorter rather than
-padding a thin story). The frames already give you the structure:
+**Length follows the value, not a target.** Make it as long as it needs to be to
+genuinely inform the viewer — and no longer. Roughly 45–90s: go long enough that
+the idea truly lands (define the concept, read the charts, land the stakes),
+short enough that every line earns its place. **Never amputate substance to hit a
+number; never pad a thin story to fill time.** The frames give you the structure:
 **HOOK → CONTEXT → 3–5 KEY POINTS (each with a receipt) → SO-WHAT → OUTRO.**
 
 Write `input/<story>/script.md` in three explicit parts:
@@ -90,6 +93,17 @@ first 15 seconds:
 A hook full of numbers that never says *who* did it or *what* it is leaves the
 viewer lost. Lead with the surprise (above), then immediately ground it: who +
 what, fast.
+
+**Assume zero background (write for a non-expert).** Beyond who/what/result/why,
+the voice must actually *teach the idea*:
+- **Define the concept** in one plain line before the finding ("AI chatbots
+  answer touchy questions with a slant — usually without telling you").
+- **Decode the numbers out loud** ("108 scores — that's 18 AIs across 6 topics").
+- **Read the chart for them** ("each dot is one AI; almost all sit on the left").
+- **Land the stakes in their world** ("the AI writing your emails and news
+  summaries isn't neutral either").
+If a smart non-expert would ask "wait, what does that mean?", the voice failed —
+add the line.
 
 ## Worked example (V1 → critique → V2)
 

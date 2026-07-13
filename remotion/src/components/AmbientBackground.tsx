@@ -18,7 +18,9 @@ export const AmbientBackground: React.FC<{
   seed?: number;
   /** true when a Backdrop image sits underneath — washes only, no fill */
   transparent?: boolean;
-}> = ({accent, secondary, seed = 0, transparent = false}) => {
+  /** motion variety behind text scenes (dark theme): aurora default | beams | plain */
+  variant?: 'aurora' | 'beams' | 'dots' | 'plain';
+}> = ({accent, secondary, seed = 0, transparent = false, variant = 'aurora'}) => {
   const second = secondary ?? accent;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -90,6 +92,45 @@ export const AmbientBackground: React.FC<{
 
   // slow-rotating conic sheen adds directionality the flat orbs lacked
   const sheenRot = (t * 6 + seed * 40) % 360;
+
+  // ---- alt dark backgrounds (motion variety behind text) ----
+  if (variant === 'plain') {
+    return (
+      <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : pal.bg, overflow: 'hidden'}}>
+        <AbsoluteFill style={{background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%)'}} />
+      </AbsoluteFill>
+    );
+  }
+  if (variant === 'beams') {
+    // drifting diagonal light streaks
+    const beams = [0, 1, 2, 3].map((i) => {
+      const hue = i % 2 === 0 ? accent : second;
+      const x = ((t * (6 + i * 2) + seed * 30 + i * 26) % 140) - 20;
+      return {hue, x, w: 5 + i * 1.5, op: (0.10 + (i % 2) * 0.04) * (1 + bass * 0.6)};
+    });
+    return (
+      <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : pal.bg, overflow: 'hidden'}}>
+        {beams.map((b, i) => (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              top: '-30%',
+              height: '160%',
+              left: `${b.x}%`,
+              width: `${b.w}%`,
+              transform: 'skewX(-16deg)',
+              background: `linear-gradient(90deg, transparent, ${b.hue}, transparent)`,
+              opacity: b.op,
+              filter: 'blur(14px)',
+              mixBlendMode: 'screen',
+            }}
+          />
+        ))}
+        <AbsoluteFill style={{background: 'radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,0.5) 100%)'}} />
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill style={{backgroundColor: transparent ? 'transparent' : pal.bg, overflow: 'hidden'}}>

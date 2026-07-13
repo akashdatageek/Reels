@@ -73,7 +73,36 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   "Grok" row when the voiceSegment says Grok), then a `{at, region: full}` step
   to pull back out. Border/label sizes stay crisp at any zoom. Estimate regions
   by eye from the cropped figure; verify with `scripts/still.sh` at a frame mid-
-  zoom before rendering the whole reel.
+  zoom before rendering the whole reel. Highlight styles: `spotlight` (dims the
+  rest), `box`/`underline` (wipe on), `circle` (springs in), `circleDraw` (a
+  hand-drawn scribble ring — great for "circle the winner"), `marker` (a
+  highlighter bar sweeps across).
+- **Scene transitions (`transition`).** Each scene enters with a move — `punch`
+  (scale-in), `slide`, `pushUp`, `whip` (motion-blur pan), `wipe`, or `none`.
+  Omit to auto-rotate per scene index so consecutive cuts never repeat. It's
+  sync-safe (plays in the first ~0.4s, then settles), so it never shifts audio.
+  A subtle **beat punch** (whole-frame zoom on the kick) is automatic when
+  `music` is set.
+- **Kinetic type (`textStyle` on HookCard).** `rise` (default word lift),
+  `typewriter` (typed on), `pop` (bouncy scale-in), `marker` (a highlighter
+  swipe behind the *asterisk-emphasized* words). Vary it so titles don't all
+  animate the same; moody vibe always stays on `rise`.
+- **Animated data (`statVariant` on StatCallout).** `ring` (default halo),
+  `donut` (an arc fills to the fraction), `bar` (a horizontal fill). donut/bar
+  need the `stat` to be a percentage (`"26%"`) or a fraction (`"97/108"`) — the
+  fill animates in sync with the count-up.
+- **Text-scene backgrounds (`bgStyle` on Hook/Stat, dark theme only).** `aurora`
+  (default), `beams` (drifting light streaks), `dots`, `plain`. Light theme
+  keeps its clean editorial wash regardless. (True video b-roll needs stock
+  footage the pipeline can't source in-sandbox — this is the motion-variety
+  substitute.)
+- **Personality flourishes (use sparingly, match the tone).** `stickers` — an
+  array of `{text, x, y, at, rotate, size}` emoji/short-label pops (`"🤯"`,
+  `"!!"`) at normalized positions; great for punchy stories, **skip them on
+  serious/credibility pieces**. `lowerThird` — a `{title, subtitle}` news strip
+  that slides in (e.g. a source credit). The OutroCard's follow button now taps
+  and rings a bell automatically. A subtle beat camera-bounce is automatic in
+  bold vibe.
 - **Explain graphs out loud.** When a figure is shown, the `voiceSegment` names
   the axes/colors and reads the takeaway ("blue = kept, red = removed, lower is
   better; GRAM's red bar is 0.60 vs 0.85").
