@@ -64,6 +64,16 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   Do NOT paraphrase a chart into decoration or replace it with a generated
   image. Generated images are for *mood/metaphor* beats only — never a stand-in
   for evidence the source actually provided.
+- **Zoom & highlight the chart (`figureFocus`).** A FigureScene can do real
+  editing moves: `figureFocus` is a timeline of camera steps, each `{at, region,
+  highlight, label}` where `at` is a fraction 0..1 of the scene, `region` is a
+  normalized rect `{x,y,w,h}` (0..1) of the figure, `highlight` is
+  `box|circle|underline|spotlight`, and `label` is a short pinned caption. Use it
+  to push into the exact bar/row/number as the voice hits it (e.g. spotlight the
+  "Grok" row when the voiceSegment says Grok), then a `{at, region: full}` step
+  to pull back out. Border/label sizes stay crisp at any zoom. Estimate regions
+  by eye from the cropped figure; verify with `scripts/still.sh` at a frame mid-
+  zoom before rendering the whole reel.
 - **Explain graphs out loud.** When a figure is shown, the `voiceSegment` names
   the axes/colors and reads the takeaway ("blue = kept, red = removed, lower is
   better; GRAM's red bar is 0.60 vs 0.85").

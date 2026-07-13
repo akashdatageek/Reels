@@ -2,7 +2,6 @@ import React from 'react';
 import {
   AbsoluteFill,
   Img,
-  interpolate,
   spring,
   staticFile,
   useCurrentFrame,
@@ -11,12 +10,27 @@ import {
 import {usePalette} from '../components/ThemeContext';
 import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
-import type {FigureAnnotation, Scene} from '../types';
+import type {FigureAnnotation, FigureFocus, Scene} from '../types';
+
+/** smoothstep-eased sample of scalar keyframes at fraction t (0..1). */
+const sampleKF = (t: number, times: number[], values: number[]): number => {
+  if (t <= times[0]) return values[0];
+  for (let i = 1; i < times.length; i++) {
+    if (t <= times[i]) {
+      const span = times[i] - times[i - 1] || 1;
+      const l = Math.min(1, Math.max(0, (t - times[i - 1]) / span));
+      const e = l * l * (3 - 2 * l); // smoothstep
+      return values[i - 1] + (values[i] - values[i - 1]) * e;
+    }
+  }
+  return values[values.length - 1];
+};
 
 /**
- * Shows a REAL source figure (chart, diagram, screenshot) big and legible,
- * with a title and explanation callouts that fade in one-by-one across the
- * scene — so the graph is actually walked through, not decorated over.
+ * Shows a REAL source figure big and legible, and — when `figureFocus` is set —
+ * zooms into the exact part of the chart on a timeline, drawing a box / circle /
+ * underline / spotlight + label as the voice hits it. Without figureFocus it
+ * renders the static figure + fade-in annotations (unchanged, backward-compat).
  * No generation: the credibility is the real figure.
  */
 export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: string}> = ({
@@ -27,18 +41,33 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
   const {fps, durationInFrames} = useVideoConfig();
   const p = usePalette();
   const anns: FigureAnnotation[] = scene.annotations ?? [];
+  const focus: FigureFocus[] = scene.figureFocus ?? [];
 
   const figIn = spring({frame: frame - 6, fps, config: {damping: 22, stiffness: 90}});
+  const t = frame / Math.max(durationInFrames - 1, 1);
 
-  // annotations fade in staggered over the middle 70% of the scene
-  const startF = 0.22 * durationInFrames;
-  const stepF = anns.length
-    ? (0.62 * durationInFrames) / anns.length
-    : 0;
+  // ---- camera keyframes: full-frame at 0, then each focus step ----
+  const kf = [
+    {at: 0, cx: 0.5, cy: 0.5, s: 1},
+    ...focus.map((f) => {
+      const r = f.region;
+      const cx = r ? r.x + r.w / 2 : 0.5;
+      const cy = r ? r.y + r.h / 2 : 0.5;
+      const s = r ? Math.min(4, Math.max(1, 0.9 / Math.max(r.w, r.h))) : 1;
+      return {at: f.at, cx, cy, s};
+    }),
+  ];
+  const times = kf.map((k) => k.at);
+  const cx = sampleKF(t, times, kf.map((k) => k.cx));
+  const cy = sampleKF(t, times, kf.map((k) => k.cy));
+  const s = sampleKF(t, times, kf.map((k) => k.s));
+
+  // active highlight = last focus step whose `at` has passed
+  const activeIdx = focus.reduce((acc, f, i) => (t >= f.at ? i : acc), -1);
+  const active = activeIdx >= 0 ? focus[activeIdx] : undefined;
 
   return (
     <AbsoluteFill style={{backgroundColor: p.bg}}>
-      {/* faint accent wash in a corner — subtle, editorial */}
       <div
         style={{
           position: 'absolute',
@@ -50,13 +79,7 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
           background: `radial-gradient(circle, ${accent}22 0%, transparent 65%)`,
         }}
       />
-      <AbsoluteFill
-        style={{
-          padding: '260px 70px 340px',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        }}
-      >
+      <AbsoluteFill style={{padding: '260px 70px 340px', justifyContent: 'flex-start', alignItems: 'center'}}>
         {scene.text ? (
           <RevealText
             text={scene.text}
@@ -77,46 +100,42 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
             style={{
               width: '100%',
               borderRadius: 20,
-              overflow: 'hidden',
+              overflow: 'hidden', // clip the zoom
               backgroundColor: '#ffffff',
               border: `1px solid ${p.panelBorder}`,
               boxShadow:
-                p.bg === '#f5f4f0'
-                  ? '0 24px 60px rgba(0,0,0,0.12)'
-                  : '0 24px 60px rgba(0,0,0,0.5)',
+                p.bg === '#f5f4f0' ? '0 24px 60px rgba(0,0,0,0.12)' : '0 24px 60px rgba(0,0,0,0.5)',
               opacity: figIn,
-              transform: `scale(${0.94 + figIn * 0.06})`,
             }}
           >
-            <Img
-              src={staticFile(scene.figure)}
-              style={{width: '100%', height: 'auto', display: 'block'}}
-            />
+            {/* zoom layer: image + on-figure highlights share one transform */}
+            <div
+              style={{
+                position: 'relative',
+                transformOrigin: `${cx * 100}% ${cy * 100}%`,
+                transform: `translate(${(0.5 - cx) * 100}%, ${(0.5 - cy) * 100}%) scale(${(0.94 + figIn * 0.06) * s})`,
+              }}
+            >
+              <Img src={staticFile(scene.figure)} style={{width: '100%', height: 'auto', display: 'block'}} />
+              {active && active.region ? (
+                <Highlight region={active.region} kind={active.highlight ?? 'box'} label={active.label} accent={accent} scale={s} />
+              ) : null}
+            </div>
           </div>
         ) : null}
 
         {scene.figureCredit ? (
-          <div
-            style={{
-              marginTop: 16,
-              fontFamily: FONT_BODY,
-              fontSize: 26,
-              color: p.textDim,
-              alignSelf: 'flex-end',
-            }}
-          >
+          <div style={{marginTop: 16, fontFamily: FONT_BODY, fontSize: 26, color: p.textDim, alignSelf: 'flex-end'}}>
             {scene.figureCredit}
           </div>
         ) : null}
 
-        {/* explanation callouts */}
+        {/* explanation callouts (below the figure) */}
         <div style={{marginTop: 40, width: '100%'}}>
           {anns.map((a, i) => {
-            const aIn = spring({
-              frame: frame - (startF + i * stepF),
-              fps,
-              config: {damping: 200},
-            });
+            const startF = 0.22 * durationInFrames;
+            const stepF = anns.length ? (0.62 * durationInFrames) / anns.length : 0;
+            const aIn = spring({frame: frame - (startF + i * stepF), fps, config: {damping: 200}});
             if (aIn < 0.01) return null;
             return (
               <div
@@ -130,25 +149,8 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
                   transform: `translateX(${(1 - aIn) * -24}px)`,
                 }}
               >
-                <div
-                  style={{
-                    marginTop: 14,
-                    minWidth: 20,
-                    width: 20,
-                    height: 20,
-                    borderRadius: 5,
-                    backgroundColor: a.emphasis ? accent : p.textDim,
-                  }}
-                />
-                <div
-                  style={{
-                    fontFamily: FONT_BODY,
-                    fontWeight: a.emphasis ? 800 : 600,
-                    fontSize: 44,
-                    lineHeight: 1.25,
-                    color: a.emphasis ? accent : p.text,
-                  }}
-                >
+                <div style={{marginTop: 14, minWidth: 20, width: 20, height: 20, borderRadius: 5, backgroundColor: a.emphasis ? accent : p.textDim}} />
+                <div style={{fontFamily: FONT_BODY, fontWeight: a.emphasis ? 800 : 600, fontSize: 44, lineHeight: 1.25, color: a.emphasis ? accent : p.text}}>
                   {a.text}
                 </div>
               </div>
@@ -157,5 +159,73 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
+  );
+};
+
+/** A mark drawn on a figure region. Border/label sizes are divided by the
+ *  current zoom so they stay crisp and constant on screen. */
+const Highlight: React.FC<{
+  region: {x: number; y: number; w: number; h: number};
+  kind: 'box' | 'circle' | 'underline' | 'spotlight';
+  label?: string;
+  accent: string;
+  scale: number;
+}> = ({region, kind, label, accent, scale}) => {
+  const bw = 5 / scale; // on-screen ~5px border regardless of zoom
+  const box: React.CSSProperties = {
+    position: 'absolute',
+    left: `${region.x * 100}%`,
+    top: `${region.y * 100}%`,
+    width: `${region.w * 100}%`,
+    height: `${region.h * 100}%`,
+    pointerEvents: 'none',
+  };
+
+  return (
+    <>
+      {kind === 'spotlight' ? (
+        <div style={{...box, boxShadow: `0 0 0 9999px rgba(8,10,24,0.55)`, borderRadius: 8 / scale}} />
+      ) : null}
+      {kind === 'box' || kind === 'spotlight' ? (
+        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: 8 / scale, boxShadow: `0 0 ${16 / scale}px ${accent}`}} />
+      ) : null}
+      {kind === 'circle' ? (
+        <div style={{...box, border: `${bw}px solid ${accent}`, borderRadius: '50%', boxShadow: `0 0 ${16 / scale}px ${accent}`}} />
+      ) : null}
+      {kind === 'underline' ? (
+        <div
+          style={{
+            position: 'absolute',
+            left: `${region.x * 100}%`,
+            top: `${(region.y + region.h) * 100}%`,
+            width: `${region.w * 100}%`,
+            height: bw,
+            backgroundColor: accent,
+            boxShadow: `0 0 ${14 / scale}px ${accent}`,
+            pointerEvents: 'none',
+          }}
+        />
+      ) : null}
+      {label ? (
+        <div
+          style={{
+            position: 'absolute',
+            left: `${region.x * 100}%`,
+            top: `${region.y * 100}%`,
+            transform: `translateY(-115%)`,
+            backgroundColor: accent,
+            color: '#0a0c1c',
+            fontFamily: FONT_BODY,
+            fontWeight: 800,
+            fontSize: 22 / scale,
+            padding: `${6 / scale}px ${12 / scale}px`,
+            borderRadius: 8 / scale,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {label}
+        </div>
+      ) : null}
+    </>
   );
 };
