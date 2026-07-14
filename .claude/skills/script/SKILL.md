@@ -73,6 +73,13 @@ brand and defies expectations, that's almost always the hook.
 A viewer is half-watching on a phone. If a line needs a re-read, they're gone.
 - **Short, common words.** Aim ~grade 6–8. Read every line **out loud** — if
   it's hard to say, rewrite it.
+- **Inherit the TRANSLATION TABLE — don't re-translate.** research.md already
+  decided every term's plain form (and its scale analogy) once. Use those exact
+  plain forms. **V2 checklist item: any jargon in the voiceover that is not in
+  the translation table (as its plain form) is a defect** — either the line
+  keeps insider words the table already translated (fix the line), or the term
+  has no row at all (go back to `research` and add one; don't improvise a
+  translation here).
 - **Ban jargon and insider terms.** Translate the source, don't quote it: "self-
   anchored ideological axes" → "they tested each AI against its own most extreme
   answers"; "reproducible" → "anyone can check the math." If a technical idea is
