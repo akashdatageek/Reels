@@ -171,8 +171,12 @@ def main() -> int:
             # framing differs from foreground, so the two never collide.
             digest = hashlib.sha1(prompt.encode("utf-8")).hexdigest()[:12]
             out_path = img_dir / f"img_{digest}.png"
+            rel = str(out_path.relative_to(out_dir))
             existing = scene.get(target_field)
-            if existing and (out_dir / existing).exists() and not args.force:
+            # Keep the existing file only when it matches THIS prompt's hash. A
+            # reworded prompt yields a new hash, so the stale image no longer
+            # matches and we fall through to regenerate — no manual delete needed.
+            if existing == rel and out_path.exists() and not args.force:
                 print(f"scene {idx:02d}: keeping existing {target_field} {existing}")
                 continue
             if out_path.exists() and not args.force:
@@ -184,7 +188,7 @@ def main() -> int:
                 else:
                     generate_placeholder(prompt, out_path, reel.get("accentColor", "#00E5FF"))
                 made += 1
-            scene[target_field] = str(out_path.relative_to(out_dir))
+            scene[target_field] = rel
 
     reel_path.write_text(json.dumps(reel, indent=2), encoding="utf-8")
     print(f"\n{made} image(s) generated; reel.json updated")
