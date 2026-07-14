@@ -13,9 +13,12 @@ frames; the `author` stage turns them into scenes. Content first, words second.
 
 ## Steps
 
-1. **Read `research.md`** — verified facts, killer numbers, ranked hook angles,
-   caveats. If key content is missing or unverified, STOP and ask for manual
-   data (see the `research` skill) — don't invent a frame to fill a gap.
+1. **Read `research.md`** — the SOURCE INVENTORY, the TRANSLATION TABLE,
+   verified facts, killer numbers, ranked hook angles, caveats. If key content
+   is missing or unverified, STOP and ask for manual data (see the `research`
+   skill) — don't invent a frame to fill a gap. **Use the translation table's
+   plain forms** in every Point / on-screen text / annotation — the plain words
+   were decided once in research; inherit them, don't re-translate.
 2. **Pick the spine and order.** Break the structure per story (an explainer is
    figure-led; a launch is image-led). **Frame 1 carries the single most
    surprising, *named* result** (the thing a viewer would text a friend).
@@ -35,6 +38,13 @@ frames; the `author` stage turns them into scenes. Content first, words second.
 5. **Cut ruthlessly.** A frame with no real content — only vibes — gets merged or
    dropped. Prefer a real figure over a generated image every time. Aim 6–11
    frames for a 45–80s reel.
+6. **Account for every USE-marked inventory item.** Walk the research.md SOURCE
+   INVENTORY: every item marked **USE** either appears in a frame, or gets a row
+   in a **"Dropped USE items"** section at the bottom of frames.md with a
+   one-line justification ("−0.11 foreign-policy avg — third per-topic number,
+   would dilute the −0.82 beat"). A USE item that silently vanishes between
+   research and frames is a defect — the whole point of the inventory is that
+   nothing falls off the table by accident.
 
 ## Explain it for someone who's never heard of this
 

@@ -68,14 +68,25 @@ narration*, a clear reason to care, and zero guess lines — **passes**.
 Don't argue with the reviewer. If it says a line was confusing, the line is
 confusing — that's the whole signal.
 
-## 4. Fix and re-run (max 3 iterations)
+## 4. Fix and re-run (max 3 iterations) — route each failure to the RIGHT stage
 
-For each failure, fix the *script*, not the reviewer:
-- **Undefined term/number** → add a plain gloss in the `voiceSegment`
-  ("108 scores — that's 18 AIs across six topics"). If the gap is a missing
-  explainer beat (no frame even tries to define the concept), go back to the
-  `content` skill and add the frame to `frames.md`, then rewrite the script to
-  it — frames.md stays the single source of truth.
+Before fixing anything, **cross-check every failed term against research.md's
+TRANSLATION TABLE** — the table tells you which stage broke:
+
+- **Failed term HAS a table entry** → the script **ignored the table**. The
+  plain form was already decided; the voiceover just didn't use it. Fix is in
+  `script.md`: swap the line to the table's plain form (+ its analogy). Cheap.
+- **Failed term has NO entry** → the **research stage missed it** — the term was
+  never harvested into the table at all. Go back to `research.md` first: add the
+  row (plain form + analogy), then flow it through frames.md/script.md. Fixing
+  only the script line would leave the gap for the next stage to trip on.
+
+Then fix accordingly:
+- **Undefined term/number** → route as above, and add the plain gloss in the
+  `voiceSegment` ("108 scores — that's 18 AIs across six topics"). If the gap is
+  a missing explainer beat (no frame even tries to define the concept), go back
+  to the `content` skill and add the frame to `frames.md`, then rewrite the
+  script to it — frames.md stays the single source of truth.
 - **Deictic visual reference** ("on the map…", "this line") the audio can't
   follow → make the voice self-describe it ("on a left-to-right scale, the
   closer to center, the more neutral").

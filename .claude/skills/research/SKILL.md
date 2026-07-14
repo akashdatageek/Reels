@@ -29,6 +29,8 @@ to a source URL in research.md.** If the story can't be verified from at least
    isn't the same take everyone posted 6 hours ago.
 
 6. **Write `input/<story>/research.md`:**
+   - **SOURCE INVENTORY** (mandatory — see below)
+   - **TRANSLATION TABLE** (mandatory — see below)
    - Verified facts, each with a source URL
    - 2–3 killer numbers/stats (candidates for StatCallout / ChartScene)
    - Suggested hook angles, ranked
@@ -36,6 +38,49 @@ to a source URL in research.md.** If the story can't be verified from at least
 
 Also extract the spine of the story: what launched, who, why it matters, and
 the 2–3 concrete numbers that prove it.
+
+## SOURCE INVENTORY (mandatory) — harvest, don't notice
+
+Facts must be **systematically harvested, not noticed in passing**. Enumerate
+**EVERY figure, chart, screenshot, number, named entity, and quotable line** in
+the provided source(s) — walk each source top to bottom and log every item, even
+the ones you're sure you won't use. Then decide each one:
+
+| # | Type | Item | Where | USE/SKIP | Reason (one line) |
+|---|------|------|-------|----------|-------------------|
+| 1 | chart | Leaderboard bar chart, 18 models | results p2 | USE | the proof beat |
+| 2 | number | −0.82 environment avg (strongest lean) | results p2 | USE | most extreme per-topic stat |
+| 3 | quote | "It frames how we think." | home p2 | USE | stakes in seven words |
+| 4 | entity | Founder bios (3 people) | home p7–8 | SKIP | credibility, not story |
+
+- **Skipping must be deliberate, never accidental.** An item with no row was
+  *missed*, not skipped — the inventory is the proof of exhaustiveness.
+- Ready-made explainers count as items: sources often carry **their own plain-
+  language labels** (an axis legend, a caption, a "what this means" card).
+  Harvest them — they're pre-translated gold for the TRANSLATION TABLE.
+- Downstream contract: the `content` skill must **justify any USE-marked item
+  that doesn't appear in frames.md** — so a USE mark is a real commitment, and
+  a dropped one leaves a written trail.
+
+## TRANSLATION TABLE (mandatory) — decide the plain words ONCE
+
+Every technical term and insider number the story needs gets its plain-English
+replacement **decided here, once** — grade 6–8 words. Where an abstract quantity
+needs *scale*, add one **physical analogy** ("5B parameters" → "a brain about
+100× smaller than ChatGPT's"). The `content` and `script` stages **INHERIT**
+this table — they never invent their own translation mid-sentence.
+
+| Term / number (source's words) | Plain English (grade 6–8) | Analogy (if scale needs it) |
+|---|---|---|
+| "self-anchored ideological axes" | each AI graded against its own most extreme answers | — |
+| "0.60 vs 0.85, lower is better" | about a third fewer mistakes | — |
+| "5B parameters" | the size of the AI's brain | ~100× smaller than ChatGPT's |
+
+Rule of thumb: if the term would appear on screen or in the voice, it needs a
+row. The `script` skill treats any jargon **not covered by this table** as a V2
+defect, and the `comprehension` gate uses the table to route failures — a term
+that fails *with* a row means the script ignored the table; a term that fails
+*without* a row means research missed it. Keep the table complete.
 
 ## Worked example (research.md shape)
 
