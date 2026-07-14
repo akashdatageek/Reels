@@ -21,12 +21,35 @@ Usage:
     python pipeline/preflight.py output/<story>/reel.json
 """
 import argparse
+import datetime
 import json
 import pathlib
 import re
 import sys
 
 import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
+TRENDS_MAX_AGE_DAYS = 14
+
+
+def trends_staleness_warning(repo_dir: pathlib.Path) -> str | None:
+    """Return a warning line if trends-current.md is missing, undated, or older
+    than TRENDS_MAX_AGE_DAYS. The date comes from the file's `Updated:` header
+    (mtimes lie after a fresh clone). Warning only — never blocks a build."""
+    path = repo_dir / ".claude" / "skills" / "trends" / "trends-current.md"
+    if not path.exists():
+        return "trends-current.md missing — run the `trends` skill (REFRESH mode)"
+    m = re.search(r"^Updated:\s*(\d{4}-\d{2}-\d{2})", path.read_text(encoding="utf-8"), re.M)
+    if not m:
+        return "trends-current.md has no 'Updated: YYYY-MM-DD' header — re-run REFRESH"
+    updated = datetime.date.fromisoformat(m.group(1))
+    age = (datetime.date.today() - updated).days
+    if age > TRENDS_MAX_AGE_DAYS:
+        return (
+            f"trends-current.md is {age} days old (updated {updated}) — trend data "
+            f"goes stale in weeks; run the `trends` skill (REFRESH mode)"
+        )
+    return None
 
 # Must stay in sync with SCENE_COMPONENTS in remotion/src/Reel.tsx.
 KNOWN_TYPES = {
@@ -136,6 +159,10 @@ def main() -> int:
     music = (reel.get("music") or "").strip()
     if music and not (repo_dir / music).exists():
         errors.append(f"music track missing — {music} (put a file in music/ or update reel.json)")
+
+    trends_warn = trends_staleness_warning(repo_dir)
+    if trends_warn:
+        warnings.append(trends_warn)
 
     for w in warnings:
         print(f"preflight WARN: {w}", file=sys.stderr)

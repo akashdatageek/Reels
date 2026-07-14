@@ -83,6 +83,17 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   sync-safe (plays in the first ~0.4s, then settles), so it never shifts audio.
   A subtle **beat punch** (whole-frame zoom on the kick) is automatic when
   `music` is set.
+- **Cut density: a visible cut or camera move at least every ~4s.** Dead air is
+  where viewers swipe. Scene entries (transitions) provide one move each; any
+  scene longer than ~4–5s must move *within* itself — for a `FigureScene` that
+  means 2–3 `figureFocus` steps spaced through the scene (they count as camera
+  moves); for Image/Terminal/Chart scenes the built-in drift/typing/bar motion
+  covers it. Audit the timeline: no stretch of more than ~4s where nothing
+  visibly changes.
+- **Trends (APPLY mode).** Read `.claude/skills/trends/trends-current.md` (the
+  `trends` skill refreshes it weekly) and pick **at most 1–2** current tactics
+  that genuinely fit this story — never force a trend onto a serious piece, and
+  never use anything on its stale/avoid list.
 - **Kinetic type (`textStyle` on HookCard).** `rise` (default word lift),
   `typewriter` (typed on), `pop` (bouncy scale-in), `marker` (a highlighter
   swipe behind the *asterisk-emphasized* words). Vary it so titles don't all
