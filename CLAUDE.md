@@ -90,6 +90,7 @@ must not be able to skip its own checklist. So:
 
 ```
 .claude/skills/         research · content · script · comprehension · author · build · editor (the workflow)
+                        + trends (weekly REFRESH → trends-current.md; author APPLYs ≤2 tactics per reel)
 input/<story>/          brief.md (+ assets/) → research.md, frames.md, script.md written here
 pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py · preflight.py · state.py (ledger)
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)

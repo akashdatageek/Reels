@@ -31,7 +31,16 @@ frames; the `author` stage turns them into scenes. Content first, words second.
    - **Visual** — the real asset to show (which figure to crop from `assets/`),
      or a StatCallout / Chart built from a verified number; a generated image
      only as a last resort, with a reason.
-   Tag each frame's **role**: hook · who · what · result · proof · stakes · outro.
+   Tag each frame's **role**: hook · who · what · result · proof · stakes ·
+   **sendable** · outro.
+   - **`sendable` is REQUIRED — design one deliberately SENDABLE moment per
+     reel.** DM shares outweigh likes in distribution, so exactly one frame is
+     engineered to be screenshotted and sent: the single most shocking,
+     self-contained fact, fully readable OUT of context (the claim + its number
+     + who measured it, all on the frame). Usually it doubles as the `result`
+     or `proof` frame — tag it `result+sendable`. Ask of it: "would someone DM
+     this to a friend with zero caption?" If no frame qualifies, the story
+     angle is weak — go back one step.
 4. **Coverage check** (same bar as the `script` skill's "cover the basics"): the
    frames together must answer **WHO · WHAT · RESULT · WHY**, all reachable in
    roughly the first 15s. Every on-screen number traces to research.md.

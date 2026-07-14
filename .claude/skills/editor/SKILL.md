@@ -94,9 +94,19 @@ changed).
   ```
   Choose the frame by eye from §1's spot-checks — a legible, on-brand moment,
   not a mid-transition blur.
-- **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary, source
-  credit (from research.md), the handle **@startups.ai**, 8–12 hashtags. Emoji
-  in the caption are fine; on-screen text stays clean.
+- **Write `output/<story>/caption.txt`** — captions are a search surface now,
+  not a hashtag dump:
+  - **First line = keyword-rich hook.** Lead with the exact phrase someone
+    would search ("The most neutral AI in 2026 is…"), not a teaser — Instagram
+    weighs the caption's first sentence most for discovery.
+  - **Series tag** — episodic naming converts viewers to followers: a stable
+    series name + episode number on its own line (e.g. `AI Receipts · Ep. 12`).
+    Keep the same series name across reels of the same kind.
+  - 2–3 line summary, source credit (from research.md), the handle
+    **@startups.ai**.
+  - **3–5 hashtags MAX, all niche-relevant** (`#AInews #AIbias #Grok` — never
+    generic `#viral #fyp`). More tags dilute relevance signals and read as
+    spam. Emoji in the caption are fine; on-screen text stays clean.
 - **Record the factcheck gate** (from §3 — every on-screen claim traces to
   research.md). Comprehension was already gated before authoring, so both
   quality gates — TRUE and UNDERSTOOD — are now green.
