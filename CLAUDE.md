@@ -8,10 +8,10 @@ data; Claude does the research, writing, visual identity, and orchestration.
 (images) · Edge-TTS / Gemini TTS (voice + word timings) · Remotion (render) ·
 FFmpeg (mux) · royalty-free music.
 
-## The workflow is six skills — run them in order
+## The workflow is seven skills — run them in order
 
 When asked to "make today's reel" (or given a link / story folder), walk these
-six stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
+seven stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
 its `SKILL.md`) when you reach that stage.** The detailed discipline lives in the
 skills, not here, so there's a single source of truth.
 
@@ -20,9 +20,10 @@ skills, not here, so there's a single source of truth.
 | 1 | **`research`** | Verify the story from primary + independent sources | `input/<story>/research.md` |
 | 2 | **`content`** | Lock the content frame-by-frame (point + receipt + visual) | `input/<story>/frames.md` |
 | 3 | **`script`** | Write the voiceover to the frames: V1 → critique → V2 | `input/<story>/script.md` |
-| 4 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
-| 5 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
-| 6 | **`editor`** | Review the render, tighten, write the caption, hand off | `output/<story>/caption.txt` |
+| 4 | **`comprehension`** | Gate: a fresh-context viewer must UNDERSTAND the script | `state.json` (`comprehension`) |
+| 5 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
+| 6 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
+| 7 | **`editor`** | Fact-check gate, tighten, write the caption, hand off | `output/<story>/caption.txt` |
 
 **Content before words:** `content` locks *what each frame says and shows* (its
 real receipt) before `script` writes the voice — so the script is never written
@@ -50,10 +51,16 @@ must not be able to skip its own checklist. So:
   memory, from a build log, or because "it obviously rendered" — if handoff
   didn't green-light it, it isn't done. A red gate means that stage's skill
   never recorded, or its check failed; go clear it, don't route around it.
+- **Two quality gates, deliberately distinct: `factcheck` = is it TRUE ·
+  `comprehension` = is it UNDERSTOOD.** `comprehension` runs right after `script`
+  (a fresh-context viewer must follow the voiceover with zero background, before
+  a single scene is authored); `factcheck` runs in `editor` (every on-screen
+  claim traces to research.md, on the finished render). Correct *and* clear.
 - Each stage marks itself: the creative skills record their gate at the END of
-  their SKILL.md (`research`→`comprehension`), and `preflight.py` + `assemble.sh`
-  record `preflight`/`build` automatically. tts/align/captions/images also log
-  to the ledger (informational, not gates).
+  their SKILL.md (`research`, `content`, `script`, `comprehension`, and
+  `editor`→`factcheck`), and `preflight.py` + `assemble.sh` record
+  `preflight`/`build` automatically. tts/align/captions/images also log to the
+  ledger (informational, not gates).
 
 ## Non-negotiable rules (apply across every stage)
 
@@ -82,7 +89,7 @@ must not be able to skip its own checklist. So:
 ## Repo map
 
 ```
-.claude/skills/         research · content · script · author · build · editor (the workflow)
+.claude/skills/         research · content · script · comprehension · author · build · editor (the workflow)
 input/<story>/          brief.md (+ assets/) → research.md, frames.md, script.md written here
 pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py · preflight.py · state.py (ledger)
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
