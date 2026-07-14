@@ -119,9 +119,17 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   drags — the eye finishes with the visual and the scene keeps talking. If a
   point needs more than ~1–2 short sentences, **split it across visual beats**
   (a Hook → its Figure, or a claim → its stat) instead of parking it on one
-  scene. Rule of thumb: ~2.8 words/sec, so ~7s ≈ 20 words. The build's `tts.py`
-  prints a `⚠️ PACING` warning for any scene that lands over ~8s of real
-  audio — treat that as a re-author signal, not a pass.
+  scene. Rule of thumb: ~2.8 words/sec, so ~7s ≈ 20 words.
+  - **Text scenes are hard-capped.** A `HookCard`, `StatCallout`, or
+    `OutroCard` has no motion to survive a long hold — one card or one number
+    frozen for 10+ seconds is exactly where viewers swipe. **`preflight.py`
+    fails the build** if any of these carries more than ~20 words of
+    `voiceSegment`; there's no walking past it. Keep them punchy.
+  - **Motion scenes earn their length.** A `FigureScene` with `figureFocus`
+    steps (or an `ImageScene`) can hold 10–13s because the camera is moving
+    through it — put the long, evidence-heavy narration there, not on a card.
+  - The build's `tts.py` also prints a `⚠️ PACING` warning for *any* scene that
+    lands over ~8s of real audio — a softer nudge for the motion scenes.
 - Each spoken scene gets a `voiceSegment` (1–2 short sentences).
 - **Hook emphasis:** in HookCard `text`, wrap the 1–2 payoff words in
   *asterisks* — they render in the accent color (`"now *one command*"`).

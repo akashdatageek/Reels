@@ -39,6 +39,18 @@ KNOWN_TYPES = {
 }
 # Scene types that are expected to narrate — a missing voiceSegment is a warning.
 SPOKEN_TYPES = {"HookCard", "ImageScene", "StatCallout", "SplitCompare", "FigureScene", "OutroCard"}
+# Pure-text scenes have no figureFocus motion to survive a long hold — one card,
+# one number, held for 10+ seconds is where viewers swipe. Their narration is
+# HARD-capped here (word count is the pre-TTS proxy for duration: ~2.8 words/s,
+# so ~20 words ≈ 7s). FigureScene/ImageScene/etc. earn longer holds with motion,
+# so they're exempt. Split long text-scene narration across visual beats.
+TEXT_SCENE_TYPES = {"HookCard", "StatCallout", "OutroCard"}
+TEXT_SCENE_MAX_WORDS = 20
+
+
+def word_count(text: str) -> int:
+    """Count word-like tokens (ignore lone punctuation such as em-dashes)."""
+    return sum(1 for tok in text.split() if re.search(r"\w", tok))
 # (scene field -> whether the pipeline can still fill it from a *Prompt sibling)
 ASSET_FIELDS = {
     "figure": None,          # always provided, never generated
@@ -94,8 +106,19 @@ def main() -> int:
             if not (out_dir / ref).exists():
                 errors.append(f"scene {idx:02d}: {field} asset missing — {ref}")
 
-        if stype in SPOKEN_TYPES and not (scene.get("voiceSegment") or "").strip():
+        voice = (scene.get("voiceSegment") or "").strip()
+        if stype in SPOKEN_TYPES and not voice:
             warnings.append(f"scene {idx:02d}: {stype} has no voiceSegment (silent scene)")
+
+        if stype in TEXT_SCENE_TYPES and voice:
+            wc = word_count(voice)
+            if wc > TEXT_SCENE_MAX_WORDS:
+                errors.append(
+                    f"scene {idx:02d}: {stype} narration is {wc} words "
+                    f"(> {TEXT_SCENE_MAX_WORDS}) — a text card can't hold that long. "
+                    f"Split it across visual beats, or move the point to a "
+                    f"FigureScene/ImageScene that earns the screen time."
+                )
 
         variant = scene.get("statVariant")
         stat = str(scene.get("stat", ""))

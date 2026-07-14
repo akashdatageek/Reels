@@ -19,10 +19,12 @@ bash scripts/make_reel.sh output/<story>
 0. **`preflight.py` — validate before spending.** Runs first, before any TTS or
    image API call. Hard-fails on an unknown scene `type` (the renderer would
    otherwise skip it silently and swallow its narration time), a referenced
-   asset that doesn't exist (figure/image/backdrop/logo/music), or unparseable
-   JSON; warns on a spoken scene with no `voiceSegment`, or a donut/bar
-   `statVariant` whose stat isn't a percentage/fraction. Fix reel.json and
-   re-run — nothing downstream runs until it's clean.
+   asset that doesn't exist (figure/image/backdrop/logo/music), unparseable
+   JSON, or a **text scene (Hook/Stat/Outro) whose narration exceeds ~20 words**
+   (those cards have no motion to survive a long hold — split them per the
+   `author` skill's pacing rule); warns on a spoken scene with no `voiceSegment`,
+   or a donut/bar `statVariant` whose stat isn't a percentage/fraction. Fix
+   reel.json and re-run — nothing downstream runs until it's clean.
 1. **`tts.py` — voice + timings.** Synthesizes each scene's `voiceSegment` into
    `voice.mp3`, measures real durations, writes them back into reel.json
    (durations stop being placeholders) and stamps each scene's `audioStart`.
