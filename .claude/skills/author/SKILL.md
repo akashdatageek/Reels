@@ -115,6 +115,13 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
 
 ## Step 3 — Wire content
 
+- **Pace it: max ~7s of narration per scene.** One frame held longer than that
+  drags — the eye finishes with the visual and the scene keeps talking. If a
+  point needs more than ~1–2 short sentences, **split it across visual beats**
+  (a Hook → its Figure, or a claim → its stat) instead of parking it on one
+  scene. Rule of thumb: ~2.8 words/sec, so ~7s ≈ 20 words. The build's `tts.py`
+  prints a `⚠️ PACING` warning for any scene that lands over ~8s of real
+  audio — treat that as a re-author signal, not a pass.
 - Each spoken scene gets a `voiceSegment` (1–2 short sentences).
 - **Hook emphasis:** in HookCard `text`, wrap the 1–2 payoff words in
   *asterisks* — they render in the accent color (`"now *one command*"`).

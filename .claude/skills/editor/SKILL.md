@@ -23,22 +23,40 @@ A render is a draft, not a delivery. Look at it critically before it ships.
 ## 2. Regenerate a weak image (one scene, not all)
 
 `generate_images.py --force` regenerates **every** image — costly, and it
-changes ones you liked. To redo just one scene, delete its file, clear its
-`image` field, and run **without** `--force` (existing files are skipped):
+changes ones you liked. Two ways to redo just one scene (files are keyed by a
+hash of the prompt, `img_<hash>.png`, not the scene index):
+
+- **Preferred — reword the prompt.** Improve the scene's `imagePrompt` (more
+  specific subject, or switch the beat to a real asset / `FigureScene`). A
+  changed prompt hashes to a *new* filename, so a plain re-run regenerates only
+  that scene — no deletion needed. A better prompt beats a re-roll of the same
+  one.
+- **Same prompt, fresh roll.** Delete that scene's current file and clear its
+  `image` field, then re-run without `--force` (existing files are skipped):
 
 ```bash
-rm output/<story>/images/scene_03.png
 python3 - <<'PY'
-import json; p="output/<story>/reel.json"; d=json.load(open(p))
-d["scenes"][3].pop("image", None); json.dump(d, open(p,"w"), indent=2)
+import json, pathlib
+p = "output/<story>/reel.json"; d = json.load(open(p))
+img = d["scenes"][3].pop("image", None)          # the scene you're redoing
+if img: pathlib.Path("output/<story>", img).unlink(missing_ok=True)
+json.dump(d, open(p, "w"), indent=2)
 PY
 python3 pipeline/generate_images.py output/<story>/reel.json   # only the missing one
 ```
 
-First improve the scene's `imagePrompt` (or switch the beat to a real asset /
-`FigureScene`) — a better prompt beats a re-roll of the same one.
+(Never delete `output/<story>/images/scene_03.png` by index — that naming is
+gone; look up the real filename from the scene's `image` field.)
 
 ## 3. Apply the editor's lens to the finished thing
+
+**Review with fresh eyes — spawn a reviewer subagent.** You wrote this reel, so
+you'll read past its weak spots. Launch a subagent (the `Agent` tool) whose only
+inputs are `input/<story>/research.md` and a few exported stills (§1) — *not*
+this conversation. Ask it: does the reel land the story to someone who hasn't
+seen the source? Is any on-screen number unsupported by research.md? Where does
+it drag? Treat its answer as the notes to act on. A clean-context read catches
+what author's-bias hides.
 
 Re-run the `script` skill's critique lens (problem before announcement · proof
 moment · stats felt by contrast · outro calls back) — this time against what's
@@ -58,10 +76,17 @@ changed).
 
 ## 4. Package and hand off
 
+- **Export a cover frame.** Pick the single strongest frame (usually the hook
+  payoff) and render it to a still the post can use as its thumbnail:
+  ```bash
+  bash scripts/still.sh output/<story> <frame> output/<story>/cover.png
+  ```
+  Choose the frame by eye from §1's spot-checks — a legible, on-brand moment,
+  not a mid-transition blur.
 - **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary, source
   credit (from research.md), the handle **@startups.ai**, 8–12 hashtags. Emoji
   in the caption are fine; on-screen text stays clean.
-- **Show the output path** (`output/<story>/reel.mp4`).
+- **Show the output paths** (`output/<story>/reel.mp4` + `cover.png`).
 - **Never post automatically.**
 
 ## Hard rules (always)

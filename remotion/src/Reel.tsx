@@ -23,7 +23,7 @@ import {OutroCard} from './scenes/OutroCard';
 import {SplitCompare} from './scenes/SplitCompare';
 import {StatCallout} from './scenes/StatCallout';
 import {TerminalScene} from './scenes/TerminalScene';
-import {BG, DEFAULT_ACCENT, SAFE_TOP} from './theme';
+import {BG, DEFAULT_ACCENT, FONT_BODY, SAFE_TOP} from './theme';
 import type {ReelProps, Scene} from './types';
 
 const SCENE_COMPONENTS: Record<
@@ -89,6 +89,32 @@ const BeatPunch: React.FC<{children: React.ReactNode}> = ({children}) => {
   );
 };
 
+/** Visible fallback for an unrecognized scene `type` — a scene that would
+ *  otherwise render as blank air (and silently swallow its narration time).
+ *  Loud on purpose so a bad reel.json is caught in review, not after posting. */
+const UnknownScene: React.FC<{type: string; index: number; accent: string}> = ({
+  type,
+  index,
+  accent,
+}) => (
+  <AbsoluteFill
+    style={{
+      backgroundColor: '#1a0000',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      padding: 80,
+      border: `8px solid ${accent}`,
+    }}
+  >
+    <div style={{fontFamily: FONT_BODY, fontWeight: 800, color: '#fff', fontSize: 64, lineHeight: 1.2}}>
+      ⚠️ Unknown scene type
+      <div style={{color: accent, marginTop: 24, fontSize: 72}}>“{type}”</div>
+      <div style={{color: '#ffffffaa', marginTop: 24, fontSize: 40}}>scene #{index}</div>
+    </div>
+  </AbsoluteFill>
+);
+
 /** Reads the reel spec (passed as input props) and sequences the scenes. */
 export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   const {fps} = useVideoConfig();
@@ -96,11 +122,14 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
   const secondary = reel.secondaryColor ?? accent;
   const palette = getPalette(reel.theme);
 
-  let cursor = 0;
+  // Accumulate exact seconds and derive each boundary from the running total,
+  // so rounding never compounds across scenes (a scene's start is always
+  // Math.round(cumulativeSeconds * fps), not the sum of rounded frame counts).
+  let cursorSeconds = 0;
   const sequenced = reel.scenes.map((scene, i) => {
-    const from = cursor;
-    const frames = Math.max(1, Math.round(scene.duration * fps));
-    cursor += frames;
+    const from = Math.round(cursorSeconds * fps);
+    cursorSeconds += scene.duration;
+    const frames = Math.max(1, Math.round(cursorSeconds * fps) - from);
     return {scene, from, frames, key: i};
   });
 
@@ -112,12 +141,15 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
         <BeatPunch>
         {sequenced.map(({scene, from, frames, key}) => {
           const Comp = SCENE_COMPONENTS[scene.type];
-          if (!Comp) return null;
           return (
             <Sequence key={key} from={from} durationInFrames={frames} name={`${key}-${scene.type}`}>
-              <SceneTransition kind={transitionFor(scene, key)}>
-                <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
-              </SceneTransition>
+              {Comp ? (
+                <SceneTransition kind={transitionFor(scene, key)}>
+                  <Comp scene={{...scene, handle: scene.handle ?? reel.handle, logo: scene.logo ?? reel.logo}} accent={accent} secondary={secondary} />
+                </SceneTransition>
+              ) : (
+                <UnknownScene type={scene.type} index={key} accent={accent} />
+              )}
               {/* personality overlays sit above the scene, outside its transition */}
               {scene.lowerThird ? <LowerThird data={scene.lowerThird} accent={accent} /> : null}
               {scene.stickers ? <Stickers stickers={scene.stickers} /> : null}

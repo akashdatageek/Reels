@@ -18,10 +18,12 @@ Env:
 """
 import argparse
 import base64
+import hashlib
 import json
 import os
 import pathlib
 import sys
+import time
 
 import requests
 
@@ -80,20 +82,24 @@ def generate_nano_banana(prompt: str, out_path: pathlib.Path) -> None:
             "imageConfig": {"aspectRatio": "9:16"},
         },
     }
-    resp = requests.post(
-        ENDPOINT,
-        params={"key": API_KEY},
-        json=body,
-        timeout=120,
-    )
-    resp.raise_for_status()
-    data = resp.json()
-    for part in data["candidates"][0]["content"]["parts"]:
-        inline = part.get("inlineData") or part.get("inline_data")
-        if inline:
-            out_path.write_bytes(base64.b64decode(inline["data"]))
-            return
-    raise RuntimeError(f"no image in response: {json.dumps(data)[:500]}")
+    # Retry transient failures with exponential backoff (same pattern as tts.py).
+    last_err = None
+    for attempt in range(4):
+        resp = requests.post(ENDPOINT, params={"key": API_KEY}, json=body, timeout=120)
+        if resp.status_code in (429, 500, 503):
+            last_err = f"HTTP {resp.status_code}: {resp.text[:300]}"
+            print(f"  nano banana {resp.status_code}, retry {attempt + 1}/4", file=sys.stderr)
+            time.sleep(2 ** (attempt + 1))
+            continue
+        resp.raise_for_status()
+        data = resp.json()
+        for part in data["candidates"][0]["content"]["parts"]:
+            inline = part.get("inlineData") or part.get("inline_data")
+            if inline:
+                out_path.write_bytes(base64.b64decode(inline["data"]))
+                return
+        raise RuntimeError(f"no image in response: {json.dumps(data)[:500]}")
+    raise RuntimeError(f"nano banana failed after retries: {last_err}")
 
 
 def generate_placeholder(prompt: str, out_path: pathlib.Path, accent: str = "#00E5FF") -> None:
@@ -142,12 +148,12 @@ def main() -> int:
 
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
-        # (prompt field, path field, filename suffix, is_backdrop)
+        # (prompt field, path field, is_backdrop)
         jobs = [
-            ("imagePrompt", "image", "", False),
-            ("backdropPrompt", "backdrop", "_bg", True),
+            ("imagePrompt", "image", False),
+            ("backdropPrompt", "backdrop", True),
         ]
-        for prompt_field, target_field, suffix, is_backdrop in jobs:
+        for prompt_field, target_field, is_backdrop in jobs:
             subject = scene.get(prompt_field)
             if not subject:
                 continue
@@ -159,13 +165,18 @@ def main() -> int:
             else:
                 framing = f" Composition: {COMPOSITIONS[idx % len(COMPOSITIONS)]}."
             prompt = BASE_RULES + vibe_words + subject + framing
+            # Filename is a hash of the FINAL prompt, not the scene index — so a
+            # scene keeps its image when other scenes are inserted/reordered, and
+            # a reworded prompt automatically maps to a fresh file. Backdrop
+            # framing differs from foreground, so the two never collide.
+            digest = hashlib.sha1(prompt.encode("utf-8")).hexdigest()[:12]
+            out_path = img_dir / f"img_{digest}.png"
             existing = scene.get(target_field)
             if existing and (out_dir / existing).exists() and not args.force:
                 print(f"scene {idx:02d}: keeping existing {target_field} {existing}")
                 continue
-            out_path = img_dir / f"scene_{idx:02d}{suffix}.png"
             if out_path.exists() and not args.force:
-                print(f"scene {idx:02d}: {target_field} already generated, skipping (--force to redo)")
+                print(f"scene {idx:02d}: {target_field} already generated ({out_path.name}), skipping")
             else:
                 print(f"scene {idx:02d}: generating {target_field} -> {out_path.name}")
                 if API_KEY:
