@@ -129,4 +129,13 @@ The reel's `vibe` (set in reel.json by the `author` skill) also drives voice
 delivery: `bold` = brisk news energy, `moody` = slow and intimate. Write V2 in
 the register you intend to hear.
 
+## Mark the gate (required)
+
+Once V2 is written — one voiceSegment per frame, every line cross-checked
+against research.md — record the gate:
+
+```bash
+python3 pipeline/state.py record output/<story> script pass "V2, ~Ns, plain-language pass done"
+```
+
 **Next:** invoke the `author` skill.

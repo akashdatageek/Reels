@@ -50,15 +50,26 @@ gone; look up the real filename from the scene's `image` field.)
 
 ## 3. Apply the editor's lens to the finished thing
 
-**Review with fresh eyes — spawn a reviewer subagent.** You wrote this reel, so
-you'll read past its weak spots. Launch a subagent (the `Agent` tool) whose only
-inputs are `input/<story>/research.md` and a few exported stills (§1) — *not*
-this conversation. Ask it: does the reel land the story to someone who hasn't
-seen the source? Is any on-screen number unsupported by research.md? Where does
-it drag? Treat its answer as the notes to act on. A clean-context read catches
-what author's-bias hides.
+**Fact-check with fresh eyes — the `factcheck` gate.** Comprehension (is it
+UNDERSTOOD) was already gated before authoring by the `comprehension` skill;
+this gate is the other half — **is it TRUE**. You wrote this reel, so you'll
+read past its weak spots. Launch a subagent (the `Agent` tool) whose only inputs
+are `input/<story>/research.md` and the reel's on-screen claims — every number,
+label, stat, name, and figure caption from `reel.json` plus a few exported
+stills (§1) — *not* this conversation. Ask it one thing: **does every on-screen
+claim trace to a sourced line in research.md?** It should flag any stat that's
+unsupported, misattributed (wrong source/credit), or drifted from the receipt
+(a rounded or transcribed number that no longer matches). Fix every flag in
+reel.json — or cut the claim — then record the gate:
 
-Re-run the `script` skill's critique lens (problem before announcement · proof
+```bash
+python3 pipeline/state.py record output/<story> factcheck pass "every on-screen claim traces to research.md"
+```
+
+If a claim can't be traced, don't record `pass` — fix it first. This is the
+non-negotiable "never use an unverified stat" rule, enforced as a gate.
+
+Then re-run the `script` skill's critique lens (problem before announcement · proof
 moment · stats felt by contrast · outro calls back) — this time against what's
 actually on screen, not the words on paper. Plus the render-only checks:
 
@@ -86,7 +97,18 @@ changed).
 - **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary, source
   credit (from research.md), the handle **@startups.ai**, 8–12 hashtags. Emoji
   in the caption are fine; on-screen text stays clean.
-- **Show the output paths** (`output/<story>/reel.mp4` + `cover.png`).
+- **Record the factcheck gate** (from §3 — every on-screen claim traces to
+  research.md). Comprehension was already gated before authoring, so both
+  quality gates — TRUE and UNDERSTOOD — are now green.
+- **Hand off through the gate (never print the path yourself).** The reel is
+  DONE only when `handoff.sh` exits 0 — it checks every required stage is green
+  and *then* prints the output paths:
+  ```bash
+  bash scripts/handoff.sh output/<story>
+  ```
+  If it exits 1, it names the red gates — go back and clear them (a missing
+  stage means that skill never recorded, or its check failed). Do **not** report
+  `reel.mp4` any other way; the exit code is the source of truth.
 - **Never post automatically.**
 
 ## Hard rules (always)

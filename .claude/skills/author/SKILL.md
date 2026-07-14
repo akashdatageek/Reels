@@ -194,4 +194,15 @@ A two-scene slice — a hook and a real figure. Note: subject-only image prompt,
 }
 ```
 
+## Verify as you wire (the `factcheck` gate is recorded later)
+
+reel.json is the moment content becomes on-screen text — so as you place each
+number, stat, quote, and figure caption, keep it traceable to a sourced line in
+`research.md`. No stat that only lives in your head, no figure credited to the
+wrong source, no rounded number that drifted from the receipt. Catching it here
+saves a wasted render. The **`factcheck` gate itself is recorded by the `editor`
+skill** (a fresh-context pass over the rendered reel vs research.md) — that's
+the *truth* gate; the `comprehension` gate already checked it's *understood*.
+Don't record `factcheck` here; just don't hand the build an unsourced figure.
+
 **Next:** invoke the `build` skill.

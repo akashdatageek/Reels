@@ -24,6 +24,11 @@ REEL_JSON="$STORY_DIR/reel.json"
 CAPTIONS_JSON="$STORY_DIR/captions.json"
 VOICE="$STORY_DIR/voice.mp3"
 
+# Record the build stage into the state ledger: fail on ANY nonzero exit
+# (precondition miss, render error, ffmpeg error), pass only on a clean finish.
+build_state() { python3 "$REPO_DIR/pipeline/state.py" record "$STORY_DIR" build "$1" "$2" >/dev/null 2>&1 || true; }
+trap 'rc=$?; [ "$rc" -ne 0 ] && build_state fail "assemble.sh exited $rc"' EXIT
+
 [ -f "$REEL_JSON" ] || { echo "missing $REEL_JSON" >&2; exit 1; }
 [ -f "$VOICE" ] || { echo "missing $VOICE (run pipeline/tts.py first)" >&2; exit 1; }
 
@@ -94,5 +99,6 @@ else
 fi
 
 rm -f "$STORY_DIR/video_silent.mp4" "$STORY_DIR/props.json"
+build_state pass "reel.mp4 rendered + muxed"
 echo ""
 echo "DONE -> $OUT"

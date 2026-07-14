@@ -14,6 +14,12 @@ bash scripts/make_reel.sh output/<story>
 = `preflight.py` → `tts.py` → `align.py` → `captions.py` → `generate_images.py`
 → `assemble.sh`. Any step can be run individually if something needs a retry.
 
+Every step records its result into the story's gate ledger
+(`output/<story>/state.json`, via `pipeline/state.py`): `preflight` and `build`
+are **required gates** the final `handoff.sh` enforces; `tts`/`align`/`captions`/
+`images` log for the record. A step that fails records `fail` — so a red gate in
+the ledger is exactly the step to re-run.
+
 ## What each step does
 
 0. **`preflight.py` — validate before spending.** Runs first, before any TTS or

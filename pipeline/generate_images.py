@@ -27,6 +27,8 @@ import time
 
 import requests
 
+import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
 try:  # optional: load .env from repo root
     from dotenv import load_dotenv
 
@@ -183,15 +185,21 @@ def main() -> int:
                 print(f"scene {idx:02d}: {target_field} already generated ({out_path.name}), skipping")
             else:
                 print(f"scene {idx:02d}: generating {target_field} -> {out_path.name}")
-                if API_KEY:
-                    generate_nano_banana(prompt, out_path)
-                else:
-                    generate_placeholder(prompt, out_path, reel.get("accentColor", "#00E5FF"))
+                try:
+                    if API_KEY:
+                        generate_nano_banana(prompt, out_path)
+                    else:
+                        generate_placeholder(prompt, out_path, reel.get("accentColor", "#00E5FF"))
+                except Exception as exc:  # noqa: BLE001 — record, then re-raise
+                    state.record(out_dir, "images", "fail",
+                                 f"scene {idx:02d} {target_field}: {type(exc).__name__}: {exc}")
+                    raise
                 made += 1
             scene[target_field] = rel
 
     reel_path.write_text(json.dumps(reel, indent=2), encoding="utf-8")
     print(f"\n{made} image(s) generated; reel.json updated")
+    state.record(out_dir, "images", "pass", f"{made} image(s) generated")
     return 0
 
 
