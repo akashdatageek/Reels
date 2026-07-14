@@ -86,7 +86,22 @@ changed).
 - **Write `output/<story>/caption.txt`:** 1-line hook, 2–3 line summary, source
   credit (from research.md), the handle **@startups.ai**, 8–12 hashtags. Emoji
   in the caption are fine; on-screen text stays clean.
-- **Show the output paths** (`output/<story>/reel.mp4` + `cover.png`).
+- **Record the comprehension gate.** The §3 fresh-context reviewer is the test
+  that a layperson actually gets the reel. Once you've acted on its notes and a
+  clean-context read lands the story, record it:
+  ```bash
+  python3 pipeline/state.py record output/<story> comprehension pass "fresh-context reviewer: story lands"
+  ```
+  If the reviewer still doesn't get it, fix the reel — don't record `pass`.
+- **Hand off through the gate (never print the path yourself).** The reel is
+  DONE only when `handoff.sh` exits 0 — it checks every required stage is green
+  and *then* prints the output paths:
+  ```bash
+  bash scripts/handoff.sh output/<story>
+  ```
+  If it exits 1, it names the red gates — go back and clear them (a missing
+  stage means that skill never recorded, or its check failed). Do **not** report
+  `reel.mp4` any other way; the exit code is the source of truth.
 - **Never post automatically.**
 
 ## Hard rules (always)

@@ -26,6 +26,8 @@ import pathlib
 import re
 import sys
 
+import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
 # Must stay in sync with SCENE_COMPONENTS in remotion/src/Reel.tsx.
 KNOWN_TYPES = {
     "HookCard",
@@ -66,16 +68,18 @@ def main() -> int:
     args = parser.parse_args()
 
     reel_path = pathlib.Path(args.reel_json)
+    out_dir = reel_path.parent
     if not reel_path.exists():
         print(f"preflight: not found: {reel_path}", file=sys.stderr)
+        state.record(out_dir, "preflight", "fail", f"reel.json not found: {reel_path}")
         return 1
     try:
         reel = json.loads(reel_path.read_text(encoding="utf-8"))
     except ValueError as exc:
         print(f"preflight: reel.json is not valid JSON — {exc}", file=sys.stderr)
+        state.record(out_dir, "preflight", "fail", f"invalid JSON: {exc}")
         return 1
 
-    out_dir = reel_path.parent
     repo_dir = pathlib.Path(__file__).resolve().parent.parent
     errors: list[str] = []
     warnings: list[str] = []
@@ -83,6 +87,7 @@ def main() -> int:
     scenes = reel.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         print("preflight: reel.json has no scenes", file=sys.stderr)
+        state.record(out_dir, "preflight", "fail", "reel.json has no scenes")
         return 1
 
     for idx, scene in enumerate(scenes):
@@ -138,9 +143,11 @@ def main() -> int:
         for e in errors:
             print(f"preflight ERROR: {e}", file=sys.stderr)
         print(f"\npreflight: {len(errors)} error(s) — fix reel.json before building.", file=sys.stderr)
+        state.record(out_dir, "preflight", "fail", f"{len(errors)} error(s): {errors[0]}")
         return 1
 
     print(f"preflight: OK — {len(scenes)} scenes, {len(warnings)} warning(s)")
+    state.record(out_dir, "preflight", "pass", f"{len(scenes)} scenes, {len(warnings)} warning(s)")
     return 0
 
 

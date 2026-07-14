@@ -70,4 +70,16 @@ the user to provide the missing data manually** — paste the text, or drop a
 screenshot/file into the story's `assets/`. Better a paused reel than a
 confident-but-wrong one.
 
+## Mark the gate (required — the reel can't ship without it)
+
+Once research.md is written and every kept fact carries a source, record the
+gate so the final `handoff.sh` can see this stage passed:
+
+```bash
+python3 pipeline/state.py record output/<story> research pass "verified from N sources"
+```
+
+If you had to stop and ask for manual data, don't record `pass` — leave it
+unrecorded (handoff stays blocked) until the story is actually verified.
+
 **Next:** invoke the `content` skill (generate the frames), then `script`.

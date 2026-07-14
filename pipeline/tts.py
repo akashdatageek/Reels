@@ -27,6 +27,8 @@ import sys
 
 import edge_tts
 
+import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
 try:  # optional: load .env from repo root (for the gemini engine key)
     from dotenv import load_dotenv
 
@@ -282,6 +284,8 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
     print(f"\nvoice.mp3 written, total {reel['totalDuration']}s")
     print(f"word_timings.json: {len(all_words)} words")
     print(f"reel.json updated with real durations")
+    state.record(out_dir, "tts", "pass",
+                 f"{engine} · {len(all_words)} words · {reel['totalDuration']}s")
     if long_scenes:
         print(
             f"\n⚠️  PACING: {len(long_scenes)} scene(s) run long "
@@ -345,7 +349,11 @@ def main() -> int:
     if not reel_path.exists():
         print(f"not found: {reel_path}", file=sys.stderr)
         return 1
-    asyncio.run(run(reel_path, args.voice, engine=engine))
+    try:
+        asyncio.run(run(reel_path, args.voice, engine=engine))
+    except Exception as exc:  # noqa: BLE001 — record the failure, then re-raise
+        state.record(reel_path.parent, "tts", "fail", f"{type(exc).__name__}: {exc}")
+        raise
     return 0
 
 

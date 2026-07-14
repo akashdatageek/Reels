@@ -19,6 +19,8 @@ import argparse
 import json
 import pathlib
 
+import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
 
 def group_words(words, max_words=4, max_gap=0.6):
     groups, current = [], []
@@ -55,12 +57,17 @@ def main() -> int:
     args = parser.parse_args()
 
     path = pathlib.Path(args.timings_json)
-    words = json.loads(path.read_text(encoding="utf-8"))
-    groups = group_words(words, args.max_words, args.max_gap)
-
-    out = path.parent / "captions.json"
-    out.write_text(json.dumps(groups, indent=2), encoding="utf-8")
+    story_dir = path.parent
+    try:
+        words = json.loads(path.read_text(encoding="utf-8"))
+        groups = group_words(words, args.max_words, args.max_gap)
+        out = story_dir / "captions.json"
+        out.write_text(json.dumps(groups, indent=2), encoding="utf-8")
+    except Exception as exc:  # noqa: BLE001 — record the failure, then re-raise
+        state.record(story_dir, "captions", "fail", f"{type(exc).__name__}: {exc}")
+        raise
     print(f"{len(words)} words -> {len(groups)} caption groups -> {out}")
+    state.record(story_dir, "captions", "pass", f"{len(words)} words, {len(groups)} groups")
     return 0
 
 

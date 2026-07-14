@@ -75,4 +75,16 @@ research.md, it doesn't exist yet — fix the research or cut the frame. Keep th
 research caveats attached to the frames they touch, so the script and author
 inherit them.
 
+## Mark the gate (required)
+
+Once frames.md is written and every frame cites real content from research.md,
+record the gate:
+
+```bash
+python3 pipeline/state.py record output/<story> content pass "N frames, all cite research.md"
+```
+
+Don't record `pass` while any frame is still a placeholder with no receipt —
+fix the research or cut the frame first.
+
 **Next:** invoke the `script` skill to write the voiceover to these frames.

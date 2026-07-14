@@ -20,6 +20,8 @@ import pathlib
 import re
 import sys
 
+import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
 
 def norm(w: str) -> str:
     return re.sub(r"[^a-z0-9]", "", w.lower())
@@ -68,21 +70,24 @@ def main() -> int:
                         help="faster-whisper model size (tiny.en/base.en/small.en)")
     args = parser.parse_args()
 
+    reel_path = pathlib.Path(args.reel_json)
+    out_dir = reel_path.parent
+
     try:
         from faster_whisper import WhisperModel
     except ImportError:
         print("align: faster-whisper not installed — keeping estimated timings", file=sys.stderr)
+        state.record(out_dir, "align", "pass", "faster-whisper unavailable, kept estimates")
         return 0
 
-    reel_path = pathlib.Path(args.reel_json)
     reel = json.loads(reel_path.read_text(encoding="utf-8"))
-    out_dir = reel_path.parent
     seg_dir = out_dir / "segments"
 
     try:
         model = WhisperModel(args.model, device="cpu", compute_type="int8")
     except Exception as exc:  # noqa: BLE001 — model download can fail offline
         print(f"align: model unavailable ({exc}) — keeping estimated timings", file=sys.stderr)
+        state.record(out_dir, "align", "pass", "model unavailable, kept estimates")
         return 0
 
     # Load the estimated timings tts.py already wrote, so scenes that DON'T
@@ -103,7 +108,12 @@ def main() -> int:
         if not text or not seg_path.exists():
             continue
         script_words = text.split()
-        words = align_segment(model, seg_path, script_words)
+        try:
+            words = align_segment(model, seg_path, script_words)
+        except Exception as exc:  # noqa: BLE001 — a transcription failure is real
+            print(f"align: scene {idx:02d} transcription failed ({exc})", file=sys.stderr)
+            state.record(out_dir, "align", "fail", f"scene {idx:02d}: {type(exc).__name__}: {exc}")
+            return 1
         offset = float(scene.get("audioStart", 0.0))
         if words is None:
             # keep this scene's estimated timings (do NOT drop its captions)
@@ -123,6 +133,7 @@ def main() -> int:
 
     if not aligned_scene_ids:
         print("align: nothing aligned — keeping estimated timings", file=sys.stderr)
+        state.record(out_dir, "align", "pass", "nothing aligned, kept estimates")
         return 0
 
     # Merge: aligned scenes replace their estimates; every other scene keeps its
@@ -137,6 +148,8 @@ def main() -> int:
         f"align: refined {len(aligned_scene_ids)} scene(s), kept estimates for "
         f"{kept_scenes} — {len(merged)} words total"
     )
+    state.record(out_dir, "align", "pass",
+                 f"refined {len(aligned_scene_ids)} scene(s), {len(merged)} words")
     return 0
 
 

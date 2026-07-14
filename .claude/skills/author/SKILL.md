@@ -194,4 +194,20 @@ A two-scene slice — a hook and a real figure. Note: subject-only image prompt,
 }
 ```
 
+## Fact-check gate (required — the last check before pixels)
+
+reel.json is the moment content becomes on-screen text. Before the build spends
+anything, verify **every on-screen number, stat, quote, and figure caption in
+reel.json traces to a sourced line in `research.md`** — no stat that only lives
+in your head, no figure credited to the wrong source, no rounded number that
+drifted from the receipt. This is the non-negotiable "never use an unverified
+stat" rule, enforced as a gate. Only when it holds, record it:
+
+```bash
+python3 pipeline/state.py record output/<story> factcheck pass "all on-screen stats trace to research.md"
+```
+
+If a number can't be traced, fix it (or cut the scene) and re-check — don't
+record `pass` on a reel with an unsourced figure.
+
 **Next:** invoke the `build` skill.
