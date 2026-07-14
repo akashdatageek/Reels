@@ -11,20 +11,35 @@ One command runs everything:
 bash scripts/make_reel.sh output/<story>
 ```
 
-= `tts.py` → `align.py` → `captions.py` → `generate_images.py` → `assemble.sh`.
-Any step can be run individually if something needs a retry.
+= `preflight.py` → `tts.py` → `align.py` → `captions.py` → `generate_images.py`
+→ `assemble.sh`. Any step can be run individually if something needs a retry.
 
 ## What each step does
 
+0. **`preflight.py` — validate before spending.** Runs first, before any TTS or
+   image API call. Hard-fails on an unknown scene `type` (the renderer would
+   otherwise skip it silently and swallow its narration time), a referenced
+   asset that doesn't exist (figure/image/backdrop/logo/music), or unparseable
+   JSON; warns on a spoken scene with no `voiceSegment`, or a donut/bar
+   `statVariant` whose stat isn't a percentage/fraction. Fix reel.json and
+   re-run — nothing downstream runs until it's clean.
 1. **`tts.py` — voice + timings.** Synthesizes each scene's `voiceSegment` into
    `voice.mp3`, measures real durations, writes them back into reel.json
    (durations stop being placeholders) and stamps each scene's `audioStart`.
-   - **Delivery matches the vibe automatically:** `bold` = brisk news energy,
-     `moody` = slow and intimate; a reel's `voiceStyle` overrides both.
+   - **Delivery and the vibe:** on the **`gemini`** engine the vibe sets a full
+     natural-language delivery direction (`bold` = brisk news energy, `moody` =
+     slow and intimate), and a reel's `voiceStyle` overrides it. The **`edge`**
+     engine can't read a style prompt — it only gets the vibe's *tempo* (bold
+     speaks a touch faster, moody slower); `voiceStyle` has no effect there. Use
+     `gemini` when the delivery direction matters.
+   - **Pacing warning:** any scene whose narration runs past ~8s prints a
+     `⚠️ PACING` line — that frame will drag on screen. Split the narration
+     across visual beats (see the `author` skill's pacing rule) and re-author.
    - Engines (`--engine`, or `TTS_ENGINE` for make_reel.sh): `edge` (word-exact
      timings, needs a WebSocket) · `gemini` (plain HTTPS, uses
      `NANO_BANANA_API_KEY`; timings estimated then refined by align.py) ·
-     `mock` (silent, for testing).
+     `mock` (silent, for testing). `make_reel.sh` **auto-falls back** from
+     `edge` to `gemini` if the edge WebSocket is blocked.
 2. **`align.py` — refine timings.** Forced alignment (faster-whisper) tightens
    word timings to the audio; degrades gracefully to the estimate if the model
    is unavailable. **Only runs for `gemini`/`mock`** (which start from estimated
@@ -46,8 +61,12 @@ Any step can be run individually if something needs a retry.
      off-center), indexed by scene position so images never look cloned
    ```
 
-   Without `NANO_BANANA_API_KEY`, it emits styled placeholder gradients so the
-   pipeline still runs end-to-end.
+   Each file is named `img_<hash-of-the-final-prompt>.png` — **keyed by the
+   prompt, not the scene index** — so inserting or reordering scenes never
+   re-rolls untouched images, and a reworded prompt automatically maps to a
+   fresh file. Nano Banana calls retry transient failures (429/500/503) with
+   exponential backoff. Without `NANO_BANANA_API_KEY`, it emits styled
+   placeholder gradients so the pipeline still runs end-to-end.
 5. **`assemble.sh` — render + mux.** Remotion renders scenes to silent video
    (music staged as `music.mp3` so visuals pulse to the beat); FFmpeg muxes
    voice + music (music sidechain-ducked −12 dB under the voice) and

@@ -85,8 +85,18 @@ def main() -> int:
         print(f"align: model unavailable ({exc}) — keeping estimated timings", file=sys.stderr)
         return 0
 
-    all_words = []
-    refined_scenes = 0
+    # Load the estimated timings tts.py already wrote, so scenes that DON'T
+    # align keep their estimates instead of losing their captions entirely.
+    tw_path = out_dir / "word_timings.json"
+    estimates = []
+    if tw_path.exists():
+        try:
+            estimates = json.loads(tw_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            estimates = []
+
+    aligned_words = []
+    aligned_scene_ids: set[int] = set()
     for idx, scene in enumerate(reel["scenes"]):
         text = (scene.get("voiceSegment") or "").strip()
         seg_path = seg_dir / f"scene_{idx:02d}.mp3"
@@ -96,11 +106,12 @@ def main() -> int:
         words = align_segment(model, seg_path, script_words)
         offset = float(scene.get("audioStart", 0.0))
         if words is None:
-            print(f"align: scene {idx:02d} — no speech recognized, skipping")
+            # keep this scene's estimated timings (do NOT drop its captions)
+            print(f"align: scene {idx:02d} — no speech recognized, keeping estimate")
             continue
-        refined_scenes += 1
+        aligned_scene_ids.add(idx)
         for w in words:
-            all_words.append(
+            aligned_words.append(
                 {
                     "word": w["word"],
                     "start": round(offset + w["start"], 3),
@@ -110,14 +121,22 @@ def main() -> int:
             )
         print(f"align: scene {idx:02d} — {len(words)} words aligned")
 
-    if not all_words:
+    if not aligned_scene_ids:
         print("align: nothing aligned — keeping estimated timings", file=sys.stderr)
         return 0
 
-    (out_dir / "word_timings.json").write_text(
-        json.dumps(all_words, indent=2), encoding="utf-8"
+    # Merge: aligned scenes replace their estimates; every other scene keeps its
+    # estimated words. Order by scene then time.
+    kept = [w for w in estimates if w.get("scene") not in aligned_scene_ids]
+    merged = kept + aligned_words
+    merged.sort(key=lambda w: (w.get("scene", 0), w.get("start", 0.0)))
+
+    tw_path.write_text(json.dumps(merged, indent=2), encoding="utf-8")
+    kept_scenes = len({w.get("scene") for w in kept})
+    print(
+        f"align: refined {len(aligned_scene_ids)} scene(s), kept estimates for "
+        f"{kept_scenes} — {len(merged)} words total"
     )
-    print(f"align: word_timings.json refined ({refined_scenes} scenes, {len(all_words)} words)")
     return 0
 
 

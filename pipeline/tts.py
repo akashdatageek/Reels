@@ -57,14 +57,26 @@ VOICE_STYLES = {
 
 def resolve_voice_style(reel: dict) -> str:
     """Pick the TTS delivery direction: explicit reel `voiceStyle` wins, else a
-    per-vibe preset, else the bold default."""
+    per-vibe preset, else the bold default. (Gemini engine only — a
+    natural-language style prompt.)"""
     explicit = (reel.get("voiceStyle") or "").strip()
     if explicit:
         return explicit if explicit.endswith((":", " ")) else explicit + ": "
     return VOICE_STYLES.get(reel.get("vibe") or "bold", GEMINI_TTS_STYLE)
 
 
+# Edge-TTS can't read a natural-language style prompt, but it does honor a
+# speaking-rate delta — so the vibe's TEMPO still lands on edge (bold = brisk,
+# moody = slow) even though the fine delivery direction is Gemini-only.
+EDGE_RATES = {"bold": "+8%", "moody": "-14%"}
+
+
+def resolve_edge_rate(reel: dict) -> str:
+    return EDGE_RATES.get(reel.get("vibe") or "bold", "+0%")
+
+
 SCENE_PAD_S = 0.35  # breathing room after the voice ends, per scene
+PACING_WARN_S = 8.0  # a scene longer than this drags — split the narration
 
 
 def mp3_duration_seconds(path: pathlib.Path) -> float:
@@ -102,9 +114,9 @@ def mp3_duration_seconds(path: pathlib.Path) -> float:
     return dur
 
 
-async def synth_segment(text: str, voice: str, out_path: pathlib.Path):
+async def synth_segment(text: str, voice: str, out_path: pathlib.Path, rate: str = "+0%"):
     """Synthesize one segment; returns (duration_s, [word timing dicts])."""
-    communicate = edge_tts.Communicate(text, voice)
+    communicate = edge_tts.Communicate(text, voice, rate=rate)
     words = []
     with open(out_path, "wb") as f:
         async for chunk in communicate.stream():
@@ -217,9 +229,11 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
     seg_dir.mkdir(parents=True, exist_ok=True)
 
     voice_style = resolve_voice_style(reel)
+    edge_rate = resolve_edge_rate(reel)
     all_words = []
     cursor = 0.0  # seconds into the concatenated voice track
     seg_files = []
+    long_scenes = []
 
     for idx, scene in enumerate(reel["scenes"]):
         text = (scene.get("voiceSegment") or "").strip()
@@ -235,9 +249,11 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
             gemini_voice = voice if voice != DEFAULT_VOICE else GEMINI_TTS_VOICE
             dur, words = await synth_segment_gemini(text, gemini_voice, seg_path, voice_style)
         else:
-            dur, words = await synth_segment(text, voice, seg_path)
+            dur, words = await synth_segment(text, voice, seg_path, edge_rate)
         if dur <= 0:
             raise RuntimeError(f"scene {idx}: synthesized audio has zero duration")
+        if dur + SCENE_PAD_S > PACING_WARN_S:
+            long_scenes.append((idx, round(dur + SCENE_PAD_S, 1)))
         for w in words:
             all_words.append(
                 {
@@ -266,6 +282,14 @@ async def run(reel_path: pathlib.Path, voice: str, engine: str = "edge") -> None
     print(f"\nvoice.mp3 written, total {reel['totalDuration']}s")
     print(f"word_timings.json: {len(all_words)} words")
     print(f"reel.json updated with real durations")
+    if long_scenes:
+        print(
+            f"\n⚠️  PACING: {len(long_scenes)} scene(s) run long "
+            f"(>{PACING_WARN_S:.0f}s) — a single frame that sits this long drags.",
+            file=sys.stderr,
+        )
+        for idx, secs in long_scenes:
+            print(f"    scene {idx:02d}: {secs}s — split this narration across visual beats", file=sys.stderr)
 
 
 def concat_with_padding(reel: dict, seg_dir: pathlib.Path, voice_path: pathlib.Path):
