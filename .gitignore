@@ -25,3 +25,4 @@ music/*.wav
 # OS
 .DS_Store
 output/*/logo.png
+output/**/reel_v1.mp4
