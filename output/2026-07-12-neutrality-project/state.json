@@ -24,12 +24,6 @@
     "timestamp": "2026-07-14T23:01:30+00:00"
   },
   {
-    "stage": "preflight",
-    "status": "pass",
-    "detail": "11 scenes, 0 warning(s)",
-    "timestamp": "2026-07-14T23:01:30+00:00"
-  },
-  {
     "stage": "tts",
     "status": "pass",
     "detail": "gemini \u00b7 195 words \u00b7 73.76s",
@@ -64,5 +58,11 @@
     "status": "pass",
     "detail": "fresh reviewer PASS: all 11 claims trace to research.md (2 flags fixed + re-verified)",
     "timestamp": "2026-07-15T01:53:34+00:00"
+  },
+  {
+    "stage": "preflight",
+    "status": "pass",
+    "detail": "11 scenes, 0 warning(s)",
+    "timestamp": "2026-07-15T19:16:36+00:00"
   }
 ]

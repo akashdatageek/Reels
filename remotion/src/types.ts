@@ -122,6 +122,15 @@ export interface Scene {
   image?: string;
   /** If set and no image exists, generate_images.py creates one. */
   imagePrompt?: string;
+  /** EDIT MODE (b-roll ONLY, never evidence): a real fetched asset to edit.
+   *  With editPrompt set, generate_images.py sends this image + the
+   *  instruction to Nano Banana and writes images/edit_<hash>.png into
+   *  `image`. The original file is never overwritten; preflight refuses any
+   *  `figure` that enters the edit path. */
+  baseImage?: string;
+  /** The edit instruction (extend to 9:16, match grade, remove distractions —
+   *  never add content that changes what the photo depicts). */
+  editPrompt?: string;
   kenBurns?: 'zoom-in' | 'zoom-out' | 'pan-left' | 'pan-right';
   /** StatCallout */
   stat?: string;

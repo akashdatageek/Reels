@@ -160,6 +160,68 @@ def main() -> int:
     if music and not (repo_dir / music).exists():
         errors.append(f"music track missing — {music} (put a file in music/ or update reel.json)")
 
+    # ---- THE hard rule: editing is for b-roll only, NEVER for evidence ----
+    # Anything a viewer treats as proof (`figure`) stays bit-exact from source.
+    manifest_path = out_dir / "assets_manifest.json"
+    manifest: list = []
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            errors.append("assets_manifest.json is unreadable — fix or delete it")
+    by_file = {r.get("file"): r for r in manifest if isinstance(r, dict)}
+
+    for idx, scene in enumerate(scenes):
+        fig = scene.get("figure")
+        if fig and scene.get("editPrompt"):
+            errors.append(
+                f"scene {idx:02d}: has BOTH figure and editPrompt — evidence is "
+                f"untouchable; editing is for b-roll only"
+            )
+        if fig:
+            row = by_file.get(fig)
+            if row and row.get("edited"):
+                errors.append(
+                    f"scene {idx:02d}: figure {fig!r} is a fetched asset marked "
+                    f"edited in assets_manifest.json — evidence must stay bit-exact "
+                    f"from source; use the untouched original or a real story asset"
+                )
+            if pathlib.PurePath(fig).name.startswith("edit_"):
+                errors.append(
+                    f"scene {idx:02d}: figure {fig!r} points at an edited output "
+                    f"(images/edit_*.png) — evidence is untouchable, never edited"
+                )
+
+    # ---- provenance: every fetched asset accounted for, nothing anonymous ----
+    for row in manifest:
+        f = row.get("file")
+        if f and not (out_dir / f).exists():
+            errors.append(f"fetched asset missing — {f} (in manifest, not on disk; re-run fetch_stock.py)")
+    input_assets = set()
+    input_dir = pathlib.Path(str(out_dir).replace("output/", "input/", 1)) / "assets"
+    if input_dir.exists():
+        input_assets = {p.name for p in input_dir.iterdir() if p.is_file()}
+    assets_dir = out_dir / "assets"
+    if assets_dir.exists():
+        manifest_names = {pathlib.PurePath(r["file"]).name for r in manifest if r.get("file")}
+        for p in sorted(assets_dir.iterdir()):
+            if p.is_file() and p.name not in manifest_names and p.name not in input_assets:
+                warnings.append(
+                    f"assets/{p.name} has no manifest row and isn't in input/ assets — unknown provenance"
+                )
+
+    # ---- attribution: CC-BY fetched assets MUST be credited in caption.txt ----
+    caption_path = out_dir / "caption.txt"
+    caption_text = caption_path.read_text(encoding="utf-8") if caption_path.exists() else ""
+    for row in manifest:
+        if row.get("attribution_required") and row.get("photographer"):
+            if row["photographer"] not in caption_text:
+                errors.append(
+                    f"asset {row.get('file')} ({row.get('license')}) requires attribution but "
+                    f"caption.txt lacks its credit — editor: append "
+                    f"\"📷 {row['photographer']} via {row.get('provider')}\" and re-run preflight"
+                )
+
     trends_warn = trends_staleness_warning(repo_dir)
     if trends_warn:
         warnings.append(trends_warn)

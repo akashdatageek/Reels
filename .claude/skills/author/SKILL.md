@@ -147,7 +147,11 @@ Scene types: `HookCard`, `ImageScene`, `StatCallout`, `SplitCompare`,
   Emphasize the surprise, not the subject.
 - **Prefer provided assets over generated images.** Copy usable files from
   `input/<story>/assets/` into `output/<story>/assets/` and reference them in
-  the scene's `image` field. Only add an `imagePrompt` to scenes with no asset.
+  the scene's `image` field. Follow the frame's ladder rung from frames.md:
+  fetched b-roll goes in `image` as-is (rung 3), or via `baseImage` +
+  `editPrompt` when it needs 9:16/grade/cleanup (rung 4 — b-roll ONLY, never a
+  `figure`). Only add an `imagePrompt` (rung 5, last resort) to scenes whose
+  frame explicitly justified pure generation.
 - **Image prompts describe the SUBJECT only.** `generate_images.py` prepends a
   photographic, anti-slop base and auto-rotates composition per scene, so don't
   restate style — push for a *real photograph or specific art-directed still*,
