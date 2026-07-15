@@ -76,6 +76,12 @@ must not be able to skip its own checklist. So:
 - **Show the real thing.** If the source provides a chart/figure/photo that
   carries the point, put it on screen (`FigureScene`) and explain it out loud —
   don't paraphrase evidence into decoration or a generated image.
+- **Editing is for b-roll only, NEVER for evidence.** Anything a viewer treats
+  as proof (charts, benchmark figures, result screenshots — every `figure`)
+  stays bit-exact from source; only fetched `broll` assets may be edited
+  (`baseImage`+`editPrompt`), and preflight hard-fails violations. Visuals
+  follow the content skill's ladder: real asset → our screenshot → fetched
+  stock → stock+edit → pure generation (last resort).
 - **Break the structure.** Never reuse the same scene order two days running.
 - **Never post automatically.** Hand off via `handoff.sh` (which shows the path
   only when all gates are green) and stop.
@@ -93,7 +99,7 @@ must not be able to skip its own checklist. So:
 .claude/skills/         research · content · script · comprehension · author · build · editor (the workflow)
                         + trends (weekly REFRESH → trends-current.md; author APPLYs ≤2 tactics per reel)
 input/<story>/          brief.md (+ assets/) → research.md, frames.md, script.md written here
-pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py · preflight.py · state.py (ledger)
+pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py (gen + b-roll edit) · fetch_stock.py (licensed photos → assets_manifest.json) · preflight.py · state.py (ledger)
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
 scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · handoff.sh (final gate) · still.sh (review frame) · install_fonts.sh
 music/                  royalty-free tracks (see music/README.md)

@@ -107,6 +107,13 @@ changed).
   - **3–5 hashtags MAX, all niche-relevant** (`#AInews #AIbias #Grok` — never
     generic `#viral #fyp`). More tags dilute relevance signals and read as
     spam. Emoji in the caption are fine; on-screen text stays clean.
+  - **Photo credits (required when owed).** Check
+    `output/<story>/assets_manifest.json`: every row with
+    `attribution_required: true` gets a credit line in caption.txt —
+    `📷 <photographer> via <provider>` — one per photographer. Then **re-run
+    `python3 pipeline/preflight.py output/<story>/reel.json`** to refresh the
+    gate: preflight hard-fails a missing owed credit, so the ledger stays red
+    until the credit lands.
 - **Record the factcheck gate** (from §3 — every on-screen claim traces to
   research.md). Comprehension was already gated before authoring, so both
   quality gates — TRUE and UNDERSTOOD — are now green.

@@ -36,7 +36,9 @@ try:  # optional: load .env from repo root
 except ImportError:
     pass
 
-API_KEY = os.environ.get("NANO_BANANA_API_KEY", "")
+# One key powers TTS + generation + editing: fall back to GEMINI_API_KEY
+# exactly like tts.py does.
+API_KEY = os.environ.get("NANO_BANANA_API_KEY") or os.environ.get("GEMINI_API_KEY") or ""
 MODEL = os.environ.get("NANO_BANANA_MODEL", "gemini-2.5-flash-image")
 ENDPOINT = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
 
@@ -76,9 +78,29 @@ COMPOSITIONS = [
 ]
 
 
-def generate_nano_banana(prompt: str, out_path: pathlib.Path) -> None:
+# House rule appended to EVERY edit instruction (and included in the output
+# hash): editing may reframe/grade/clean a real photo — it must never change
+# what the photo depicts. Evidence never comes through this path at all
+# (preflight blocks `figure` + edits), but even b-roll must stay honest.
+EDIT_RULES = (
+    " Keep the photograph's real content truthful: do not add screens with "
+    "fabricated data, invented text, logos, people, or objects that change what "
+    "the photo depicts. Output a vertical 9:16 image, full-bleed."
+)
+
+MIME_BY_SUFFIX = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}
+
+
+def generate_nano_banana(prompt: str, out_path: pathlib.Path, base_image: pathlib.Path | None = None) -> None:
+    """Text->image generation, or (with base_image) image+instruction editing —
+    same Gemini endpoint, the base photo sent as inline_data."""
+    parts = []
+    if base_image is not None:
+        mime = MIME_BY_SUFFIX.get(base_image.suffix.lower(), "image/jpeg")
+        parts.append({"inline_data": {"mime_type": mime, "data": base64.b64encode(base_image.read_bytes()).decode()}})
+    parts.append({"text": prompt})
     body = {
-        "contents": [{"parts": [{"text": prompt}]}],
+        "contents": [{"parts": parts}],
         "generationConfig": {
             "responseModalities": ["IMAGE"],
             "imageConfig": {"aspectRatio": "9:16"},
@@ -148,13 +170,72 @@ def main() -> int:
     image_style = (reel.get("imageStyle") or "").strip()
     vibe_words = f"{image_style.rstrip('.')}. " if image_style else DEFAULT_VIBE
 
+    import fetch_stock  # sibling module: manifest helpers
+
+    manifest = fetch_stock.load_manifest(out_dir)
+    manifest_dirty = False
+
     made = 0
     for idx, scene in enumerate(reel["scenes"]):
-        # (prompt field, path field, is_backdrop)
-        jobs = [
-            ("imagePrompt", "image", False),
-            ("backdropPrompt", "backdrop", True),
-        ]
+        # ---- EDIT MODE: baseImage (a real fetched asset) + editPrompt ----
+        # Produces images/edit_<hash of base bytes + prompt>.png — same stable-
+        # key semantics as imagePrompt (reword -> new hash -> regenerates; the
+        # ORIGINAL fetched file is never overwritten). B-roll only: preflight
+        # refuses any `figure` that enters this path.
+        base_rel = scene.get("baseImage")
+        edit_prompt = (scene.get("editPrompt") or "").strip()
+        if base_rel and edit_prompt:
+            base_path = out_dir / base_rel
+            if not base_path.exists():
+                state.record(out_dir, "images", "fail",
+                             f"scene {idx:02d}: baseImage missing — {base_rel}")
+                raise RuntimeError(f"scene {idx:02d}: baseImage not found: {base_rel}")
+            if scene.get("imagePrompt"):
+                print(f"scene {idx:02d}: WARN both editPrompt and imagePrompt set — edit wins, imagePrompt ignored",
+                      file=sys.stderr)
+            full_edit = edit_prompt + EDIT_RULES
+            digest = hashlib.sha1(base_path.read_bytes() + full_edit.encode("utf-8")).hexdigest()[:12]
+            out_path = img_dir / f"edit_{digest}.png"
+            rel = str(out_path.relative_to(out_dir))
+            if scene.get("image") == rel and out_path.exists() and not args.force:
+                print(f"scene {idx:02d}: keeping existing edit {rel}")
+                continue
+            if out_path.exists() and not args.force:
+                print(f"scene {idx:02d}: edit already generated ({out_path.name}), relinking")
+            else:
+                print(f"scene {idx:02d}: editing {base_rel} -> {out_path.name}")
+                try:
+                    if API_KEY:
+                        generate_nano_banana(full_edit, out_path, base_image=base_path)
+                    else:
+                        # keyless: use the unedited original so the pipeline
+                        # still runs — honest fallback, no fake "edited" flag
+                        print(f"scene {idx:02d}: WARN no API key — using unedited base image", file=sys.stderr)
+                        out_path.write_bytes(base_path.read_bytes())
+                except Exception as exc:  # noqa: BLE001 — record, then re-raise
+                    state.record(out_dir, "images", "fail",
+                                 f"scene {idx:02d} edit: {type(exc).__name__}: {exc}")
+                    raise
+                made += 1
+            scene["image"] = rel
+            if API_KEY:
+                for row in manifest:
+                    if row.get("file") == base_rel:
+                        row["edited"] = True
+                        row["edit_prompt"] = edit_prompt
+                        manifest_dirty = True
+                        break
+                else:
+                    print(f"scene {idx:02d}: WARN baseImage {base_rel} has no manifest row "
+                          f"(not a fetched asset?) — provenance unknown", file=sys.stderr)
+            # imagePrompt is superseded by the edit; backdropPrompt still runs
+            jobs = [("backdropPrompt", "backdrop", True)]
+        else:
+            # (prompt field, path field, is_backdrop)
+            jobs = [
+                ("imagePrompt", "image", False),
+                ("backdropPrompt", "backdrop", True),
+            ]
         for prompt_field, target_field, is_backdrop in jobs:
             subject = scene.get(prompt_field)
             if not subject:
@@ -197,6 +278,8 @@ def main() -> int:
                 made += 1
             scene[target_field] = rel
 
+    if manifest_dirty:
+        fetch_stock.save_manifest(out_dir, manifest)
     reel_path.write_text(json.dumps(reel, indent=2), encoding="utf-8")
     print(f"\n{made} image(s) generated; reel.json updated")
     state.record(out_dir, "images", "pass", f"{made} image(s) generated")

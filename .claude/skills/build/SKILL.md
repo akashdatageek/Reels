@@ -74,8 +74,34 @@ red gate in the ledger is exactly the step to re-run.
    prompt, not the scene index** — so inserting or reordering scenes never
    re-rolls untouched images, and a reworded prompt automatically maps to a
    fresh file. Nano Banana calls retry transient failures (429/500/503) with
-   exponential backoff. Without `NANO_BANANA_API_KEY`, it emits styled
-   placeholder gradients so the pipeline still runs end-to-end.
+   exponential backoff. The key falls back `NANO_BANANA_API_KEY` →
+   `GEMINI_API_KEY` (one key powers TTS + generation + editing). Without any
+   key, it emits styled placeholder gradients so the pipeline still runs.
+
+   **Fetching real b-roll (`pipeline/fetch_stock.py`) — rung 3 of the visual
+   ladder.** Real licensed photos beat generated ones:
+   ```bash
+   python3 pipeline/fetch_stock.py output/<story> --query "data center corridor" --slot broll_01
+   ```
+   Providers fall back Pexels → Unsplash → Openverse (keys in `.env`; Openverse
+   needs none). Prefers portrait, min 1080px short side; every fetch writes a
+   provenance row to `output/<story>/assets_manifest.json` (provider, license,
+   photographer, attribution_required). CC-BY results MUST be credited in
+   caption.txt — preflight enforces it.
+
+   **Editing b-roll (`baseImage` + `editPrompt` on a scene) — rung 4.** Sends
+   the real photo + instruction to the same endpoint; output lands at
+   `images/edit_<hash-of-base-bytes+prompt>.png` (same stable-key semantics:
+   unchanged = idempotent, reworded = fresh file; the ORIGINAL fetched file is
+   never overwritten, its manifest row flips `edited: true`).
+   *House style for edit prompts:* extend to 9:16 vertical · match our grade
+   (restrained contrast, film-grain tolerant) · remove distracting elements.
+   **Never add content that changes what the photo depicts** — no fake screens
+   with fabricated data, no added logos (a no-fabrication rule is also appended
+   to every edit call in code).
+   **THE hard rule: editing is for b-roll only, NEVER for evidence.** `figure`
+   assets stay bit-exact from source — preflight hard-fails a `figure` that is
+   edited, or that points at any `edit_*.png`.
 5. **`assemble.sh` — render + mux.** Remotion renders scenes to silent video
    (music staged as `music.mp3` so visuals pulse to the beat); FFmpeg muxes
    voice + music (music sidechain-ducked −12 dB under the voice) and

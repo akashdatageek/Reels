@@ -28,9 +28,26 @@ frames; the `author` stage turns them into scenes. Content first, words second.
      research.md that fills it, **with its source**. No frame ships without real
      content.
    - **On-screen text** — the few words a viewer reads (headline / label / stat).
-   - **Visual** — the real asset to show (which figure to crop from `assets/`),
-     or a StatCallout / Chart built from a verified number; a generated image
-     only as a last resort, with a reason.
+   - **Visual** — pick from the ladder below, best to last resort, and **name
+     the rung in the frame's Visual cell** (e.g. "R1: fig from paper", "R3:
+     stock b-roll") so every drop from real toward generated is a visible,
+     deliberate choice — never a silent default:
+     1. **Real story asset** — their blog/paper/repo figure or screenshot
+        (crop from `assets/`), or a StatCallout/Chart built from a verified
+        number.
+     2. **Our screenshot of the real thing** — product UI, terminal, docs.
+     3. **Fetched stock b-roll, unedited** — `pipeline/fetch_stock.py` (real
+        licensed photos: Pexels → Unsplash → Openverse; provenance recorded in
+        `assets_manifest.json`).
+     4. **Fetched stock b-roll + Nano Banana edit** — format/grade/cleanup
+        only (`baseImage` + `editPrompt`); never content that changes what the
+        photo depicts.
+     5. **Pure Nano Banana generation** — ONLY when no real image can exist
+        (abstract concepts), with a written reason.
+     **The hard rule: editing is for b-roll only, NEVER for evidence.** Charts,
+     benchmark figures, result screenshots — anything a viewer treats as proof —
+     stay bit-exact from source (rung 1); `figure` assets are untouchable and
+     preflight enforces it.
    Tag each frame's **role**: hook · who · what · result · proof · stakes ·
    **sendable** · outro.
    - **`sendable` is REQUIRED — design one deliberately SENDABLE moment per
