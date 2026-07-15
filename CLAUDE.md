@@ -39,7 +39,7 @@ Every stage records its result into a per-story ledger
 are green:
 
 ```
-research · content · script · factcheck · comprehension · preflight · build
+research · content · script · factcheck · comprehension · preflight · tts · captions · images · build
 ```
 
 The non-negotiables live in this exit code, not in prose — the orchestrator
@@ -58,9 +58,10 @@ must not be able to skip its own checklist. So:
   claim traces to research.md, on the finished render). Correct *and* clear.
 - Each stage marks itself: the creative skills record their gate at the END of
   their SKILL.md (`research`, `content`, `script`, `comprehension`, and
-  `editor`→`factcheck`), and `preflight.py` + `assemble.sh` record
-  `preflight`/`build` automatically. tts/align/captions/images also log to the
-  ledger (informational, not gates).
+  `editor`→`factcheck`), and the pipeline scripts record the mechanical gates
+  automatically. `align` alone is informational (the edge engine skips it by
+  design). Handoff also refuses any scene whose image/backdrop prompt was never
+  generated — a blank scene can't ride a stale green ledger.
 
 ## Non-negotiable rules (apply across every stage)
 

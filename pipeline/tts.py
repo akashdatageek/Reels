@@ -25,9 +25,12 @@ import pathlib
 import struct
 import sys
 
-import edge_tts
-
 import state  # sibling module (scripts run as `python3 pipeline/<x>.py`)
+
+# NOTE: edge_tts is imported LAZILY inside synth_segment() (same pattern as
+# align.py's faster-whisper) — the mock and gemini engines must work in
+# environments that don't have it, and an import-time death would crash before
+# main()'s try/except can record `tts fail` in the ledger.
 
 try:  # optional: load .env from repo root (for the gemini engine key)
     from dotenv import load_dotenv
@@ -118,6 +121,8 @@ def mp3_duration_seconds(path: pathlib.Path) -> float:
 
 async def synth_segment(text: str, voice: str, out_path: pathlib.Path, rate: str = "+0%"):
     """Synthesize one segment; returns (duration_s, [word timing dicts])."""
+    import edge_tts  # lazy: only the edge engine needs it (see module NOTE)
+
     communicate = edge_tts.Communicate(text, voice, rate=rate)
     words = []
     with open(out_path, "wb") as f:

@@ -15,10 +15,11 @@ bash scripts/make_reel.sh output/<story>
 → `assemble.sh`. Any step can be run individually if something needs a retry.
 
 Every step records its result into the story's gate ledger
-(`output/<story>/state.json`, via `pipeline/state.py`): `preflight` and `build`
-are **required gates** the final `handoff.sh` enforces; `tts`/`align`/`captions`/
-`images` log for the record. A step that fails records `fail` — so a red gate in
-the ledger is exactly the step to re-run.
+(`output/<story>/state.json`, via `pipeline/state.py`): `preflight`, `tts`,
+`captions`, `images`, and `build` are **required gates** the final `handoff.sh`
+enforces; `align` alone is informational (the edge engine skips it by design —
+its timings are already word-exact). A step that fails records `fail` — so a
+red gate in the ledger is exactly the step to re-run.
 
 ## What each step does
 
