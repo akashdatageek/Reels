@@ -15,9 +15,11 @@ REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_DIR"
 
 # Every stage that MUST be green before a reel can ship. The creative gates
-# (research → comprehension) are recorded by the skills; preflight + build by
-# the pipeline scripts.
-REQUIRED=(research content script factcheck comprehension preflight build)
+# (research → comprehension) are recorded by the skills; the mechanical gates
+# by the pipeline scripts. `align` is deliberately NOT required — the edge
+# engine skips it by design (its timings are already word-exact), so a missing
+# align entry is normal; every other mechanical stage runs on every build.
+REQUIRED=(research content script factcheck comprehension preflight tts captions images build)
 
 if ! python3 pipeline/state.py check "$STORY_DIR" "${REQUIRED[@]}"; then
   echo "" >&2
@@ -31,6 +33,28 @@ COVER="$STORY_DIR/cover.png"
 missing=0
 [ -f "$REEL" ]  || { echo "⛔ gate 'build' is green but $REEL is missing" >&2; missing=1; }
 [ -f "$COVER" ] || { echo "⛔ 'comprehension' is green but $COVER is missing (editor: export the cover)" >&2; missing=1; }
+
+# No scene may still carry an UNGENERATED image/backdrop prompt. Preflight
+# exempts prompt-scenes (their files come later); the `images` gate covers the
+# run that generated them — but a scene added AFTER images last ran would render
+# blank while riding a stale green ledger. Catch it here, on the final artifact.
+if ! python3 - "$STORY_DIR/reel.json" <<'PY'
+import json, pathlib, sys
+p = pathlib.Path(sys.argv[1]); reel = json.loads(p.read_text(encoding="utf-8"))
+bad = []
+for i, s in enumerate(reel.get("scenes", [])):
+    for prompt, field in (("imagePrompt", "image"), ("backdropPrompt", "backdrop")):
+        if s.get(prompt) and not (s.get(field) and (p.parent / s[field]).exists()):
+            bad.append(f"scene {i:02d}: {prompt} set but no generated {field} file — would render blank")
+for b in bad:
+    print(f"⛔ {b}", file=sys.stderr)
+sys.exit(1 if bad else 0)
+PY
+then
+  echo "⛔ ungenerated prompt(s) above — re-run pipeline/generate_images.py" >&2
+  missing=1
+fi
+
 if [ "$missing" -ne 0 ]; then
   exit 1
 fi
