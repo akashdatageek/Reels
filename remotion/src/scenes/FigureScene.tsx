@@ -112,13 +112,21 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
               opacity: figIn,
             }}
           >
-            {/* zoom layer: image + on-figure highlights share one transform */}
+            {/* zoom layer: image + on-figure highlights share one transform.
+                The camera center is CLAMPED so the viewport never pans past the
+                image edge — zooming near a border must not expose card white. */}
             <div
-              style={{
-                position: 'relative',
-                transformOrigin: `${cx * 100}% ${cy * 100}%`,
-                transform: `translate(${(0.5 - cx) * 100}%, ${(0.5 - cy) * 100}%) scale(${(0.94 + figIn * 0.06) * s})`,
-              }}
+              style={(() => {
+                const S = (0.94 + figIn * 0.06) * s;
+                const half = 1 / (2 * Math.max(S, 0.0001));
+                const ccx = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cx));
+                const ccy = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cy));
+                return {
+                  position: 'relative' as const,
+                  transformOrigin: `${ccx * 100}% ${ccy * 100}%`,
+                  transform: `translate(${(0.5 - ccx) * 100}%, ${(0.5 - ccy) * 100}%) scale(${S})`,
+                };
+              })()}
             >
               <Img src={staticFile(scene.figure)} style={{width: '100%', height: 'auto', display: 'block'}} />
               {active && active.region ? (

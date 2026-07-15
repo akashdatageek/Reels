@@ -1,0 +1,68 @@
+[
+  {
+    "stage": "research",
+    "status": "pass",
+    "detail": "v2 harvest: 48-row inventory + 17-row translation table from both primary PDFs",
+    "timestamp": "2026-07-14T22:36:00+00:00"
+  },
+  {
+    "stage": "content",
+    "status": "pass",
+    "detail": "11 frames, all receipts cite inventory IDs; sendable=fr4; 5 dropped USE items justified",
+    "timestamp": "2026-07-14T22:36:46+00:00"
+  },
+  {
+    "stage": "script",
+    "status": "pass",
+    "detail": "V2: 11 segments, 187 words ~67s, all scenes <=20 words, table-conformant",
+    "timestamp": "2026-07-14T22:37:21+00:00"
+  },
+  {
+    "stage": "comprehension",
+    "status": "pass",
+    "detail": "fresh viewer PASS (re-gated after factcheck fixes): retell correct, all terms defined, zero guess lines",
+    "timestamp": "2026-07-14T23:01:30+00:00"
+  },
+  {
+    "stage": "preflight",
+    "status": "pass",
+    "detail": "11 scenes, 0 warning(s)",
+    "timestamp": "2026-07-14T23:01:30+00:00"
+  },
+  {
+    "stage": "tts",
+    "status": "pass",
+    "detail": "gemini \u00b7 195 words \u00b7 73.76s",
+    "timestamp": "2026-07-14T23:02:28+00:00"
+  },
+  {
+    "stage": "align",
+    "status": "pass",
+    "detail": "model unavailable, kept estimates",
+    "timestamp": "2026-07-14T23:02:29+00:00"
+  },
+  {
+    "stage": "captions",
+    "status": "pass",
+    "detail": "195 words, 67 groups",
+    "timestamp": "2026-07-14T23:02:29+00:00"
+  },
+  {
+    "stage": "images",
+    "status": "pass",
+    "detail": "0 image(s) generated",
+    "timestamp": "2026-07-14T23:02:29+00:00"
+  },
+  {
+    "stage": "build",
+    "status": "pass",
+    "detail": "reel.mp4 rendered + muxed",
+    "timestamp": "2026-07-14T23:05:56+00:00"
+  },
+  {
+    "stage": "factcheck",
+    "status": "pass",
+    "detail": "fresh reviewer PASS: all 11 claims trace to research.md (2 flags fixed + re-verified)",
+    "timestamp": "2026-07-15T01:53:34+00:00"
+  }
+]

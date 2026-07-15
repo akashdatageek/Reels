@@ -1,51 +1,97 @@
 {
-  "title": "The Neutrality Project \u2014 who's the most neutral AI?",
+  "title": "The Neutrality Project \u2014 who's the most neutral AI? (reference cut)",
   "theme": "light",
   "vibe": "bold",
   "accentColor": "#12B98A",
   "secondaryColor": "#0EA5A5",
   "handle": "@startups.ai",
-  "voiceStyle": "Narrate clearly and evenly, like a credible explainer \u2014 engaged but calm and non-partisan: ",
+  "voiceStyle": "Narrate briskly and crisply, like a sharp news explainer with good pace \u2014 clear diction, minimal pauses, credible and non-partisan, never rushed into slurring: ",
   "music": "music/neutrality_bed.mp3",
   "scenes": [
     {
       "type": "HookCard",
-      "duration": 4.32,
-      "text": "The most politically *neutral* AI right now? It's *Grok*.",
+      "duration": 3.68,
+      "text": "The most *neutral* AI? It's *GROK*.",
       "textStyle": "pop",
       "voiceSegment": "The most politically neutral AI right now? It's Grok.",
       "audioStart": 0.0
     },
     {
       "type": "HookCard",
-      "duration": 9.84,
-      "text": "Every AI has a *political lean* \u2014 baked in.",
+      "duration": 5.72,
+      "text": "Every AI has a *hidden lean*",
       "textStyle": "marker",
-      "voiceSegment": "Here's something most people don't realize: every AI chatbot leans a certain way on hot topics \u2014 baked in, whether it tells you or not.",
-      "audioStart": 4.32
+      "voiceSegment": "Every AI chatbot leans one way on hot topics \u2014 baked in, whether it tells you or not.",
+      "audioStart": 3.68
+    },
+    {
+      "type": "HookCard",
+      "duration": 7.04,
+      "text": "The Neutrality Project: 18 AIs \u00b7 *3,987 questions*",
+      "voiceSegment": "An independent group, The Neutrality Project, gave eighteen AIs a political survey \u2014 almost four thousand questions.",
+      "audioStart": 9.4
     },
     {
       "type": "StatCallout",
-      "duration": 10.96,
-      "stat": "4,000",
-      "label": "questions \u2014 a political survey",
-      "voiceSegment": "An independent group, The Neutrality Project, decided to measure it. They gave 18 AIs the same kind of political survey a person would take \u2014 almost 4,000 questions.",
-      "audioStart": 14.16
+      "duration": 5.92,
+      "stat": "97/108",
+      "label": "AI scores leaned LEFT \u00b7 18 AIs \u00d7 6 topics \u2014 The Neutrality Project",
+      "statVariant": "donut",
+      "voiceSegment": "Eighteen AIs, six topics each \u2014 that's one hundred eight scores. Ninety-seven of them leaned left.",
+      "audioStart": 16.44
     },
     {
       "type": "FigureScene",
-      "duration": 13.04,
-      "text": "Almost all leaned left",
+      "duration": 8.64,
+      "text": "Almost all sit LEFT",
       "figure": "assets/aggregate_scale.png",
       "figureCredit": "The Neutrality Project",
-      "voiceSegment": "Almost every one leaned left \u2014 its answers favored progressive views. Across 18 AIs and six topics, that's 108 scores. 97 of them tilted left.",
+      "voiceSegment": "Picture all eighteen on one line, left to right. Left means favoring social change; right, tradition. Nearly all sit left.",
       "annotations": [
         {
-          "text": "Each dot is one AI",
+          "text": "Each dot = one AI",
           "emphasis": false
         },
         {
-          "text": "Left = progressive \u00b7 right = conservative",
+          "text": "Left = social change \u00b7 Right = tradition",
+          "emphasis": true
+        }
+      ],
+      "figureFocus": [
+        {
+          "at": 0.0
+        },
+        {
+          "at": 0.42,
+          "region": {
+            "x": 0.13,
+            "y": 0.15,
+            "w": 0.44,
+            "h": 0.3
+          },
+          "highlight": "spotlight",
+          "label": "NEARLY ALL LEFT"
+        },
+        {
+          "at": 0.8
+        }
+      ],
+      "audioStart": 22.36
+    },
+    {
+      "type": "FigureScene",
+      "duration": 8.64,
+      "text": "Six topics \u2014 hardest: CLIMATE",
+      "figure": "assets/topics_strips.png",
+      "figureCredit": "The Neutrality Project",
+      "voiceSegment": "The six topics: climate, social values, national identity, religion, money, and war and peace. The lean is hardest on climate.",
+      "annotations": [
+        {
+          "text": "The source's own plain labels",
+          "emphasis": false
+        },
+        {
+          "text": "Climate = strongest lean",
           "emphasis": true
         }
       ],
@@ -56,31 +102,34 @@
         {
           "at": 0.45,
           "region": {
-            "x": 0.13,
-            "y": 0.15,
-            "w": 0.44,
-            "h": 0.3
+            "x": 0.03,
+            "y": 0.06,
+            "w": 0.6,
+            "h": 0.24
           },
-          "highlight": "spotlight",
-          "label": "97 OF 108 LEFT"
+          "highlight": "marker",
+          "label": "STRONGEST LEAN"
+        },
+        {
+          "at": 0.8
         }
       ],
-      "audioStart": 25.12
+      "audioStart": 31.0
     },
     {
       "type": "FigureScene",
-      "duration": 10.96,
+      "duration": 7.32,
       "text": "Who's actually neutral?",
       "figure": "assets/neutrality_map.png",
       "figureCredit": "The Neutrality Project",
-      "voiceSegment": "But here's the twist. On the map, closer to the middle means more neutral \u2014 and Elon Musk's Grok landed right on the line. The most balanced of all.",
+      "voiceSegment": "Closer to the middle of that line means more neutral. The closest \u2014 so close it may be exactly neutral: Grok.",
       "annotations": [
         {
-          "text": "Closer to the middle = more neutral",
+          "text": "Middle = more neutral",
           "emphasis": false
         },
         {
-          "text": "Grok lands right on the line",
+          "text": "2nd place: Grok 4.3",
           "emphasis": true
         }
       ],
@@ -89,7 +138,7 @@
           "at": 0.0
         },
         {
-          "at": 0.4,
+          "at": 0.35,
           "region": {
             "x": 0.25,
             "y": 0.34,
@@ -99,7 +148,7 @@
           "highlight": "spotlight"
         },
         {
-          "at": 0.66,
+          "at": 0.62,
           "region": {
             "x": 0.27,
             "y": 0.35,
@@ -107,44 +156,44 @@
             "h": 0.26
           },
           "highlight": "circleDraw",
-          "label": "MOST BALANCED"
+          "label": "CLOSEST TO CENTER"
         }
       ],
-      "audioStart": 38.16
+      "audioStart": 39.64
     },
     {
       "type": "StatCallout",
-      "duration": 10.04,
+      "duration": 7.08,
       "stat": "26%",
-      "label": "Phi-4 dodged 1 in 4",
+      "label": "of questions dodged \u2014 Microsoft's Phi-4",
       "statVariant": "donut",
-      "voiceSegment": "The most one-sided? Microsoft's Phi-4 \u2014 which also refused to answer one in four questions. And dodging is its own kind of bias.",
-      "audioStart": 49.12
+      "voiceSegment": "The most one-sided: Microsoft's Phi-4. It dodged one in four questions \u2014 and dodging hides a lean too.",
+      "audioStart": 46.96
     },
     {
       "type": "HookCard",
-      "duration": 9.4,
-      "text": "*3 countries* kept it fair",
+      "duration": 7.12,
+      "text": "*3 countries* set the rules",
       "textStyle": "typewriter",
-      "voiceSegment": "To keep it fair, AIs from three different countries decided what counts as left or right \u2014 so no single country's politics set the rules.",
-      "audioStart": 59.16
+      "voiceSegment": "The grading rules were set in advance by referees from three countries \u2014 so no one country's politics defined the middle.",
+      "audioStart": 54.04
     },
     {
       "type": "HookCard",
-      "duration": 9.64,
-      "text": "Its lean becomes *your* news, emails, homework",
-      "voiceSegment": "Why care? This is the AI writing your emails, your kid's homework, your news summary. If it leans, your information leans too \u2014 quietly.",
-      "audioStart": 68.56
+      "duration": 6.0,
+      "text": "Its lean becomes *your* news",
+      "voiceSegment": "Because AI writes your emails, your homework, your news. If it leans, your information leans.",
+      "audioStart": 61.16
     },
     {
       "type": "OutroCard",
-      "duration": 10.08,
-      "text": "It has a side. Most neutral: Grok \u2014 check the rest.",
+      "duration": 6.6,
+      "text": "Most neutral: Grok. Which do YOU use?",
       "handle": "@startups.ai",
-      "voiceSegment": "So next time an AI explains the news to you, remember: it has a side. The most balanced one is Grok \u2014 now you can check the rest yourself.",
-      "audioStart": 78.2
+      "voiceSegment": "Your AI has a side \u2014 now you can check it. Which one do you use? Most neutral today: Grok.",
+      "audioStart": 67.16
     }
   ],
   "voiceFile": "voice.mp3",
-  "totalDuration": 88.28
+  "totalDuration": 73.76
 }
