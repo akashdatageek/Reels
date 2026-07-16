@@ -1,0 +1,1016 @@
+[
+  {
+    "word": "OpenAI",
+    "start": 0.05,
+    "end": 0.43,
+    "scene": 0
+  },
+  {
+    "word": "\u2014",
+    "start": 0.497,
+    "end": 0.639,
+    "scene": 0
+  },
+  {
+    "word": "the",
+    "start": 0.664,
+    "end": 0.902,
+    "scene": 0
+  },
+  {
+    "word": "company",
+    "start": 0.944,
+    "end": 1.371,
+    "scene": 0
+  },
+  {
+    "word": "behind",
+    "start": 1.446,
+    "end": 1.826,
+    "scene": 0
+  },
+  {
+    "word": "the",
+    "start": 1.893,
+    "end": 2.131,
+    "scene": 0
+  },
+  {
+    "word": "famous",
+    "start": 2.173,
+    "end": 2.552,
+    "scene": 0
+  },
+  {
+    "word": "AI",
+    "start": 2.62,
+    "end": 2.809,
+    "scene": 0
+  },
+  {
+    "word": "chatbot",
+    "start": 2.843,
+    "end": 3.27,
+    "scene": 0
+  },
+  {
+    "word": "ChatGPT",
+    "start": 3.346,
+    "end": 3.773,
+    "scene": 0
+  },
+  {
+    "word": "\u2014",
+    "start": 3.848,
+    "end": 3.991,
+    "scene": 0
+  },
+  {
+    "word": "just",
+    "start": 4.016,
+    "end": 4.301,
+    "scene": 0
+  },
+  {
+    "word": "shipped",
+    "start": 4.351,
+    "end": 4.778,
+    "scene": 0
+  },
+  {
+    "word": "its",
+    "start": 4.854,
+    "end": 5.091,
+    "scene": 0
+  },
+  {
+    "word": "first",
+    "start": 5.133,
+    "end": 5.466,
+    "scene": 0
+  },
+  {
+    "word": "hardware",
+    "start": 5.524,
+    "end": 5.999,
+    "scene": 0
+  },
+  {
+    "word": "ever.",
+    "start": 6.083,
+    "end": 6.415,
+    "scene": 0
+  },
+  {
+    "word": "A",
+    "start": 6.474,
+    "end": 6.616,
+    "scene": 0
+  },
+  {
+    "word": "tiny",
+    "start": 6.641,
+    "end": 6.926,
+    "scene": 0
+  },
+  {
+    "word": "keyboard.",
+    "start": 6.977,
+    "end": 7.499,
+    "scene": 0
+  },
+  {
+    "word": "The",
+    "start": 8.09,
+    "end": 8.286,
+    "scene": 1
+  },
+  {
+    "word": "Codex",
+    "start": 8.321,
+    "end": 8.596,
+    "scene": 1
+  },
+  {
+    "word": "Micro:",
+    "start": 8.644,
+    "end": 8.959,
+    "scene": 1
+  },
+  {
+    "word": "two",
+    "start": 9.014,
+    "end": 9.21,
+    "scene": 1
+  },
+  {
+    "word": "hundred",
+    "start": 9.245,
+    "end": 9.598,
+    "scene": 1
+  },
+  {
+    "word": "thirty",
+    "start": 9.661,
+    "end": 9.975,
+    "scene": 1
+  },
+  {
+    "word": "dollars,",
+    "start": 10.03,
+    "end": 10.423,
+    "scene": 1
+  },
+  {
+    "word": "made",
+    "start": 10.492,
+    "end": 10.728,
+    "scene": 1
+  },
+  {
+    "word": "to",
+    "start": 10.769,
+    "end": 10.927,
+    "scene": 1
+  },
+  {
+    "word": "control",
+    "start": 10.954,
+    "end": 11.308,
+    "scene": 1
+  },
+  {
+    "word": "Codex",
+    "start": 11.37,
+    "end": 11.645,
+    "scene": 1
+  },
+  {
+    "word": "\u2014",
+    "start": 11.693,
+    "end": 11.811,
+    "scene": 1
+  },
+  {
+    "word": "OpenAI's",
+    "start": 11.832,
+    "end": 12.225,
+    "scene": 1
+  },
+  {
+    "word": "AI",
+    "start": 12.294,
+    "end": 12.451,
+    "scene": 1
+  },
+  {
+    "word": "that",
+    "start": 12.479,
+    "end": 12.714,
+    "scene": 1
+  },
+  {
+    "word": "writes",
+    "start": 12.756,
+    "end": 13.07,
+    "scene": 1
+  },
+  {
+    "word": "code",
+    "start": 13.126,
+    "end": 13.361,
+    "scene": 1
+  },
+  {
+    "word": "for",
+    "start": 13.403,
+    "end": 13.599,
+    "scene": 1
+  },
+  {
+    "word": "you.",
+    "start": 13.634,
+    "end": 13.869,
+    "scene": 1
+  },
+  {
+    "word": "The",
+    "start": 14.41,
+    "end": 14.622,
+    "scene": 2
+  },
+  {
+    "word": "big",
+    "start": 14.66,
+    "end": 14.872,
+    "scene": 2
+  },
+  {
+    "word": "dial",
+    "start": 14.909,
+    "end": 15.164,
+    "scene": 2
+  },
+  {
+    "word": "sets",
+    "start": 15.209,
+    "end": 15.463,
+    "scene": 2
+  },
+  {
+    "word": "how",
+    "start": 15.508,
+    "end": 15.72,
+    "scene": 2
+  },
+  {
+    "word": "hard",
+    "start": 15.758,
+    "end": 16.012,
+    "scene": 2
+  },
+  {
+    "word": "the",
+    "start": 16.057,
+    "end": 16.269,
+    "scene": 2
+  },
+  {
+    "word": "AI",
+    "start": 16.307,
+    "end": 16.477,
+    "scene": 2
+  },
+  {
+    "word": "thinks.",
+    "start": 16.507,
+    "end": 16.888,
+    "scene": 2
+  },
+  {
+    "word": "Simple",
+    "start": 16.956,
+    "end": 17.295,
+    "scene": 2
+  },
+  {
+    "word": "task?",
+    "start": 17.355,
+    "end": 17.652,
+    "scene": 2
+  },
+  {
+    "word": "Keep",
+    "start": 17.705,
+    "end": 17.959,
+    "scene": 2
+  },
+  {
+    "word": "it",
+    "start": 18.004,
+    "end": 18.174,
+    "scene": 2
+  },
+  {
+    "word": "fast.",
+    "start": 18.204,
+    "end": 18.501,
+    "scene": 2
+  },
+  {
+    "word": "Hard",
+    "start": 18.553,
+    "end": 18.808,
+    "scene": 2
+  },
+  {
+    "word": "one?",
+    "start": 18.853,
+    "end": 19.107,
+    "scene": 2
+  },
+  {
+    "word": "Crank",
+    "start": 19.152,
+    "end": 19.449,
+    "scene": 2
+  },
+  {
+    "word": "it",
+    "start": 19.502,
+    "end": 19.671,
+    "scene": 2
+  },
+  {
+    "word": "up.",
+    "start": 19.701,
+    "end": 19.914,
+    "scene": 2
+  },
+  {
+    "word": "It",
+    "start": 20.45,
+    "end": 20.612,
+    "scene": 3
+  },
+  {
+    "word": "can",
+    "start": 20.64,
+    "end": 20.842,
+    "scene": 3
+  },
+  {
+    "word": "run",
+    "start": 20.878,
+    "end": 21.08,
+    "scene": 3
+  },
+  {
+    "word": "several",
+    "start": 21.116,
+    "end": 21.479,
+    "scene": 3
+  },
+  {
+    "word": "jobs",
+    "start": 21.544,
+    "end": 21.786,
+    "scene": 3
+  },
+  {
+    "word": "at",
+    "start": 21.829,
+    "end": 21.99,
+    "scene": 3
+  },
+  {
+    "word": "once",
+    "start": 22.019,
+    "end": 22.261,
+    "scene": 3
+  },
+  {
+    "word": "\u2014",
+    "start": 22.304,
+    "end": 22.426,
+    "scene": 3
+  },
+  {
+    "word": "and",
+    "start": 22.447,
+    "end": 22.649,
+    "scene": 3
+  },
+  {
+    "word": "six",
+    "start": 22.685,
+    "end": 22.887,
+    "scene": 3
+  },
+  {
+    "word": "keys",
+    "start": 22.922,
+    "end": 23.165,
+    "scene": 3
+  },
+  {
+    "word": "glow",
+    "start": 23.208,
+    "end": 23.45,
+    "scene": 3
+  },
+  {
+    "word": "with",
+    "start": 23.493,
+    "end": 23.735,
+    "scene": 3
+  },
+  {
+    "word": "each",
+    "start": 23.778,
+    "end": 24.021,
+    "scene": 3
+  },
+  {
+    "word": "one's",
+    "start": 24.063,
+    "end": 24.346,
+    "scene": 3
+  },
+  {
+    "word": "status:",
+    "start": 24.396,
+    "end": 24.76,
+    "scene": 3
+  },
+  {
+    "word": "thinking,",
+    "start": 24.824,
+    "end": 25.269,
+    "scene": 3
+  },
+  {
+    "word": "working,",
+    "start": 25.347,
+    "end": 25.751,
+    "scene": 3
+  },
+  {
+    "word": "waiting,",
+    "start": 25.823,
+    "end": 26.227,
+    "scene": 3
+  },
+  {
+    "word": "done.",
+    "start": 26.298,
+    "end": 26.581,
+    "scene": 3
+  },
+  {
+    "word": "Flick",
+    "start": 27.13,
+    "end": 27.428,
+    "scene": 4
+  },
+  {
+    "word": "the",
+    "start": 27.481,
+    "end": 27.694,
+    "scene": 4
+  },
+  {
+    "word": "joystick",
+    "start": 27.731,
+    "end": 28.157,
+    "scene": 4
+  },
+  {
+    "word": "and",
+    "start": 28.232,
+    "end": 28.445,
+    "scene": 4
+  },
+  {
+    "word": "it",
+    "start": 28.483,
+    "end": 28.653,
+    "scene": 4
+  },
+  {
+    "word": "starts",
+    "start": 28.683,
+    "end": 29.024,
+    "scene": 4
+  },
+  {
+    "word": "a",
+    "start": 29.084,
+    "end": 29.211,
+    "scene": 4
+  },
+  {
+    "word": "job:",
+    "start": 29.234,
+    "end": 29.489,
+    "scene": 4
+  },
+  {
+    "word": "review",
+    "start": 29.534,
+    "end": 29.875,
+    "scene": 4
+  },
+  {
+    "word": "code,",
+    "start": 29.935,
+    "end": 30.233,
+    "scene": 4
+  },
+  {
+    "word": "or",
+    "start": 30.286,
+    "end": 30.456,
+    "scene": 4
+  },
+  {
+    "word": "fix",
+    "start": 30.486,
+    "end": 30.699,
+    "scene": 4
+  },
+  {
+    "word": "a",
+    "start": 30.737,
+    "end": 30.864,
+    "scene": 4
+  },
+  {
+    "word": "bug.",
+    "start": 30.887,
+    "end": 31.143,
+    "scene": 4
+  },
+  {
+    "word": "One",
+    "start": 31.188,
+    "end": 31.4,
+    "scene": 4
+  },
+  {
+    "word": "key",
+    "start": 31.438,
+    "end": 31.651,
+    "scene": 4
+  },
+  {
+    "word": "approves.",
+    "start": 31.689,
+    "end": 32.157,
+    "scene": 4
+  },
+  {
+    "word": "One",
+    "start": 32.24,
+    "end": 32.452,
+    "scene": 4
+  },
+  {
+    "word": "rejects.",
+    "start": 32.49,
+    "end": 32.916,
+    "scene": 4
+  },
+  {
+    "word": "Thirteen",
+    "start": 33.49,
+    "end": 33.855,
+    "scene": 5
+  },
+  {
+    "word": "keys,",
+    "start": 33.92,
+    "end": 34.176,
+    "scene": 5
+  },
+  {
+    "word": "two",
+    "start": 34.221,
+    "end": 34.403,
+    "scene": 5
+  },
+  {
+    "word": "hundred",
+    "start": 34.436,
+    "end": 34.764,
+    "scene": 5
+  },
+  {
+    "word": "thirty",
+    "start": 34.822,
+    "end": 35.115,
+    "scene": 5
+  },
+  {
+    "word": "dollars,",
+    "start": 35.166,
+    "end": 35.532,
+    "scene": 5
+  },
+  {
+    "word": "a",
+    "start": 35.596,
+    "end": 35.706,
+    "scene": 5
+  },
+  {
+    "word": "limited",
+    "start": 35.725,
+    "end": 36.054,
+    "scene": 5
+  },
+  {
+    "word": "run",
+    "start": 36.112,
+    "end": 36.294,
+    "scene": 5
+  },
+  {
+    "word": "\u2014",
+    "start": 36.327,
+    "end": 36.436,
+    "scene": 5
+  },
+  {
+    "word": "and",
+    "start": 36.456,
+    "end": 36.638,
+    "scene": 5
+  },
+  {
+    "word": "it's",
+    "start": 36.671,
+    "end": 36.89,
+    "scene": 5
+  },
+  {
+    "word": "already",
+    "start": 36.928,
+    "end": 37.257,
+    "scene": 5
+  },
+  {
+    "word": "sold",
+    "start": 37.315,
+    "end": 37.534,
+    "scene": 5
+  },
+  {
+    "word": "out.",
+    "start": 37.573,
+    "end": 37.792,
+    "scene": 5
+  },
+  {
+    "word": "OpenAI",
+    "start": 38.33,
+    "end": 38.636,
+    "scene": 6
+  },
+  {
+    "word": "separately",
+    "start": 38.69,
+    "end": 39.149,
+    "scene": 6
+  },
+  {
+    "word": "bought",
+    "start": 39.229,
+    "end": 39.535,
+    "scene": 6
+  },
+  {
+    "word": "a",
+    "start": 39.589,
+    "end": 39.704,
+    "scene": 6
+  },
+  {
+    "word": "secret",
+    "start": 39.724,
+    "end": 40.03,
+    "scene": 6
+  },
+  {
+    "word": "gadget",
+    "start": 40.084,
+    "end": 40.39,
+    "scene": 6
+  },
+  {
+    "word": "company",
+    "start": 40.444,
+    "end": 40.788,
+    "scene": 6
+  },
+  {
+    "word": "from",
+    "start": 40.848,
+    "end": 41.078,
+    "scene": 6
+  },
+  {
+    "word": "the",
+    "start": 41.118,
+    "end": 41.309,
+    "scene": 6
+  },
+  {
+    "word": "iPhone's",
+    "start": 41.343,
+    "end": 41.725,
+    "scene": 6
+  },
+  {
+    "word": "designer",
+    "start": 41.793,
+    "end": 42.175,
+    "scene": 6
+  },
+  {
+    "word": "\u2014",
+    "start": 42.243,
+    "end": 42.357,
+    "scene": 6
+  },
+  {
+    "word": "reportedly",
+    "start": 42.378,
+    "end": 42.836,
+    "scene": 6
+  },
+  {
+    "word": "six",
+    "start": 42.917,
+    "end": 43.108,
+    "scene": 6
+  },
+  {
+    "word": "and",
+    "start": 43.142,
+    "end": 43.333,
+    "scene": 6
+  },
+  {
+    "word": "a",
+    "start": 43.367,
+    "end": 43.482,
+    "scene": 6
+  },
+  {
+    "word": "half",
+    "start": 43.502,
+    "end": 43.731,
+    "scene": 6
+  },
+  {
+    "word": "billion.",
+    "start": 43.772,
+    "end": 44.154,
+    "scene": 6
+  },
+  {
+    "word": "This",
+    "start": 44.221,
+    "end": 44.451,
+    "scene": 6
+  },
+  {
+    "word": "isn't",
+    "start": 44.491,
+    "end": 44.759,
+    "scene": 6
+  },
+  {
+    "word": "it.",
+    "start": 44.806,
+    "end": 44.997,
+    "scene": 6
+  },
+  {
+    "word": "Here's",
+    "start": 45.53,
+    "end": 45.853,
+    "scene": 7
+  },
+  {
+    "word": "the",
+    "start": 45.909,
+    "end": 46.111,
+    "scene": 7
+  },
+  {
+    "word": "real",
+    "start": 46.147,
+    "end": 46.389,
+    "scene": 7
+  },
+  {
+    "word": "story:",
+    "start": 46.431,
+    "end": 46.754,
+    "scene": 7
+  },
+  {
+    "word": "coders",
+    "start": 46.811,
+    "end": 47.133,
+    "scene": 7
+  },
+  {
+    "word": "are",
+    "start": 47.19,
+    "end": 47.392,
+    "scene": 7
+  },
+  {
+    "word": "becoming",
+    "start": 47.427,
+    "end": 47.83,
+    "scene": 7
+  },
+  {
+    "word": "managers",
+    "start": 47.902,
+    "end": 48.305,
+    "scene": 7
+  },
+  {
+    "word": "of",
+    "start": 48.376,
+    "end": 48.537,
+    "scene": 7
+  },
+  {
+    "word": "AI",
+    "start": 48.566,
+    "end": 48.727,
+    "scene": 7
+  },
+  {
+    "word": "workers.",
+    "start": 48.755,
+    "end": 49.159,
+    "scene": 7
+  },
+  {
+    "word": "This",
+    "start": 49.23,
+    "end": 49.472,
+    "scene": 7
+  },
+  {
+    "word": "is",
+    "start": 49.514,
+    "end": 49.676,
+    "scene": 7
+  },
+  {
+    "word": "the",
+    "start": 49.704,
+    "end": 49.906,
+    "scene": 7
+  },
+  {
+    "word": "first",
+    "start": 49.941,
+    "end": 50.223,
+    "scene": 7
+  },
+  {
+    "word": "desk",
+    "start": 50.273,
+    "end": 50.515,
+    "scene": 7
+  },
+  {
+    "word": "console",
+    "start": 50.558,
+    "end": 50.921,
+    "scene": 7
+  },
+  {
+    "word": "for",
+    "start": 50.985,
+    "end": 51.186,
+    "scene": 7
+  },
+  {
+    "word": "that",
+    "start": 51.222,
+    "end": 51.464,
+    "scene": 7
+  },
+  {
+    "word": "job.",
+    "start": 51.506,
+    "end": 51.748,
+    "scene": 7
+  },
+  {
+    "word": "The",
+    "start": 52.29,
+    "end": 52.499,
+    "scene": 8
+  },
+  {
+    "word": "box",
+    "start": 52.535,
+    "end": 52.744,
+    "scene": 8
+  },
+  {
+    "word": "says:",
+    "start": 52.781,
+    "end": 53.073,
+    "scene": 8
+  },
+  {
+    "word": "you",
+    "start": 53.124,
+    "end": 53.333,
+    "scene": 8
+  },
+  {
+    "word": "can",
+    "start": 53.369,
+    "end": 53.578,
+    "scene": 8
+  },
+  {
+    "word": "just",
+    "start": 53.615,
+    "end": 53.865,
+    "scene": 8
+  },
+  {
+    "word": "build",
+    "start": 53.909,
+    "end": 54.201,
+    "scene": 8
+  },
+  {
+    "word": "things.",
+    "start": 54.253,
+    "end": 54.628,
+    "scene": 8
+  },
+  {
+    "word": "Would",
+    "start": 54.694,
+    "end": 54.986,
+    "scene": 8
+  },
+  {
+    "word": "you",
+    "start": 55.038,
+    "end": 55.246,
+    "scene": 8
+  },
+  {
+    "word": "buy",
+    "start": 55.283,
+    "end": 55.491,
+    "scene": 8
+  },
+  {
+    "word": "a",
+    "start": 55.528,
+    "end": 55.653,
+    "scene": 8
+  },
+  {
+    "word": "keyboard",
+    "start": 55.675,
+    "end": 56.092,
+    "scene": 8
+  },
+  {
+    "word": "for",
+    "start": 56.166,
+    "end": 56.374,
+    "scene": 8
+  },
+  {
+    "word": "your",
+    "start": 56.411,
+    "end": 56.661,
+    "scene": 8
+  },
+  {
+    "word": "AI?",
+    "start": 56.706,
+    "end": 56.914,
+    "scene": 8
+  }
+]
