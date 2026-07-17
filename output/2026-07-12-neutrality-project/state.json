@@ -63,6 +63,18 @@
     "stage": "build",
     "status": "pass",
     "detail": "reel.mp4 rendered + muxed",
-    "timestamp": "2026-07-17T19:37:09+00:00"
+    "timestamp": "2026-07-17T20:08:13+00:00"
+  },
+  {
+    "stage": "screening_assets",
+    "status": "pass",
+    "detail": "30 scene stills + contact sheet + first-second strip + waveform",
+    "timestamp": "2026-07-17T20:08:20+00:00"
+  },
+  {
+    "stage": "screening",
+    "status": "pass",
+    "detail": "R1-R7 PASS; deliberate-failure test: R2 failed on widest-crop scene 6 (scene_06_043.30.jpg), fixed by restoring tight figureFocus, re-judged R2 only (scene_06_045.57.jpg)",
+    "timestamp": "2026-07-17T20:08:38+00:00"
   }
 ]

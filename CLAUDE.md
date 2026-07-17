@@ -8,10 +8,10 @@ data; Claude does the research, writing, visual identity, and orchestration.
 (images) · Edge-TTS / Gemini TTS (voice + word timings) · Remotion (render) ·
 FFmpeg (mux) · royalty-free music.
 
-## The workflow is seven skills — run them in order
+## The workflow is eight skills — run them in order
 
 When asked to "make today's reel" (or given a link / story folder), walk these
-seven stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
+eight stages. **Each stage is a skill in `.claude/skills/` — invoke it (or open
 its `SKILL.md`) when you reach that stage.** The detailed discipline lives in the
 skills, not here, so there's a single source of truth.
 
@@ -23,7 +23,11 @@ skills, not here, so there's a single source of truth.
 | 4 | **`comprehension`** | Gate: a fresh-context viewer must UNDERSTAND the script | `state.json` (`comprehension`) |
 | 5 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
 | 6 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
-| 7 | **`editor`** | Fact-check gate, tighten, write the caption, hand off | `output/<story>/caption.txt` |
+| 7 | **`screening`** | Gate: LOOK at the render — stills + R1–R7 rubric, revise | `output/<story>/stills/`, `state.json` (`screening`) |
+| 8 | **`editor`** | Fact-check gate, tighten, write the caption, hand off | `output/<story>/caption.txt` |
+
+**The editor's cover.png must come from a still that passed screening's R4/R5**
+— the cover is a frame the gate actually looked at, never a guess.
 
 **Content before words:** `content` locks *what each frame says and shows* (its
 real receipt) before `script` writes the voice — so the script is never written
@@ -39,7 +43,7 @@ Every stage records its result into a per-story ledger
 are green:
 
 ```
-research · content · script · factcheck · comprehension · preflight · tts · captions · images · build
+research · content · script · factcheck · comprehension · preflight · tts · captions · images · build · screening
 ```
 
 The non-negotiables live in this exit code, not in prose — the orchestrator
@@ -51,17 +55,21 @@ must not be able to skip its own checklist. So:
   memory, from a build log, or because "it obviously rendered" — if handoff
   didn't green-light it, it isn't done. A red gate means that stage's skill
   never recorded, or its check failed; go clear it, don't route around it.
-- **Two quality gates, deliberately distinct: `factcheck` = is it TRUE ·
-  `comprehension` = is it UNDERSTOOD.** `comprehension` runs right after `script`
-  (a fresh-context viewer must follow the voiceover with zero background, before
-  a single scene is authored); `factcheck` runs in `editor` (every on-screen
-  claim traces to research.md, on the finished render). Correct *and* clear.
+- **Three quality gates, deliberately distinct: `factcheck` = is it TRUE ·
+  `comprehension` = is it UNDERSTOOD · `screening` = does it LOOK right.**
+  `comprehension` runs right after `script` (a fresh-context viewer must follow
+  the voiceover with zero background, before a single scene is authored);
+  `screening` runs right after `build` (the orchestrator views stills of the
+  actual render and judges the R1–R7 rubric in writing — the pipeline never
+  ships a reel nobody looked at); `factcheck` runs in `editor` (every on-screen
+  claim traces to research.md, on the finished render). Correct, clear, *and*
+  watchable.
 - Each stage marks itself: the creative skills record their gate at the END of
-  their SKILL.md (`research`, `content`, `script`, `comprehension`, and
-  `editor`→`factcheck`), and the pipeline scripts record the mechanical gates
-  automatically. `align` alone is informational (the edge engine skips it by
-  design). Handoff also refuses any scene whose image/backdrop prompt was never
-  generated — a blank scene can't ride a stale green ledger.
+  their SKILL.md (`research`, `content`, `script`, `comprehension`, `screening`,
+  and `editor`→`factcheck`), and the pipeline scripts record the mechanical
+  gates automatically. `align` alone is informational (the edge engine skips it
+  by design). Handoff also refuses any scene whose image/backdrop prompt was
+  never generated — a blank scene can't ride a stale green ledger.
 
 ## Non-negotiable rules (apply across every stage)
 
@@ -96,15 +104,16 @@ must not be able to skip its own checklist. So:
 ## Repo map
 
 ```
-.claude/skills/         research · content · script · comprehension · author · build · editor (the workflow)
+.claude/skills/         research · content · script · comprehension · author · build · screening · editor (the workflow)
                         + trends (weekly REFRESH → trends-current.md; author APPLYs ≤2 tactics per reel)
+                        screening/exemplars/ = taste bar (bars + anti-patterns; rejections append here)
 input/<story>/          brief.md (+ assets/) → research.md, frames.md, script.md written here
-pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py (gen + b-roll edit) · fetch_stock.py (licensed photos → assets_manifest.json) · preflight.py · state.py (ledger)
+pipeline/               extract.py · tts.py · align.py · captions.py · generate_images.py (gen + b-roll edit) · fetch_stock.py (licensed photos → assets_manifest.json) · preflight.py · screen.py (stills for the screening gate) · state.py (ledger)
 remotion/               scene templates + Reel sequencer (reads reel.json via --props)
 scripts/                make_reel.sh (end-to-end) · assemble.sh (render + mux) · handoff.sh (final gate) · still.sh (review frame) · install_fonts.sh
 music/                  royalty-free tracks (see music/README.md)
 brand/                  startups-logo.png (auto-staged onto the OutroCard)
-output/<story>/         reel.json · voice.mp3 · captions.json · images/ · reel.mp4 · cover.png · caption.txt · state.json (gate ledger)
+output/<story>/         reel.json · voice.mp3 · captions.json · images/ · reel.mp4 · stills/ (screening evidence) · cover.png · caption.txt · state.json (gate ledger)
 ```
 
 ## Environment quick reference

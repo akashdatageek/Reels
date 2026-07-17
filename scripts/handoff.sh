@@ -19,7 +19,7 @@ cd "$REPO_DIR"
 # by the pipeline scripts. `align` is deliberately NOT required — the edge
 # engine skips it by design (its timings are already word-exact), so a missing
 # align entry is normal; every other mechanical stage runs on every build.
-REQUIRED=(research content script factcheck comprehension preflight tts captions images build)
+REQUIRED=(research content script factcheck comprehension preflight tts captions images build screening)
 
 if ! python3 pipeline/state.py check "$STORY_DIR" "${REQUIRED[@]}"; then
   echo "" >&2
