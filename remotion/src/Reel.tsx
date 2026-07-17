@@ -9,10 +9,10 @@ import {Captions} from './components/Captions';
 import {CinemaGrade} from './components/CinemaGrade';
 import {CUT_FLASH_FRAMES, CutFlash} from './components/CutFlash';
 import {Grain} from './components/Grain';
-import {MusicPulseProvider, usePulse} from './components/MusicPulse';
+import {MusicPulseProvider} from './components/MusicPulse';
 import {LowerThird, Stickers} from './components/Overlays';
 import {SceneTransition, transitionFor} from './components/SceneTransition';
-import {VibeContext, useVibe} from './components/VibeContext';
+import {VibeContext} from './components/VibeContext';
 import {ThemeContext, usePalette} from './components/ThemeContext';
 import {getPalette} from './palette';
 import {ChartScene} from './scenes/ChartScene';
@@ -45,7 +45,6 @@ const SCENE_COMPONENTS: Record<
 const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
-  const {bass} = usePulse();
   const p = usePalette();
   const pct = Math.min(1, frame / Math.max(durationInFrames - 1, 1));
   return (
@@ -57,7 +56,7 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
         right: 60,
         height: 8,
         borderRadius: 4,
-        backgroundColor: p.bg === '#f5f4f0' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.14)',
+        backgroundColor: p.kind === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.14)',
         overflow: 'hidden',
       }}
     >
@@ -67,27 +66,16 @@ const ProgressBar: React.FC<{accent: string}> = ({accent}) => {
           height: '100%',
           borderRadius: 4,
           backgroundColor: accent,
-          boxShadow: `0 0 ${18 + bass * 26}px ${accent}aa`,
+          boxShadow: `0 0 18px ${accent}aa`,
         }}
       />
     </div>
   );
 };
 
-/** Subtle whole-frame zoom that breathes with the kick — the modern "punch"
- *  feel. Kept ≤2% so it energizes without nausea; calmer in the moody vibe. */
-const BeatPunch: React.FC<{children: React.ReactNode}> = ({children}) => {
-  const {bass} = usePulse();
-  const moody = useVibe() === 'moody';
-  const amt = moody ? 0.008 : 0.018;
-  // subtle camera bounce: a few px vertical nudge on the kick (bold only)
-  const bounce = moody ? 0 : bass * 5;
-  return (
-    <AbsoluteFill style={{transform: `translateY(${-bounce}px) scale(${1 + bass * amt})`, transformOrigin: 'center center'}}>
-      {children}
-    </AbsoluteFill>
-  );
-};
+/* BeatPunch (music-driven whole-frame zoom/bounce) was REMOVED: it moved every
+ * media layer on every kick — exactly the tremble the editorial style bans.
+ * Rhythm now comes from cuts and deliberate camera moves, not idle motion. */
 
 /** Visible fallback for an unrecognized scene `type` — a scene that would
  *  otherwise render as blank air (and silently swallow its narration time).
@@ -138,7 +126,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
     <VibeContext.Provider value={reel.vibe ?? 'bold'}>
     <MusicPulseProvider hasMusic={Boolean(reel.music)}>
       <AbsoluteFill style={{backgroundColor: palette.bg}}>
-        <BeatPunch>
+        <AbsoluteFill>
         {sequenced.map(({scene, from, frames, key}) => {
           const Comp = SCENE_COMPONENTS[scene.type];
           return (
@@ -156,7 +144,7 @@ export const Reel: React.FC<ReelProps> = ({reel, captions}) => {
             </Sequence>
           );
         })}
-        </BeatPunch>
+        </AbsoluteFill>
         {/* accent wipe at every cut (skip the reel's very first frame) */}
         {sequenced.slice(1).map(({from, key}) => (
           <Sequence key={`cut-${key}`} from={from - 3} durationInFrames={CUT_FLASH_FRAMES} name={`cut-${key}`}>

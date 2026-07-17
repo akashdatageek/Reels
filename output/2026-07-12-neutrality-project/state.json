@@ -48,12 +48,6 @@
     "timestamp": "2026-07-14T23:02:29+00:00"
   },
   {
-    "stage": "build",
-    "status": "pass",
-    "detail": "reel.mp4 rendered + muxed",
-    "timestamp": "2026-07-14T23:05:56+00:00"
-  },
-  {
     "stage": "factcheck",
     "status": "pass",
     "detail": "fresh reviewer PASS: all 11 claims trace to research.md (2 flags fixed + re-verified)",
@@ -63,6 +57,12 @@
     "stage": "preflight",
     "status": "pass",
     "detail": "11 scenes, 0 warning(s)",
-    "timestamp": "2026-07-15T19:16:36+00:00"
+    "timestamp": "2026-07-17T19:32:56+00:00"
+  },
+  {
+    "stage": "build",
+    "status": "pass",
+    "detail": "reel.mp4 rendered + muxed",
+    "timestamp": "2026-07-17T19:37:09+00:00"
   }
 ]

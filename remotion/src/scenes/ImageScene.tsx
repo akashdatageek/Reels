@@ -8,17 +8,26 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
-import {usePulse} from '../components/MusicPulse';
+import {
+  ChannelBadge,
+  EditorialTextBlock,
+  MediaCard,
+} from '../components/EditorialCard';
+import {usePalette} from '../components/ThemeContext';
 import {BG, FONT_BODY, SAFE_BOTTOM, TEXT} from '../theme';
 import type {Scene} from '../types';
 
-/** Ken Burns pan/zoom on an image, caption bar, subtle vignette. */
+/** Ken Burns pan/zoom on an image. Editorial theme renders the image inside a
+ *  rounded media card with the headline/subhead text block below; legacy
+ *  themes keep the full-bleed look. Media is rock-steady: the only motion is
+ *  the deliberate LINEAR Ken Burns move — no tilt, no music jitter, no sweep. */
 export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
   scene,
   accent,
 }) => {
   const frame = useCurrentFrame();
   const {fps, durationInFrames} = useVideoConfig();
+  const pal = usePalette();
   const t = frame / Math.max(durationInFrames, 1);
 
   const mode = scene.kenBurns ?? 'zoom-in';
@@ -27,30 +36,46 @@ export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
   const ty = 0;
   switch (mode) {
     case 'zoom-in':
-      scale = interpolate(t, [0, 1], [1.02, 1.16]);
+      scale = interpolate(t, [0, 1], [1.02, 1.14]);
       break;
     case 'zoom-out':
-      scale = interpolate(t, [0, 1], [1.18, 1.04]);
+      scale = interpolate(t, [0, 1], [1.16, 1.04]);
       break;
     case 'pan-left':
-      scale = 1.15;
-      tx = interpolate(t, [0, 1], [40, -40]);
+      scale = 1.14;
+      tx = interpolate(t, [0, 1], [36, -36]);
       break;
     case 'pan-right':
-      scale = 1.15;
-      tx = interpolate(t, [0, 1], [-40, 40]);
+      scale = 1.14;
+      tx = interpolate(t, [0, 1], [-36, 36]);
       break;
   }
 
-  const barIn = spring({frame: frame - 4, fps, config: {damping: 200}});
-  const {bass} = usePulse();
-  // 2.5D feel: a slow perspective tilt + a light band sweeping across once
-  const tilt = Math.sin(t * Math.PI) * 1.2;
-  const sweepX = interpolate(t, [0.1, 0.75], [-60, 160], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // ---- editorial-dark: card layout ----
+  if (pal.kind === 'editorial') {
+    return (
+      <AbsoluteFill style={{backgroundColor: pal.bg}}>
+        <MediaCard>
+          {scene.image ? (
+            <Img
+              src={staticFile(scene.image)}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                transform: `scale(${scale}) translate(${tx}px, ${ty}px)`,
+              }}
+            />
+          ) : null}
+        </MediaCard>
+        <ChannelBadge logo={scene.logo} handle={scene.handle} />
+        <EditorialTextBlock headline={scene.text} subtext={scene.subtext} accent={accent} />
+      </AbsoluteFill>
+    );
+  }
 
+  // ---- legacy full-bleed layout ----
+  const barIn = spring({frame: frame - 4, fps, config: {damping: 200}});
   return (
     <AbsoluteFill style={{backgroundColor: BG}}>
       {scene.image ? (
@@ -60,26 +85,10 @@ export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            transform: `perspective(1400px) rotateY(${tilt}deg) scale(${scale * (1 + bass * 0.01)}) translate(${tx}px, ${ty}px)`,
+            transform: `scale(${scale}) translate(${tx}px, ${ty}px)`,
           }}
         />
       ) : null}
-      {/* light sweep across the image */}
-      <AbsoluteFill style={{overflow: 'hidden', pointerEvents: 'none'}}>
-        <div
-          style={{
-            position: 'absolute',
-            top: '-20%',
-            height: '140%',
-            width: '45%',
-            left: 0,
-            transform: `translateX(${sweepX}%) skewX(-14deg)`,
-            background:
-              'linear-gradient(90deg, transparent, rgba(255,255,255,0.10) 50%, transparent)',
-            mixBlendMode: 'screen',
-          }}
-        />
-      </AbsoluteFill>
       {/* vignette */}
       <AbsoluteFill
         style={{

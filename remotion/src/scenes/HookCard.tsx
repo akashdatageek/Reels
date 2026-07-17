@@ -8,10 +8,11 @@ import {
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
+import {ChannelBadge} from '../components/EditorialCard';
 import {usePulse} from '../components/MusicPulse';
 import {useVibe} from '../components/VibeContext';
 import {usePalette} from '../components/ThemeContext';
-import {FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP} from '../theme';
+import {FONT_BODY, FONT_DISPLAY, FONT_SERIF, SAFE_BOTTOM, SAFE_TOP} from '../theme';
 import type {Scene} from '../types';
 
 /** Big bold opening statement — huge type, spring-in, living background.
@@ -53,6 +54,51 @@ export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: strin
     if (closes) emphasis = false;
     return {text: w.replace(/\*/g, ''), emphasized};
   });
+
+  // ---- editorial-dark: left-aligned document block — divider, big type,
+  // solid-accent emphasis, calm non-oscillating entrance, ZERO idle motion ----
+  const pal = usePalette();
+  if (pal.kind === 'editorial') {
+    const enter = spring({frame, fps, config: {damping: 200}});
+    return (
+      <AbsoluteFill>
+        <AmbientBackground accent={accent} secondary={second} seed={1} variant={scene.bgStyle} />
+        <ChannelBadge logo={scene.logo} handle={scene.handle} />
+        <div
+          style={{
+            position: 'absolute',
+            left: 64,
+            right: 64,
+            top: SAFE_TOP + 240,
+            opacity: enter,
+            transform: `translateY(${(1 - enter) * 30}px)`,
+          }}
+        >
+          <div style={{width: 96, height: 10, borderRadius: 5, backgroundColor: accent, marginBottom: 34}} />
+          <div
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontSize: 88,
+              lineHeight: 1.1,
+              color: TEXT,
+              letterSpacing: -1,
+            }}
+          >
+            {words.map((w, i) => (
+              <span key={i} style={{marginRight: 22, color: w.emphasized ? accent : TEXT}}>
+                {w.text}
+              </span>
+            ))}
+          </div>
+          {scene.subtext ? (
+            <div style={{marginTop: 26, fontFamily: FONT_BODY, fontWeight: 700, fontSize: 40, color: accent}}>
+              {scene.subtext}
+            </div>
+          ) : null}
+        </div>
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill>

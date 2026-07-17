@@ -1,11 +1,11 @@
 {
-  "title": "The Neutrality Project \u2014 who's the most neutral AI? (reference cut)",
-  "theme": "light",
+  "title": "The Neutrality Project — who's the most neutral AI? (reference cut)",
+  "theme": "editorial-dark",
   "vibe": "bold",
-  "accentColor": "#12B98A",
-  "secondaryColor": "#0EA5A5",
+  "accentColor": "#C96B3B",
+  "secondaryColor": "#E39A5E",
   "handle": "@startups.ai",
-  "voiceStyle": "Narrate briskly and crisply, like a sharp news explainer with good pace \u2014 clear diction, minimal pauses, credible and non-partisan, never rushed into slurring: ",
+  "voiceStyle": "Narrate briskly and crisply, like a sharp news explainer with good pace — clear diction, minimal pauses, credible and non-partisan, never rushed into slurring: ",
   "music": "music/neutrality_bed.mp3",
   "scenes": [
     {
@@ -21,23 +21,23 @@
       "duration": 5.72,
       "text": "Every AI has a *hidden lean*",
       "textStyle": "marker",
-      "voiceSegment": "Every AI chatbot leans one way on hot topics \u2014 baked in, whether it tells you or not.",
+      "voiceSegment": "Every AI chatbot leans one way on hot topics — baked in, whether it tells you or not.",
       "audioStart": 3.68
     },
     {
       "type": "HookCard",
       "duration": 7.04,
-      "text": "The Neutrality Project: 18 AIs \u00b7 *3,987 questions*",
-      "voiceSegment": "An independent group, The Neutrality Project, gave eighteen AIs a political survey \u2014 almost four thousand questions.",
+      "text": "The Neutrality Project: 18 AIs · *3,987 questions*",
+      "voiceSegment": "An independent group, The Neutrality Project, gave eighteen AIs a political survey — almost four thousand questions.",
       "audioStart": 9.4
     },
     {
       "type": "StatCallout",
       "duration": 5.92,
       "stat": "97/108",
-      "label": "AI scores leaned LEFT \u00b7 18 AIs \u00d7 6 topics \u2014 The Neutrality Project",
+      "label": "AI scores leaned LEFT · 18 AIs × 6 topics — The Neutrality Project",
       "statVariant": "donut",
-      "voiceSegment": "Eighteen AIs, six topics each \u2014 that's one hundred eight scores. Ninety-seven of them leaned left.",
+      "voiceSegment": "Eighteen AIs, six topics each — that's one hundred eight scores. Ninety-seven of them leaned left.",
       "audioStart": 16.44
     },
     {
@@ -53,7 +53,7 @@
           "emphasis": false
         },
         {
-          "text": "Left = social change \u00b7 Right = tradition",
+          "text": "Left = social change · Right = tradition",
           "emphasis": true
         }
       ],
@@ -76,12 +76,13 @@
           "at": 0.8
         }
       ],
-      "audioStart": 22.36
+      "audioStart": 22.36,
+      "subtext": "Left = social change · Right = tradition"
     },
     {
       "type": "FigureScene",
       "duration": 8.64,
-      "text": "Six topics \u2014 hardest: CLIMATE",
+      "text": "Six topics — hardest: CLIMATE",
       "figure": "assets/topics_strips.png",
       "figureCredit": "The Neutrality Project",
       "voiceSegment": "The six topics: climate, social values, national identity, religion, money, and war and peace. The lean is hardest on climate.",
@@ -114,7 +115,8 @@
           "at": 0.8
         }
       ],
-      "audioStart": 31.0
+      "audioStart": 31.0,
+      "subtext": "The lean is hardest on climate"
     },
     {
       "type": "FigureScene",
@@ -122,7 +124,7 @@
       "text": "Who's actually neutral?",
       "figure": "assets/neutrality_map.png",
       "figureCredit": "The Neutrality Project",
-      "voiceSegment": "Closer to the middle of that line means more neutral. The closest \u2014 so close it may be exactly neutral: Grok.",
+      "voiceSegment": "Closer to the middle of that line means more neutral. The closest — so close it may be exactly neutral: Grok.",
       "annotations": [
         {
           "text": "Middle = more neutral",
@@ -159,15 +161,16 @@
           "label": "CLOSEST TO CENTER"
         }
       ],
-      "audioStart": 39.64
+      "audioStart": 39.64,
+      "subtext": "2nd place: Grok 4.3"
     },
     {
       "type": "StatCallout",
       "duration": 7.08,
       "stat": "26%",
-      "label": "of questions dodged \u2014 Microsoft's Phi-4",
+      "label": "of questions dodged — Microsoft's Phi-4",
       "statVariant": "donut",
-      "voiceSegment": "The most one-sided: Microsoft's Phi-4. It dodged one in four questions \u2014 and dodging hides a lean too.",
+      "voiceSegment": "The most one-sided: Microsoft's Phi-4. It dodged one in four questions — and dodging hides a lean too.",
       "audioStart": 46.96
     },
     {
@@ -175,7 +178,7 @@
       "duration": 7.12,
       "text": "*3 countries* set the rules",
       "textStyle": "typewriter",
-      "voiceSegment": "The grading rules were set in advance by referees from three countries \u2014 so no one country's politics defined the middle.",
+      "voiceSegment": "The grading rules were set in advance by referees from three countries — so no one country's politics defined the middle.",
       "audioStart": 54.04
     },
     {
@@ -190,7 +193,7 @@
       "duration": 6.6,
       "text": "Most neutral: Grok. Which do YOU use?",
       "handle": "@startups.ai",
-      "voiceSegment": "Your AI has a side \u2014 now you can check it. Which one do you use? Most neutral today: Grok.",
+      "voiceSegment": "Your AI has a side — now you can check it. Which one do you use? Most neutral today: Grok.",
       "audioStart": 67.16
     }
   ],

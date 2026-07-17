@@ -33,11 +33,17 @@ prompt; *replaces* the default look).
 Pairs are starting points — tune per story. One `accentColor` per reel, never
 more (loosely match the subject's brand/mood).
 
-**Theme (`theme`): choose by content.** `light` (editorial warm-white, dark
-text) for data, research papers, charts, explainers, business/credibility
-stories. `dark` (default) for launches, drama, atmosphere. Don't default to
-dark neon for everything — it makes data look like a sci-fi trailer instead of
-credible reporting.
+**Theme (`theme`): `editorial-dark` is the DEFAULT for new reels** — the
+channel's editorial card look: warm near-black canvas (#0d0b09), rounded media
+card on the top ~55-60% with the channel badge top-left, then a left-aligned
+text block (accent divider → big white headline from `text` → one accent
+`subtext` subhead → karaoke captions as body text). Media is rock-steady by
+design (no beat-punch, no drift; figureFocus moves are ease-in-out then HOLD).
+Prefer ONE warm accent (rust/amber family, e.g. `#C96B3B` + `#E39A5E`) unless
+the story demands otherwise. `light` (warm-white editorial) stays available for
+paper-white data stories; `dark` is the legacy navy look for older reels.
+**Write a `subtext` for every media scene** — one line, the scene's "so what",
+already fact-checked wording (an emphasized annotation line works verbatim).
 
 **Vibe (`vibe`):**
 - `bold` (default) — loud acid duotone, chunky uppercase type, sticker
