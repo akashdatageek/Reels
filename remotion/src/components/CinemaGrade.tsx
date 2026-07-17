@@ -1,6 +1,5 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
-import {usePulse} from './MusicPulse';
 import {useVibe} from './VibeContext';
 import {usePalette} from './ThemeContext';
 
@@ -13,24 +12,26 @@ import {usePalette} from './ThemeContext';
  * Kept very low-opacity; light theme gets only the gentlest touch.
  */
 export const CinemaGrade: React.FC<{accent: string}> = ({accent}) => {
-  const {energy} = usePulse();
   const moody = useVibe() === 'moody';
-  const light = usePalette().bg === '#f5f4f0';
+  const kind = usePalette().kind;
 
-  if (light) {
-    // editorial: only the faintest top/bottom falloff, no bloom
+  if (kind === 'light' || kind === 'editorial') {
+    // editorial looks: only the faintest STATIC top/bottom falloff, no bloom
     return (
       <AbsoluteFill
         style={{
           pointerEvents: 'none',
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 14%, transparent 86%, rgba(0,0,0,0.05) 100%)',
+            kind === 'light'
+              ? 'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 14%, transparent 86%, rgba(0,0,0,0.05) 100%)'
+              : 'linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, transparent 16%, transparent 84%, rgba(0,0,0,0.26) 100%)',
         }}
       />
     );
   }
 
-  const bloom = (moody ? 0.05 : 0.08) + energy * 0.06;
+  // static bloom — the old music-driven term made the whole frame breathe
+  const bloom = moody ? 0.05 : 0.08;
 
   return (
     <AbsoluteFill style={{pointerEvents: 'none'}}>

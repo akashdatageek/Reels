@@ -35,6 +35,46 @@ export const Captions: React.FC<{
   // sticker feel: each caption group lands at a slightly different angle
   const jitter = ((groupIndex * 37) % 5) - 2; // deterministic, -2..2 degrees
 
+  // ---- editorial-dark: karaoke as calm BODY TEXT in the document's text
+  // zone — left-aligned, no pill (redundant on the dark canvas), no rotation,
+  // no music-driven scale. Word-level highlight kept. ----
+  if (pal.kind === 'editorial') {
+    return (
+      <AbsoluteFill style={{pointerEvents: 'none'}}>
+        <div
+          style={{
+            position: 'absolute',
+            left: 64,
+            right: 64,
+            top: 1400,
+            textAlign: 'left',
+            fontFamily: FONT_BODY,
+            fontWeight: 600,
+            fontSize: 42,
+            lineHeight: 1.42,
+          }}
+        >
+          {group.words.map((w, i) => {
+            const active = t >= w.start;
+            const isCurrent = t >= w.start && t <= w.end + 0.12;
+            return (
+              <span
+                key={i}
+                style={{
+                  color: isCurrent ? accent : active ? pal.text : pal.textDim,
+                  marginRight: 16,
+                  display: 'inline-block',
+                }}
+              >
+                {w.word}
+              </span>
+            );
+          })}
+        </div>
+      </AbsoluteFill>
+    );
+  }
+
   return (
     <AbsoluteFill style={{pointerEvents: 'none'}}>
       <div

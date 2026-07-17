@@ -118,6 +118,9 @@ export interface Scene {
   annotations?: FigureAnnotation[];
   /** FigureScene: timed zoom/highlight moves onto parts of the figure. */
   figureFocus?: FigureFocus[];
+  /** Editorial layout: one accent-colored subhead line under the headline —
+   *  the scene's "so what". Optional; media + hook scenes. */
+  subtext?: string;
   /** Path relative to the story output folder (or assets/...). */
   image?: string;
   /** If set and no image exists, generate_images.py creates one. */
@@ -180,8 +183,9 @@ export interface ReelSpec {
   /** Optional TTS delivery direction override (read by tts.py). Falls back to a
    *  per-vibe preset: bold = brisk news energy, moody = slow and intimate. */
   voiceStyle?: string;
-  /** 'dark' (default, atmospheric) or 'light' (editorial white — data/research). */
-  theme?: 'dark' | 'light';
+  /** 'editorial-dark' (default for new reels — warm near-black card layout) ·
+   *  'light' (editorial white) · 'dark' (legacy navy, older reels). */
+  theme?: 'dark' | 'light' | 'editorial-dark';
   handle?: string;
   scenes: Scene[];
   totalDuration?: number;

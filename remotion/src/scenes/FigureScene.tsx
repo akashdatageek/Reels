@@ -7,23 +7,39 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
+import {ChannelBadge, EditorialTextBlock, MediaCard} from '../components/EditorialCard';
 import {usePalette} from '../components/ThemeContext';
 import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
 import type {FigureAnnotation, FigureFocus, Scene} from '../types';
 
-/** smoothstep-eased sample of scalar keyframes at fraction t (0..1). */
-const sampleKF = (t: number, times: number[], values: number[]): number => {
-  if (t <= times[0]) return values[0];
+/** Hold-then-move keyframe sampler. The old sampler interpolated across the
+ *  ENTIRE gap between steps, so the camera drifted continuously and was never
+ *  at rest. Now: when a step's `at` arrives, the camera eases to it over a
+ *  short window (cubic ease-in-out, no overshoot) and then HOLDS perfectly
+ *  still until the next step. `windowT` is the transition length as a fraction
+ *  of the scene. */
+const easeInOutCubic = (l: number): number =>
+  l < 0.5 ? 4 * l * l * l : 1 - Math.pow(-2 * l + 2, 3) / 2;
+
+const sampleKF = (
+  t: number,
+  times: number[],
+  values: number[],
+  windowT: number,
+): number => {
+  let v = values[0];
   for (let i = 1; i < times.length; i++) {
-    if (t <= times[i]) {
-      const span = times[i] - times[i - 1] || 1;
-      const l = Math.min(1, Math.max(0, (t - times[i - 1]) / span));
-      const e = l * l * (3 - 2 * l); // smoothstep
-      return values[i - 1] + (values[i] - values[i - 1]) * e;
-    }
+    const start = times[i], // motion begins when the step's `at` arrives
+      gap = (times[i + 1] ?? 1) - start,
+      w = Math.max(0.0001, Math.min(windowT, gap));
+    if (t <= start) return v;
+    const l = Math.min(1, (t - start) / w);
+    v = v + (values[i] - v) * easeInOutCubic(l);
+    if (l < 1) return v;
+    v = values[i]; // transition done — HOLD exactly here
   }
-  return values[values.length - 1];
+  return v;
 };
 
 /**
@@ -43,10 +59,14 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
   const anns: FigureAnnotation[] = scene.annotations ?? [];
   const focus: FigureFocus[] = scene.figureFocus ?? [];
 
-  const figIn = spring({frame: frame - 6, fps, config: {damping: 22, stiffness: 90}});
+  // non-oscillating fade-in; drives OPACITY ONLY — the media never scales in
+  // (the old 0.94→1 intro "breath" was idle motion on evidence)
+  const figIn = spring({frame: frame - 6, fps, config: {damping: 200}});
   const t = frame / Math.max(durationInFrames - 1, 1);
 
-  // ---- camera keyframes: full-frame at 0, then each focus step ----
+  // ---- camera keyframes: full-frame at 0, then each focus step.
+  // Motion happens only in a ~0.9s ease-in-out window after each step's `at`;
+  // between windows the camera is PERFECTLY still. ----
   const kf = [
     {at: 0, cx: 0.5, cy: 0.5, s: 1},
     ...focus.map((f) => {
@@ -57,18 +77,82 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
       return {at: f.at, cx, cy, s};
     }),
   ];
+  const windowT = (0.9 * fps) / Math.max(durationInFrames, 1);
   const times = kf.map((k) => k.at);
-  const cx = sampleKF(t, times, kf.map((k) => k.cx));
-  const cy = sampleKF(t, times, kf.map((k) => k.cy));
-  const s = sampleKF(t, times, kf.map((k) => k.s));
+  const cx = sampleKF(t, times, kf.map((k) => k.cx), windowT);
+  const cy = sampleKF(t, times, kf.map((k) => k.cy), windowT);
+  const s = sampleKF(t, times, kf.map((k) => k.s), windowT);
 
   // active highlight = last focus step whose `at` has passed
   const activeIdx = focus.reduce((acc, f, i) => (t >= f.at ? i : acc), -1);
   const active = activeIdx >= 0 ? focus[activeIdx] : undefined;
-  // draw-on progress (0..1) since this highlight became active
-  const drawP = active
-    ? spring({frame: frame - active.at * durationInFrames, fps, config: {damping: 200}})
-    : 0;
+  // draw-on progress since this highlight became active. Deterministic ease
+  // that reaches EXACTLY 1 (a spring only approaches 1 asymptotically, which
+  // kept the mark's clip edge creeping sub-pixel forever — visible tremble).
+  const drawSec = active ? (frame - active.at * durationInFrames) / fps : 0;
+  const dl = Math.min(1, Math.max(0, drawSec / 0.6));
+  const drawP = active ? 1 - Math.pow(1 - dl, 3) : 0;
+
+  // shared zoom layer (image + highlights in one clamped transform)
+  const zoomLayer = scene.figure ? (
+    <div
+      style={(() => {
+        const S = s;
+        const half = 1 / (2 * Math.max(S, 0.0001));
+        const ccx = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cx));
+        const ccy = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cy));
+        return {
+          position: 'relative' as const,
+          transformOrigin: `${ccx * 100}% ${ccy * 100}%`,
+          transform: `translate(${(0.5 - ccx) * 100}%, ${(0.5 - ccy) * 100}%) scale(${S})`,
+        };
+      })()}
+    >
+      <Img src={staticFile(scene.figure)} style={{width: '100%', height: 'auto', display: 'block'}} />
+      {active && active.region ? (
+        <Highlight region={active.region} kind={active.highlight ?? 'box'} label={active.label} accent={accent} scale={s} progress={drawP} />
+      ) : null}
+    </div>
+  ) : null;
+
+  // ---- editorial-dark: media card + text block layout ----
+  if (p.kind === 'editorial') {
+    return (
+      <AbsoluteFill style={{backgroundColor: p.bg}}>
+        <MediaCard>
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              overflow: 'hidden',
+              opacity: figIn,
+            }}
+          >
+            <div style={{width: '100%'}}>{zoomLayer}</div>
+          </div>
+          {scene.figureCredit ? (
+            <div
+              style={{
+                position: 'absolute',
+                right: 20,
+                bottom: 14,
+                fontFamily: FONT_BODY,
+                fontSize: 22,
+                color: 'rgba(0,0,0,0.45)',
+              }}
+            >
+              {scene.figureCredit}
+            </div>
+          ) : null}
+        </MediaCard>
+        <ChannelBadge logo={scene.logo} handle={scene.handle} />
+        <EditorialTextBlock headline={scene.text} subtext={scene.subtext} accent={accent} />
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill style={{backgroundColor: p.bg}}>
@@ -108,31 +192,11 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
               backgroundColor: '#ffffff',
               border: `1px solid ${p.panelBorder}`,
               boxShadow:
-                p.bg === '#f5f4f0' ? '0 24px 60px rgba(0,0,0,0.12)' : '0 24px 60px rgba(0,0,0,0.5)',
+                p.kind === 'light' ? '0 24px 60px rgba(0,0,0,0.12)' : '0 24px 60px rgba(0,0,0,0.5)',
               opacity: figIn,
             }}
           >
-            {/* zoom layer: image + on-figure highlights share one transform.
-                The camera center is CLAMPED so the viewport never pans past the
-                image edge — zooming near a border must not expose card white. */}
-            <div
-              style={(() => {
-                const S = (0.94 + figIn * 0.06) * s;
-                const half = 1 / (2 * Math.max(S, 0.0001));
-                const ccx = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cx));
-                const ccy = S <= 1 ? 0.5 : Math.min(1 - half, Math.max(half, cy));
-                return {
-                  position: 'relative' as const,
-                  transformOrigin: `${ccx * 100}% ${ccy * 100}%`,
-                  transform: `translate(${(0.5 - ccx) * 100}%, ${(0.5 - ccy) * 100}%) scale(${S})`,
-                };
-              })()}
-            >
-              <Img src={staticFile(scene.figure)} style={{width: '100%', height: 'auto', display: 'block'}} />
-              {active && active.region ? (
-                <Highlight region={active.region} kind={active.highlight ?? 'box'} label={active.label} accent={accent} scale={s} progress={drawP} />
-              ) : null}
-            </div>
+            {zoomLayer}
           </div>
         ) : null}
 

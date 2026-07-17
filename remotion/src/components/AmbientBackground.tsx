@@ -27,10 +27,40 @@ export const AmbientBackground: React.FC<{
   const pulse = usePulse();
   const moody = useVibe() === 'moody';
   const pal = usePalette();
-  const light = pal.bg === '#f5f4f0';
+  const light = pal.kind === 'light';
   // moody: calmer glow, half the audio reactivity
   const bass = moody ? pulse.bass * 0.5 : pulse.bass;
   const t = frame / fps;
+
+  // ---- editorial-dark: flat warm canvas, one STATIC corner wash, no motion ----
+  if (pal.kind === 'editorial') {
+    return (
+      <AbsoluteFill
+        style={{
+          backgroundColor: transparent ? 'transparent' : pal.bg,
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: -260,
+            right: -220,
+            width: 720,
+            height: 720,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${accent}14 0%, transparent 66%)`,
+          }}
+        />
+        <AbsoluteFill
+          style={{
+            background:
+              'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%)',
+          }}
+        />
+      </AbsoluteFill>
+    );
+  }
 
   // ---- light theme: clean editorial (no aurora, no dots) ----
   if (light) {

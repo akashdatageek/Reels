@@ -8,6 +8,7 @@ import {
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
+import {ChannelBadge} from '../components/EditorialCard';
 import {usePulse} from '../components/MusicPulse';
 import {usePalette} from '../components/ThemeContext';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
@@ -60,6 +61,51 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
   const fillP = (fraction ?? 0) * progress; // arc/bar fills in sync with count-up
   const R = 46;
   const C = 2 * Math.PI * R;
+
+  // ---- editorial-dark: left-aligned document stat — solid accent number,
+  // static glow, fraction as a clean bar. No music-driven motion. ----
+  const pal = usePalette();
+  if (pal.kind === 'editorial') {
+    return (
+      <AbsoluteFill>
+        <AmbientBackground accent={accent} secondary={second} seed={2} variant={scene.bgStyle} />
+        <ChannelBadge logo={scene.logo} handle={scene.handle} />
+        <div style={{position: 'absolute', left: 64, right: 64, top: 560}}>
+          <div style={{width: 96, height: 10, borderRadius: 5, backgroundColor: accent, marginBottom: 40}} />
+          <div
+            style={{
+              fontFamily: FONT_DISPLAY,
+              fontSize: 220,
+              lineHeight: 1,
+              color: accent,
+              letterSpacing: -2,
+            }}
+          >
+            {value === null ? scene.stat : `${prefix}${shown}${suffix}`}
+          </div>
+          <div
+            style={{
+              marginTop: 34,
+              fontFamily: FONT_BODY,
+              fontWeight: 700,
+              fontSize: 46,
+              lineHeight: 1.3,
+              color: pal.text,
+              opacity: labelIn,
+              transform: `translateY(${(1 - labelIn) * 20}px)`,
+            }}
+          >
+            {scene.label}
+          </div>
+          {fraction !== null ? (
+            <div style={{marginTop: 44, width: '100%', height: 26, borderRadius: 13, backgroundColor: `${accent}26`, overflow: 'hidden'}}>
+              <div style={{width: `${fillP * 100}%`, height: '100%', borderRadius: 13, backgroundColor: accent}} />
+            </div>
+          ) : null}
+        </div>
+      </AbsoluteFill>
+    );
+  }
 
   return (
     <AbsoluteFill>

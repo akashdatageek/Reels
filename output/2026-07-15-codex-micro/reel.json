@@ -1,0 +1,92 @@
+{
+  "title": "Codex Micro \u2014 OpenAI's first hardware is a keyboard",
+  "theme": "dark",
+  "vibe": "bold",
+  "accentColor": "#00E58C",
+  "secondaryColor": "#00A3FF",
+  "handle": "@startups.ai",
+  "voiceStyle": "Narrate briskly and crisply, like a sharp launch-day tech news explainer \u2014 energetic, clear diction, minimal pauses, never slurred: ",
+  "music": "music/ambient_01.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 8.04,
+      "text": "OpenAI's first hardware: *a KEYBOARD?*",
+      "textStyle": "pop",
+      "voiceSegment": "OpenAI \u2014 the company behind the famous AI chatbot ChatGPT \u2014 just shipped its first hardware ever. A tiny keyboard.",
+      "audioStart": 0.0
+    },
+    {
+      "type": "ImageScene",
+      "duration": 6.32,
+      "text": "CODEX MICRO \u00b7 $230",
+      "image": "assets/board.png",
+      "kenBurns": "zoom-in",
+      "voiceSegment": "The Codex Micro: two hundred thirty dollars, made to control Codex \u2014 OpenAI's AI that writes code for you.",
+      "audioStart": 8.04
+    },
+    {
+      "type": "ImageScene",
+      "duration": 6.04,
+      "text": "a DIAL for AI brainpower",
+      "image": "assets/dial.png",
+      "kenBurns": "zoom-out",
+      "voiceSegment": "The big dial sets how hard the AI thinks. Simple task? Keep it fast. Hard one? Crank it up.",
+      "audioStart": 14.36
+    },
+    {
+      "type": "ImageScene",
+      "duration": 6.68,
+      "text": "keys GLOW with agent status",
+      "image": "assets/board.png",
+      "kenBurns": "pan-right",
+      "voiceSegment": "It can run several jobs at once \u2014 and six keys glow with each one's status: thinking, working, waiting, done.",
+      "audioStart": 20.4
+    },
+    {
+      "type": "ImageScene",
+      "duration": 6.36,
+      "text": "flick \u2192 it works",
+      "image": "assets/joystick.png",
+      "kenBurns": "zoom-in",
+      "voiceSegment": "Flick the joystick and it starts a job: review code, or fix a bug. One key approves. One rejects.",
+      "audioStart": 27.08
+    },
+    {
+      "type": "StatCallout",
+      "duration": 4.84,
+      "stat": "$230",
+      "label": "13 keys \u00b7 limited run \u00b7 SOLD OUT \u2014 OpenAI \u00d7 Work Louder",
+      "voiceSegment": "Thirteen keys, two hundred thirty dollars, a limited run \u2014 and it's already sold out.",
+      "audioStart": 33.44
+    },
+    {
+      "type": "ImageScene",
+      "duration": 7.2,
+      "text": "the $6.5B gadget? still coming",
+      "image": "assets/packaging.png",
+      "kenBurns": "zoom-out",
+      "voiceSegment": "OpenAI separately bought a secret gadget company from the iPhone's designer \u2014 reportedly six and a half billion. This isn't it.",
+      "audioStart": 38.28
+    },
+    {
+      "type": "HookCard",
+      "duration": 6.76,
+      "text": "you won't type code \u2014 you'll *manage* it",
+      "textStyle": "marker",
+      "bgStyle": "beams",
+      "voiceSegment": "Here's the real story: coders are becoming managers of AI workers. This is the first desk console for that job.",
+      "audioStart": 45.48
+    },
+    {
+      "type": "OutroCard",
+      "duration": 5.16,
+      "text": "Would YOU buy a keyboard for an AI?",
+      "handle": "@startups.ai",
+      "voiceSegment": "The box says: you can just build things. Would you buy a keyboard for your AI?",
+      "audioStart": 52.24
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 57.4
+}
