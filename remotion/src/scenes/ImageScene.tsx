@@ -13,6 +13,7 @@ import {
   EditorialTextBlock,
   MediaCard,
 } from '../components/EditorialCard';
+import {SceneBackground} from '../components/SceneBackground';
 import {usePalette} from '../components/ThemeContext';
 import {BG, FONT_BODY, SAFE_BOTTOM, TEXT} from '../theme';
 import type {Scene} from '../types';
@@ -55,6 +56,7 @@ export const ImageScene: React.FC<{scene: Scene; accent: string}> = ({
   if (pal.kind === 'editorial') {
     return (
       <AbsoluteFill style={{backgroundColor: pal.bg}}>
+        {scene.background ? <SceneBackground src={scene.background} /> : null}
         <MediaCard>
           {scene.image ? (
             <Img

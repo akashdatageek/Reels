@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {SceneBackground} from '../components/SceneBackground';
 import {usePalette} from '../components/ThemeContext';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
 import type {Scene} from '../types';
@@ -37,7 +38,8 @@ export const OutroCard: React.FC<{scene: Scene; accent: string; secondary?: stri
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={4} />
+      {scene.background ? <SceneBackground src={scene.background} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={4} transparent={Boolean(scene.background)} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

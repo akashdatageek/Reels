@@ -81,6 +81,7 @@ ASSET_FIELDS = {
     "figure": None,          # always provided, never generated
     "image": "imagePrompt",
     "backdrop": "backdropPrompt",
+    "background": "backgroundPrompt",
     "logo": None,
 }
 
@@ -147,6 +148,30 @@ def main() -> int:
                     f"Split it across visual beats, or move the point to a "
                     f"FigureScene/ImageScene that earns the screen time."
                 )
+
+        # ---- HARD RULE: no scene shows text on a bare canvas ----
+        # Every text scene must carry a topic-relevant background (a path now,
+        # or a backgroundPrompt the pipeline will generate). Media scenes may
+        # omit it — their card IS the visual.
+        if stype in TEXT_SCENE_TYPES and not (
+            scene.get("background") or scene.get("backgroundPrompt")
+        ):
+            errors.append(
+                f"scene {idx:02d}: {stype} has no background — text never sits on "
+                f"a bare canvas. Source one per the content skill's background "
+                f"ladder (story asset crop → fetched stock → generated abstract)."
+            )
+        # A background is decoration (scrimmed, blurred) — it can never double
+        # as the scene's evidence. The bit-exact figure in the card carries
+        # that role, so the two must be distinct files.
+        bg = scene.get("background")
+        if bg and scene.get("figure") and bg == scene.get("figure"):
+            errors.append(
+                f"scene {idx:02d}: background equals figure path ({bg!r}) — a "
+                f"scrimmed background is decoration, not evidence. Point "
+                f"background at a distinct copy/crop and keep the card's "
+                f"figure bit-exact."
+            )
 
         variant = scene.get("statVariant")
         stat = str(scene.get("stat", ""))

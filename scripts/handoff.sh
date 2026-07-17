@@ -43,7 +43,7 @@ import json, pathlib, sys
 p = pathlib.Path(sys.argv[1]); reel = json.loads(p.read_text(encoding="utf-8"))
 bad = []
 for i, s in enumerate(reel.get("scenes", [])):
-    for prompt, field in (("imagePrompt", "image"), ("backdropPrompt", "backdrop")):
+    for prompt, field in (("imagePrompt", "image"), ("backdropPrompt", "backdrop"), ("backgroundPrompt", "background")):
         if s.get(prompt) and not (s.get(field) and (p.parent / s[field]).exists()):
             bad.append(f"scene {i:02d}: {prompt} set but no generated {field} file — would render blank")
 for b in bad:

@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {SceneBackground} from '../components/SceneBackground';
 import {FONT_BODY, FONT_MONO, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {Scene, TerminalLine} from '../types';
 
@@ -42,7 +43,8 @@ export const TerminalScene: React.FC<{scene: Scene; accent: string; secondary?: 
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={3} />
+      {scene.background ? <SceneBackground src={scene.background} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={3} transparent={Boolean(scene.background)} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

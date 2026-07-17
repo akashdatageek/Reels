@@ -7,6 +7,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {AmbientBackground} from '../components/AmbientBackground';
+import {SceneBackground} from '../components/SceneBackground';
 import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY, SAFE_BOTTOM, SAFE_TOP, TEXT, TEXT_DIM} from '../theme';
 import type {ChartItem, Scene} from '../types';
@@ -28,7 +29,8 @@ export const ChartScene: React.FC<{scene: Scene; accent: string; secondary?: str
 
   return (
     <AbsoluteFill>
-      <AmbientBackground accent={accent} secondary={second} seed={5} />
+      {scene.background ? <SceneBackground src={scene.background} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={5} transparent={Boolean(scene.background)} />
       <AbsoluteFill
         style={{
           paddingTop: SAFE_TOP + 60,

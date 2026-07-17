@@ -228,22 +228,31 @@ def main() -> int:
                 else:
                     print(f"scene {idx:02d}: WARN baseImage {base_rel} has no manifest row "
                           f"(not a fetched asset?) — provenance unknown", file=sys.stderr)
-            # imagePrompt is superseded by the edit; backdropPrompt still runs
-            jobs = [("backdropPrompt", "backdrop", True)]
+            # imagePrompt is superseded by the edit; backdrop/background still run
+            jobs = [("backdropPrompt", "backdrop"), ("backgroundPrompt", "background")]
         else:
-            # (prompt field, path field, is_backdrop)
+            # (prompt field, path field)
             jobs = [
-                ("imagePrompt", "image", False),
-                ("backdropPrompt", "backdrop", True),
+                ("imagePrompt", "image"),
+                ("backdropPrompt", "backdrop"),
+                ("backgroundPrompt", "background"),
             ]
-        for prompt_field, target_field, is_backdrop in jobs:
+        for prompt_field, target_field in jobs:
             subject = scene.get(prompt_field)
             if not subject:
                 continue
-            if is_backdrop:
+            if target_field == "backdrop":
                 framing = (
                     " Real, uncluttered environment with out-of-focus depth, dark "
                     "and atmospheric so overlaid text stays readable."
+                )
+            elif target_field == "background":
+                # scene backgrounds are AMBIENCE under a scrim (ladder rung c —
+                # generation is the last resort after story assets and stock)
+                framing = (
+                    " Abstract, topic-toned atmosphere for a text-card background — "
+                    "soft light, texture, depth; dark and uncluttered. Absolutely "
+                    "no text, no charts, no logos, no readable UI."
                 )
             else:
                 framing = f" Composition: {COMPOSITIONS[idx % len(COMPOSITIONS)]}."

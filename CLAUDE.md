@@ -23,7 +23,7 @@ skills, not here, so there's a single source of truth.
 | 4 | **`comprehension`** | Gate: a fresh-context viewer must UNDERSTAND the script | `state.json` (`comprehension`) |
 | 5 | **`author`** | Build the contract: scenes, theme/vibe/palette, assets | `output/<story>/reel.json` |
 | 6 | **`build`** | Run the pipeline: voice → captions → images → render → mux | `output/<story>/reel.mp4` |
-| 7 | **`screening`** | Gate: LOOK at the render — stills + R1–R7 rubric, revise | `output/<story>/stills/`, `state.json` (`screening`) |
+| 7 | **`screening`** | Gate: LOOK at the render — stills + R1–R8 rubric, revise | `output/<story>/stills/`, `state.json` (`screening`) |
 | 8 | **`editor`** | Fact-check gate, tighten, write the caption, hand off | `output/<story>/caption.txt` |
 
 **The editor's cover.png must come from a still that passed screening's R4/R5**
@@ -60,7 +60,7 @@ must not be able to skip its own checklist. So:
   `comprehension` runs right after `script` (a fresh-context viewer must follow
   the voiceover with zero background, before a single scene is authored);
   `screening` runs right after `build` (the orchestrator views stills of the
-  actual render and judges the R1–R7 rubric in writing — the pipeline never
+  actual render and judges the R1–R8 rubric in writing — the pipeline never
   ships a reel nobody looked at); `factcheck` runs in `editor` (every on-screen
   claim traces to research.md, on the finished render). Correct, clear, *and*
   watchable.
@@ -90,6 +90,13 @@ must not be able to skip its own checklist. So:
   (`baseImage`+`editPrompt`), and preflight hard-fails violations. Visuals
   follow the content skill's ladder: real asset → our screenshot → fetched
   stock → stock+edit → pure generation (last resort).
+- **No text on a bare canvas.** Every scene — including HookCard, StatCallout,
+  OutroCard — carries a topic-relevant `background` under the legibility scrim
+  (static, ~15-25% visual weight). Source it by the content skill's background
+  ladder (story asset crop → fetched stock → generated abstract, reuse before
+  generate); preflight hard-fails a text scene without one, and a background
+  may never be the same file as the scene's `figure` — decoration is not
+  evidence. Screening judges it (R8).
 - **Break the structure.** Never reuse the same scene order two days running.
 - **Never post automatically.** Hand off via `handoff.sh` (which shows the path
   only when all gates are green) and stop.

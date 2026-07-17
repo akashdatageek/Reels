@@ -106,6 +106,18 @@ export interface Scene {
   backdrop?: string;
   /** If set and no backdrop exists, generate_images.py creates one. */
   backdropPrompt?: string;
+  /** HARD RULE — no scene shows text on a bare canvas. A topic-relevant visual
+   *  rendered UNDER the legibility scrim (SceneBackground: static, darkened,
+   *  blurred, gradient toward the text zone; ~15-25% visual weight, ZERO
+   *  motion). REQUIRED on text scenes (HookCard/StatCallout/OutroCard —
+   *  preflight enforces); optional behind media scenes' card. A figure used
+   *  here is decoration, not evidence — it must NOT be the same file as this
+   *  scene's `figure` (preflight enforces; the bit-exact card copy carries
+   *  the evidence role). */
+  background?: string;
+  /** If set and no background exists, generate_images.py creates one —
+   *  abstract, topic-toned, explicitly no text/charts/logos. */
+  backgroundPrompt?: string;
   /** TerminalScene: the lines to type/print (title bar text comes from `text`). */
   terminal?: TerminalLine[];
   /** ChartScene: bars, top-to-bottom (title from `text`, footnote from `label`). */

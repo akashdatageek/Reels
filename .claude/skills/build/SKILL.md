@@ -27,9 +27,11 @@ red gate in the ledger is exactly the step to re-run.
    image API call. Hard-fails on an unknown scene `type` (the renderer would
    otherwise skip it silently and swallow its narration time), a referenced
    asset that doesn't exist (figure/image/backdrop/logo/music), unparseable
-   JSON, or a **text scene (Hook/Stat/Outro) whose narration exceeds ~20 words**
+   JSON, a **text scene (Hook/Stat/Outro) whose narration exceeds ~20 words**
    (those cards have no motion to survive a long hold — split them per the
-   `author` skill's pacing rule); warns on a spoken scene with no `voiceSegment`,
+   `author` skill's pacing rule), a **text scene with no `background`** (no
+   text on a bare canvas), or a scene whose `background` equals its `figure`
+   (decoration is not evidence); warns on a spoken scene with no `voiceSegment`,
    or a donut/bar `statVariant` whose stat isn't a percentage/fraction. Fix
    reel.json and re-run — nothing downstream runs until it's clean.
 1. **`tts.py` — voice + timings.** Synthesizes each scene's `voiceSegment` into
@@ -57,9 +59,13 @@ red gate in the ledger is exactly the step to re-run.
 3. **`captions.py` — caption groups.** Reads `word_timings.json` (not reel.json),
    groups words into short 1–3 word chunks that pop in sync with the voice, and
    writes `captions.json` next to it.
-4. **`generate_images.py` — images + backdrops.** For each scene with an
-   `imagePrompt`/`backdropPrompt` and no provided asset, calls Nano Banana and
-   writes the path back into reel.json. The final prompt is assembled as:
+4. **`generate_images.py` — images + backdrops + backgrounds.** For each scene
+   with an `imagePrompt`/`backdropPrompt`/`backgroundPrompt` and no provided
+   asset, calls Nano Banana and writes the path back into reel.json.
+   `backgroundPrompt` (ladder rung c — last resort after story assets and
+   fetched stock) gets its own framing: abstract topic-toned ambience,
+   explicitly no text/charts/logos, rendered under the SceneBackground scrim.
+   The final prompt is assembled as:
 
    ```
    BASE_RULES  (photographic, anti-slop: no CGI blobs / floating spheres /

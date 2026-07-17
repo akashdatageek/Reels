@@ -54,12 +54,6 @@
     "timestamp": "2026-07-15T01:53:34+00:00"
   },
   {
-    "stage": "preflight",
-    "status": "pass",
-    "detail": "11 scenes, 0 warning(s)",
-    "timestamp": "2026-07-17T19:32:56+00:00"
-  },
-  {
     "stage": "build",
     "status": "pass",
     "detail": "reel.mp4 rendered + muxed",
@@ -76,5 +70,11 @@
     "status": "pass",
     "detail": "R1-R7 PASS; deliberate-failure test: R2 failed on widest-crop scene 6 (scene_06_043.30.jpg), fixed by restoring tight figureFocus, re-judged R2 only (scene_06_045.57.jpg)",
     "timestamp": "2026-07-17T20:08:38+00:00"
+  },
+  {
+    "stage": "preflight",
+    "status": "pass",
+    "detail": "11 scenes, 0 warning(s)",
+    "timestamp": "2026-07-17T20:31:57+00:00"
   }
 ]
