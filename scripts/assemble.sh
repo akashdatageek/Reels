@@ -73,6 +73,11 @@ MUSIC_REL="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get
 MUSIC="$REPO_DIR/$MUSIC_REL"
 OUT="$STORY_DIR/reel.mp4"
 
+# Fade the mix out over the final 0.8s — without this the music bed slams
+# into the end of the file at full energy (screening gate R7).
+DUR="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['totalDuration'])" "$REEL_JSON")"
+FADE_ST="$(python3 -c "import sys; print(max(0, float(sys.argv[1]) - 0.8))" "$DUR")"
+
 if [ -n "$MUSIC_REL" ] && [ -f "$MUSIC" ]; then
   # music looped to full length, ducked -12dB under voice, then loudnorm
   ffmpeg -y \
@@ -83,7 +88,7 @@ if [ -n "$MUSIC_REL" ] && [ -f "$MUSIC" ]; then
 [2:a]volume=0.5[music];\
 [music][1:a]sidechaincompress=threshold=0.03:ratio=8:attack=50:release=400:makeup=1[ducked];\
 [1:a][ducked]amix=inputs=2:duration=first:dropout_transition=0[mix];\
-[mix]loudnorm=I=-14:TP=-1.5:LRA=11[aout]" \
+[mix]loudnorm=I=-14:TP=-1.5:LRA=11,afade=t=out:st=${FADE_ST}:d=0.8[aout]" \
     -map 0:v -map "[aout]" \
     -c:v copy -c:a aac -b:a 192k -shortest \
     "$OUT"
@@ -92,7 +97,7 @@ else
   ffmpeg -y \
     -i "$STORY_DIR/video_silent.mp4" \
     -i "$VOICE" \
-    -filter_complex "[1:a]loudnorm=I=-14:TP=-1.5:LRA=11[aout]" \
+    -filter_complex "[1:a]loudnorm=I=-14:TP=-1.5:LRA=11,afade=t=out:st=${FADE_ST}:d=0.8[aout]" \
     -map 0:v -map "[aout]" \
     -c:v copy -c:a aac -b:a 192k -shortest \
     "$OUT"

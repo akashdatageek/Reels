@@ -84,8 +84,13 @@ export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: strin
               letterSpacing: -1,
             }}
           >
+            {/* inline-block, NOT plain inline: adjacent inline spans with no
+                whitespace text nodes between them give CSS zero line-break
+                opportunities, so long headlines overflow the frame edge
+                instead of wrapping (caught by the screening gate). Atomic
+                inlines restore a break opportunity at every word. */}
             {words.map((w, i) => (
-              <span key={i} style={{marginRight: 22, color: w.emphasized ? accent : TEXT}}>
+              <span key={i} style={{display: 'inline-block', marginRight: 22, color: w.emphasized ? accent : TEXT}}>
                 {w.text}
               </span>
             ))}
@@ -158,7 +163,7 @@ export const HookCard: React.FC<{scene: Scene; accent: string; secondary?: strin
 
               if (mode === 'typewriter') {
                 const rev = Math.max(0, Math.min(w.text.length, Math.floor(shownChars - start)));
-                if (rev <= 0) return <span key={i} style={{marginRight: 22, opacity: 0}}>{w.text}</span>;
+                if (rev <= 0) return <span key={i} style={{display: 'inline-block', marginRight: 22, opacity: 0}}>{w.text}</span>;
                 return (
                   <span key={i} style={{display: 'inline-block', marginRight: 22, ...emph}}>
                     {w.text.slice(0, rev)}

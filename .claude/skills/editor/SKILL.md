@@ -92,8 +92,11 @@ changed).
   ```bash
   bash scripts/still.sh output/<story> <frame> output/<story>/cover.png
   ```
-  Choose the frame by eye from §1's spot-checks — a legible, on-brand moment,
-  not a mid-transition blur.
+  **The cover must be a moment the screening gate judged**: pick a frame from
+  `output/<story>/stills/` that PASSED R4 (sendable out of context) and R5
+  (holds up at grid size) in the screening verdicts — never a frame screening
+  didn't look at, and never one that failed either item. Render that same
+  timestamp at full res with still.sh.
 - **Write `output/<story>/caption.txt`** — captions are a search surface now,
   not a hashtag dump:
   - **First line = keyword-rich hook.** Lead with the exact phrase someone
