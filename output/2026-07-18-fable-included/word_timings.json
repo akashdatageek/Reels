@@ -1,0 +1,986 @@
+[
+  {
+    "word": "Anthropic",
+    "start": 0.05,
+    "end": 0.54,
+    "scene": 0
+  },
+  {
+    "word": "just",
+    "start": 0.626,
+    "end": 0.893,
+    "scene": 0
+  },
+  {
+    "word": "split",
+    "start": 0.94,
+    "end": 1.252,
+    "scene": 0
+  },
+  {
+    "word": "Claude",
+    "start": 1.307,
+    "end": 1.663,
+    "scene": 0
+  },
+  {
+    "word": "subscribers",
+    "start": 1.726,
+    "end": 2.304,
+    "scene": 0
+  },
+  {
+    "word": "into",
+    "start": 2.406,
+    "end": 2.673,
+    "scene": 0
+  },
+  {
+    "word": "winners",
+    "start": 2.72,
+    "end": 3.121,
+    "scene": 0
+  },
+  {
+    "word": "and",
+    "start": 3.192,
+    "end": 3.414,
+    "scene": 0
+  },
+  {
+    "word": "losers.",
+    "start": 3.454,
+    "end": 3.854,
+    "scene": 0
+  },
+  {
+    "word": "Which",
+    "start": 3.925,
+    "end": 4.236,
+    "scene": 0
+  },
+  {
+    "word": "side",
+    "start": 4.291,
+    "end": 4.558,
+    "scene": 0
+  },
+  {
+    "word": "are",
+    "start": 4.606,
+    "end": 4.828,
+    "scene": 0
+  },
+  {
+    "word": "you",
+    "start": 4.867,
+    "end": 5.09,
+    "scene": 0
+  },
+  {
+    "word": "on?",
+    "start": 5.129,
+    "end": 5.352,
+    "scene": 0
+  },
+  {
+    "word": "Starting",
+    "start": 5.89,
+    "end": 6.328,
+    "scene": 1
+  },
+  {
+    "word": "July",
+    "start": 6.405,
+    "end": 6.668,
+    "scene": 1
+  },
+  {
+    "word": "twentieth,",
+    "start": 6.714,
+    "end": 7.239,
+    "scene": 1
+  },
+  {
+    "word": "Anthropic's",
+    "start": 7.332,
+    "end": 7.901,
+    "scene": 1
+  },
+  {
+    "word": "newest,",
+    "start": 8.002,
+    "end": 8.396,
+    "scene": 1
+  },
+  {
+    "word": "most",
+    "start": 8.465,
+    "end": 8.728,
+    "scene": 1
+  },
+  {
+    "word": "powerful",
+    "start": 8.774,
+    "end": 9.212,
+    "scene": 1
+  },
+  {
+    "word": "Claude",
+    "start": 9.289,
+    "end": 9.64,
+    "scene": 1
+  },
+  {
+    "word": "model",
+    "start": 9.701,
+    "end": 10.008,
+    "scene": 1
+  },
+  {
+    "word": "\u2014",
+    "start": 10.062,
+    "end": 10.193,
+    "scene": 1
+  },
+  {
+    "word": "Fable",
+    "start": 10.216,
+    "end": 10.523,
+    "scene": 1
+  },
+  {
+    "word": "5",
+    "start": 10.577,
+    "end": 10.708,
+    "scene": 1
+  },
+  {
+    "word": "\u2014",
+    "start": 10.732,
+    "end": 10.863,
+    "scene": 1
+  },
+  {
+    "word": "is",
+    "start": 10.886,
+    "end": 11.061,
+    "scene": 1
+  },
+  {
+    "word": "included",
+    "start": 11.092,
+    "end": 11.53,
+    "scene": 1
+  },
+  {
+    "word": "on",
+    "start": 11.607,
+    "end": 11.782,
+    "scene": 1
+  },
+  {
+    "word": "the",
+    "start": 11.813,
+    "end": 12.032,
+    "scene": 1
+  },
+  {
+    "word": "two",
+    "start": 12.071,
+    "end": 12.29,
+    "scene": 1
+  },
+  {
+    "word": "top",
+    "start": 12.328,
+    "end": 12.547,
+    "scene": 1
+  },
+  {
+    "word": "plans,",
+    "start": 12.586,
+    "end": 12.936,
+    "scene": 1
+  },
+  {
+    "word": "Max",
+    "start": 12.998,
+    "end": 13.217,
+    "scene": 1
+  },
+  {
+    "word": "and",
+    "start": 13.255,
+    "end": 13.474,
+    "scene": 1
+  },
+  {
+    "word": "Team",
+    "start": 13.513,
+    "end": 13.775,
+    "scene": 1
+  },
+  {
+    "word": "Premium,",
+    "start": 13.822,
+    "end": 14.26,
+    "scene": 1
+  },
+  {
+    "word": "at",
+    "start": 14.337,
+    "end": 14.512,
+    "scene": 1
+  },
+  {
+    "word": "no",
+    "start": 14.543,
+    "end": 14.718,
+    "scene": 1
+  },
+  {
+    "word": "extra",
+    "start": 14.749,
+    "end": 15.055,
+    "scene": 1
+  },
+  {
+    "word": "cost.",
+    "start": 15.109,
+    "end": 15.416,
+    "scene": 1
+  },
+  {
+    "word": "The",
+    "start": 15.47,
+    "end": 15.689,
+    "scene": 1
+  },
+  {
+    "word": "fine",
+    "start": 15.728,
+    "end": 15.99,
+    "scene": 1
+  },
+  {
+    "word": "print:",
+    "start": 16.037,
+    "end": 16.387,
+    "scene": 1
+  },
+  {
+    "word": "Fable",
+    "start": 16.449,
+    "end": 16.755,
+    "scene": 1
+  },
+  {
+    "word": "can",
+    "start": 16.809,
+    "end": 17.028,
+    "scene": 1
+  },
+  {
+    "word": "take",
+    "start": 17.067,
+    "end": 17.329,
+    "scene": 1
+  },
+  {
+    "word": "up",
+    "start": 17.376,
+    "end": 17.551,
+    "scene": 1
+  },
+  {
+    "word": "at",
+    "start": 17.582,
+    "end": 17.757,
+    "scene": 1
+  },
+  {
+    "word": "most",
+    "start": 17.788,
+    "end": 18.05,
+    "scene": 1
+  },
+  {
+    "word": "half",
+    "start": 18.097,
+    "end": 18.359,
+    "scene": 1
+  },
+  {
+    "word": "your",
+    "start": 18.406,
+    "end": 18.668,
+    "scene": 1
+  },
+  {
+    "word": "plan's",
+    "start": 18.715,
+    "end": 19.065,
+    "scene": 1
+  },
+  {
+    "word": "weekly",
+    "start": 19.127,
+    "end": 19.477,
+    "scene": 1
+  },
+  {
+    "word": "usage.",
+    "start": 19.539,
+    "end": 19.889,
+    "scene": 1
+  },
+  {
+    "word": "On",
+    "start": 20.45,
+    "end": 20.597,
+    "scene": 2
+  },
+  {
+    "word": "the",
+    "start": 20.623,
+    "end": 20.807,
+    "scene": 2
+  },
+  {
+    "word": "cheaper",
+    "start": 20.84,
+    "end": 21.171,
+    "scene": 2
+  },
+  {
+    "word": "plans",
+    "start": 21.23,
+    "end": 21.487,
+    "scene": 2
+  },
+  {
+    "word": "\u2014",
+    "start": 21.533,
+    "end": 21.643,
+    "scene": 2
+  },
+  {
+    "word": "Pro",
+    "start": 21.663,
+    "end": 21.847,
+    "scene": 2
+  },
+  {
+    "word": "and",
+    "start": 21.879,
+    "end": 22.063,
+    "scene": 2
+  },
+  {
+    "word": "Team",
+    "start": 22.096,
+    "end": 22.317,
+    "scene": 2
+  },
+  {
+    "word": "Standard",
+    "start": 22.356,
+    "end": 22.724,
+    "scene": 2
+  },
+  {
+    "word": "\u2014",
+    "start": 22.789,
+    "end": 22.899,
+    "scene": 2
+  },
+  {
+    "word": "your",
+    "start": 22.919,
+    "end": 23.139,
+    "scene": 2
+  },
+  {
+    "word": "subscription",
+    "start": 23.178,
+    "end": 23.694,
+    "scene": 2
+  },
+  {
+    "word": "stays,",
+    "start": 23.785,
+    "end": 24.079,
+    "scene": 2
+  },
+  {
+    "word": "but",
+    "start": 24.131,
+    "end": 24.315,
+    "scene": 2
+  },
+  {
+    "word": "Fable",
+    "start": 24.348,
+    "end": 24.606,
+    "scene": 2
+  },
+  {
+    "word": "costs",
+    "start": 24.651,
+    "end": 24.909,
+    "scene": 2
+  },
+  {
+    "word": "extra:",
+    "start": 24.954,
+    "end": 25.249,
+    "scene": 2
+  },
+  {
+    "word": "pay",
+    "start": 25.301,
+    "end": 25.485,
+    "scene": 2
+  },
+  {
+    "word": "as",
+    "start": 25.517,
+    "end": 25.664,
+    "scene": 2
+  },
+  {
+    "word": "you",
+    "start": 25.69,
+    "end": 25.874,
+    "scene": 2
+  },
+  {
+    "word": "go,",
+    "start": 25.907,
+    "end": 26.091,
+    "scene": 2
+  },
+  {
+    "word": "like",
+    "start": 26.123,
+    "end": 26.344,
+    "scene": 2
+  },
+  {
+    "word": "a",
+    "start": 26.383,
+    "end": 26.494,
+    "scene": 2
+  },
+  {
+    "word": "prepaid",
+    "start": 26.513,
+    "end": 26.845,
+    "scene": 2
+  },
+  {
+    "word": "phone",
+    "start": 26.903,
+    "end": 27.161,
+    "scene": 2
+  },
+  {
+    "word": "card.",
+    "start": 27.206,
+    "end": 27.464,
+    "scene": 2
+  },
+  {
+    "word": "Anthropic",
+    "start": 27.509,
+    "end": 27.914,
+    "scene": 2
+  },
+  {
+    "word": "starts",
+    "start": 27.986,
+    "end": 28.28,
+    "scene": 2
+  },
+  {
+    "word": "you",
+    "start": 28.332,
+    "end": 28.516,
+    "scene": 2
+  },
+  {
+    "word": "off",
+    "start": 28.549,
+    "end": 28.733,
+    "scene": 2
+  },
+  {
+    "word": "with",
+    "start": 28.765,
+    "end": 28.986,
+    "scene": 2
+  },
+  {
+    "word": "a",
+    "start": 29.025,
+    "end": 29.136,
+    "scene": 2
+  },
+  {
+    "word": "one-time",
+    "start": 29.155,
+    "end": 29.523,
+    "scene": 2
+  },
+  {
+    "word": "hundred-dollar",
+    "start": 29.588,
+    "end": 30.177,
+    "scene": 2
+  },
+  {
+    "word": "credit.",
+    "start": 30.281,
+    "end": 30.612,
+    "scene": 2
+  },
+  {
+    "word": "A",
+    "start": 31.17,
+    "end": 31.293,
+    "scene": 3
+  },
+  {
+    "word": "hundred",
+    "start": 31.314,
+    "end": 31.682,
+    "scene": 3
+  },
+  {
+    "word": "dollars",
+    "start": 31.747,
+    "end": 32.115,
+    "scene": 3
+  },
+  {
+    "word": "sounds",
+    "start": 32.18,
+    "end": 32.507,
+    "scene": 3
+  },
+  {
+    "word": "generous",
+    "start": 32.565,
+    "end": 32.974,
+    "scene": 3
+  },
+  {
+    "word": "\u2014",
+    "start": 33.046,
+    "end": 33.169,
+    "scene": 3
+  },
+  {
+    "word": "until",
+    "start": 33.19,
+    "end": 33.477,
+    "scene": 3
+  },
+  {
+    "word": "you",
+    "start": 33.527,
+    "end": 33.731,
+    "scene": 3
+  },
+  {
+    "word": "learn",
+    "start": 33.768,
+    "end": 34.054,
+    "scene": 3
+  },
+  {
+    "word": "one",
+    "start": 34.104,
+    "end": 34.309,
+    "scene": 3
+  },
+  {
+    "word": "job,",
+    "start": 34.345,
+    "end": 34.59,
+    "scene": 3
+  },
+  {
+    "word": "an",
+    "start": 34.633,
+    "end": 34.797,
+    "scene": 3
+  },
+  {
+    "word": "AI",
+    "start": 34.826,
+    "end": 34.989,
+    "scene": 3
+  },
+  {
+    "word": "coding",
+    "start": 35.018,
+    "end": 35.345,
+    "scene": 3
+  },
+  {
+    "word": "your",
+    "start": 35.403,
+    "end": 35.648,
+    "scene": 3
+  },
+  {
+    "word": "app",
+    "start": 35.692,
+    "end": 35.896,
+    "scene": 3
+  },
+  {
+    "word": "overnight,",
+    "start": 35.932,
+    "end": 36.423,
+    "scene": 3
+  },
+  {
+    "word": "can",
+    "start": 36.509,
+    "end": 36.714,
+    "scene": 3
+  },
+  {
+    "word": "eat",
+    "start": 36.75,
+    "end": 36.954,
+    "scene": 3
+  },
+  {
+    "word": "it.",
+    "start": 36.99,
+    "end": 37.195,
+    "scene": 3
+  },
+  {
+    "word": "Because",
+    "start": 37.73,
+    "end": 38.121,
+    "scene": 4
+  },
+  {
+    "word": "Fable",
+    "start": 38.191,
+    "end": 38.495,
+    "scene": 4
+  },
+  {
+    "word": "is",
+    "start": 38.549,
+    "end": 38.723,
+    "scene": 4
+  },
+  {
+    "word": "the",
+    "start": 38.753,
+    "end": 38.971,
+    "scene": 4
+  },
+  {
+    "word": "priciest",
+    "start": 39.009,
+    "end": 39.444,
+    "scene": 4
+  },
+  {
+    "word": "Claude",
+    "start": 39.521,
+    "end": 39.869,
+    "scene": 4
+  },
+  {
+    "word": "ever",
+    "start": 39.931,
+    "end": 40.192,
+    "scene": 4
+  },
+  {
+    "word": "sold",
+    "start": 40.238,
+    "end": 40.499,
+    "scene": 4
+  },
+  {
+    "word": "\u2014",
+    "start": 40.545,
+    "end": 40.675,
+    "scene": 4
+  },
+  {
+    "word": "each",
+    "start": 40.698,
+    "end": 40.959,
+    "scene": 4
+  },
+  {
+    "word": "answer",
+    "start": 41.005,
+    "end": 41.353,
+    "scene": 4
+  },
+  {
+    "word": "costs",
+    "start": 41.415,
+    "end": 41.719,
+    "scene": 4
+  },
+  {
+    "word": "about",
+    "start": 41.773,
+    "end": 42.077,
+    "scene": 4
+  },
+  {
+    "word": "double",
+    "start": 42.131,
+    "end": 42.479,
+    "scene": 4
+  },
+  {
+    "word": "their",
+    "start": 42.54,
+    "end": 42.845,
+    "scene": 4
+  },
+  {
+    "word": "next-best",
+    "start": 42.899,
+    "end": 43.377,
+    "scene": 4
+  },
+  {
+    "word": "model.",
+    "start": 43.462,
+    "end": 43.81,
+    "scene": 4
+  },
+  {
+    "word": "Anthropic's",
+    "start": 44.37,
+    "end": 44.897,
+    "scene": 5
+  },
+  {
+    "word": "post",
+    "start": 44.991,
+    "end": 45.234,
+    "scene": 5
+  },
+  {
+    "word": "on",
+    "start": 45.277,
+    "end": 45.439,
+    "scene": 5
+  },
+  {
+    "word": "this",
+    "start": 45.468,
+    "end": 45.711,
+    "scene": 5
+  },
+  {
+    "word": "hit",
+    "start": 45.754,
+    "end": 45.957,
+    "scene": 5
+  },
+  {
+    "word": "sixteen",
+    "start": 45.993,
+    "end": 46.358,
+    "scene": 5
+  },
+  {
+    "word": "million",
+    "start": 46.423,
+    "end": 46.788,
+    "scene": 5
+  },
+  {
+    "word": "views.",
+    "start": 46.852,
+    "end": 47.177,
+    "scene": 5
+  },
+  {
+    "word": "If",
+    "start": 47.234,
+    "end": 47.396,
+    "scene": 5
+  },
+  {
+    "word": "you",
+    "start": 47.425,
+    "end": 47.628,
+    "scene": 5
+  },
+  {
+    "word": "pay",
+    "start": 47.664,
+    "end": 47.867,
+    "scene": 5
+  },
+  {
+    "word": "for",
+    "start": 47.902,
+    "end": 48.105,
+    "scene": 5
+  },
+  {
+    "word": "Claude,",
+    "start": 48.141,
+    "end": 48.506,
+    "scene": 5
+  },
+  {
+    "word": "know",
+    "start": 48.571,
+    "end": 48.814,
+    "scene": 5
+  },
+  {
+    "word": "your",
+    "start": 48.857,
+    "end": 49.1,
+    "scene": 5
+  },
+  {
+    "word": "side",
+    "start": 49.143,
+    "end": 49.387,
+    "scene": 5
+  },
+  {
+    "word": "before",
+    "start": 49.43,
+    "end": 49.754,
+    "scene": 5
+  },
+  {
+    "word": "July",
+    "start": 49.812,
+    "end": 50.055,
+    "scene": 5
+  },
+  {
+    "word": "twentieth.",
+    "start": 50.098,
+    "end": 50.585,
+    "scene": 5
+  },
+  {
+    "word": "Best",
+    "start": 51.17,
+    "end": 51.448,
+    "scene": 6
+  },
+  {
+    "word": "AI",
+    "start": 51.497,
+    "end": 51.682,
+    "scene": 6
+  },
+  {
+    "word": "included",
+    "start": 51.715,
+    "end": 52.178,
+    "scene": 6
+  },
+  {
+    "word": "\u2014",
+    "start": 52.259,
+    "end": 52.398,
+    "scene": 6
+  },
+  {
+    "word": "or",
+    "start": 52.423,
+    "end": 52.608,
+    "scene": 6
+  },
+  {
+    "word": "a",
+    "start": 52.641,
+    "end": 52.779,
+    "scene": 6
+  },
+  {
+    "word": "meter.",
+    "start": 52.804,
+    "end": 53.174,
+    "scene": 6
+  },
+  {
+    "word": "Which",
+    "start": 53.24,
+    "end": 53.564,
+    "scene": 6
+  },
+  {
+    "word": "side",
+    "start": 53.621,
+    "end": 53.899,
+    "scene": 6
+  },
+  {
+    "word": "are",
+    "start": 53.948,
+    "end": 54.179,
+    "scene": 6
+  },
+  {
+    "word": "you",
+    "start": 54.22,
+    "end": 54.452,
+    "scene": 6
+  },
+  {
+    "word": "on?",
+    "start": 54.492,
+    "end": 54.724,
+    "scene": 6
+  },
+  {
+    "word": "Follow",
+    "start": 54.765,
+    "end": 55.135,
+    "scene": 6
+  },
+  {
+    "word": "for",
+    "start": 55.2,
+    "end": 55.432,
+    "scene": 6
+  },
+  {
+    "word": "daily",
+    "start": 55.473,
+    "end": 55.797,
+    "scene": 6
+  },
+  {
+    "word": "AI",
+    "start": 55.854,
+    "end": 56.039,
+    "scene": 6
+  },
+  {
+    "word": "receipts.",
+    "start": 56.072,
+    "end": 56.581,
+    "scene": 6
+  }
+]

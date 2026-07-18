@@ -1,0 +1,8 @@
+[
+  {
+    "stage": "captions",
+    "status": "fail",
+    "detail": "IsADirectoryError: [Errno 21] Is a directory: 'output/2026-07-18-fable-included'",
+    "timestamp": "2026-07-18T19:22:18+00:00"
+  }
+]
