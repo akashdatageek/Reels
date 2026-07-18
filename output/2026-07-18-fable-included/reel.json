@@ -1,0 +1,125 @@
+{
+  "title": "Claude Fable 5 goes standard on top plans \u2014 winners & losers",
+  "theme": "editorial-dark",
+  "vibe": "bold",
+  "accentColor": "#C96B3B",
+  "secondaryColor": "#E39A5E",
+  "handle": "@startups.ai",
+  "voiceStyle": "Narrate briskly and crisply, like a sharp news explainer with good pace \u2014 clear diction, minimal pauses, credible, never rushed into slurring: ",
+  "music": "music/neutrality_bed.mp3",
+  "scenes": [
+    {
+      "type": "HookCard",
+      "duration": 5.84,
+      "text": "Anthropic just *split* Claude users in two",
+      "textStyle": "marker",
+      "background": "assets/bg_tweet_full.png",
+      "voiceSegment": "Anthropic just split Claude subscribers into winners and losers. Which side are you on?",
+      "audioStart": 0.0
+    },
+    {
+      "type": "FigureScene",
+      "duration": 14.56,
+      "text": "INCLUDED on the top plans",
+      "figure": "assets/fig_tweet_main.png",
+      "figureCredit": "@claudeai on X",
+      "subtext": "Fine print: up to half your weekly usage",
+      "figureFocus": [
+        {
+          "at": 0.0
+        },
+        {
+          "at": 0.3,
+          "region": {
+            "x": 0.02,
+            "y": 0.16,
+            "w": 0.96,
+            "h": 0.2
+          },
+          "highlight": "spotlight",
+          "label": "AT 50% OF LIMITS"
+        },
+        {
+          "at": 0.6,
+          "region": {
+            "x": 0.02,
+            "y": 0.1,
+            "w": 0.75,
+            "h": 0.18
+          }
+        },
+        {
+          "at": 0.85
+        }
+      ],
+      "voiceSegment": "Starting July twentieth, Anthropic's newest, most powerful Claude model \u2014 Fable 5 \u2014 is included on the two top plans, Max and Team Premium, at no extra cost. The fine print: Fable can take up at most half your plan's weekly usage.",
+      "audioStart": 5.84
+    },
+    {
+      "type": "FigureScene",
+      "duration": 10.72,
+      "text": "Pro: pay-as-you-go + $100",
+      "figure": "assets/fig_tweet_main.png",
+      "figureCredit": "@claudeai on X",
+      "subtext": "Your subscription stays \u2014 Fable is extra",
+      "figureFocus": [
+        {
+          "at": 0.0
+        },
+        {
+          "at": 0.38,
+          "region": {
+            "x": 0.02,
+            "y": 0.37,
+            "w": 0.96,
+            "h": 0.21
+          },
+          "highlight": "marker",
+          "label": "ONE-TIME $100 CREDIT"
+        },
+        {
+          "at": 0.8
+        }
+      ],
+      "voiceSegment": "On the cheaper plans \u2014 Pro and Team Standard \u2014 your subscription stays, but Fable costs extra: pay as you go, like a prepaid phone card. Anthropic starts you off with a one-time hundred-dollar credit.",
+      "audioStart": 20.4
+    },
+    {
+      "type": "StatCallout",
+      "duration": 6.56,
+      "stat": "$100",
+      "label": "one-time credit \u2248 one big overnight AI job, at Fable 5's usage prices",
+      "background": "assets/bg_tweet_full.png",
+      "voiceSegment": "A hundred dollars sounds generous \u2014 until you learn one job, an AI coding your app overnight, can eat it.",
+      "audioStart": 31.12
+    },
+    {
+      "type": "StatCallout",
+      "duration": 6.64,
+      "stat": "2\u00d7",
+      "label": "the price of Anthropic's next-best AI \u2014 the priciest Claude ever sold",
+      "background": "assets/bg_tweet_full.png",
+      "voiceSegment": "Because Fable is the priciest Claude ever sold \u2014 each answer costs about double their next-best model.",
+      "audioStart": 37.68
+    },
+    {
+      "type": "HookCard",
+      "duration": 6.8,
+      "text": "*16M* views. Know your side before July 20",
+      "background": "assets/bg_tweet_full.png",
+      "voiceSegment": "Anthropic's post on this hit sixteen million views. If you pay for Claude, know your side before July twentieth.",
+      "audioStart": 44.32
+    },
+    {
+      "type": "OutroCard",
+      "duration": 6.0,
+      "text": "Best AI included \u2014 or a meter. Which side are YOU on?",
+      "handle": "@startups.ai",
+      "background": "assets/bg_tweet_full.png",
+      "voiceSegment": "Best AI included \u2014 or a meter. Which side are you on? Follow for daily AI receipts.",
+      "audioStart": 51.12
+    }
+  ],
+  "voiceFile": "voice.mp3",
+  "totalDuration": 57.12
+}

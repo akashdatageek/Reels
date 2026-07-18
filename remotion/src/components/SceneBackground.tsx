@@ -29,12 +29,15 @@ export const SceneBackground: React.FC<{src: string}> = ({src}) => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          filter: 'brightness(0.42) saturate(0.75) blur(2.5px)',
-          transform: 'scale(1.04)', // hide the blur's soft edge, statically
+          // blur must be strong enough to melt TEXT in a background (tweet
+          // crops, article screenshots) into texture — the screening gate's
+          // R8 failed a 2.5px blur as text-on-text
+          filter: 'brightness(0.34) saturate(0.7) blur(10px)',
+          transform: 'scale(1.06)', // hide the blur's soft edge, statically
         }}
       />
       {/* flat tint pulls the image toward the theme canvas */}
-      <AbsoluteFill style={{backgroundColor: `${bg}8c`}} />
+      <AbsoluteFill style={{backgroundColor: `${bg}a6`}} />
       {/* gradient scrim: heaviest over the headline block and caption band */}
       <AbsoluteFill
         style={{

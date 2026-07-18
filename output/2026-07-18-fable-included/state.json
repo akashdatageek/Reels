@@ -1,0 +1,80 @@
+[
+  {
+    "stage": "research",
+    "status": "pass",
+    "detail": "primary screenshot + 8 independent outlets; 19-item inventory; 3 single-source claims excluded",
+    "timestamp": "2026-07-18T18:44:18+00:00"
+  },
+  {
+    "stage": "script",
+    "status": "pass",
+    "detail": "V2, ~167 words \u2248 65-70s, plain-language + table-inheritance pass done",
+    "timestamp": "2026-07-18T18:46:55+00:00"
+  },
+  {
+    "stage": "comprehension",
+    "status": "pass",
+    "detail": "V3.2 PASS round 7: full correct retell, no load-bearing guesses; gate cut 2 beats (gov block, apology) + fixed 5 wordings",
+    "timestamp": "2026-07-18T19:20:35+00:00"
+  },
+  {
+    "stage": "content",
+    "status": "pass",
+    "detail": "7 frames (V3.2), all cite research.md; 3 justified drops",
+    "timestamp": "2026-07-18T19:20:35+00:00"
+  },
+  {
+    "stage": "preflight",
+    "status": "pass",
+    "detail": "7 scenes, 0 warning(s)",
+    "timestamp": "2026-07-18T19:21:01+00:00"
+  },
+  {
+    "stage": "tts",
+    "status": "pass",
+    "detail": "gemini \u00b7 164 words \u00b7 57.12s",
+    "timestamp": "2026-07-18T19:22:03+00:00"
+  },
+  {
+    "stage": "images",
+    "status": "pass",
+    "detail": "0 image(s) generated",
+    "timestamp": "2026-07-18T19:22:18+00:00"
+  },
+  {
+    "stage": "align",
+    "status": "pass",
+    "detail": "model unavailable, kept estimates",
+    "timestamp": "2026-07-18T19:22:47+00:00"
+  },
+  {
+    "stage": "captions",
+    "status": "pass",
+    "detail": "164 words, 57 groups",
+    "timestamp": "2026-07-18T19:23:10+00:00"
+  },
+  {
+    "stage": "build",
+    "status": "pass",
+    "detail": "reel.mp4 rendered + muxed",
+    "timestamp": "2026-07-18T19:37:32+00:00"
+  },
+  {
+    "stage": "screening_assets",
+    "status": "pass",
+    "detail": "21 scene stills + contact sheet + first-second strip + waveform",
+    "timestamp": "2026-07-18T19:37:40+00:00"
+  },
+  {
+    "stage": "screening",
+    "status": "pass",
+    "detail": "R1-R8 PASS after 2 rounds: R2 fixed (1-line headlines, subtext/caption collision), R8 fixed (bg_tweet_full swap + 10px scrim blur); 21 stills judged; verdicts cite scene_01_006.14/scene_02_020.70 (R2), scene_03_034.40 (R4/R8), waveform (R7)",
+    "timestamp": "2026-07-18T19:38:21+00:00"
+  },
+  {
+    "stage": "factcheck",
+    "status": "pass",
+    "detail": "fresh-context factcheck: 7 on-screen + 7 voice claims all VERIFIED vs research.md; excluded items absent",
+    "timestamp": "2026-07-18T19:40:13+00:00"
+  }
+]
