@@ -48,6 +48,25 @@ frames; the `author` stage turns them into scenes. Content first, words second.
      benchmark figures, result screenshots — anything a viewer treats as proof —
      stay bit-exact from source (rung 1); `figure` assets are untouchable and
      preflight enforces it.
+   - **Background (REQUIRED for text frames — no text on a bare canvas).**
+     Every frame that will become a text scene (HookCard / StatCallout /
+     OutroCard) also names a **topic-relevant background** rendered under a
+     legibility scrim (preflight hard-fails a text scene without one; media
+     scenes may reuse a blurred fill of their own asset behind the card).
+     Source it by this ladder — **reuse before generate** — and name the rung
+     next to the background in frames.md (e.g. "bg: map crop, B-a"):
+     1. **(a) A source asset already in the story** — a second crop of a
+        figure, the launch screenshot, a photo from their post.
+     2. **(b) Fetched stock b-roll** — `pipeline/fetch_stock.py`, provenance
+        in `assets_manifest.json` as usual (CC-BY credits still apply).
+     3. **(c) Nano Banana generation** (`backgroundPrompt`) — abstract,
+        topic-toned, house prompt style; generated backgrounds carry
+        explicitly NO text, charts, or logos.
+     A background is **ambience, not information** (~15-25% visual weight,
+     static). A figure used as a background is *decoration, not evidence* —
+     it may be blurred/darkened by the scrim, so it can never be the same
+     file as the scene's `figure`; the bit-exact card copy carries the
+     evidence role (preflight enforces both).
    Tag each frame's **role**: hook · who · what · result · proof · stakes ·
    **sendable** · outro.
    - **`sendable` is REQUIRED — design one deliberately SENDABLE moment per
@@ -98,11 +117,11 @@ everyone understands than a tight one only insiders get.
 
 An ordered table, one row per frame:
 
-| # | Role | Point (one line) | Content — receipt + source | On-screen text | Visual (real asset) |
-|---|------|------------------|----------------------------|----------------|---------------------|
-| 1 | hook | The most neutral AI is Grok | Grok 4.5 = −0.02, closest to 0 [results.html] | "MOST NEUTRAL: GROK" | HookCard |
-| 2 | who+what | An independent group tested it | The Neutrality Project · 18 models · ~4,000 Qs [home] | "The Neutrality Project" | text/logo |
-| … | | | | | |
+| # | Role | Point (one line) | Content — receipt + source | On-screen text | Visual (real asset) | Background (+ ladder rung) |
+|---|------|------------------|----------------------------|----------------|---------------------|----------------------------|
+| 1 | hook | The most neutral AI is Grok | Grok 4.5 = −0.02, closest to 0 [results.html] | "MOST NEUTRAL: GROK" | HookCard | map crop (B-a) |
+| 2 | who+what | An independent group tested it | The Neutrality Project · 18 models · ~4,000 Qs [home] | "The Neutrality Project" | text/logo | site screenshot (B-a) |
+| … | | | | | | |
 
 ## Rule
 

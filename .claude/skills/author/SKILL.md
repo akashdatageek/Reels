@@ -45,6 +45,16 @@ paper-white data stories; `dark` is the legacy navy look for older reels.
 **Write a `subtext` for every media scene** — one line, the scene's "so what",
 already fact-checked wording (an emphasized annotation line works verbatim).
 
+**Set a `background` on EVERY text scene (HookCard/StatCallout/OutroCard) —
+no text on a bare canvas; preflight hard-fails without it.** frames.md names
+each frame's background and its ladder rung (content skill: story-asset crop →
+fetched stock → `backgroundPrompt` generation) — wire that choice here, as a
+path in `background` or a prompt in `backgroundPrompt`. It renders under a
+static legibility scrim at ~15-25% weight (`SceneBackground`). Media scenes
+may carry one behind their card (a blurred fill of the same asset is fine) —
+but a scene's `background` must never be the same file as its `figure`
+(decoration is not evidence; preflight enforces).
+
 **Vibe (`vibe`):**
 - `bold` (default) — loud acid duotone, chunky uppercase type, sticker
   captions, light-blade cuts, brisk news voice. For news, launches, benchmarks.

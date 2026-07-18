@@ -9,6 +9,7 @@ import {
 import {AmbientBackground} from '../components/AmbientBackground';
 import {Backdrop} from '../components/Backdrop';
 import {ChannelBadge} from '../components/EditorialCard';
+import {SceneBackground} from '../components/SceneBackground';
 import {usePulse} from '../components/MusicPulse';
 import {usePalette} from '../components/ThemeContext';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
@@ -68,7 +69,8 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
   if (pal.kind === 'editorial') {
     return (
       <AbsoluteFill>
-        <AmbientBackground accent={accent} secondary={second} seed={2} variant={scene.bgStyle} />
+        {scene.background ? <SceneBackground src={scene.background} /> : null}
+        <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.background)} variant={scene.bgStyle} />
         <ChannelBadge logo={scene.logo} handle={scene.handle} />
         <div style={{position: 'absolute', left: 64, right: 64, top: 560}}>
           <div style={{width: 96, height: 10, borderRadius: 5, backgroundColor: accent, marginBottom: 40}} />
@@ -109,8 +111,8 @@ export const StatCallout: React.FC<{scene: Scene; accent: string; secondary?: st
 
   return (
     <AbsoluteFill>
-      {scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
-      <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.backdrop)} variant={scene.bgStyle} />
+      {scene.background ? <SceneBackground src={scene.background} /> : scene.backdrop ? <Backdrop src={scene.backdrop} /> : null}
+      <AmbientBackground accent={accent} secondary={second} seed={2} transparent={Boolean(scene.background || scene.backdrop)} variant={scene.bgStyle} />
       <AbsoluteFill
         style={{
           justifyContent: 'center',

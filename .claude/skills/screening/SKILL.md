@@ -1,6 +1,6 @@
 ---
 name: screening
-description: Stage between build and editor — the pipeline must LOOK at the reel it rendered. Runs pipeline/screen.py to extract stills (per-scene frames, contact sheet, first-second strip, waveform), then the orchestrator VIEWS them with the Read tool and judges the R1–R7 rubric in writing, each verdict citing a specific still and comparing against exemplars/. Any FAIL triggers the smallest-fix revision loop (max 2 rounds). Records ledger stage `screening`; handoff blocks without it. Use after reel.mp4 exists, before editor writes the caption.
+description: Stage between build and editor — the pipeline must LOOK at the reel it rendered. Runs pipeline/screen.py to extract stills (per-scene frames, contact sheet, first-second strip, waveform), then the orchestrator VIEWS them with the Read tool and judges the R1–R8 rubric in writing, each verdict citing a specific still and comparing against exemplars/. Any FAIL triggers the smallest-fix revision loop (max 2 rounds). Records ledger stage `screening`; handoff blocks without it. Use after reel.mp4 exists, before editor writes the caption.
 ---
 
 # Screening — did anyone actually LOOK at this reel?
@@ -8,7 +8,7 @@ description: Stage between build and editor — the pipeline must LOOK at the re
 The pipeline can render a reel nobody ever watched. This gate forces the
 orchestrator to look at the actual pixels and the actual audio shape — not
 `reel.json`, not the build log — and to defend, in writing, that the reel
-survives the seven ways reels die on a phone screen.
+survives the eight ways reels die on a phone screen.
 
 Run this AFTER `build` (reel.mp4 exists, `build` gate green) and BEFORE the
 `editor` stage writes the caption. The editor's cover.png must be chosen from
@@ -68,9 +68,15 @@ reason.** No verdict without a cited still.
 - **R7 AUDIO SHAPE** — on `waveform.png`: any dead air >1s? Any clipped-flat
   blocks? Does the outro taper, or does the audio cut mid-energy? Any of
   those = FAIL.
+- **R8 BACKGROUND** — on every text-scene tile in the contact sheet: is the
+  text still fully legible OVER its background at 270px (the scrim doing its
+  job — background at ~15-25% weight, never fighting the type)? And is the
+  background clearly *topic-relevant* — recognizably from this story's world
+  — not generic wallpaper? Illegible text or could-be-any-reel ambience =
+  FAIL.
 
 **Honesty rule:** this gate exists to find problems, not to rubber-stamp. A
-7/7 PASS on the first look is suspicious — before accepting it, re-judge R2 on
+8/8 PASS on the first look is suspicious — before accepting it, re-judge R2 on
 the *widest* figure crop and R3 on the *longest* scene, and defend those two
 verdicts explicitly.
 
@@ -85,6 +91,7 @@ Any FAIL → apply the SMALLEST fix that addresses it:
 | R1 / R4 / R5 | re-order scenes or restyle the offending card |
 | R6 | reposition the element out of the chrome bands |
 | R7 | re-mux audio (trim dead air, fix outro tail) |
+| R8 | swap the background one ladder rung up (content skill), or re-crop it; if legibility is the issue, the scrim in SceneBackground.tsx is the knob |
 
 Apply the fix via reel.json / component edit → re-render → re-run
 `pipeline/screen.py` → **re-judge ONLY the items that failed** (cite the new
@@ -105,10 +112,10 @@ reel, and do not proceed to editor with a red screening gate.
 When every item passes (initially or after revision):
 
 ```bash
-python3 pipeline/state.py record output/<story> screening pass "R1-R7 PASS; <n> stills; round <k>"
+python3 pipeline/state.py record output/<story> screening pass "R1-R8 PASS; <n> stills; round <k>"
 ```
 
-The detail must summarize per-item verdicts (e.g. `R1-R7 PASS after R2 fix
+The detail must summarize per-item verdicts (e.g. `R1-R8 PASS after R2 fix
 round 1`). `scripts/handoff.sh` requires this stage — a reel without a
 recorded screening judgment is not done.
 
@@ -125,7 +132,7 @@ and leave it to the user rather than guessing PASS.
 When the user rejects a shipped reel for a visual reason:
 
 1. **Append the reason to the rubric** in this file as a new numbered item
-   (R8, R9, …) phrased as a testable check with its own smallest-fix row.
+   (R9, R10, …) phrased as a testable check with its own smallest-fix row.
 2. **Add the offending still to `exemplars/exemplars.md`** as an anti-pattern
    (copy the frame into `exemplars/`, 2–3 lines on why it failed).
 

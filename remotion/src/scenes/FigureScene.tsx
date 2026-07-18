@@ -8,6 +8,7 @@ import {
   useVideoConfig,
 } from 'remotion';
 import {ChannelBadge, EditorialTextBlock, MediaCard} from '../components/EditorialCard';
+import {SceneBackground} from '../components/SceneBackground';
 import {usePalette} from '../components/ThemeContext';
 import {RevealText} from '../components/RevealText';
 import {FONT_BODY, FONT_DISPLAY} from '../theme';
@@ -119,6 +120,8 @@ export const FigureScene: React.FC<{scene: Scene; accent: string; secondary?: st
   if (p.kind === 'editorial') {
     return (
       <AbsoluteFill style={{backgroundColor: p.bg}}>
+      {scene.background ? <SceneBackground src={scene.background} /> : null}
+        {scene.background ? <SceneBackground src={scene.background} /> : null}
         <MediaCard>
           <div
             style={{

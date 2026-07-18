@@ -14,7 +14,8 @@
       "text": "The most *neutral* AI? It's *GROK*.",
       "textStyle": "pop",
       "voiceSegment": "The most politically neutral AI right now? It's Grok.",
-      "audioStart": 0.0
+      "audioStart": 0.0,
+      "background": "assets/bg_map.png"
     },
     {
       "type": "HookCard",
@@ -22,14 +23,16 @@
       "text": "Every AI has a *hidden lean*",
       "textStyle": "marker",
       "voiceSegment": "Every AI chatbot leans one way on hot topics \u2014 baked in, whether it tells you or not.",
-      "audioStart": 3.68
+      "audioStart": 3.68,
+      "background": "assets/bg_scale.png"
     },
     {
       "type": "HookCard",
       "duration": 7.04,
       "text": "The Neutrality Project: 18 AIs \u00b7 *3,987 questions*",
       "voiceSegment": "An independent group, The Neutrality Project, gave eighteen AIs a political survey \u2014 almost four thousand questions.",
-      "audioStart": 9.4
+      "audioStart": 9.4,
+      "background": "assets/bg_site.png"
     },
     {
       "type": "StatCallout",
@@ -38,7 +41,8 @@
       "label": "AI scores leaned LEFT \u00b7 18 AIs \u00d7 6 topics \u2014 The Neutrality Project",
       "statVariant": "donut",
       "voiceSegment": "Eighteen AIs, six topics each \u2014 that's one hundred eight scores. Ninety-seven of them leaned left.",
-      "audioStart": 16.44
+      "audioStart": 16.44,
+      "background": "assets/bg_scale.png"
     },
     {
       "type": "FigureScene",
@@ -171,7 +175,8 @@
       "label": "of questions dodged \u2014 Microsoft's Phi-4",
       "statVariant": "donut",
       "voiceSegment": "The most one-sided: Microsoft's Phi-4. It dodged one in four questions \u2014 and dodging hides a lean too.",
-      "audioStart": 46.96
+      "audioStart": 46.96,
+      "background": "assets/bg_topics.png"
     },
     {
       "type": "HookCard",
@@ -179,14 +184,16 @@
       "text": "*3 countries* set the rules",
       "textStyle": "typewriter",
       "voiceSegment": "The grading rules were set in advance by referees from three countries \u2014 so no one country's politics defined the middle.",
-      "audioStart": 54.04
+      "audioStart": 54.04,
+      "background": "assets/bg_map.png"
     },
     {
       "type": "HookCard",
       "duration": 6.0,
       "text": "Its lean becomes *your* news",
       "voiceSegment": "Because AI writes your emails, your homework, your news. If it leans, your information leans.",
-      "audioStart": 61.16
+      "audioStart": 61.16,
+      "background": "assets/bg_topics.png"
     },
     {
       "type": "OutroCard",
@@ -194,7 +201,8 @@
       "text": "Most neutral: Grok. Which do YOU use?",
       "handle": "@startups.ai",
       "voiceSegment": "Your AI has a side \u2014 now you can check it. Which one do you use? Most neutral today: Grok.",
-      "audioStart": 67.16
+      "audioStart": 67.16,
+      "background": "assets/bg_site.png"
     }
   ],
   "voiceFile": "voice.mp3",
